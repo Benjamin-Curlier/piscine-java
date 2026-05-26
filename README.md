@@ -30,7 +30,7 @@ Inspirée des piscines C/C++ de 42 et Epitech, cette piscine se distingue par :
 
 ## Architecture technique
 
-- **Java 21 LTS** (OpenJDK Temurin)
+- **Java 25 LTS** (OpenJDK Temurin)
 - **Maven** multi-module pour la moulinette
 - **JUnit 5** + **AssertJ** + **JaCoCo** pour les tests
 - **Checkstyle / PMD / SpotBugs** pour l'analyse statique
