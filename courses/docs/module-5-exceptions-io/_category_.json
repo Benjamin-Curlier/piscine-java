@@ -1,0 +1,11 @@
+{
+  "label": "Module 5 — Exceptions et I/O",
+  "position": 6,
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "title": "Module 5 — Exceptions et I/O",
+    "description": "Gestion d'erreurs robuste, lecture/écriture de fichiers (I/O classique et NIO.2), manipulation de formats texte courants."
+  }
+}

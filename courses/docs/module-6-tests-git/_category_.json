@@ -1,0 +1,11 @@
+{
+  "label": "Module 6 — Tests et Git",
+  "position": 7,
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "title": "Module 6 — Tests et Git",
+    "description": "Tests automatisés avec JUnit 5, démarche TDD, workflow Git collaboratif (branches, PR, résolution de conflits)."
+  }
+}

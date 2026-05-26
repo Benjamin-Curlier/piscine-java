@@ -1,0 +1,11 @@
+{
+  "label": "Module 3 — Programmation Orientée Objet",
+  "position": 4,
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "title": "Module 3 — Programmation Orientée Objet",
+    "description": "Classes, encapsulation, héritage, polymorphisme, interfaces. Découverte des types modernes : enums, records, classes scellées."
+  }
+}

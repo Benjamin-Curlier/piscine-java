@@ -1,0 +1,11 @@
+{
+  "label": "Module 2 — Tableaux, chaînes, méthodes",
+  "position": 3,
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "title": "Module 2 — Tableaux, chaînes, méthodes",
+    "description": "Manipulation de données structurées, organisation du code en méthodes réutilisables, première approche de la récursivité."
+  }
+}

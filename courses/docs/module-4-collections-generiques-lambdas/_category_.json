@@ -1,0 +1,11 @@
+{
+  "label": "Module 4 — Collections, génériques, lambdas",
+  "position": 5,
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "title": "Module 4 — Collections, génériques, lambdas",
+    "description": "Listes, ensembles, dictionnaires ; génériques ; programmation fonctionnelle avec lambdas et Streams."
+  }
+}

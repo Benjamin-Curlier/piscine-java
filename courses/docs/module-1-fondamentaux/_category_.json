@@ -1,0 +1,11 @@
+{
+  "label": "Module 1 — Fondamentaux",
+  "position": 2,
+  "collapsible": true,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "title": "Module 1 — Fondamentaux",
+    "description": "Variables, types, opérateurs, conditions, boucles. À l'issue de ce module, vous saurez compiler et exécuter un programme Java structuré avec une logique de base."
+  }
+}
