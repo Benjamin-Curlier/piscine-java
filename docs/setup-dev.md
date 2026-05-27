@@ -1,0 +1,180 @@
+# Guide d'installation — environnement de développement Piscine ETNC
+
+> Ce guide s'adresse aux **formateurs et contributeurs** qui souhaitent travailler
+> sur le projet en local (rédiger des exercices, valider des solutions, lancer la moulinette).
+>
+> Pour les **stagiaires**, consultez les instructions dans `exercises/README.md` (à venir).
+
+---
+
+## Prérequis
+
+| Outil | Version minimale | Rôle |
+|-------|-----------------|------|
+| **Java 25 (Temurin)** | 25 LTS | Compiler et exécuter les exercices et la moulinette |
+| **Git** | 2.x | Cloner le dépôt, soumettre des rendus |
+| **Node.js** | 20 LTS | Construire le site Docusaurus (cours) |
+
+Maven **n'est pas à installer** : le Maven Wrapper `./mvnw` (à la racine du repo) le
+télécharge automatiquement à la première utilisation.
+
+---
+
+## 1. Installer Java 25 (Temurin) sans droits administrateur — Windows
+
+> Cette procédure utilise l'archive `.zip` portable d'Eclipse Temurin,
+> qui ne nécessite pas de droits administrateur.
+
+### 1.1 Télécharger l'archive
+
+Rendez-vous sur **[adoptium.net/temurin/releases](https://adoptium.net/temurin/releases/)**,
+sélectionnez :
+- **Version** : 25
+- **OS** : Windows
+- **Architecture** : x64
+- **Package type** : `.zip`
+
+Téléchargez le fichier (ex. `OpenJDK25U-jdk_x64_windows_hotspot_25_xx.zip`).
+
+### 1.2 Extraire et choisir un emplacement
+
+Extrayez l'archive dans un dossier **sans espace** dans le chemin, par exemple :
+
+```
+C:\tools\jdk-25\
+```
+
+### 1.3 Définir les variables d'environnement (session courante)
+
+Dans un terminal PowerShell :
+
+```powershell
+$env:JAVA_HOME = "C:\tools\jdk-25"
+$env:PATH = "$env:JAVA_HOME\bin;$env:PATH"
+```
+
+Pour rendre ces variables permanentes **sans droits admin** (utilisateur courant) :
+
+```powershell
+[Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\tools\jdk-25", "User")
+[Environment]::SetEnvironmentVariable(
+    "PATH",
+    "C:\tools\jdk-25\bin;" + [Environment]::GetEnvironmentVariable("PATH", "User"),
+    "User"
+)
+```
+
+### 1.4 Vérifier l'installation
+
+```powershell
+java --version
+# Résultat attendu : openjdk 25 ...
+```
+
+---
+
+## 2. Installer Java 25 — Linux / macOS
+
+### Via SDKMAN (recommandé)
+
+```bash
+# Installer SDKMAN si absent
+curl -s "https://get.sdkman.io" | bash
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# Installer Temurin 25
+sdk install java 25-tem
+
+# Vérifier
+java --version
+```
+
+### Via archive portable
+
+Téléchargez l'archive `.tar.gz` sur [adoptium.net](https://adoptium.net/temurin/releases/),
+extrayez-la et ajoutez `bin/` au `PATH` :
+
+```bash
+export JAVA_HOME="$HOME/tools/jdk-25"
+export PATH="$JAVA_HOME/bin:$PATH"
+# Ajoutez ces lignes à ~/.bashrc ou ~/.zshrc pour les rendre permanentes
+```
+
+---
+
+## 3. Cloner le dépôt
+
+```bash
+git clone https://github.com/Benjamin-Curlier/Piscine-ETNC.git
+cd Piscine-ETNC
+```
+
+---
+
+## 4. Utiliser le Maven Wrapper
+
+Le repo contient `mvnw` (Unix) et `mvnw.cmd` (Windows) à sa racine.
+Ils téléchargent Maven 3.9.9 automatiquement dans `~/.m2/wrapper/dists/` lors du premier appel.
+
+```bash
+# Unix — rendre le script exécutable (une seule fois après le clone)
+chmod +x mvnw
+
+# Vérifier la version de Maven téléchargée
+./mvnw -v          # Unix
+mvnw.cmd -v        # Windows PowerShell
+```
+
+### Lancer les tests d'un exercice
+
+```bash
+# Tests publics du starter (depuis la racine du repo)
+./mvnw -f exercises/module-1-fondamentaux/1.1.1-hello-world/starter/pom.xml test
+
+# Tests complets de la solution de référence (publics + privés)
+./mvnw -f exercises/module-1-fondamentaux/1.1.1-hello-world/solution/pom.xml test
+```
+
+### Lancer les tests de la moulinette
+
+```bash
+# Tous les modules
+./mvnw -f moulinette/pom.xml verify
+
+# Un seul module
+./mvnw -f moulinette/pom.xml -pl framework test
+```
+
+---
+
+## 5. Construire le site de cours (Docusaurus)
+
+```bash
+cd courses
+
+# Installer les dépendances Node (une seule fois)
+npm ci
+
+# Lancer en mode développement (hot-reload)
+npm start
+
+# Construire la version statique (vérification des liens cassés)
+npm run build
+```
+
+---
+
+## 6. Résolution des problèmes courants
+
+| Symptôme | Cause probable | Solution |
+|---|---|---|
+| `java: command not found` | `JAVA_HOME` non défini | Relire §1.3 / §2 |
+| `./mvnw: Permission denied` | Script non exécutable | `chmod +x mvnw` |
+| `mvnw` télécharge mais échoue | Proxy réseau | Configurer `~/.m2/settings.xml` avec les paramètres proxy |
+| Tests échouent sur `utf-8` | Encodage terminal | Ajouter `-Dfile.encoding=UTF-8` à `MAVEN_OPTS` |
+| Port 3000 occupé (Docusaurus) | Autre processus | `npm start -- --port 3001` |
+
+---
+
+*Dernière mise à jour : 2026-05-27 — tâche #10.*
+*Pour l'installation complète (scripts automatisés) voir tâche #12.*

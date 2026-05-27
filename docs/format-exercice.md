@@ -127,7 +127,7 @@ date_creation: 2026-05-26
 - Projet **Maven** mono-module minimal (`pom.xml` à la racine de `starter/`).
 - Java **25** (`<maven.compiler.release>25</maven.compiler.release>`).
 - Dépendances test : JUnit Jupiter et AssertJ.
-- Le `pom.xml` utilise **`build-helper-maven-plugin`** pour ajouter `../tests/src/test/java` comme source de tests, de sorte qu'un simple `mvn test` depuis `starter/` exécute les tests publics.
+- Le `pom.xml` utilise **`build-helper-maven-plugin`** pour ajouter `../tests/src/test/java` comme source de tests, de sorte qu'un `./mvnw test` (ou `mvn test` si Maven est installé globalement) depuis `starter/` exécute les tests publics.
 - Package : `etnc.mN` où N est le numéro de module (ex. `etnc.m1`, `etnc.m3`).
 - Le code de départ contient **strictement** ce qui est nécessaire pour démarrer : signatures de méthodes vides, commentaires `// TODO`, imports nécessaires.
 - **Jamais** de réponse partielle qui orienterait vers une seule solution possible.
@@ -189,7 +189,7 @@ Une implémentation **idiomatique, lisible et commentée pédagogiquement**.
 - **Pas** la solution la plus astucieuse ou la plus courte : la plus **claire**.
 - Commentaires en français qui expliquent **pourquoi**, pas **quoi** (le code dit déjà le quoi).
 - Respecte Checkstyle/PMD/SpotBugs (zéro warning).
-- `solution/pom.xml` est **identique** au `starter/pom.xml`, à une différence près : `build-helper` ajoute **à la fois** `../tests/src/test/java` **et** `../tests-prives/src/test/java`. Ainsi `cd solution && mvn test` valide que la solution de référence passe **toutes** les épreuves (publiques et privées) — gage de cohérence pour les formateurs.
+- `solution/pom.xml` est **identique** au `starter/pom.xml`, à une différence près : `build-helper` ajoute **à la fois** `../tests/src/test/java` **et** `../tests-prives/src/test/java`. Ainsi `./mvnw -f solution/pom.xml test` (ou `cd solution && mvn test`) valide que la solution de référence passe **toutes** les épreuves (publiques et privées) — gage de cohérence pour les formateurs.
 
 ```java
 // solution/src/main/java/etnc/m1/HelloWorld.java

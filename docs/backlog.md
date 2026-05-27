@@ -50,7 +50,7 @@
 ---
 
 ### #10 — Maven Wrapper (mvnw) mutualisé pour les exercices
-**Statut** : À faire
+**Statut** : Faite — commit `feat(tooling): Maven Wrapper 3.3.2 + docs/setup-dev.md` (voir historique git)
 **Priorité** : Haute
 **Pré-requis** : aucun
 **Pourquoi** : éviter aux stagiaires (et au CI) d'avoir à installer Maven globalement. `./mvnw` suffit.
@@ -58,12 +58,12 @@
 **Livrable** : un Maven Wrapper installé à la racine du repo, utilisable depuis n'importe quel exercice via un alias / un lien.
 
 **Critères d'acceptation** :
-- [ ] `./mvnw -v` fonctionne depuis la racine (télécharge Maven à la première exécution).
-- [ ] Documentation dans `docs/setup-dev.md` (à créer en #12) qui explique comment lancer les tests d'un exercice via `./mvnw -f exercises/.../starter/pom.xml test`.
-- [ ] Format d'exercice mis à jour pour mentionner `./mvnw` plutôt que `mvn`.
+- [x] `./mvnw -v` fonctionne depuis la racine (télécharge Maven 3.9.9 à la première exécution).
+- [x] Documentation dans `docs/setup-dev.md` créée : installation Java 25 portable + exemples `./mvnw`.
+- [x] Format d'exercice mis à jour pour mentionner `./mvnw` plutôt que `mvn`.
 
-**Décisions à prendre** :
-- Un seul `mvnw` racine partagé, ou un par exercice ? **Recommandation** : un seul racine pour ne pas dupliquer.
+**Décision prise** :
+- Un seul `mvnw` racine partagé ✓ — évite la duplication (commande `./mvnw -f <chemin>/pom.xml`).
 
 ---
 

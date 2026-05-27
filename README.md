@@ -38,9 +38,21 @@ Inspirée des piscines C/C++ de 42 et Epitech, cette piscine se distingue par :
 - **Docusaurus** pour le site de cours
 - **GitHub** (dev) → **GitLab CE on-premise** (prod)
 
+## Démarrage rapide
+
+Voir **[`docs/setup-dev.md`](docs/setup-dev.md)** pour installer Java 25 (sans droits admin) et lancer les tests localement.
+
+```bash
+# Unix — rendre le wrapper exécutable (une seule fois)
+chmod +x mvnw
+
+# Vérifier la version de Maven téléchargée
+./mvnw -v
+```
+
 ## Statut
 
-Projet en cours d'initialisation. Voir `docs/referentiel.md` (à venir) pour la liste détaillée des exercices et la progression pédagogique.
+Projet en cours de construction. Voir [`docs/backlog.md`](docs/backlog.md) pour les tâches en cours et [`docs/referentiel.md`](docs/referentiel.md) pour le plan pédagogique complet.
 
 ---
 
