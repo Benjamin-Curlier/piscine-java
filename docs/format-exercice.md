@@ -41,9 +41,11 @@ Chaque dossier d'exercice contient **exactement** :
 │   └── src/main/java/etnc/m1/HelloWorld.java
 ├── tests/                # Tests JUnit 5 PUBLICS (le stagiaire les voit)
 │   └── src/test/java/etnc/m1/HelloWorldTest.java
+│   └── src/test/java/etnc/util/...       # éventuels utilitaires de test partagés
 ├── tests-prives/         # Tests JUnit 5 PRIVÉS (exécutés par la moulinette uniquement)
 │   └── src/test/java/etnc/m1/HelloWorldPriveTest.java
 ├── solution/             # Solution de référence commentée pédagogiquement
+│   ├── pom.xml                            # identique au starter, + injecte tests-prives
 │   └── src/main/java/etnc/m1/HelloWorld.java
 ├── correction.md         # Explication pas-à-pas de la solution (publié APRÈS rendu)
 └── evaluation.yml        # Rubrique de notation pondérée
@@ -124,6 +126,8 @@ date_creation: 2026-05-26
 
 - Projet **Maven** mono-module minimal (`pom.xml` à la racine de `starter/`).
 - Java **25** (`<maven.compiler.release>25</maven.compiler.release>`).
+- Dépendances test : JUnit Jupiter et AssertJ.
+- Le `pom.xml` utilise **`build-helper-maven-plugin`** pour ajouter `../tests/src/test/java` comme source de tests, de sorte qu'un simple `mvn test` depuis `starter/` exécute les tests publics.
 - Package : `etnc.mN` où N est le numéro de module (ex. `etnc.m1`, `etnc.m3`).
 - Le code de départ contient **strictement** ce qui est nécessaire pour démarrer : signatures de méthodes vides, commentaires `// TODO`, imports nécessaires.
 - **Jamais** de réponse partielle qui orienterait vers une seule solution possible.
@@ -147,7 +151,8 @@ Tests **JUnit 5 + AssertJ** que le stagiaire peut lancer en local pour vérifier
 
 - Package miroir du code (`etnc.m1` → `etnc.m1`).
 - Nommage : `<Classe>Test.java`.
-- Une assertion claire par test, message d'échec explicite en **français**.
+- Une assertion claire par test, message d'échec explicite en **français** (via `.as(...)`).
+- Les **utilitaires de test partagés** (ex. : capture de `System.out`) vivent sous `etnc.util` dans le même dossier `tests/src/test/java/`. Ils sont accessibles tant aux tests publics qu'aux tests privés.
 
 ```java
 // tests/src/test/java/etnc/m1/HelloWorldTest.java
@@ -184,6 +189,7 @@ Une implémentation **idiomatique, lisible et commentée pédagogiquement**.
 - **Pas** la solution la plus astucieuse ou la plus courte : la plus **claire**.
 - Commentaires en français qui expliquent **pourquoi**, pas **quoi** (le code dit déjà le quoi).
 - Respecte Checkstyle/PMD/SpotBugs (zéro warning).
+- `solution/pom.xml` est **identique** au `starter/pom.xml`, à une différence près : `build-helper` ajoute **à la fois** `../tests/src/test/java` **et** `../tests-prives/src/test/java`. Ainsi `cd solution && mvn test` valide que la solution de référence passe **toutes** les épreuves (publiques et privées) — gage de cohérence pour les formateurs.
 
 ```java
 // solution/src/main/java/etnc/m1/HelloWorld.java

@@ -1,0 +1,21 @@
+slug: hello-world
+titre: "Hello World"
+module: 1
+sous_groupe: "1.1"
+position: 1
+difficulte: tres-facile
+duree_estimee_min: 10
+prerequis: []
+objectifs_pedagogiques:
+  - "Compiler un programme Java avec javac (ou via Maven)"
+  - "Exécuter un programme Java compilé"
+  - "Utiliser System.out.println pour afficher du texte"
+  - "Comprendre la correspondance nom de classe / nom de fichier"
+notions:
+  - syntaxe-de-base
+  - compilation
+  - sortie-standard
+  - methode-main
+auteur: "ETNC"
+version: 1
+date_creation: 2026-05-26
