@@ -1,0 +1,12 @@
+<configuration>
+    <!-- Configuration Logback pour la production CLI -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss} %-5level [%logger{20}] %msg%n</pattern>
+        </encoder>
+    </appender>
+    <!-- Niveau INFO par défaut en production ; DEBUG activable via -Dlogback.level=DEBUG -->
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

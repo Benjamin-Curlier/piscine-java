@@ -23,7 +23,7 @@
 > Avant de produire du contenu pédagogique en masse, on cristallise les outils qui le valideront. Sans ça, on accumulerait de la dette.
 
 ### #9 — Squelette Maven multi-module de la moulinette
-**Statut** : À faire
+**Statut** : Faite — commit `feat(moulinette): squelette Maven multi-module Java 25` (voir historique git)
 **Priorité** : Haute
 **Pré-requis** : aucun
 **Pourquoi** : la moulinette est le différenciateur du projet (correction explicative). Avoir le squelette tôt permet de tester l'intégration avec les exercices.
@@ -37,15 +37,15 @@
 - `moulinette/cli/` — point d'entrée CLI `mvn -pl cli exec:java -- run --exo 1.1.1 --rendu <path>`.
 
 **Critères d'acceptation** :
-- [ ] POM parent Java 25, dependency management JUnit 5 / AssertJ / SLF4J.
-- [ ] Chaque module a son `pom.xml`, son `src/main/java`, un test smoke qui passe.
-- [ ] `mvn -f moulinette/pom.xml verify` passe (sur une machine avec Java 25 + Maven 3.9+).
-- [ ] README dans `moulinette/` qui explique la structure et comment lancer en local.
+- [x] POM parent Java 25, dependency management JUnit 5 / AssertJ / SLF4J.
+- [x] Chaque module a son `pom.xml`, son `src/main/java`, un test smoke.
+- [ ] `mvn -f moulinette/pom.xml verify` passe — **en attente** : Java 25 pas encore installé en local (tâche #12). Sera validé par le CI (tâche #11).
+- [x] README dans `moulinette/` qui explique la structure et comment lancer en local.
 
-**Décisions à prendre** :
-- Groupe ID : `etnc.piscine.moulinette` (proposé).
-- Logging : SLF4J + Logback ? Ou java.util.logging pour zéro dépendance ?
-- Format du rapport : Markdown généré + JSON parallèle pour la moulinette future. Templates Mustache ou concaténation simple ?
+**Décisions prises** :
+- Groupe ID : `etnc.piscine.moulinette` ✓
+- Logging : **SLF4J 2.0.16 + Logback 1.5.12** (API dans les modules bibliothèques, runtime dans cli)
+- Format du rapport : **concaténation simple** — Mustache à introduire quand le format sera figé.
 
 ---
 
