@@ -140,6 +140,86 @@
 
 ---
 
+## Phase 1bis — MVP Piscine locale (priorité HAUTE)
+
+> Première itération **bout en bout utilisable** : un stagiaire clone le repo, lance un script de bootstrap, et fait des exos en local avec une console REPL qui déclenche la moulinette sur la séquence git `add` + `commit` + `push` (branche `rendu/<sous-groupe>`).
+> Spec validée : [`docs/superpowers/specs/2026-05-28-mvp-console-correction-design.md`](superpowers/specs/2026-05-28-mvp-console-correction-design.md).
+> Tous ces items partagent le pré-requis #9 (squelette moulinette).
+
+### #34 — Module Maven `moulinette/console` (squelette)
+**Statut** : À faire — **Priorité** : Haute — **Pré-requis** : #9
+**Livrable** : nouveau sous-module Maven `moulinette/console`, dépend de `framework`+`runner`+`reports`, enum `Mode { LOCAL, NOMINAL }`, smoke test.
+**Critères** :
+- [ ] `mvn -f moulinette/pom.xml -pl console verify` passe.
+- [ ] Pas de dépendance vers `cli`.
+- [ ] Smoke test charge la classe `Main`.
+
+### #35 — `console.git.GitClient` + `ProcessGitClient`
+**Statut** : À faire — **Priorité** : Haute — **Pré-requis** : #34
+**Livrable** : interface `GitClient` (run, currentBranch, lastPushRefs) + impl sous-process + tests intégration `@Tag("git")`.
+**Critères** :
+- [ ] `FakeGitClient` disponible pour les tests des autres packages.
+- [ ] Tests int : init / commit / push vers bare local / lecture des refs.
+- [ ] Tagués `@Tag("git")` (skippables si git absent).
+
+### #36 — `console.workspace` (catalogue + initializer)
+**Statut** : À faire — **Priorité** : Haute — **Pré-requis** : #34, #35
+**Livrable** : `ExerciseCatalog` (scan `exercises/`, regroupement par `sous_groupe`, tri par `position`), `WorkspaceInitializer` (création repo stagiaire + bare remote + copie starters + commit initial), `LocalSubmissionBackend`.
+**Critères** :
+- [ ] `init` produit un repo git valide avec remote `origin = file://…/.piscine/remote.git`.
+- [ ] Catalogue résilient à un `metadata.yml` invalide (warn, skip).
+- [ ] Tests unitaires + intégration avec `@TempDir`.
+
+### #37 — `console.commands` + `console.repl`
+**Statut** : À faire — **Priorité** : Haute — **Pré-requis** : #35
+**Livrable** : interface `Command`, classes `AddCommand`, `CommitCommand`, `PushCommand`, `StatusCommand`, `LogCommand`, `DiffCommand`, `SubmitStartCommand`, `HelpCommand`, `ExitCommand`. Boucle `Repl` avec prompt `piscine[<branche>]>`.
+**Critères** :
+- [ ] Commande inconnue → message « non supportée dans le MVP » + suggestion.
+- [ ] Commande malformée → message pédagogique (ex: commit sans `-m`).
+- [ ] Couverture ≥ 80 % sur `console.commands`.
+
+### #38 — `SubmissionTrigger` + `MoulinetteRunner`
+**Statut** : À faire — **Priorité** : Haute — **Pré-requis** : #36, #37
+**Livrable** : détection du push sur `rendu/<sous-groupe>`, lancement de la moulinette sur les exos du sous-groupe en ordre de difficulté croissante, **arrêt au premier exo qui échoue**, génération du rapport `.piscine/reports/<groupe>-<ts>.md`.
+**Critères** :
+- [ ] Push sur `main` ne déclenche pas.
+- [ ] Séquence stoppe au 1er `Checker` KO avec message explicite.
+- [ ] Le rapport contient une section par exo exécuté.
+
+### #39 — Sous-commandes `init` / `repl` dans `console.Main`
+**Statut** : À faire — **Priorité** : Haute — **Pré-requis** : #36, #37
+**Livrable** : `Main` parse `init` et `repl`, accepte `--mode local` (par défaut). `--mode nominal` retourne une erreur explicite « non implémenté dans le MVP ».
+**Critères** :
+- [ ] `java -jar moulinette-console.jar init --nom X --dest <path>` fonctionne bout en bout.
+- [ ] `java -jar moulinette-console.jar repl --repo <path>` lance la boucle.
+- [ ] `--help` documente les deux sous-commandes.
+
+### #40 — Script `scripts/piscine-bootstrap.{sh,ps1}`
+**Statut** : À faire — **Priorité** : Haute — **Pré-requis** : #39
+**Livrable** : deux scripts (Bash + PowerShell) à la racine du repo Piscine ETNC. Vérifient les prérequis, builent la console, créent le workspace à côté du repo (`../piscine-<nom>/`), lancent `init --mode local`, affichent la commande pour démarrer le REPL.
+**Critères** :
+- [ ] Idempotent (relance détecte le workspace, propose `--force` ou `--resume`).
+- [ ] Message clair si Java 25 ou git absent + renvoi vers `docs/setup-dev.md`.
+- [ ] Testé manuellement sur Windows sans droits admin (machine du formateur).
+
+### #41 — `docs/piscine-stagiaire.md` (guide autonome)
+**Statut** : À faire — **Priorité** : Haute — **Pré-requis** : #40
+**Livrable** : guide unique pour le stagiaire — du `git clone` au premier rendu validé.
+**Critères** :
+- [ ] Section « Démarrage » : `clone` → `bootstrap` → premier `repl`.
+- [ ] Section « Faire un rendu » : `submit-start` → édition → `add` + `commit` + `push` → lecture du rapport.
+- [ ] Section « Bloqué ? » : comment lire un rapport d'échec, comment re-pousser.
+- [ ] Lien depuis le `README.md` racine en haut.
+
+### #42 — E2E smoke « happy path » sur exo 1.1.1
+**Statut** : À faire — **Priorité** : Haute — **Pré-requis** : #38, #39, #40
+**Livrable** : test JUnit qui exécute le bootstrap complet sur un repo factice, applique la solution de référence de 1.1.1, push, et vérifie qu'un rapport ✓ est généré.
+**Critères** :
+- [ ] Test passe en local et sera repris par le CI #11.
+- [ ] Aucun fichier hors `@TempDir`.
+
+---
+
 ## Phase 2 — Module 1 pilote complet (priorité HAUTE)
 
 > On finit **entièrement** le module 1 avant de toucher aux autres : 7 chapitres + 10 exercices + rétro. Sert de gabarit pour les modules 2 à 6.

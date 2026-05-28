@@ -30,6 +30,8 @@ Cette itération est la première rampe utilisable bout en bout. Elle ne couvre 
 | D5 | Layout = repo stagiaire séparé, généré par `init` | Édition dans le repo Piscine | Sépare référentiel et travail stagiaire |
 | D6 | Commandes git supportées = `add`, `commit`, `push`, `status`, `log`, `diff` | Set étendu, passe-plat total | Minimum pour le MVP ; toute autre → message « non supportée » |
 | D7 | Nouveau module Maven `moulinette/console` à côté de `cli` | Étendre `cli`, app séparée | `cli` reste headless (CI), `console` est interactif (stagiaire) |
+| D8 | Notion de `Mode` (`local` \| `nominal`) câblée dès le MVP | Tout coder en dur `local` | Évite une refacto brutale quand le mode nominal (plateforme) arrivera |
+| D9 | Bootstrap depuis le repo Piscine ETNC via `scripts/piscine-bootstrap.{sh,ps1}` | Demander au stagiaire d'enchaîner manuellement `mvn package` puis `java -jar` | Autonomie : 1 commande après `git clone` |
 
 ---
 
@@ -47,6 +49,14 @@ moulinette/
 ```
 
 `moulinette/console` dépend de `framework`, `runner`, `reports`. Pas de dépendance vers `cli` ; les deux sont des entry points pairs.
+
+### Modes d'exécution
+
+```java
+public enum Mode { LOCAL, NOMINAL }
+```
+
+Le MVP **implémente uniquement `LOCAL`**. `NOMINAL` (déploiement plateforme avec auth, rendu serveur, etc.) est référencé partout où l'implémentation diverge — typiquement via une interface `SubmissionBackend` dont seule `LocalSubmissionBackend` (bare remote `file://`) existe au MVP. Toute commande `Main` accepte un flag `--mode local` (par défaut). Un appel avec `--mode nominal` retourne une erreur explicite « non implémenté dans le MVP, voir tâche #X ».
 
 ### Packages internes
 
@@ -106,6 +116,25 @@ public interface MoulinetteRunner {
 ---
 
 ## 5. Flux d'usage
+
+### Bootstrap depuis le repo Piscine ETNC (stagiaire en autonomie)
+
+Le stagiaire reçoit l'URL du repo Piscine ETNC. Il fait :
+
+```
+git clone <url-piscine-etnc> piscine-etnc
+cd piscine-etnc
+./scripts/piscine-bootstrap.sh --nom curlier        # ou .ps1 sous Windows
+```
+
+Le script :
+1. vérifie les prérequis (Java 25, git) — message clair si absent + lien vers `docs/setup-dev.md`,
+2. build `moulinette-console` via `./mvnw -f moulinette/pom.xml -pl console -am package`,
+3. crée un workspace stagiaire à côté du repo : `../piscine-<nom>/`,
+4. y exécute `init --mode local` (commit initial, bare remote, starters du module 1),
+5. affiche la commande pour lancer le REPL : `java -jar … repl --repo ../piscine-curlier`.
+
+Idempotent : relancé, il détecte le workspace existant et propose `--force` ou `--resume`.
 
 ### Initialisation (one-shot)
 
@@ -232,11 +261,12 @@ Voir `docs/backlog.md` — section MVP, tâches #34 à #41 (cf. §11 ci-dessous 
 
 ## 11. Découpage en tâches (proposition pour backlog)
 
-1. **#34** — Module Maven `moulinette/console` (squelette, dépendances, smoke test).
+1. **#34** — Module Maven `moulinette/console` (squelette, dépendances, `Mode` enum, smoke test).
 2. **#35** — `console.git.GitClient` + `ProcessGitClient` + tests intégration.
-3. **#36** — `console.workspace` : `ExerciseCatalog` + `WorkspaceInitializer` + tests.
+3. **#36** — `console.workspace` : `ExerciseCatalog` + `WorkspaceInitializer` + `LocalSubmissionBackend` + tests.
 4. **#37** — `console.commands` + `console.repl` (commandes minimales, dispatch, prompt).
 5. **#38** — `console.trigger.SubmissionTrigger` + `MoulinetteRunner` (pont vers framework).
-6. **#39** — Sous-commande `init` + sous-commande `repl` dans `console.Main`.
-7. **#40** — E2E smoke « happy path » sur exo 1.1.1.
-8. **#41** — Documentation utilisateur (`docs/console-mvp.md`) + mention dans le README racine.
+6. **#39** — Sous-commande `init` + sous-commande `repl` dans `console.Main` (flag `--mode local`).
+7. **#40** — Script `scripts/piscine-bootstrap.{sh,ps1}` + tests sur un repo factice.
+8. **#41** — `docs/piscine-stagiaire.md` (guide autonome) + mention dans le `README.md` racine.
+9. **#42** — E2E smoke « happy path » sur exo 1.1.1 via le bootstrap complet.
