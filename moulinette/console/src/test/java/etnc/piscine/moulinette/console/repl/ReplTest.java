@@ -38,4 +38,12 @@ class ReplTest {
 
         assertThat(sw.toString()).contains("non supportée");
     }
+
+    @Test
+    void tokenize_respecte_les_guillemets() {
+        assertThat(Repl.tokenize("git commit -m \"mon message\""))
+            .containsExactly("git", "commit", "-m", "mon message");
+        assertThat(Repl.tokenize("git add exercices/1.1.1"))
+            .containsExactly("git", "add", "exercices/1.1.1");
+    }
 }

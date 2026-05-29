@@ -4,7 +4,7 @@ import etnc.piscine.moulinette.console.commands.CommandRegistry;
 import etnc.piscine.moulinette.console.commands.CommandResult;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 public final class Repl {
@@ -24,7 +24,7 @@ public final class Repl {
             if (line == null) return;
             line = line.trim();
             if (line.isEmpty()) continue;
-            List<String> tokens = Arrays.stream(line.split("\\s+")).toList();
+            List<String> tokens = tokenize(line);
             CommandResult r = registry.dispatch(ctx, tokens);
             if (!r.output().isEmpty()) {
                 io.write(r.output());
@@ -32,5 +32,30 @@ public final class Repl {
             }
             if (r.shouldExit()) return;
         }
+    }
+
+    /**
+     * Découpe une ligne en jetons, en respectant les guillemets doubles.
+     * Exemple : {@code git commit -m "mon message"} → [git, commit, -m, mon message].
+     */
+    static List<String> tokenize(String line) {
+        List<String> tokens = new ArrayList<>();
+        StringBuilder cur = new StringBuilder();
+        boolean inQuotes = false;
+        boolean hasToken = false;
+        for (int i = 0; i < line.length(); i++) {
+            char c = line.charAt(i);
+            if (c == '"') {
+                inQuotes = !inQuotes;
+                hasToken = true;
+            } else if (Character.isWhitespace(c) && !inQuotes) {
+                if (hasToken) { tokens.add(cur.toString()); cur.setLength(0); hasToken = false; }
+            } else {
+                cur.append(c);
+                hasToken = true;
+            }
+        }
+        if (hasToken) tokens.add(cur.toString());
+        return tokens;
     }
 }
