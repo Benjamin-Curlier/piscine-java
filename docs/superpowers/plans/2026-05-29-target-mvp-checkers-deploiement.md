@@ -16,6 +16,33 @@
 
 ---
 
+## Démarrage en session vierge (lire en premier)
+
+Cette itération s'exécute **inline** dans une nouvelle session sans contexte. Pour démarrer :
+
+1. **Invoquer la skill** `superpowers:executing-plans` et lui donner ce fichier.
+2. **Brancher** : travailler sur `feature/mvp-console-correction` (la branche de l'itération précédente, déjà créée). Ne pas committer sur `main`.
+3. **Suivre les tâches dans l'ordre** (Task 1 → 10), en TDD, un commit par tâche. Les commandes et le code sont fournis intégralement.
+
+### Environnement de build (gotchas — vérifiés en session précédente)
+- **JDK 25** : `E:\java\jdk-25.0.3+9` (= `JAVA_HOME`). Le `java` du PATH est Java 8 → pour lancer un jar, utiliser `"$JAVA_HOME/bin/java"`.
+- **Maven** : utiliser le `mvn` **système** (`E:\java\apache-maven-3.9.9`, sur le PATH). **`./mvnw` échoue** (ne peut pas télécharger Maven : réseau restreint).
+- **Sandbox** : tous les `mvn` doivent tourner avec `dangerouslyDisableSandbox: true` (sinon la résolution de dépendances time out). Cette itération télécharge de nouvelles deps (junit-platform-console, checkstyle) → premier build plus long.
+- **`-Dtest=X`** s'applique à tout le reactor → toujours ajouter `-Dsurefire.failIfNoSpecifiedTests=false`.
+- **Tags** : `surefire.excludedGroups` par défaut deviendra `git,e2e,tools`. Lancer une suite ciblée : `-Dsurefire.excludedGroups=<autres> -Dgroups=<tag>`.
+- **CRLF** : warnings "LF will be replaced by CRLF" à chaque `git add` = normaux.
+- **Trailer de commit** : `Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>`.
+
+### État au démarrage (acquis de l'itération MVP précédente)
+- `moulinette/console` existe : REPL git (`init`/`repl`), commandes `add/commit/push/status/log/diff/submit-start`, `SubmissionTrigger`, `MoulinetteRunner.Default` câblé **mais avec une liste de Checkers vide** (tout passe OK). C'est ce que cette itération corrige.
+- Uber-jar via maven-shade déjà en place (`moulinette-console.jar`).
+- Tests verts : suites unit + `@Tag("git")` + `@Tag("e2e")`.
+
+### Définition de terminé
+Les 4 suites passent (`verify` + `git` + `tools` + `e2e`), le bundle ZIP se construit et se lance hors du repo, et les deux docs existent. Détail en §9 de la spec.
+
+---
+
 ## File Structure
 
 ### Modifié — `moulinette/framework`
