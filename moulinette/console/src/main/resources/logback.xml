@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Config Logback de la console stagiaire.
+  Niveau WARN par défaut : la console parle au stagiaire via System.out,
+  on ne veut pas polluer le REPL avec les logs DEBUG de git.
+  Passe à DEBUG via -Dlogback.configurationFile ou en éditant ce fichier pour diagnostiquer.
+-->
+<configuration>
+    <appender name="STDERR" class="ch.qos.logback.core.ConsoleAppender">
+        <target>System.err</target>
+        <encoder>
+            <pattern>%d{HH:mm:ss} %-5level %logger{0} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="WARN">
+        <appender-ref ref="STDERR"/>
+    </root>
+</configuration>
