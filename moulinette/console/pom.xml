@@ -63,13 +63,23 @@
         </dependency>
     </dependencies>
 
+    <properties>
+        <!-- Tags exclus par défaut (tests nécessitant git / scénarios lourds).
+             Surchargeable : mvn ... -Dsurefire.excludedGroups=e2e -Dgroups=git -->
+        <surefire.excludedGroups>git,e2e</surefire.excludedGroups>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <excludedGroups>git,e2e</excludedGroups>
+                    <excludedGroups>${surefire.excludedGroups}</excludedGroups>
+                    <includes>
+                        <include>**/*Test.java</include>
+                        <include>**/*IT.java</include>
+                    </includes>
                 </configuration>
             </plugin>
         </plugins>
