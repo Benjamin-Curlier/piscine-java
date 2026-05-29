@@ -1,5 +1,7 @@
 # Piscine ETNC
 
+> **Stagiaire ?** Va directement à [`docs/piscine-stagiaire.md`](docs/piscine-stagiaire.md) — tout est expliqué pour démarrer en autonomie.
+
 Plateforme pédagogique d'apprentissage du langage **Java** pour les stagiaires de l'**École des Transmissions, du Numérique et du Cyber** (ETNC).
 
 Inspirée des piscines C/C++ de 42 et Epitech, cette piscine se distingue par :
