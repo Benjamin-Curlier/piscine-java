@@ -19,6 +19,7 @@
         <module>runner</module>
         <module>reports</module>
         <module>cli</module>
+        <module>console</module>
     </modules>
 
     <properties>

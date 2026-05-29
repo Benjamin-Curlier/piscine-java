@@ -11,15 +11,14 @@
         <version>0.1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>cli</artifactId>
-    <name>Moulinette — CLI</name>
+    <artifactId>console</artifactId>
+    <name>Moulinette — Console interactive</name>
     <description>
-        Point d'entrée de la moulinette ETNC.
-        Parsing des arguments, orchestration du pipeline de vérification.
+        REPL git sandbox pour la Piscine ETNC en mode local.
+        Lance la moulinette sur push d'une branche rendu/&lt;sous-groupe&gt;.
     </description>
 
     <dependencies>
-
         <dependency>
             <groupId>etnc.piscine.moulinette</groupId>
             <artifactId>framework</artifactId>
@@ -37,14 +36,18 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>
-        <!-- Logback en runtime pour la production CLI -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Tests -->
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>2.3</version>
+        </dependency>
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -53,26 +56,22 @@
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
         </dependency>
-        <!-- En scope test, Logback est visible (overrides runtime scope pour les tests) -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <build>
         <plugins>
-            <!-- Lancement CLI via exec-maven-plugin (voir moulinette/README.md pour la commande complete) -->
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <mainClass>etnc.piscine.moulinette.cli.Main</mainClass>
+                    <excludedGroups>git,e2e</excludedGroups>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
 </project>
