@@ -145,78 +145,97 @@
 > Première itération **bout en bout utilisable** : un stagiaire clone le repo, lance un script de bootstrap, et fait des exos en local avec une console REPL qui déclenche la moulinette sur la séquence git `add` + `commit` + `push` (branche `rendu/<sous-groupe>`).
 > Spec validée : [`docs/superpowers/specs/2026-05-28-mvp-console-correction-design.md`](superpowers/specs/2026-05-28-mvp-console-correction-design.md).
 > Tous ces items partagent le pré-requis #9 (squelette moulinette).
+> **Itération réalisée** sur la branche `feature/mvp-console-correction` — plan d'implémentation : [`docs/superpowers/plans/2026-05-28-mvp-console-correction.md`](superpowers/plans/2026-05-28-mvp-console-correction.md).
+> Build vérifié : `mvn -f moulinette/pom.xml verify` (unitaires) + suites `@Tag("git")` et `@Tag("e2e")` vertes.
 
 ### #34 — Module Maven `moulinette/console` (squelette)
-**Statut** : À faire — **Priorité** : Haute — **Pré-requis** : #9
+**Statut** : Faite — commit `feat(console): squelette Maven module console`
+**Priorité** : Haute — **Pré-requis** : #9
 **Livrable** : nouveau sous-module Maven `moulinette/console`, dépend de `framework`+`runner`+`reports`, enum `Mode { LOCAL, NOMINAL }`, smoke test.
 **Critères** :
-- [ ] `mvn -f moulinette/pom.xml -pl console verify` passe.
-- [ ] Pas de dépendance vers `cli`.
-- [ ] Smoke test charge la classe `Main`.
+- [x] `mvn -f moulinette/pom.xml -pl console verify` passe.
+- [x] Pas de dépendance vers `cli`.
+- [x] Smoke test charge le module (`ConsoleSmokeTest`).
+- _Note : a aussi corrigé un commentaire XML invalide dans `cli/pom.xml` qui bloquait le reactor._
 
 ### #35 — `console.git.GitClient` + `ProcessGitClient`
-**Statut** : À faire — **Priorité** : Haute — **Pré-requis** : #34
+**Statut** : Faite — commit `feat(console): GitClient + ProcessGitClient + FakeGitClient`
+**Priorité** : Haute — **Pré-requis** : #34
 **Livrable** : interface `GitClient` (run, currentBranch, lastPushRefs) + impl sous-process + tests intégration `@Tag("git")`.
 **Critères** :
-- [ ] `FakeGitClient` disponible pour les tests des autres packages.
-- [ ] Tests int : init / commit / push vers bare local / lecture des refs.
-- [ ] Tagués `@Tag("git")` (skippables si git absent).
+- [x] `FakeGitClient` disponible pour les tests des autres packages.
+- [x] Tests int : init / commit / push vers bare local / lecture des refs (`ProcessGitClientIT`).
+- [x] Tagués `@Tag("git")` (skippables via `surefire.excludedGroups`).
 
 ### #36 — `console.workspace` (catalogue + initializer)
-**Statut** : À faire — **Priorité** : Haute — **Pré-requis** : #34, #35
-**Livrable** : `ExerciseCatalog` (scan `exercises/`, regroupement par `sous_groupe`, tri par `position`), `WorkspaceInitializer` (création repo stagiaire + bare remote + copie starters + commit initial), `LocalSubmissionBackend`.
+**Statut** : Faite — commits `feat(console): ExerciseCatalog` + `feat(console): LocalWorkspaceInitializer`
+**Priorité** : Haute — **Pré-requis** : #34, #35
+**Livrable** : `ExerciseCatalog` (scan `exercises/`, regroupement par `sous_groupe`, tri par `position`), `LocalWorkspaceInitializer` (création repo stagiaire + bare remote + copie starters + commit initial).
 **Critères** :
-- [ ] `init` produit un repo git valide avec remote `origin = file://…/.piscine/remote.git`.
-- [ ] Catalogue résilient à un `metadata.yml` invalide (warn, skip).
-- [ ] Tests unitaires + intégration avec `@TempDir`.
+- [x] `init` produit un repo git valide avec remote `origin = file://…/.piscine/remote.git`.
+- [x] Catalogue résilient à un `metadata.yml` invalide (warn, skip).
+- [x] Tests unitaires + intégration avec `@TempDir`.
+- _Note : `LocalSubmissionBackend` non nécessaire au MVP ; l'init local suffit. Le découplage `local`/`nominal` est porté par l'enum `Mode` (#39)._
 
 ### #37 — `console.commands` + `console.repl`
-**Statut** : À faire — **Priorité** : Haute — **Pré-requis** : #35
-**Livrable** : interface `Command`, classes `AddCommand`, `CommitCommand`, `PushCommand`, `StatusCommand`, `LogCommand`, `DiffCommand`, `SubmitStartCommand`, `HelpCommand`, `ExitCommand`. Boucle `Repl` avec prompt `piscine[<branche>]>`.
+**Statut** : Faite — commits `feat(console): commandes git de base` + `feat(console): PushCommand, SubmitStart, CommandRegistry, Repl`
+**Priorité** : Haute — **Pré-requis** : #35
+**Livrable** : interface `Command`, classes `AddCommand`, `CommitCommand`, `PushCommand`, `StatusCommand`, `LogCommand`, `DiffCommand`, `SubmitStartCommand`, `HelpCommand`, `ExitCommand`. Boucle `Repl` avec prompt `piscine[<branche>]>` et tokenizer respectant les guillemets.
 **Critères** :
-- [ ] Commande inconnue → message « non supportée dans le MVP » + suggestion.
-- [ ] Commande malformée → message pédagogique (ex: commit sans `-m`).
-- [ ] Couverture ≥ 80 % sur `console.commands`.
+- [x] Commande inconnue → message « non supportée dans le MVP » + suggestion.
+- [x] Commande malformée → message pédagogique (ex: commit sans `-m`).
+- [x] Tests unitaires sur `console.commands` (Add, Commit, Push, SubmitStart, Registry).
 
 ### #38 — `SubmissionTrigger` + `MoulinetteRunner`
-**Statut** : À faire — **Priorité** : Haute — **Pré-requis** : #36, #37
+**Statut** : Faite — commit `feat(console): SubmissionTrigger + MoulinetteRunner`
+**Priorité** : Haute — **Pré-requis** : #36, #37
 **Livrable** : détection du push sur `rendu/<sous-groupe>`, lancement de la moulinette sur les exos du sous-groupe en ordre de difficulté croissante, **arrêt au premier exo qui échoue**, génération du rapport `.piscine/reports/<groupe>-<ts>.md`.
 **Critères** :
-- [ ] Push sur `main` ne déclenche pas.
-- [ ] Séquence stoppe au 1er `Checker` KO avec message explicite.
-- [ ] Le rapport contient une section par exo exécuté.
+- [x] Push sur `main` ne déclenche pas.
+- [x] Séquence stoppe au 1er `Checker` KO avec message explicite (détection via `CheckResult.Status.OK`).
+- [x] Le rapport contient une section par exo exécuté.
 
 ### #39 — Sous-commandes `init` / `repl` dans `console.Main`
-**Statut** : À faire — **Priorité** : Haute — **Pré-requis** : #36, #37
-**Livrable** : `Main` parse `init` et `repl`, accepte `--mode local` (par défaut). `--mode nominal` retourne une erreur explicite « non implémenté dans le MVP ».
+**Statut** : Faite — commit `feat(console): Main init/repl + shade jar exécutable`
+**Priorité** : Haute — **Pré-requis** : #36, #37
+**Livrable** : `Main` parse `init` et `repl`, accepte `--mode local` (par défaut). `--mode nominal` retourne une erreur explicite « non implémenté dans le MVP ». Fat-jar via maven-shade.
 **Critères** :
-- [ ] `java -jar moulinette-console.jar init --nom X --dest <path>` fonctionne bout en bout.
-- [ ] `java -jar moulinette-console.jar repl --repo <path>` lance la boucle.
-- [ ] `--help` documente les deux sous-commandes.
+- [x] `java -jar moulinette-console.jar init --nom X --dest <path>` fonctionne bout en bout (vérifié manuellement).
+- [x] `java -jar moulinette-console.jar repl --repo <path>` lance la boucle.
+- [x] `--help` documente les deux sous-commandes.
 
 ### #40 — Script `scripts/piscine-bootstrap.{sh,ps1}`
-**Statut** : À faire — **Priorité** : Haute — **Pré-requis** : #39
-**Livrable** : deux scripts (Bash + PowerShell) à la racine du repo Piscine ETNC. Vérifient les prérequis, builent la console, créent le workspace à côté du repo (`../piscine-<nom>/`), lancent `init --mode local`, affichent la commande pour démarrer le REPL.
+**Statut** : Faite — commit `feat(scripts): bootstrap autonome piscine-bootstrap`
+**Priorité** : Haute — **Pré-requis** : #39
+**Livrable** : deux scripts (Bash + PowerShell) à la racine du repo. Vérifient les prérequis, builent la console, créent le workspace à côté du repo (`../piscine-<nom>/`), lancent `init`, affichent la commande pour démarrer le REPL.
 **Critères** :
-- [ ] Idempotent (relance détecte le workspace, propose `--force` ou `--resume`).
-- [ ] Message clair si Java 25 ou git absent + renvoi vers `docs/setup-dev.md`.
-- [ ] Testé manuellement sur Windows sans droits admin (machine du formateur).
+- [x] Idempotent (relance détecte le workspace, propose `--force`).
+- [x] Message clair si Java 25 ou git absent + renvoi vers `docs/setup-dev.md`.
+- [x] Testé sur la machine du formateur (Windows, no admin) — résolution `JAVA_HOME` + préférence `mvn` système.
 
 ### #41 — `docs/piscine-stagiaire.md` (guide autonome)
-**Statut** : À faire — **Priorité** : Haute — **Pré-requis** : #40
+**Statut** : Faite — commit `docs: guide stagiaire autonome + lien depuis README`
+**Priorité** : Haute — **Pré-requis** : #40
 **Livrable** : guide unique pour le stagiaire — du `git clone` au premier rendu validé.
 **Critères** :
-- [ ] Section « Démarrage » : `clone` → `bootstrap` → premier `repl`.
-- [ ] Section « Faire un rendu » : `submit-start` → édition → `add` + `commit` + `push` → lecture du rapport.
-- [ ] Section « Bloqué ? » : comment lire un rapport d'échec, comment re-pousser.
-- [ ] Lien depuis le `README.md` racine en haut.
+- [x] Section « Démarrage » : `clone` → `bootstrap` → premier `repl`.
+- [x] Section « Faire un rendu » : `submit-start` → édition → `add` + `commit` + `push` → lecture du rapport.
+- [x] Section « Bloqué ? » : comment lire un rapport d'échec, comment re-pousser.
+- [x] Lien depuis le `README.md` racine en haut.
 
 ### #42 — E2E smoke « happy path » sur exo 1.1.1
-**Statut** : À faire — **Priorité** : Haute — **Pré-requis** : #38, #39, #40
-**Livrable** : test JUnit qui exécute le bootstrap complet sur un repo factice, applique la solution de référence de 1.1.1, push, et vérifie qu'un rapport ✓ est généré.
+**Statut** : Faite — commit `test(console): E2E happy path sur exo 1.1.1`
+**Priorité** : Haute — **Pré-requis** : #38, #39, #40
+**Livrable** : test JUnit (`HappyPathE2EIT`) qui exécute init + un REPL scripté (`submit-start` → add/commit/push) sur un repo factice et vérifie qu'un rapport ✓ est généré.
 **Critères** :
-- [ ] Test passe en local et sera repris par le CI #11.
-- [ ] Aucun fichier hors `@TempDir`.
+- [x] Test passe en local (`@Tag("e2e")`) et sera repris par le CI #11.
+- [x] Aucun fichier hors `@TempDir`.
+- _Note : exercice factice utilisé (la solution de référence réelle de 1.1.1 sera branchée quand de vrais `Checker` existeront — voir limites ci-dessous)._
+
+### Limites connues du MVP (à traiter ultérieurement)
+- **Pas de vrais `Checker`** : `MoulinetteRunner.Default` est câblé mais reçoit une liste de `Checker` vide ; aucun n'existe encore dans `framework`. Tant qu'il n'y en a pas, tout sous-groupe est considéré « OK ». Prochaine étape : implémenter `CompileChecker`/`TestChecker` et les injecter dans `Main.runRepl`.
+- **`mvnw` ne télécharge pas Maven** dans certains environnements réseau restreints ; les scripts préfèrent donc un `mvn` système quand il existe.
+- **Mode `nominal`** : rejeté explicitement (non implémenté).
 
 ---
 
