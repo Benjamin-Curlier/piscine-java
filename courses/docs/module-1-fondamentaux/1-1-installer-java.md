@@ -227,4 +227,4 @@ public class HelloWorld {
 
 ## Prochain chapitre
 
-→ **Chapitre 1.2 — Variables et types primitifs** *(à venir)*
+→ **[Chapitre 1.2 — Variables et types primitifs](1-2-variables-types-primitifs)**
