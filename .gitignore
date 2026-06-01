@@ -8,6 +8,8 @@ target/
 hs_err_pid*
 replay_pid*
 .mvn/wrapper/maven-wrapper.jar
+# Régénéré par maven-shade-plugin à chaque `mvn package`
+**/dependency-reduced-pom.xml
 
 # --- IDE ---
 .idea/
