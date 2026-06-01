@@ -302,24 +302,24 @@ Hygiène (hors chemin critique, à caser quand pratique) : **#54** (committer `m
 > **Décision 2026-06-01** : le module 1 complet fait partie du périmètre MVP (étape 5 de la [roadmap](#-roadmap-jusquau-mvp-ordre-dexécution-validé-le-2026-06-01)). L'outillage a dépassé le contenu (1 exo, 2 chapitres) ; or la moulinette + le CI `valider-solutions` (#11b) permettent désormais une **boucle vertueuse** : on écrit l'exo, la moulinette valide immédiatement sa solution de référence. C'est le bon moment pour produire le contenu en masse sans accumuler de dette.
 
 ### #15 — Chapitres restants du module 1
-**Statut** : À faire
+**Statut** : Faite — branche `feature/m1-chapitres` (PR à merger). Spec [`2026-06-01-m1-chapitres-design.md`](superpowers/specs/2026-06-01-m1-chapitres-design.md), plan [`2026-06-01-m1-chapitres.md`](superpowers/plans/2026-06-01-m1-chapitres.md).
 **Priorité** : Haute
 **Pré-requis** : aucun (le chapitre 1.1 sert de modèle)
 
 **Livrable** : 6 chapitres dans `courses/docs/module-1-fondamentaux/`, format défini en section 6 de `docs/charte-redaction.md`.
 
-- [ ] `1-2-variables-types-primitifs.md`
-- [ ] `1-3-operateurs.md`
-- [ ] `1-4-entrees-clavier.md`
-- [ ] `1-5-conditions.md`
-- [ ] `1-6-boucles.md`
-- [ ] `1-7-bonnes-pratiques-lisibilite.md`
+- [x] `1-2-variables-types-primitifs.md`
+- [x] `1-3-operateurs.md`
+- [x] `1-4-entrees-clavier.md`
+- [x] `1-5-conditions.md`
+- [x] `1-6-boucles.md`
+- [x] `1-7-bonnes-pratiques-lisibilite.md`
 
 **Critères d'acceptation** :
-- [ ] Chaque chapitre respecte la structure imposée (section 6 charte rédaction).
-- [ ] Build Docusaurus passe (`npm run build`).
-- [ ] Chaque chapitre a son "exercice guidé" et ses "vérifications d'acquis".
-- [ ] Aucune notion utilisée n'a été introduite plus tard que son chapitre d'origine (cohérence avec [`referentiel.md`](referentiel.md)).
+- [x] Chaque chapitre respecte la structure imposée (section 6 charte rédaction).
+- [x] Build Docusaurus passe (`npm run build`).
+- [x] Chaque chapitre a son "exercice guidé" et ses "vérifications d'acquis".
+- [x] Aucune notion utilisée n'a été introduite plus tard que son chapitre d'origine (cohérence avec [`referentiel.md`](referentiel.md)).
 
 ---
 
