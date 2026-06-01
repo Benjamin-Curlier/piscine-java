@@ -1,7 +1,7 @@
 name: CI
 
-# CI minimal (#11a) : filet anti-régression avant les vrais Checkers (#43–#51).
-# Le job `valider-solutions` (#11b) sera ajouté une fois les Checkers en place.
+# CI (#11a + #11b) : build moulinette, lint exos, build site, et validation des
+# solutions de référence (chaque solution doit passer ses propres tests).
 on:
   push:
     branches: [main]
@@ -80,3 +80,19 @@ jobs:
 
       - name: Build du site
         run: npm run build
+
+  valider-solutions:
+    name: Valider les solutions de référence
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 25 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+
+      - name: Tester chaque solution de référence
+        run: bash scripts/valider-solutions.sh

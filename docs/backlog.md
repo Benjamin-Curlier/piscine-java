@@ -87,7 +87,7 @@ Hygiène (hors chemin critique, à caser quand pratique) : **#54** (committer `m
 ---
 
 ### #11 — GitHub Actions CI (scindée en #11a et #11b)
-**Statut** : **#11a Faite** (commit `8e3399b`, validée sur [PR #1](https://github.com/Benjamin-Curlier/Piscine-ETNC/pull/1)) — **#11b À faire** (après #43–#51)
+**Statut** : **#11a Faite** (commit `8e3399b`, [PR #1](https://github.com/Benjamin-Curlier/Piscine-ETNC/pull/1)) — **#11b Faite** (job `valider-solutions` via `scripts/valider-solutions.sh` : `mvn test` sur chaque `solution/`)
 **Priorité** : **Haute — point d'entrée de la roadmap MVP.**
 **Pré-requis** : #9 (squelette moulinette), #10 (mvnw)
 **Pourquoi** : casser tout PR qui régresse un exercice, le site, ou la moulinette. *Le plus rentable* : c'est l'absence de CI qui avait laissé passer le commentaire XML invalide de `cli/pom.xml`.
