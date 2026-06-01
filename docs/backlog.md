@@ -18,6 +18,25 @@
 
 ---
 
+## 🎯 Roadmap jusqu'au MVP (ordre d'exécution validé le 2026-06-01)
+
+> Issue d'une remontée d'action : maintenant que le reactor compile, que des tests existent et que de vrais Checkers arrivent, on installe les filets de sécurité **avant** d'accumuler du contenu, on resynchronise `main`, puis on produit le module 1 complet en s'appuyant sur la boucle vertueuse « écris l'exo → la moulinette valide sa solution ».
+>
+> **Définition du MVP** : chaîne d'évaluation réelle (Checkers) + filets CI + `main` à jour + déploiement stagiaire + **module 1 pédagogiquement complet** (7 chapitres + 10 exercices validés par la moulinette).
+
+Séquence :
+
+1. **#11a — CI minimal** (filet anti-régression, *le plus rentable*). `verify` du reactor + les 4 suites taguées (`git`/`tools`/`e2e`) + lint-exercices + build Docusaurus. **Avant** les Checkers : c'est ce qui aurait attrapé le commentaire XML invalide de `cli/pom.xml`. → *priorité immédiate.*
+2. **#52 — PR + merge `feature/mvp-console-correction` → `main`.** Une fois le CI minimal vert sur la PR, merger l'acquis MVP console pour que `main` reflète la réalité. Les itérations suivantes branchent depuis `main`.
+3. **#43–#51 — Target MVP (vrais Checkers + bundle + docs).** Depuis une branche issue de `main`. Inclut le **StyleChecker en mode advisory** (non bloquant) pour la beta — voir plan target-MVP, Tasks 5–6.
+4. **#11b — Job `valider-solutions` dans le CI.** Débloqué par les vrais Checkers : faire tourner la moulinette sur la `solution/` de référence de chaque exo. Si la solution ne passe pas ses propres tests, l'exo est cassé *avant* le stagiaire. Filet pédagogique le plus précieux.
+5. **#15 + #16 — Module 1 complet** (6 chapitres restants + 9 exercices restants). Boucle vertueuse : chaque exo écrit est immédiatement validé par la moulinette + le CI `valider-solutions`. **Fait partie du MVP.**
+6. **#14 — `CONTRIBUTING.md` + `LICENSE`.** Cadrage institutionnel/militaire : comment ajouter exos/chapitres, droits d'usage. Peu coûteux.
+
+Hygiène (hors chemin critique, à caser quand pratique) : **#54** (committer `maven-wrapper.jar` pour un `./mvnw` offline), **#53** (durcir le style advisory → bloquant après la beta), **#55** (migrer `ReportGenerator` vers Jackson quand le format JSON se stabilise).
+
+---
+
 ## Phase 1 — Outillage fondateur (priorité HAUTE)
 
 > Avant de produire du contenu pédagogique en masse, on cristallise les outils qui le valideront. Sans ça, on accumulerait de la dette.
@@ -50,7 +69,7 @@
 ---
 
 ### #10 — Maven Wrapper (mvnw) mutualisé pour les exercices
-**Statut** : À faire
+**Statut** : Faite — commit `feat(tooling): Maven Wrapper 3.3.2 + docs/setup-dev.md` (voir historique git)
 **Priorité** : Haute
 **Pré-requis** : aucun
 **Pourquoi** : éviter aux stagiaires (et au CI) d'avoir à installer Maven globalement. `./mvnw` suffit.
@@ -58,34 +77,43 @@
 **Livrable** : un Maven Wrapper installé à la racine du repo, utilisable depuis n'importe quel exercice via un alias / un lien.
 
 **Critères d'acceptation** :
-- [ ] `./mvnw -v` fonctionne depuis la racine (télécharge Maven à la première exécution).
-- [ ] Documentation dans `docs/setup-dev.md` (à créer en #12) qui explique comment lancer les tests d'un exercice via `./mvnw -f exercises/.../starter/pom.xml test`.
-- [ ] Format d'exercice mis à jour pour mentionner `./mvnw` plutôt que `mvn`.
+- [x] `./mvnw -v` fonctionne depuis la racine (télécharge Maven 3.9.9 à la première exécution).
+- [x] Documentation dans `docs/setup-dev.md` créée : installation Java 25 portable + exemples `./mvnw`.
+- [x] Format d'exercice mis à jour pour mentionner `./mvnw` plutôt que `mvn`.
 
-**Décisions à prendre** :
-- Un seul `mvnw` racine partagé, ou un par exercice ? **Recommandation** : un seul racine pour ne pas dupliquer.
+**Décision prise** :
+- Un seul `mvnw` racine partagé ✓ — évite la duplication (commande `./mvnw -f <chemin>/pom.xml`).
 
 ---
 
-### #11 — GitHub Actions CI
+### #11 — GitHub Actions CI (scindée en #11a et #11b)
 **Statut** : À faire
-**Priorité** : Haute
+**Priorité** : **Haute — point d'entrée de la roadmap MVP.**
 **Pré-requis** : #9 (squelette moulinette), #10 (mvnw)
-**Pourquoi** : casser tout PR qui régresse un exercice, le site, ou la moulinette.
+**Pourquoi** : casser tout PR qui régresse un exercice, le site, ou la moulinette. *Le plus rentable* : c'est l'absence de CI qui avait laissé passer le commentaire XML invalide de `cli/pom.xml`.
 
-**Livrable** : `.github/workflows/ci.yml` avec trois jobs en parallèle.
+**Livrable** : `.github/workflows/ci.yml`. Le job `valider-solutions` dépend des vrais Checkers (#43–#51), donc la tâche est scindée en deux jalons exécutés à des moments différents de la roadmap.
 
+#### #11a — CI minimal (AVANT les Checkers, filet anti-régression immédiat)
 **Jobs** :
-1. **lint-exercices** — script Bash/Python qui vérifie pour chaque dossier `exercises/M.S.E-slug/` la présence des fichiers obligatoires (`sujet.md`, `metadata.yml`, `starter/pom.xml`, etc.) et la conformité YAML.
-2. **build-docusaurus** — `cd courses && npm ci && npm run build`. Le `onBrokenLinks: 'throw'` casse le job si une réf est cassée.
-3. **valider-solutions** — pour chaque exercice : `cd exercises/.../solution && ../../../../mvnw test`. La solution de référence doit passer **tous** les tests (publics ET privés).
+1. **build-moulinette** — `mvn -f moulinette/pom.xml verify` (reactor + unitaires) puis les suites lourdes taguées : `git`, `tools`, `e2e` (lancées explicitement via `-Dgroups`). Casse à la moindre régression de build/test.
+2. **lint-exercices** — script Bash/Python qui vérifie pour chaque dossier `exercises/M.S.E-slug/` la présence des fichiers obligatoires (`sujet.md`, `metadata.yml`, `starter/pom.xml`, etc.) et la conformité YAML.
+3. **build-docusaurus** — `cd courses && npm ci && npm run build`. Le `onBrokenLinks: 'throw'` casse le job si une réf est cassée.
 
-**Critères d'acceptation** :
-- [ ] Les 3 jobs passent sur la branche `main` actuelle.
+**Critères d'acceptation #11a** :
+- [ ] Les 3 jobs passent sur la PR `feature/mvp-console-correction → main` (#52).
 - [ ] Un PR qui supprime `sujet.md` d'un exercice casse `lint-exercices`.
 - [ ] Un PR qui introduit un lien cassé dans un chapitre casse `build-docusaurus`.
-- [ ] Un PR qui altère la solution de l'exo 1.1.1 casse `valider-solutions`.
-- [ ] Le job tourne sur `ubuntu-latest` avec `setup-java@v4` (Temurin 25) et `setup-node@v4` (Node 20).
+- [ ] Tourne sur `ubuntu-latest` avec `setup-java@v4` (Temurin 25) et `setup-node@v4` (Node 20).
+- [ ] Gotcha réseau Maven : prévoir le cache `~/.m2` (`actions/cache` ou `setup-java` avec `cache: maven`) ; sur les runners GitHub la résolution Maven Central fonctionne (contrairement à la machine du formateur).
+
+#### #11b — Job `valider-solutions` (APRÈS les Checkers #43–#51)
+**Job** : pour chaque exercice, faire tourner la moulinette sur la `solution/` de référence (compile + tests publics + tests privés). La solution doit passer **tous** ses propres tests. Filet pédagogique le plus précieux : un exo cassé est détecté avant le stagiaire.
+
+**Critères d'acceptation #11b** :
+- [ ] Un PR qui altère la solution de l'exo 1.1.1 (ou ses tests) casse `valider-solutions`.
+- [ ] Le job s'exécute sur tous les exos présents sous `exercises/` (boucle, pas en dur).
+- [ ] Réutilise l'uber-jar console (`run --exo … --solution`) ou le module `cli` headless — pas de logique de validation dupliquée dans le YAML.
 
 ---
 
@@ -124,25 +152,126 @@
 
 ---
 
-### #14 — `CONTRIBUTING.md` à la racine
+### #14 — `CONTRIBUTING.md` + `LICENSE` à la racine
 **Statut** : À faire
-**Priorité** : Moyenne
+**Priorité** : Haute (étape 6 de la [roadmap MVP](#-roadmap-jusquau-mvp-ordre-dexécution-validé-le-2026-06-01))
 **Pré-requis** : #13 (la grille est référencée)
-**Pourquoi** : cadrer comment d'autres formateurs (ou plus tard, contributeurs externes) ajoutent du contenu.
+**Pourquoi** : projet institutionnel/militaire partagé entre formateurs — cadrer l'ajout d'exos/chapitres et clarifier les droits d'usage avant d'élargir la base de contributeurs.
 
-**Livrable** : `CONTRIBUTING.md` racine.
+**Livrable** : `CONTRIBUTING.md` racine + un fichier `LICENSE` à la racine.
 
 **Critères d'acceptation** :
-- [ ] Workflow Git : `feature/<slug>` → PR → revue par 1 autre formateur → merge.
+- [ ] Workflow Git : `feature/<slug>` → PR → revue par 1 autre formateur → merge (le CI #11 doit être vert).
 - [ ] Checklist d'ajout d'un exercice (renvoie vers `docs/format-exercice.md`).
 - [ ] Checklist d'ajout d'un chapitre (renvoie vers `docs/charte-redaction.md`).
 - [ ] Critères de bloc à la revue (lisibilité, niveau de langue, tests qui passent, etc.).
+- [ ] `LICENSE` : choix d'une licence clarifiant les droits d'usage/diffusion (à arbitrer avec la hiérarchie/RSSI — usage interne ETNC vs. ouverture). Si indécis, placer un en-tête « Tous droits réservés — usage interne ETNC » en attendant l'arbitrage.
 
 ---
 
-## Phase 2 — Module 1 pilote complet (priorité HAUTE)
+## Phase 1bis — MVP Piscine locale (priorité HAUTE)
+
+> Première itération **bout en bout utilisable** : un stagiaire clone le repo, lance un script de bootstrap, et fait des exos en local avec une console REPL qui déclenche la moulinette sur la séquence git `add` + `commit` + `push` (branche `rendu/<sous-groupe>`).
+> Spec validée : [`docs/superpowers/specs/2026-05-28-mvp-console-correction-design.md`](superpowers/specs/2026-05-28-mvp-console-correction-design.md).
+> Tous ces items partagent le pré-requis #9 (squelette moulinette).
+> **Itération réalisée** sur la branche `feature/mvp-console-correction` — plan d'implémentation : [`docs/superpowers/plans/2026-05-28-mvp-console-correction.md`](superpowers/plans/2026-05-28-mvp-console-correction.md).
+> Build vérifié : `mvn -f moulinette/pom.xml verify` (unitaires) + suites `@Tag("git")` et `@Tag("e2e")` vertes.
+
+### #34 — Module Maven `moulinette/console` (squelette)
+**Statut** : Faite — commit `feat(console): squelette Maven module console`
+**Priorité** : Haute — **Pré-requis** : #9
+**Livrable** : nouveau sous-module Maven `moulinette/console`, dépend de `framework`+`runner`+`reports`, enum `Mode { LOCAL, NOMINAL }`, smoke test.
+**Critères** :
+- [x] `mvn -f moulinette/pom.xml -pl console verify` passe.
+- [x] Pas de dépendance vers `cli`.
+- [x] Smoke test charge le module (`ConsoleSmokeTest`).
+- _Note : a aussi corrigé un commentaire XML invalide dans `cli/pom.xml` qui bloquait le reactor._
+
+### #35 — `console.git.GitClient` + `ProcessGitClient`
+**Statut** : Faite — commit `feat(console): GitClient + ProcessGitClient + FakeGitClient`
+**Priorité** : Haute — **Pré-requis** : #34
+**Livrable** : interface `GitClient` (run, currentBranch, lastPushRefs) + impl sous-process + tests intégration `@Tag("git")`.
+**Critères** :
+- [x] `FakeGitClient` disponible pour les tests des autres packages.
+- [x] Tests int : init / commit / push vers bare local / lecture des refs (`ProcessGitClientIT`).
+- [x] Tagués `@Tag("git")` (skippables via `surefire.excludedGroups`).
+
+### #36 — `console.workspace` (catalogue + initializer)
+**Statut** : Faite — commits `feat(console): ExerciseCatalog` + `feat(console): LocalWorkspaceInitializer`
+**Priorité** : Haute — **Pré-requis** : #34, #35
+**Livrable** : `ExerciseCatalog` (scan `exercises/`, regroupement par `sous_groupe`, tri par `position`), `LocalWorkspaceInitializer` (création repo stagiaire + bare remote + copie starters + commit initial).
+**Critères** :
+- [x] `init` produit un repo git valide avec remote `origin = file://…/.piscine/remote.git`.
+- [x] Catalogue résilient à un `metadata.yml` invalide (warn, skip).
+- [x] Tests unitaires + intégration avec `@TempDir`.
+- _Note : `LocalSubmissionBackend` non nécessaire au MVP ; l'init local suffit. Le découplage `local`/`nominal` est porté par l'enum `Mode` (#39)._
+
+### #37 — `console.commands` + `console.repl`
+**Statut** : Faite — commits `feat(console): commandes git de base` + `feat(console): PushCommand, SubmitStart, CommandRegistry, Repl`
+**Priorité** : Haute — **Pré-requis** : #35
+**Livrable** : interface `Command`, classes `AddCommand`, `CommitCommand`, `PushCommand`, `StatusCommand`, `LogCommand`, `DiffCommand`, `SubmitStartCommand`, `HelpCommand`, `ExitCommand`. Boucle `Repl` avec prompt `piscine[<branche>]>` et tokenizer respectant les guillemets.
+**Critères** :
+- [x] Commande inconnue → message « non supportée dans le MVP » + suggestion.
+- [x] Commande malformée → message pédagogique (ex: commit sans `-m`).
+- [x] Tests unitaires sur `console.commands` (Add, Commit, Push, SubmitStart, Registry).
+
+### #38 — `SubmissionTrigger` + `MoulinetteRunner`
+**Statut** : Faite — commit `feat(console): SubmissionTrigger + MoulinetteRunner`
+**Priorité** : Haute — **Pré-requis** : #36, #37
+**Livrable** : détection du push sur `rendu/<sous-groupe>`, lancement de la moulinette sur les exos du sous-groupe en ordre de difficulté croissante, **arrêt au premier exo qui échoue**, génération du rapport `.piscine/reports/<groupe>-<ts>.md`.
+**Critères** :
+- [x] Push sur `main` ne déclenche pas.
+- [x] Séquence stoppe au 1er `Checker` KO avec message explicite (détection via `CheckResult.Status.OK`).
+- [x] Le rapport contient une section par exo exécuté.
+
+### #39 — Sous-commandes `init` / `repl` dans `console.Main`
+**Statut** : Faite — commit `feat(console): Main init/repl + shade jar exécutable`
+**Priorité** : Haute — **Pré-requis** : #36, #37
+**Livrable** : `Main` parse `init` et `repl`, accepte `--mode local` (par défaut). `--mode nominal` retourne une erreur explicite « non implémenté dans le MVP ». Fat-jar via maven-shade.
+**Critères** :
+- [x] `java -jar moulinette-console.jar init --nom X --dest <path>` fonctionne bout en bout (vérifié manuellement).
+- [x] `java -jar moulinette-console.jar repl --repo <path>` lance la boucle.
+- [x] `--help` documente les deux sous-commandes.
+
+### #40 — Script `scripts/piscine-bootstrap.{sh,ps1}`
+**Statut** : Faite — commit `feat(scripts): bootstrap autonome piscine-bootstrap`
+**Priorité** : Haute — **Pré-requis** : #39
+**Livrable** : deux scripts (Bash + PowerShell) à la racine du repo. Vérifient les prérequis, builent la console, créent le workspace à côté du repo (`../piscine-<nom>/`), lancent `init`, affichent la commande pour démarrer le REPL.
+**Critères** :
+- [x] Idempotent (relance détecte le workspace, propose `--force`).
+- [x] Message clair si Java 25 ou git absent + renvoi vers `docs/setup-dev.md`.
+- [x] Testé sur la machine du formateur (Windows, no admin) — résolution `JAVA_HOME` + préférence `mvn` système.
+
+### #41 — `docs/piscine-stagiaire.md` (guide autonome)
+**Statut** : Faite — commit `docs: guide stagiaire autonome + lien depuis README`
+**Priorité** : Haute — **Pré-requis** : #40
+**Livrable** : guide unique pour le stagiaire — du `git clone` au premier rendu validé.
+**Critères** :
+- [x] Section « Démarrage » : `clone` → `bootstrap` → premier `repl`.
+- [x] Section « Faire un rendu » : `submit-start` → édition → `add` + `commit` + `push` → lecture du rapport.
+- [x] Section « Bloqué ? » : comment lire un rapport d'échec, comment re-pousser.
+- [x] Lien depuis le `README.md` racine en haut.
+
+### #42 — E2E smoke « happy path » sur exo 1.1.1
+**Statut** : Faite — commit `test(console): E2E happy path sur exo 1.1.1`
+**Priorité** : Haute — **Pré-requis** : #38, #39, #40
+**Livrable** : test JUnit (`HappyPathE2EIT`) qui exécute init + un REPL scripté (`submit-start` → add/commit/push) sur un repo factice et vérifie qu'un rapport ✓ est généré.
+**Critères** :
+- [x] Test passe en local (`@Tag("e2e")`) et sera repris par le CI #11.
+- [x] Aucun fichier hors `@TempDir`.
+- _Note : exercice factice utilisé (la solution de référence réelle de 1.1.1 sera branchée quand de vrais `Checker` existeront — voir limites ci-dessous)._
+
+### Limites connues du MVP (à traiter ultérieurement)
+- **Pas de vrais `Checker`** : `MoulinetteRunner.Default` est câblé mais reçoit une liste de `Checker` vide ; aucun n'existe encore dans `framework`. Tant qu'il n'y en a pas, tout sous-groupe est considéré « OK ». Prochaine étape : implémenter `CompileChecker`/`TestChecker` et les injecter dans `Main.runRepl`.
+- **`mvnw` ne télécharge pas Maven** dans certains environnements réseau restreints ; les scripts préfèrent donc un `mvn` système quand il existe.
+- **Mode `nominal`** : rejeté explicitement (non implémenté).
+
+---
+
+## Phase 2 — Module 1 pilote complet (priorité HAUTE — **inclus dans le MVP**)
 
 > On finit **entièrement** le module 1 avant de toucher aux autres : 7 chapitres + 10 exercices + rétro. Sert de gabarit pour les modules 2 à 6.
+> **Décision 2026-06-01** : le module 1 complet fait partie du périmètre MVP (étape 5 de la [roadmap](#-roadmap-jusquau-mvp-ordre-dexécution-validé-le-2026-06-01)). L'outillage a dépassé le contenu (1 exo, 2 chapitres) ; or la moulinette + le CI `valider-solutions` (#11b) permettent désormais une **boucle vertueuse** : on écrit l'exo, la moulinette valide immédiatement sa solution de référence. C'est le bon moment pour produire le contenu en masse sans accumuler de dette.
 
 ### #15 — Chapitres restants du module 1
 **Statut** : À faire
@@ -168,8 +297,8 @@
 
 ### #16 — Exercices restants du module 1
 **Statut** : À faire
-**Priorité** : Haute
-**Pré-requis** : #10 (mvnw pour valider localement), #15 (les notions des chapitres déterminent ce qu'on peut demander)
+**Priorité** : Haute (étape 5 de la roadmap MVP)
+**Pré-requis** : #10 (mvnw), #15 (les notions des chapitres déterminent ce qu'on peut demander), **#43–#51 (vrais Checkers)** + **#11b (`valider-solutions`)** pour la boucle vertueuse de validation
 
 **Livrable** : 9 exercices dans `exercises/module-1-fondamentaux/`, format défini dans `docs/format-exercice.md`.
 
@@ -263,6 +392,53 @@ Voir `referentiel.md` §5. Format à définir dans `exercises/projets-binome/pro
 **Statut** : À faire
 **Priorité** : Basse
 Remplacer les assets Docusaurus par défaut (favicon, logo, social card) par les visuels ETNC.
+
+---
+
+## Phase 1ter — Resynchronisation & hygiène (ajoutées le 2026-06-01)
+
+> Issues de la remontée d'action. La #52 est sur le chemin critique du MVP (étape 2) ; les autres sont de l'hygiène à caser quand pratique.
+
+### #52 — PR + merge `feature/mvp-console-correction` → `main`
+**Statut** : À faire
+**Priorité** : **Haute — étape 2 de la roadmap MVP.**
+**Pré-requis** : #11a (CI minimal en place pour valider la PR)
+**Pourquoi** : tout le MVP vit sur une branche de feature longue durée ; `main` est resté au squelette. L'écart grandit à chaque itération. Resynchroniser pour que `main` reflète la réalité et que les prochaines itérations branchent proprement.
+
+**Critères d'acceptation** :
+- [ ] Une PR `feature/mvp-console-correction → main` est ouverte, le CI #11a est vert dessus.
+- [ ] La PR est mergée (merge ou squash selon la convention #14 à venir).
+- [ ] La target-MVP (#43–#51) est exécutée depuis une **nouvelle branche issue de `main`** (mettre à jour la section « Démarrage » du plan target-MVP en conséquence).
+
+### #53 — Durcir le style (advisory → bloquant) après la beta
+**Statut** : À faire
+**Priorité** : Basse
+**Pré-requis** : #47 (StyleChecker), retours beta stagiaires
+**Pourquoi** : le `StyleChecker` est livré en mode **advisory** (non bloquant) pour la beta afin de ne pas frustrer les stagiaires (« mes tests passent mais c'est rouge à cause d'une accolade »). Une fois la beta stabilisée, repasser le style en bloquant (ou introduire un seuil).
+
+**Critères d'acceptation** :
+- [ ] Le caractère bloquant/advisory du style est configurable (pas de re-code en dur).
+- [ ] Décision documentée après retours stagiaires.
+
+### #54 — Committer le `maven-wrapper.jar` (le dé-ignorer)
+**Statut** : À faire
+**Priorité** : Basse
+**Pré-requis** : #10
+**Pourquoi** : versionner `.mvn/wrapper/maven-wrapper.jar` rend `./mvnw` fonctionnel **offline**, sans dépendre du réseau (pratique standard pour des builds reproductibles, pertinent vu le réseau restreint côté formateur et la cible militaire).
+
+**Critères d'acceptation** :
+- [ ] `.mvn/wrapper/maven-wrapper.jar` retiré du `.gitignore` et committé.
+- [ ] `./mvnw -v` fonctionne sur une machine sans accès réseau Maven.
+
+### #55 — Migrer `ReportGenerator` JSON vers Jackson
+**Statut** : À faire
+**Priorité** : Basse
+**Pré-requis** : #48 (rapport câblé), format JSON stabilisé
+**Pourquoi** : le JSON de `ReportGenerator` est fabriqué à la main (déjà noté dans le code). Migrer vers Jackson quand le format se stabilise — plus robuste (échappement, structures imbriquées). Pas urgent.
+
+**Critères d'acceptation** :
+- [ ] Jackson ajouté en dépendance (dependency management) et utilisé dans `reports`.
+- [ ] Sérialisation identique (tests de non-régression sur le JSON produit).
 
 ---
 

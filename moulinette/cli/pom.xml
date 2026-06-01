@@ -64,7 +64,7 @@
 
     <build>
         <plugins>
-            <!-- Lancement CLI via : mvn -pl cli exec:java -Dexec.args="run --exo 1.1.1 ..." -->
+            <!-- Lancement CLI via exec-maven-plugin (voir moulinette/README.md pour la commande complete) -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
