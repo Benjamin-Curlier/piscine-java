@@ -21,8 +21,9 @@
 Cette itération s'exécute **inline** dans une nouvelle session sans contexte. Pour démarrer :
 
 1. **Invoquer la skill** `superpowers:executing-plans` et lui donner ce fichier.
-2. **Brancher** : travailler sur `feature/mvp-console-correction` (la branche de l'itération précédente, déjà créée). Ne pas committer sur `main`.
+2. **Pré-requis de séquencement (décision 2026-06-01)** : cette itération vient **après** la mise en place du CI minimal (#11a) et le **merge de `feature/mvp-console-correction` dans `main`** (#52). Donc **brancher depuis `main` à jour** : `git switch main && git pull && git switch -c feature/target-mvp-checkers`. Ne pas committer directement sur `main`. _(Si le merge #52 n'a pas encore eu lieu, se replier sur `feature/mvp-console-correction`, mais l'ordre validé est : #11a → #52 → cette itération.)_
 3. **Suivre les tâches dans l'ordre** (Task 1 → 10), en TDD, un commit par tâche. Les commandes et le code sont fournis intégralement.
+4. **Note beta** : le `StyleChecker` est livré en **mode advisory (non bloquant)** — voir Tasks 5 et 6. Le durcissement (advisory → bloquant) est la tâche backlog #53.
 
 ### Environnement de build (gotchas — vérifiés en session précédente)
 - **JDK 25** : `E:\java\jdk-25.0.3+9` (= `JAVA_HOME`). Le `java` du PATH est Java 8 → pour lancer un jar, utiliser `"$JAVA_HOME/bin/java"`.
@@ -48,6 +49,7 @@ Les 4 suites passent (`verify` + `git` + `tools` + `e2e`), le bundle ZIP se cons
 ### Modifié — `moulinette/framework`
 ```
 framework/src/main/java/etnc/piscine/moulinette/framework/CheckerContext.java   (ajoute exerciseRefPath)
+framework/src/main/java/etnc/piscine/moulinette/framework/Checker.java          (ajoute default isBlocking() — Task 5)
 framework/src/test/java/etnc/piscine/moulinette/framework/FrameworkSmokeTest.java (si construit un CheckerContext)
 ```
 
@@ -938,12 +940,36 @@ git commit -m "feat(console): PublicTestChecker + PrivateTestChecker (tâche #46
 
 ---
 
-## Task 5 (#47) : `StyleChecker` + config Checkstyle
+## Task 5 (#47) : `StyleChecker` (mode **advisory**) + config Checkstyle
+
+> **Décision beta (2026-06-01)** : le style est **non bloquant** (advisory). Un échec de style est **rapporté** mais n'arrête pas la chaîne et ne fait pas échouer l'exo — pour ne pas frustrer des stagiaires en phase de test (« mes tests passent mais c'est rouge à cause d'une accolade »). Le durcissement (advisory → bloquant) est la tâche backlog #53. On implémente ça proprement via une méthode `isBlocking()` sur l'interface `Checker` (défaut : bloquant) que `StyleChecker` redéfinit à `false`.
 
 **Files:**
+- Modify: `moulinette/framework/src/main/java/etnc/piscine/moulinette/framework/Checker.java` (ajoute `default boolean isBlocking()`)
 - Create: `console/src/main/resources/checkstyle-etnc.xml`
 - Create: `console/.../checkers/StyleChecker.java`
 - Test: `console/.../checkers/StyleCheckerIT.java`
+
+- [ ] **Step 5.0 : Ajouter `isBlocking()` à l'interface `Checker`**
+
+Dans `moulinette/framework/.../Checker.java`, ajouter une méthode par défaut (rétro-compatible — tous les Checkers existants restent bloquants) :
+
+```java
+    /**
+     * Indique si un résultat non-OK de ce Checker doit faire échouer l'exercice
+     * et stopper la chaîne (bloquant), ou simplement être rapporté (advisory).
+     *
+     * <p>Par défaut un Checker est bloquant. Le {@code StyleChecker} redéfinit ce
+     * contrat à {@code false} pendant la beta (voir backlog #53).
+     *
+     * @return {@code true} si bloquant (défaut), {@code false} si advisory
+     */
+    default boolean isBlocking() {
+        return true;
+    }
+```
+
+(Optionnel : un test unitaire `default isBlocking() == true` dans le module framework.)
 
 - [ ] **Step 5.1 : Config Checkstyle bundlée**
 
@@ -1080,6 +1106,9 @@ public final class StyleChecker implements Checker {
 
     @Override public String id() { return "style"; }
 
+    /** Beta : le style est advisory (rapporté mais non bloquant). Voir backlog #53. */
+    @Override public boolean isBlocking() { return false; }
+
     @Override
     public CheckResult check(CheckerContext ctx) {
         Path mainSrc = ctx.renduPath().resolve("starter/src/main/java");
@@ -1093,8 +1122,9 @@ public final class StyleChecker implements Checker {
             }
             String corps = violations.isEmpty() ? r.stdout() : String.join("\n", violations);
             return CheckResult.fail(
-                "Des problèmes de style ont été détectés :\n" + corps,
-                "Corrige l'indentation, les accolades et les imports inutilisés.");
+                "Conseils de style (non bloquant) :\n" + corps,
+                "Tu peux améliorer l'indentation, les accolades et les imports inutilisés — "
+                + "ça ne bloque pas ta validation pendant la beta.");
         } catch (IOException e) {
             return CheckResult.error("Échec technique de l'analyse de style : " + e.getMessage());
         }
@@ -1123,8 +1153,8 @@ Expected: PASS (2 tests). Si Checkstyle 10.21.0 n'est pas résolvable, ajuster l
 - [ ] **Step 5.6 : Commit**
 
 ```bash
-git add moulinette/console/src/main/resources/checkstyle-etnc.xml moulinette/console/src/main/java/etnc/piscine/moulinette/console/checkers/StyleChecker.java moulinette/console/src/test/java/etnc/piscine/moulinette/console/checkers/StyleCheckerIT.java
-git commit -m "feat(console): StyleChecker + config Checkstyle bundlée (tâche #47)"
+git add moulinette/framework/src/main/java/etnc/piscine/moulinette/framework/Checker.java moulinette/console/src/main/resources/checkstyle-etnc.xml moulinette/console/src/main/java/etnc/piscine/moulinette/console/checkers/StyleChecker.java moulinette/console/src/test/java/etnc/piscine/moulinette/console/checkers/StyleCheckerIT.java
+git commit -m "feat(console): StyleChecker advisory + isBlocking() + config Checkstyle (tâche #47)"
 ```
 
 ---
@@ -1161,10 +1191,15 @@ Remplacer le corps de la boucle `for (ExerciseEntry e : sg.exercices())` par :
                 for (Checker c : checkers) {
                     CheckResult r = c.check(new CheckerContext(e.id(), renduDir, e.exerciseDir()));
                     parChecker.put(c.id(), r == null ? CheckResult.error("résultat null") : r);
-                    if (r == null || r.status() != CheckResult.Status.OK) {
-                        ok = false;
-                        if (r != null) msg.append(c.id()).append(" : ")
+                    boolean nonOk = (r == null || r.status() != CheckResult.Status.OK);
+                    if (nonOk && r != null) {
+                        msg.append(c.id()).append(c.isBlocking() ? " : " : " (conseil) : ")
                             .append(String.join(" / ", r.messages())).append('\n');
+                    }
+                    // Un Checker advisory (ex. style en beta, isBlocking()==false) est rapporté
+                    // mais ne fait pas échouer l'exo et n'arrête pas la chaîne. Voir backlog #53.
+                    if (nonOk && (r == null || c.isBlocking())) {
+                        ok = false;
                         break;
                     }
                 }
@@ -1692,7 +1727,8 @@ git push origin rendu/1.1
       → MoulinetteRunner.Default.runGroup("1.1", workspace)
           pour chaque exo (difficulté croissante) :
             CompileChecker → PublicTestChecker → PrivateTestChecker → StyleChecker
-            (arrêt au 1er Checker non-OK ; arrêt au 1er exo non-OK)
+            (arrêt au 1er Checker BLOQUANT non-OK ; arrêt au 1er exo non-OK)
+            (le StyleChecker est advisory en beta : isBlocking()==false → rapporté mais ne bloque pas)
             → EvaluationReport → ReportGenerator (md + json) dans .piscine/reports/
       → récap console + chemin du rapport
 ```
@@ -1709,6 +1745,7 @@ La console est packagée en uber-jar (maven-shade) qui embarque JUnit, AssertJ e
 1. Implémenter `framework.Checker` (méthode `id()` + `check(CheckerContext)`).
 2. Utiliser `JavaToolkit` pour compiler/exécuter au besoin ; renvoyer `CheckResult.ok()/fail(...)/error(...)`.
 3. L'enregistrer dans `Main.runRepl` (liste `checkers`, dans l'ordre voulu).
+4. Pour un Checker **non bloquant** (advisory), redéfinir `default boolean isBlocking()` à `false` : son échec est rapporté mais n'arrête pas la chaîne ni ne fait échouer l'exo (cas du `StyleChecker` en beta).
 
 ## Ajouter un exercice
 
@@ -1739,6 +1776,7 @@ Exclusions par défaut : `surefire.excludedGroups = git,e2e,tools` (les suites l
 
 ## Limites connues & dette
 
+- **Style advisory en beta** : le `StyleChecker` est non bloquant (`isBlocking()==false`) ; durcissement prévu tâche #53.
 - **PMD** différé (le `StyleChecker` est prévu pour l'accueillir ; Checkstyle seul aujourd'hui).
 - **Note pondérée /20 + seuil** : pas encore calculée (pass/fail par Checker).
 - **Anti-triche** (tests-prives visibles dans le bundle) : tâche #29.
@@ -1769,7 +1807,7 @@ Expected: BUILD SUCCESS partout.
 
 - [ ] **Step 10.2 : Mettre à jour `docs/backlog.md`**
 
-Ajouter une section « Phase 1ter — Target MVP » avec les tâches #43 à #51 marquées `Faite` + lien vers la spec et le plan. Documenter les limites (PMD différé, note /20 future).
+Marquer les tâches #43 à #51 `Faite` (section dédiée « Target MVP — Checkers réels », distincte de la « Phase 1ter — Resynchronisation & hygiène » déjà présente) + lien vers la spec et le plan. Documenter les limites (style advisory #53, PMD différé, note /20 future). Vérifier au passage l'état de #11b (`valider-solutions`), débloqué par cette itération.
 
 - [ ] **Step 10.3 : Commit**
 
