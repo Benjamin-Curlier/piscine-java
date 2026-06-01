@@ -1,0 +1,21 @@
+slug: manipulation-booleenne
+titre: "Manipulation booléenne (année bissextile)"
+module: 1
+sous_groupe: "1.2"
+position: 3
+difficulte: moyen
+duree_estimee_min: 20
+prerequis:
+  - calculs-geometriques
+objectifs_pedagogiques:
+  - "Combiner modulo et opérateurs logiques dans une expression booléenne"
+  - "Stocker un résultat dans une variable boolean"
+  - "Traduire une règle métier en condition"
+notions:
+  - boolean
+  - operateurs-logiques
+  - modulo
+  - conditions
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-01
