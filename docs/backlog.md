@@ -345,16 +345,16 @@ Sous-groupes ([referentiel.md §4 module 1](referentiel.md#sous-groupes-dexercic
 ---
 
 ### #17 — Rétrospective module 1 pilote
-**Statut** : À faire
+**Statut** : Faite — branche `feature/retro-module-1` (PR à merger). `docs/retro-module-1.md`. _Reste : le formateur doit renseigner les temps réels de production (§4) — donnée non instrumentée._
 **Priorité** : Moyenne
 **Pré-requis** : #15, #16
 
 **Livrable** : `docs/retro-module-1.md` documentant ce qui a été appris en construisant le module pilote, ajustements à propager aux modules 2-6.
 
 **Critères d'acceptation** :
-- [ ] Liste des ajustements à apporter aux formats (`format-exercice.md`, `charte-redaction.md`).
-- [ ] Estimation du temps réel passé par chapitre / par exercice → ré-estimation des modules 2-6.
-- [ ] Décision claire : on continue identique / on adapte / on simplifie.
+- [x] Liste des ajustements à apporter aux formats (`format-exercice.md`, `charte-redaction.md`).
+- [x] Estimation du temps réel passé par chapitre / par exercice → ré-estimation des modules 2-6. _(tableau fourni ; temps de production formateur à remplir.)_
+- [x] Décision claire : on continue identique / on adapte / on simplifie. _(on continue à l'identique, ajustements intégrés.)_
 
 ---
 
