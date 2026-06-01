@@ -259,7 +259,7 @@ criteres:
 
 **Règles** :
 - `poids` cumulés = `total`.
-- Tout critère `formateur` doit être justifiable par une grille (à venir dans `docs/grille-evaluation.md`).
+- Tout critère `formateur` doit être justifiable par une grille : voir [`grille-evaluation.md`](grille-evaluation.md). Son `id` doit correspondre à l'une des grilles (`demarche`, `lisibilite`, `idiomatisme`, `respect-consignes`).
 - Le seuil de réussite est typiquement à **60 %** (12/20).
 
 ## 11. Pour les projets binôme
