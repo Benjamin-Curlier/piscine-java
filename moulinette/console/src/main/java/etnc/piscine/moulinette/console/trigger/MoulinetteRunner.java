@@ -6,6 +6,8 @@ import etnc.piscine.moulinette.console.workspace.SousGroupe;
 import etnc.piscine.moulinette.framework.CheckResult;
 import etnc.piscine.moulinette.framework.Checker;
 import etnc.piscine.moulinette.framework.CheckerContext;
+import etnc.piscine.moulinette.framework.EvaluationReport;
+import etnc.piscine.moulinette.reports.ReportGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,7 +18,9 @@ import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Lance la moulinette sur un sous-groupe d'exercices.
@@ -57,23 +61,52 @@ public interface MoulinetteRunner {
             boolean stopped = false;
             for (ExerciseEntry e : sg.exercices()) {
                 Path renduDir = repoRoot.resolve("exercises").resolve(e.exerciseDir().getFileName());
-                StringBuilder msg = new StringBuilder();
+                nettoyerBuildDir(renduDir);
+                Map<String, CheckResult> parChecker = new LinkedHashMap<>();
                 boolean ok = true;
+                StringBuilder msg = new StringBuilder();
                 for (Checker c : checkers) {
                     CheckResult r = c.check(new CheckerContext(e.id(), renduDir, e.exerciseDir()));
-                    if (r == null || r.status() != CheckResult.Status.OK) {
+                    parChecker.put(c.id(), r == null ? CheckResult.error("résultat null") : r);
+                    boolean nonOk = (r == null || r.status() != CheckResult.Status.OK);
+                    if (nonOk && r != null) {
+                        msg.append(c.id()).append(c.isBlocking() ? " : " : " (conseil) : ")
+                           .append(String.join(" / ", r.messages())).append('\n');
+                    }
+                    // Un Checker advisory (ex. style en beta, isBlocking()==false) est rapporté
+                    // mais ne fait pas échouer l'exo et n'arrête pas la chaîne. Voir backlog #53.
+                    if (nonOk && (r == null || c.isBlocking())) {
                         ok = false;
-                        msg.append(c.id()).append(" : ")
-                           .append(r == null ? "résultat null" : String.join(" / ", r.messages()))
-                           .append('\n');
                         break;
                     }
                 }
+                ecrireRapportExo(renduDir, e.id(), parChecker);
                 outcomes.add(new ExoOutcome(e.id(), ok, msg.toString()));
                 if (!ok) { stopped = true; break; }
             }
             Path report = writeReport(sgId, outcomes, stopped);
             return new GroupReport(sgId, outcomes, stopped, report);
+        }
+
+        private void nettoyerBuildDir(Path renduDir) {
+            Path build = renduDir.resolve(".piscine/build");
+            if (Files.isDirectory(build)) {
+                try (var walk = Files.walk(build)) {
+                    walk.sorted(java.util.Comparator.reverseOrder())
+                        .forEach(p -> { try { Files.deleteIfExists(p); } catch (IOException ignore) { } });
+                } catch (IOException ignore) { }
+            }
+        }
+
+        private void ecrireRapportExo(Path renduDir, String exoId, Map<String, CheckResult> parChecker) {
+            try {
+                Path dir = renduDir.resolve(".piscine/reports");
+                Files.createDirectories(dir);
+                var report = new EvaluationReport(exoId, parChecker);
+                var gen = new ReportGenerator();
+                Files.writeString(dir.resolve(exoId + ".md"), gen.toMarkdown(report));
+                Files.writeString(dir.resolve(exoId + ".json"), gen.toJson(report));
+            } catch (IOException ignore) { /* rapport best-effort */ }
         }
 
         private Path writeReport(String sgId, List<ExoOutcome> outcomes, boolean stopped) {

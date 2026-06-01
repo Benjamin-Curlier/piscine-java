@@ -1,8 +1,11 @@
 package etnc.piscine.moulinette.console;
 
+import etnc.piscine.moulinette.console.checkers.*;
 import etnc.piscine.moulinette.console.commands.CommandRegistry;
 import etnc.piscine.moulinette.console.git.GitClient;
 import etnc.piscine.moulinette.console.git.ProcessGitClient;
+import etnc.piscine.moulinette.framework.Checker;
+import etnc.piscine.moulinette.runner.ProcessRunner;
 import etnc.piscine.moulinette.console.repl.Repl;
 import etnc.piscine.moulinette.console.repl.ReplContext;
 import etnc.piscine.moulinette.console.repl.ReplIo;
@@ -65,7 +68,14 @@ public final class Main {
         Path piscine = Paths.get(optional(args, "--piscine-repo", defaultPiscine.toString()));
         GitClient git = new ProcessGitClient();
         ExerciseCatalog catalog = ExerciseCatalog.scan(piscine.resolve("exercises"));
-        var runner = new MoulinetteRunner.Default(catalog, List.of(), repo.resolve(".piscine/reports"));
+        var toolkit = new JavaToolkit(new ProcessRunner());
+        Path styleConfig = StyleChecker.extractBundledConfig();
+        List<Checker> checkers = List.of(
+            new CompileChecker(toolkit),
+            new PublicTestChecker(toolkit),
+            new PrivateTestChecker(toolkit),
+            new StyleChecker(toolkit, styleConfig));
+        var runner = new MoulinetteRunner.Default(catalog, checkers, repo.resolve(".piscine/reports"));
         var trigger = new SubmissionTrigger(runner);
         var ctx = new ReplContext(repo, git, catalog, Mode.LOCAL);
         new Repl(ctx, CommandRegistry.defaults(trigger), ReplIo.stdio()).run();
