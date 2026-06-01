@@ -1,0 +1,21 @@
+slug: calculs-geometriques
+titre: "Calculs géométriques"
+module: 1
+sous_groupe: "1.2"
+position: 2
+difficulte: facile
+duree_estimee_min: 15
+prerequis:
+  - conversion-unites
+objectifs_pedagogiques:
+  - "Réutiliser la constante Math.PI"
+  - "Enchaîner plusieurs calculs en double"
+  - "Afficher plusieurs résultats formatés"
+notions:
+  - scanner
+  - double
+  - operateurs-arithmetiques
+  - math
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-01
