@@ -9,7 +9,7 @@ criteres:
     description: "Style et lisibilité (Checkstyle + PMD)"
     poids: 2
     type: automatique
-  - id: demarche
+  - id: respect-consignes
     description: "Respect des consignes (n'a modifié que le corps du main)"
     poids: 2
     type: formateur

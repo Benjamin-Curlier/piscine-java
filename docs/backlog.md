@@ -138,7 +138,7 @@ Hygiène (hors chemin critique, à caser quand pratique) : **#54** (committer `m
 ---
 
 ### #13 — `docs/grille-evaluation.md`
-**Statut** : À faire
+**Statut** : Faite — branche `feature/grille-evaluation` (PR à merger). Grille livrée + ré-ID des critères `formateur` des `evaluation.yml` du module 1 (1.1.1/1.1.2 → `respect-consignes`, 1.2.3 → `lisibilite`).
 **Priorité** : Moyenne
 **Pré-requis** : aucun
 **Pourquoi** : `docs/format-exercice.md` mentionne ce fichier mais il n'existe pas encore. Cadre la part `type: formateur` des `evaluation.yml`.
@@ -146,9 +146,9 @@ Hygiène (hors chemin critique, à caser quand pratique) : **#54** (committer `m
 **Livrable** : grille de notation détaillée pour les critères humains (lisibilité, idiomatisme, respect des consignes, démarche).
 
 **Critères d'acceptation** :
-- [ ] Une grille par "type de critère humain" récurrent (au moins : `demarche`, `lisibilite`, `idiomatisme`, `respect-consignes`).
-- [ ] Pour chaque grille : 4 niveaux (excellent / bon / passable / insuffisant) avec descripteurs concrets et exemples observables.
-- [ ] Un exemple appliqué à l'exo 1.1.1 hello-world.
+- [x] Une grille par "type de critère humain" récurrent (au moins : `demarche`, `lisibilite`, `idiomatisme`, `respect-consignes`).
+- [x] Pour chaque grille : 4 niveaux (excellent / bon / passable / insuffisant) avec descripteurs concrets et exemples observables.
+- [x] Un exemple appliqué à l'exo 1.1.1 hello-world.
 
 ---
 

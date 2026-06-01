@@ -13,7 +13,7 @@ criteres:
     description: "Style et lisibilité (Checkstyle + PMD)"
     poids: 2
     type: automatique
-  - id: demarche
-    description: "Pertinence de la démarche (expression booléenne lisible)"
+  - id: lisibilite
+    description: "Lisibilité de l'expression booléenne (nommage, décomposition)"
     poids: 2
     type: formateur
