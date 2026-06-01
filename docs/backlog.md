@@ -324,21 +324,23 @@ Hygiène (hors chemin critique, à caser quand pratique) : **#54** (committer `m
 ---
 
 ### #16 — Exercices restants du module 1
-**Statut** : À faire
+**Statut** : Faite — livrée en 3 PRs (un sous-groupe par PR). Spec [`2026-06-01-m1-exercices-design.md`](superpowers/specs/2026-06-01-m1-exercices-design.md), plan [`2026-06-01-m1-exercices.md`](superpowers/plans/2026-06-01-m1-exercices.md). 1.1 (PR #6) et 1.2 (PR #7) mergées ; 1.3 en PR finale.
 **Priorité** : Haute (étape 5 de la roadmap MVP)
 **Pré-requis** : #10 (mvnw), #15 (les notions des chapitres déterminent ce qu'on peut demander), **#43–#51 (vrais Checkers)** + **#11b (`valider-solutions`)** pour la boucle vertueuse de validation
 
 **Livrable** : 9 exercices dans `exercises/module-1-fondamentaux/`, format défini dans `docs/format-exercice.md`.
 
 Sous-groupes ([referentiel.md §4 module 1](referentiel.md#sous-groupes-dexercices-3-sous-groupes-10-exercices)) :
-- [ ] **1.1 Premiers pas** : `1.1.2-affichage-formate`, `1.1.3-lecture-saisie`.
-- [ ] **1.2 Variables et opérateurs** : `1.2.1-conversion-unites`, `1.2.2-calculs-geometriques`, `1.2.3-manipulation-booleenne`.
-- [ ] **1.3 Contrôle de flux** : `1.3.1-fizzbuzz`, `1.3.2-fibonacci-iteratif`, `1.3.3-table-multiplication`, `1.3.4-devine-le-nombre`.
+- [x] **1.1 Premiers pas** : `1.1.2-affichage-formate`, `1.1.3-lecture-saisie`.
+- [x] **1.2 Variables et opérateurs** : `1.2.1-conversion-unites`, `1.2.2-calculs-geometriques`, `1.2.3-manipulation-booleenne`.
+- [x] **1.3 Contrôle de flux** : `1.3.1-fizzbuzz`, `1.3.2-fibonacci-iteratif`, `1.3.3-table-multiplication`, `1.3.4-devine-le-nombre`.
 
 **Critères d'acceptation** :
-- [ ] Chaque exercice complet (11 fichiers minimum, voir `format-exercice.md`).
-- [ ] `mvn test` sur chaque `solution/` passe les tests publics ET privés.
-- [ ] Le CI #11 passe.
+- [x] Chaque exercice complet (11 fichiers ; exception documentée : `1.1.2` sans `tests-prives/`, autorisée par `format-exercice.md` §2).
+- [x] `mvn test` sur chaque `solution/` passe les tests publics ET privés (job CI `valider-solutions`).
+- [x] Le CI #11 passe.
+
+**Décisions** : tout dans `main` + E/S standard (antériorité) ; util de test `CaptureEntree` ; 1.3.4 secret via `Random(1789)` fourni dans le starter ; entrée clavier sans séparateur décimal (insensible à la locale).
 
 ---
 
