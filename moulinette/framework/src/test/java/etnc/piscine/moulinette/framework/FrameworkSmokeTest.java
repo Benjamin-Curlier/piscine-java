@@ -47,15 +47,16 @@ class FrameworkSmokeTest {
     @Test
     void checkerContext_shouldStoreFields() {
         Path path = Path.of("/tmp/rendu");
-        CheckerContext ctx = new CheckerContext("1.1.1", path);
+        CheckerContext ctx = new CheckerContext("1.1.1", path, Path.of("/tmp/ref"));
 
         assertThat(ctx.exerciseId()).isEqualTo("1.1.1");
         assertThat(ctx.renduPath()).isEqualTo(path);
+        assertThat(ctx.exerciseRefPath()).isEqualTo(Path.of("/tmp/ref"));
     }
 
     @Test
     void checkerContext_blankExerciseId_shouldThrow() {
-        assertThatThrownBy(() -> new CheckerContext("  ", Path.of("/tmp")))
+        assertThatThrownBy(() -> new CheckerContext("  ", Path.of("/tmp"), Path.of("/ref")))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("exerciseId");
     }
