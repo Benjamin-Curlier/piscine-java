@@ -2,10 +2,10 @@
   "label": "Module 2 — Tableaux, chaînes, méthodes",
   "position": 3,
   "collapsible": true,
-  "collapsed": true,
+  "collapsed": false,
   "link": {
     "type": "generated-index",
     "title": "Module 2 — Tableaux, chaînes, méthodes",
-    "description": "Manipulation de données structurées, organisation du code en méthodes réutilisables, première approche de la récursivité."
+    "description": "Tableaux 1D et 2D, chaînes de caractères, méthodes réutilisables et récursivité. À l'issue de ce module, vous saurez structurer votre code en méthodes et manipuler des collections de données."
   }
 }
