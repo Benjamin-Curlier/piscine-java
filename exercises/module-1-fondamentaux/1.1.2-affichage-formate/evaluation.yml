@@ -1,0 +1,15 @@
+total: 20
+seuil_reussite: 12
+criteres:
+  - id: tests-publics
+    description: "Tests publics passants (sortie exacte de la fiche)"
+    poids: 16
+    type: automatique
+  - id: style
+    description: "Style et lisibilité (Checkstyle + PMD)"
+    poids: 2
+    type: automatique
+  - id: demarche
+    description: "Respect des consignes (n'a modifié que le corps du main)"
+    poids: 2
+    type: formateur
