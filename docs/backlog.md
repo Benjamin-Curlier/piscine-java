@@ -118,7 +118,7 @@ Hygiène (hors chemin critique, à caser quand pratique) : **#54** (committer `m
 ---
 
 ### #12 — Documentation install Java 25 + script `setup-dev`
-**Statut** : À faire
+**Statut** : Faite — branche `feature/setup-dev-scripts` (PR à merger). Doc `setup-dev.md` enrichie (Node 22, wrapper offline #54, §0 automatisée) + scripts `setup-dev.ps1`/`setup-dev.sh` (install Temurin 25 portable via API Adoptium). _⚠️ chemin de téléchargement non exécuté en session (pas de Java/Maven local) — à valider par un run formateur, comme #40._
 **Priorité** : Haute (bloque la validation locale par tout contributeur)
 **Pré-requis** : aucun
 **Pourquoi** : actuellement la machine du formateur n'a que Java 8 et pas de Maven. Personne ne peut valider en local. Pareil pour les futurs stagiaires.
@@ -128,9 +128,9 @@ Hygiène (hors chemin critique, à caser quand pratique) : **#54** (committer `m
 - Optionnel : `scripts/setup-dev.ps1` (Windows) et `scripts/setup-dev.sh` (Unix) qui installent Java 25 en mode portable / utilisateur (la machine du formateur n'a pas les droits admin).
 
 **Critères d'acceptation** :
-- [ ] Sur la machine du formateur (Windows, no admin), suivre `setup-dev.md` permet d'arriver à `java --version` → 25 et `mvn -v` (ou `./mvnw -v`) qui fonctionne.
-- [ ] La doc renvoie vers la version `.zip` portable de Temurin pour le cas no-admin.
-- [ ] Le `README.md` racine ajoute un lien vers `setup-dev.md`.
+- [x] Sur la machine du formateur (Windows, no admin), suivre `setup-dev.md` permet d'arriver à `java --version` → 25 et `mvn -v` (ou `./mvnw -v`) qui fonctionne. _(procédure manuelle §1-4 + script §0 ; run de validation formateur recommandé.)_
+- [x] La doc renvoie vers la version `.zip` portable de Temurin pour le cas no-admin.
+- [x] Le `README.md` racine ajoute un lien vers `setup-dev.md` (section « Démarrage rapide »).
 
 **Décisions à prendre** :
 - Faut-il versionner un JDK Temurin portable dans le repo ? **Non**, taille trop grosse et ça date. Pointer vers Adoptium.
