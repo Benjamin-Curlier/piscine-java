@@ -48,20 +48,36 @@
             <version>2.3</version>
         </dependency>
 
+        <!-- Outillage d'évaluation : shadé dans l'uber-jar (scope runtime),
+             invoqué en sous-processus par les Checkers. Disponible aussi au classpath de test. -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-console</artifactId>
+            <version>1.11.4</version>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.puppycrawl.tools</groupId>
+            <artifactId>checkstyle</artifactId>
+            <version>10.21.0</version>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 
     <properties>
         <!-- Tags exclus par défaut (tests nécessitant git / scénarios lourds).
              Surchargeable : mvn ... -Dsurefire.excludedGroups=e2e -Dgroups=git -->
-        <surefire.excludedGroups>git,e2e</surefire.excludedGroups>
+        <surefire.excludedGroups>git,e2e,tools</surefire.excludedGroups>
     </properties>
 
     <build>
