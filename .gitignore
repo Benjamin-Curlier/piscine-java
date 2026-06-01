@@ -61,6 +61,9 @@ secrets/
 moulinette/**/work/
 moulinette/**/reports-output/
 
+# --- Bundle stagiaire (artefact de build, contient un JDK) ---
+dist/
+
 # --- Claude Code local user settings (per-user, not shared) ---
 .claude/settings.local.json
 
