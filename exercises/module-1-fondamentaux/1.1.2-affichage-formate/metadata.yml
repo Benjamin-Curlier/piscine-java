@@ -1,0 +1,20 @@
+slug: affichage-formate
+titre: "Affichage formaté"
+module: 1
+sous_groupe: "1.1"
+position: 2
+difficulte: tres-facile
+duree_estimee_min: 10
+prerequis:
+  - hello-world
+objectifs_pedagogiques:
+  - "Composer une sortie multi-lignes avec System.out.println"
+  - "Concaténer du texte fixe et des variables"
+  - "Respecter un format de sortie imposé au caractère près"
+notions:
+  - sortie-standard
+  - concatenation
+  - variables
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-01
