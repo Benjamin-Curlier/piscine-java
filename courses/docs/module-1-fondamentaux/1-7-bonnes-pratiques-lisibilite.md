@@ -202,4 +202,4 @@ Même comportement, mais on comprend immédiatement ce que fait le code et où c
 
 ## Prochain chapitre
 
-→ **Module 2 — Tableaux, chaînes, méthodes** *(à venir)*
+→ **[Module 2 — Tableaux 1D](../module-2-tableaux-chaines-methodes/2-1-tableaux-1d)**
