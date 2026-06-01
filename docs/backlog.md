@@ -451,14 +451,14 @@ Remplacer les assets Docusaurus par défaut (favicon, logo, social card) par les
 - [ ] Décision documentée après retours stagiaires.
 
 ### #54 — Committer le `maven-wrapper.jar` (le dé-ignorer)
-**Statut** : À faire
+**Statut** : Faite — branche `chore/commit-maven-wrapper` (PR à merger). Négation `!.mvn/wrapper/maven-wrapper.jar` dans `.gitignore` (le `*.jar` global l'attrapait) + jar versionné.
 **Priorité** : Basse
 **Pré-requis** : #10
 **Pourquoi** : versionner `.mvn/wrapper/maven-wrapper.jar` rend `./mvnw` fonctionnel **offline**, sans dépendre du réseau (pratique standard pour des builds reproductibles, pertinent vu le réseau restreint côté formateur et la cible militaire).
 
 **Critères d'acceptation** :
-- [ ] `.mvn/wrapper/maven-wrapper.jar` retiré du `.gitignore` et committé.
-- [ ] `./mvnw -v` fonctionne sur une machine sans accès réseau Maven.
+- [x] `.mvn/wrapper/maven-wrapper.jar` retiré du `.gitignore` et committé.
+- [x] `./mvnw -v` fonctionne sur une machine sans accès réseau Maven (le jar versionné évite le téléchargement initial).
 
 ### #55 — Migrer `ReportGenerator` JSON vers Jackson
 **Statut** : À faire

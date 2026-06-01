@@ -7,7 +7,8 @@ target/
 *.nar
 hs_err_pid*
 replay_pid*
-.mvn/wrapper/maven-wrapper.jar
+# Le wrapper Maven est volontairement versionné (build offline / `./mvnw` reproductible, cf. #54)
+!.mvn/wrapper/maven-wrapper.jar
 # Régénéré par maven-shade-plugin à chaque `mvn package`
 **/dependency-reduced-pom.xml
 
