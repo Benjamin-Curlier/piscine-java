@@ -13,10 +13,36 @@
 |-------|-----------------|------|
 | **Java 25 (Temurin)** | 25 LTS | Compiler et exécuter les exercices et la moulinette |
 | **Git** | 2.x | Cloner le dépôt, soumettre des rendus |
-| **Node.js** | 20 LTS | Construire le site Docusaurus (cours) |
+| **Node.js** | 22 LTS | Construire le site Docusaurus (cours) |
 
-Maven **n'est pas à installer** : le Maven Wrapper `./mvnw` (à la racine du repo) le
-télécharge automatiquement à la première utilisation.
+Maven **n'est pas à installer** : le Maven Wrapper `./mvnw` (à la racine du repo) fournit
+Maven. Le `maven-wrapper.jar` est **versionné dans le dépôt** (#54), donc `./mvnw` fonctionne
+même **sans accès réseau** au premier appel.
+
+---
+
+## 0. Installation automatisée (recommandé, sans droits admin)
+
+Des scripts préparent l'environnement en une commande : vérification de git/Node,
+installation d'un JDK **Temurin 25 portable** si Java 25+ est absent (téléchargé depuis
+Adoptium, extrait dans votre dossier utilisateur), configuration de `JAVA_HOME`/`PATH`
+au niveau utilisateur, puis vérification du Maven Wrapper.
+
+```powershell
+# Windows (PowerShell) — depuis la racine du repo
+.\scripts\setup-dev.ps1            # ou : .\scripts\setup-dev.ps1 -Force pour réinstaller le JDK
+```
+
+```bash
+# Linux / macOS — depuis la racine du repo
+./scripts/setup-dev.sh             # ou : ./scripts/setup-dev.sh --force
+```
+
+Après exécution, **rouvrez votre terminal** pour que `JAVA_HOME` soit pris en compte, puis
+vérifiez : `java --version` (→ 25) et `./mvnw -v`.
+
+Les sections 1 à 6 ci-dessous décrivent la **procédure manuelle** équivalente, utile si vous
+préférez maîtriser chaque étape ou si un script échoue (proxy, OS non géré, etc.).
 
 ---
 
@@ -113,8 +139,10 @@ cd Piscine-ETNC
 
 ## 4. Utiliser le Maven Wrapper
 
-Le repo contient `mvnw` (Unix) et `mvnw.cmd` (Windows) à sa racine.
-Ils téléchargent Maven 3.9.9 automatiquement dans `~/.m2/wrapper/dists/` lors du premier appel.
+Le repo contient `mvnw` (Unix) et `mvnw.cmd` (Windows) à sa racine, ainsi que le
+`maven-wrapper.jar` versionné (#54). Maven 3.9.9 est téléchargé dans `~/.m2/wrapper/dists/`
+au premier appel ; le `.jar` du wrapper, lui, est déjà présent (pas de téléchargement
+préalable nécessaire pour amorcer `./mvnw`).
 
 ```bash
 # Unix — rendre le script exécutable (une seule fois après le clone)
@@ -176,5 +204,4 @@ npm run build
 
 ---
 
-*Dernière mise à jour : 2026-05-27 — tâche #10.*
-*Pour l'installation complète (scripts automatisés) voir tâche #12.*
+*Dernière mise à jour : 2026-06-01 — tâche #12 (scripts `setup-dev`, Node 22, wrapper offline).*
