@@ -60,7 +60,7 @@ public interface MoulinetteRunner {
                 StringBuilder msg = new StringBuilder();
                 boolean ok = true;
                 for (Checker c : checkers) {
-                    CheckResult r = c.check(new CheckerContext(e.id(), renduDir));
+                    CheckResult r = c.check(new CheckerContext(e.id(), renduDir, e.exerciseDir()));
                     if (r == null || r.status() != CheckResult.Status.OK) {
                         ok = false;
                         msg.append(c.id()).append(" : ")
