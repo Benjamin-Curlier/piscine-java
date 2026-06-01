@@ -365,7 +365,7 @@ Sous-groupes ([referentiel.md §4 module 1](referentiel.md#sous-groupes-dexercic
 ### #18 à #22 — Modules 2 à 6 (1 tâche par module)
 Pour chaque module, créer une tâche dédiée listant ses chapitres et exercices. Ne pas tout démarrer en parallèle — pédagogie d'abord, donc finir Mod2 avant d'attaquer Mod3, etc.
 
-- **#18 — Module 2** (5 chapitres, 12 exercices, 4 sous-groupes)
+- **#18 — Module 2** (5 chapitres, 12 exercices, 4 sous-groupes) — **prochain chantier ; brief de démarrage prêt** : [`docs/superpowers/2026-06-01-m2-kickoff.md`](superpowers/2026-06-01-m2-kickoff.md). Validation désormais **locale** (Java 25 + Maven installés) en plus du CI.
 - **#19 — Module 3** (10 chapitres, 14 exercices, 4 sous-groupes) → débloque le **Projet binôme #1**
 - **#20 — Module 4** (8 chapitres, 12 exercices, 3 sous-groupes)
 - **#21 — Module 5** (7 chapitres, 10 exercices, 3 sous-groupes) → débloque le **Projet binôme #2**
