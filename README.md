@@ -52,9 +52,17 @@ chmod +x mvnw
 ./mvnw -v
 ```
 
+## Contribuer
+
+Formateur ? Voir **[`CONTRIBUTING.md`](CONTRIBUTING.md)** : workflow Git, checklists d'ajout d'exercice / de chapitre, critères de revue.
+
 ## Statut
 
 Projet en cours de construction. Voir [`docs/backlog.md`](docs/backlog.md) pour les tâches en cours et [`docs/referentiel.md`](docs/referentiel.md) pour le plan pédagogique complet.
+
+## Licence
+
+Tous droits réservés — usage interne ETNC. Voir [`LICENSE`](LICENSE).
 
 ---
 
