@@ -1,0 +1,20 @@
+slug: fizzbuzz
+titre: "FizzBuzz"
+module: 1
+sous_groupe: "1.3"
+position: 1
+difficulte: facile
+duree_estimee_min: 20
+prerequis:
+  - manipulation-booleenne
+objectifs_pedagogiques:
+  - "Parcourir une plage de nombres avec une boucle for"
+  - "Combiner conditions et modulo"
+  - "Ordonner correctement une cascade de if / else if"
+notions:
+  - boucle
+  - modulo
+  - conditions
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-01

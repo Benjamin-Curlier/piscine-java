@@ -1,0 +1,20 @@
+slug: devine-le-nombre
+titre: "Devine le nombre"
+module: 1
+sous_groupe: "1.3"
+position: 4
+difficulte: moyen
+duree_estimee_min: 30
+prerequis:
+  - table-multiplication
+objectifs_pedagogiques:
+  - "Écrire une boucle while à condition d'arrêt"
+  - "Combiner lecture clavier et conditions dans une boucle"
+  - "Compter les itérations et arrêter au bon moment"
+notions:
+  - boucle-while
+  - conditions
+  - scanner
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-01

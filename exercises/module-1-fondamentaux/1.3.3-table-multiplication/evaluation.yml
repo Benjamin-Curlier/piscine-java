@@ -1,0 +1,19 @@
+total: 20
+seuil_reussite: 12
+criteres:
+  - id: tests-publics
+    description: "Tests publics passants (table de 7, format exact)"
+    poids: 8
+    type: automatique
+  - id: tests-prives
+    description: "Tests privés passants (table de 0, table négative)"
+    poids: 8
+    type: automatique
+  - id: style
+    description: "Style et lisibilité (Checkstyle + PMD)"
+    poids: 2
+    type: automatique
+  - id: demarche
+    description: "Pertinence de la démarche (boucle for, lisibilité)"
+    poids: 2
+    type: formateur
