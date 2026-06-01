@@ -1,0 +1,19 @@
+total: 20
+seuil_reussite: 12
+criteres:
+  - id: tests-publics
+    description: "Tests publics passants (F(10) correct, format exact)"
+    poids: 8
+    type: automatique
+  - id: tests-prives
+    description: "Tests privés passants (cas de base 0/1/2, rang élevé)"
+    poids: 8
+    type: automatique
+  - id: style
+    description: "Style et lisibilité (Checkstyle + PMD)"
+    poids: 2
+    type: automatique
+  - id: demarche
+    description: "Pertinence de la démarche (itératif, choix de long)"
+    poids: 2
+    type: formateur
