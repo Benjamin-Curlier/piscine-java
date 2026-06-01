@@ -104,7 +104,7 @@ Hygiène (hors chemin critique, à caser quand pratique) : **#54** (committer `m
 - [ ] Les 3 jobs passent sur la PR `feature/mvp-console-correction → main` (#52).
 - [ ] Un PR qui supprime `sujet.md` d'un exercice casse `lint-exercices`.
 - [ ] Un PR qui introduit un lien cassé dans un chapitre casse `build-docusaurus`.
-- [ ] Tourne sur `ubuntu-latest` avec `setup-java@v4` (Temurin 25) et `setup-node@v4` (Node 20).
+- [ ] Tourne sur `ubuntu-latest` avec `setup-java@v4` (Temurin 25) et `setup-node@v4` (Node 22).
 - [ ] Gotcha réseau Maven : prévoir le cache `~/.m2` (`actions/cache` ou `setup-java` avec `cache: maven`) ; sur les runners GitHub la résolution Maven Central fonctionne (contrairement à la machine du formateur).
 
 #### #11b — Job `valider-solutions` (APRÈS les Checkers #43–#51)
@@ -124,7 +124,7 @@ Hygiène (hors chemin critique, à caser quand pratique) : **#54** (committer `m
 **Pourquoi** : actuellement la machine du formateur n'a que Java 8 et pas de Maven. Personne ne peut valider en local. Pareil pour les futurs stagiaires.
 
 **Livrable** :
-- `docs/setup-dev.md` : install Java 25 (Windows/Linux/macOS) + Node 20 + variables d'env.
+- `docs/setup-dev.md` : install Java 25 (Windows/Linux/macOS) + Node 22 + variables d'env.
 - Optionnel : `scripts/setup-dev.ps1` (Windows) et `scripts/setup-dev.sh` (Unix) qui installent Java 25 en mode portable / utilisateur (la machine du formateur n'a pas les droits admin).
 
 **Critères d'acceptation** :
