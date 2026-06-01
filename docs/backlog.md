@@ -153,7 +153,7 @@ Hygiène (hors chemin critique, à caser quand pratique) : **#54** (committer `m
 ---
 
 ### #14 — `CONTRIBUTING.md` + `LICENSE` à la racine
-**Statut** : À faire
+**Statut** : Faite — branche `feature/contributing-license` (PR à merger). LICENSE = en-tête provisoire « Tous droits réservés — usage interne ETNC » (arbitrage définitif hiérarchie/RSSI à venir).
 **Priorité** : Haute (étape 6 de la [roadmap MVP](#-roadmap-jusquau-mvp-ordre-dexécution-validé-le-2026-06-01))
 **Pré-requis** : #13 (la grille est référencée)
 **Pourquoi** : projet institutionnel/militaire partagé entre formateurs — cadrer l'ajout d'exos/chapitres et clarifier les droits d'usage avant d'élargir la base de contributeurs.
@@ -161,11 +161,11 @@ Hygiène (hors chemin critique, à caser quand pratique) : **#54** (committer `m
 **Livrable** : `CONTRIBUTING.md` racine + un fichier `LICENSE` à la racine.
 
 **Critères d'acceptation** :
-- [ ] Workflow Git : `feature/<slug>` → PR → revue par 1 autre formateur → merge (le CI #11 doit être vert).
-- [ ] Checklist d'ajout d'un exercice (renvoie vers `docs/format-exercice.md`).
-- [ ] Checklist d'ajout d'un chapitre (renvoie vers `docs/charte-redaction.md`).
-- [ ] Critères de bloc à la revue (lisibilité, niveau de langue, tests qui passent, etc.).
-- [ ] `LICENSE` : choix d'une licence clarifiant les droits d'usage/diffusion (à arbitrer avec la hiérarchie/RSSI — usage interne ETNC vs. ouverture). Si indécis, placer un en-tête « Tous droits réservés — usage interne ETNC » en attendant l'arbitrage.
+- [x] Workflow Git : `feature/<slug>` → PR → revue par 1 autre formateur → merge (le CI #11 doit être vert).
+- [x] Checklist d'ajout d'un exercice (renvoie vers `docs/format-exercice.md`).
+- [x] Checklist d'ajout d'un chapitre (renvoie vers `docs/charte-redaction.md`).
+- [x] Critères de bloc à la revue (lisibilité, niveau de langue, tests qui passent, etc.).
+- [x] `LICENSE` : en-tête provisoire « Tous droits réservés — usage interne ETNC » posé en attendant l'arbitrage hiérarchie/RSSI.
 
 ---
 
