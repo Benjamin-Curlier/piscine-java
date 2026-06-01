@@ -87,7 +87,7 @@ Hygiène (hors chemin critique, à caser quand pratique) : **#54** (committer `m
 ---
 
 ### #11 — GitHub Actions CI (scindée en #11a et #11b)
-**Statut** : À faire
+**Statut** : **#11a Faite** (commit `8e3399b`, validée sur [PR #1](https://github.com/Benjamin-Curlier/Piscine-ETNC/pull/1)) — **#11b À faire** (après #43–#51)
 **Priorité** : **Haute — point d'entrée de la roadmap MVP.**
 **Pré-requis** : #9 (squelette moulinette), #10 (mvnw)
 **Pourquoi** : casser tout PR qui régresse un exercice, le site, ou la moulinette. *Le plus rentable* : c'est l'absence de CI qui avait laissé passer le commentaire XML invalide de `cli/pom.xml`.
@@ -400,7 +400,7 @@ Remplacer les assets Docusaurus par défaut (favicon, logo, social card) par les
 > Issues de la remontée d'action. La #52 est sur le chemin critique du MVP (étape 2) ; les autres sont de l'hygiène à caser quand pratique.
 
 ### #52 — PR + merge `feature/mvp-console-correction` → `main`
-**Statut** : À faire
+**Statut** : **Faite** — [PR #1](https://github.com/Benjamin-Curlier/Piscine-ETNC/pull/1) mergée (merge commit `c86e098`), branche supprimée. La target-MVP est exécutée depuis `feature/target-mvp-checkers` (issue de `main`).
 **Priorité** : **Haute — étape 2 de la roadmap MVP.**
 **Pré-requis** : #11a (CI minimal en place pour valider la PR)
 **Pourquoi** : tout le MVP vit sur une branche de feature longue durée ; `main` est resté au squelette. L'écart grandit à chaque itération. Resynchroniser pour que `main` reflète la réalité et que les prochaines itérations branchent proprement.
