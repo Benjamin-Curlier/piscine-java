@@ -268,6 +268,34 @@ Hygiène (hors chemin critique, à caser quand pratique) : **#54** (committer `m
 
 ---
 
+## Phase 1quater — Target MVP : Checkers réels + déploiement (#43–#51) — **Faite**
+
+> Itération réalisée sur `feature/target-mvp-checkers` (issue de `main`). La moulinette est désormais **réellement évaluante**.
+> Spec : [`docs/superpowers/specs/2026-05-29-target-mvp-checkers-deploiement-design.md`](superpowers/specs/2026-05-29-target-mvp-checkers-deploiement-design.md) — Plan : [`docs/superpowers/plans/2026-05-29-target-mvp-checkers-deploiement.md`](superpowers/plans/2026-05-29-target-mvp-checkers-deploiement.md).
+> Vérifié : les 4 suites vertes (`verify` 28 unit, `git` 2, `tools` 7, `e2e` 2) + uber-jar exécutable (`java -jar … --help`).
+
+| # | Tâche | Statut |
+|---|---|---|
+| #43 | `CheckerContext` porte `exerciseRefPath` | Faite |
+| #44 | `JavaToolkit` + `FqcnExtractor` + deps outillage runtime | Faite |
+| #45 | `CompileChecker` | Faite |
+| #46 | `PublicTestChecker` + `PrivateTestChecker` | Faite |
+| #47 | `StyleChecker` **advisory** + `isBlocking()` + config Checkstyle | Faite |
+| #48 | Câblage `Main`/`MoulinetteRunner` + rapport `ReportGenerator` + E2E | Faite |
+| #49 | Script `build-bundle` (ZIP portable) | Faite (scripts livrés ; exécution ZIP non vérifiée localement — PowerShell interdit + `zip` absent) |
+| #50 | `docs/deploiement-instructeur.md` | Faite |
+| #51 | `docs/architecture-moulinette.md` | Faite |
+
+**Ruse centrale** : l'uber-jar shadé embarque JUnit/AssertJ/Checkstyle (scope `runtime`) et **sert lui-même de classpath** pour compiler/exécuter le code stagiaire — zéro Maven, zéro réseau à l'exécution. Fix shade : exclusion des `META-INF/*.SF|DSA|RSA` (deps signées).
+
+**Débloque #11b** (`valider-solutions`) : la moulinette peut maintenant tourner sur les `solution/` de référence en CI.
+
+**Limites** : style advisory (#53 pour durcir), PMD différé, note /20 future, JSON fait main (#55 Jackson), anti-triche (#29), Docker (#30).
+
+**À vérifier côté instructeur** : un `\.\scripts\build-bundle.ps1` complet (génération du ZIP + lancement hors repo) sur une machine où PowerShell est autorisé.
+
+---
+
 ## Phase 2 — Module 1 pilote complet (priorité HAUTE — **inclus dans le MVP**)
 
 > On finit **entièrement** le module 1 avant de toucher aux autres : 7 chapitres + 10 exercices + rétro. Sert de gabarit pour les modules 2 à 6.
