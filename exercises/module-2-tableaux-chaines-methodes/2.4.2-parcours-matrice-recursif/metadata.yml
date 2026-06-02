@@ -1,0 +1,20 @@
+slug: parcours-matrice-recursif
+titre: "Parcours récursif de matrice"
+module: 2
+sous_groupe: "2.4"
+position: 2
+difficulte: difficile
+duree_estimee_min: 45
+prerequis: []
+objectifs_pedagogiques:
+  - "Appliquer la récursivité à une structure à deux dimensions"
+  - "Décomposer un problème en sous-problèmes (ligne, puis reste de la matrice)"
+  - "Écrire des méthodes auxiliaires récursives"
+notions:
+  - recursivite
+  - cas-de-base
+  - matrice
+  - tableau-2d
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-02
