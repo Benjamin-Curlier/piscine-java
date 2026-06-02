@@ -1,0 +1,21 @@
+slug: factorielle-puissance
+titre: "Factorielle et puissance"
+module: 2
+sous_groupe: "2.4"
+position: 1
+difficulte: moyen
+duree_estimee_min: 35
+prerequis: []
+objectifs_pedagogiques:
+  - "Écrire une méthode récursive avec un cas de base et un cas récursif"
+  - "Réduire un problème vers son cas de base"
+  - "Choisir un type de retour adapté (long) pour éviter le débordement"
+notions:
+  - recursivite
+  - cas-de-base
+  - methode
+  - factorielle
+  - puissance
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-02
