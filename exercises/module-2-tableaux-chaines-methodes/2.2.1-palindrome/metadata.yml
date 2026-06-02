@@ -1,0 +1,20 @@
+slug: palindrome
+titre: "Palindrome"
+module: 2
+sous_groupe: "2.2"
+position: 1
+difficulte: facile
+duree_estimee_min: 25
+prerequis: []
+objectifs_pedagogiques:
+  - "Lire une chaîne de caractères au clavier"
+  - "Parcourir une chaîne par ses deux extrémités avec charAt"
+  - "Normaliser la casse avant comparaison"
+notions:
+  - chaine
+  - boucle
+  - charAt
+  - palindrome
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-02
