@@ -370,7 +370,8 @@ Pour chaque module, créer une tâche dédiée listant ses chapitres et exercice
   - 🟡 **Volet exercices** (cycles séparés, 1 sous-groupe = 1 PR) : 2.1 Tableaux, 2.2 Chaînes, 2.3 Méthodes, 2.4 Récursivité. **Brief de démarrage prêt** : [`superpowers/2026-06-01-m2-exos-kickoff.md`](superpowers/2026-06-01-m2-exos-kickoff.md). Décisions transverses figées (spec chapitres §10) : tout dans `main` pour 2.1/2.2, méthodes `static` testées par retour pour 2.3/2.4, récursivité imposée par consigne, refactor 2.3.3 basé sur 1.2.2.
     - ✅ **2.1 Tableaux** (PR #18) : `min-max-moyenne`, `inversion`, `recherche-lineaire`, `rotation-matrice`. Spec [`specs/2026-06-02-m2-exos-2-1-design.md`](superpowers/specs/2026-06-02-m2-exos-2-1-design.md), plan [`plans/2026-06-02-m2-exos-2-1.md`](superpowers/plans/2026-06-02-m2-exos-2-1.md).
     - ✅ **2.2 Chaînes** (PR #19) : `palindrome`, `comptage-occurrences`, `ascii-art`. Saisie clavier + test sur sortie ; solutions validées en local (`valider-solutions` + lint 0 erreur). Spec [`specs/2026-06-02-m2-exos-2-2-design.md`](superpowers/specs/2026-06-02-m2-exos-2-2-design.md).
-    - ⬜ Restent : 2.3 Méthodes, 2.4 Récursivité.
+    - ✅ **2.3 Méthodes** : `biblio-maths`, `surcharge`, `refactor-calculs-geometriques`. Méthodes `static` à signature imposée, **testées par valeur de retour** (AssertJ direct). Spec [`specs/2026-06-02-m2-exos-2-3-design.md`](superpowers/specs/2026-06-02-m2-exos-2-3-design.md).
+    - ⬜ Reste : 2.4 Récursivité.
 - **#19 — Module 3** (10 chapitres, 14 exercices, 4 sous-groupes) → débloque le **Projet binôme #1**
 - **#20 — Module 4** (8 chapitres, 12 exercices, 3 sous-groupes)
 - **#21 — Module 5** (7 chapitres, 10 exercices, 3 sous-groupes) → débloque le **Projet binôme #2**
