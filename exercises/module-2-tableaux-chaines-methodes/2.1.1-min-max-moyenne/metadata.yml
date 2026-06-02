@@ -1,0 +1,20 @@
+slug: min-max-moyenne
+titre: "Min, max et moyenne"
+module: 2
+sous_groupe: "2.1"
+position: 1
+difficulte: facile
+duree_estimee_min: 25
+prerequis: []
+objectifs_pedagogiques:
+  - "Déclarer et remplir un tableau d'entiers à partir d'une saisie"
+  - "Parcourir un tableau pour accumuler minimum, maximum et somme"
+  - "Calculer une moyenne en nombres à virgule et la formater proprement"
+notions:
+  - tableau
+  - boucle
+  - min-max
+  - moyenne
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-02
