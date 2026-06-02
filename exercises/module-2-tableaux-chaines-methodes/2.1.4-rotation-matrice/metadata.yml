@@ -1,0 +1,20 @@
+slug: rotation-matrice
+titre: "Rotation d'une matrice"
+module: 2
+sous_groupe: "2.1"
+position: 4
+difficulte: moyen
+duree_estimee_min: 40
+prerequis: []
+objectifs_pedagogiques:
+  - "Déclarer et remplir un tableau à deux dimensions"
+  - "Parcourir une matrice avec une double boucle"
+  - "Calculer l'indice de destination d'une rotation de 90°"
+notions:
+  - matrice
+  - tableau-2d
+  - indexation
+  - boucle
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-02
