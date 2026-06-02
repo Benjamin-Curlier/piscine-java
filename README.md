@@ -11,6 +11,19 @@ Inspirée des piscines C/C++ de 42 et Epitech, cette piscine se distingue par :
 - **Pas de vidéos intégrées** — les cours s'appuient sur du texte, du code commenté, et renvoient vers des ressources externes (articles, vidéos) sélectionnées.
 - **Rendu via Git** — pour familiariser les stagiaires avec l'outil dès le premier exercice.
 
+## Deux modes d'utilisation
+
+La piscine s'utilise de **deux façons**, selon le public :
+
+| Mode | Pour qui | Comment | Prérequis |
+|------|----------|---------|-----------|
+| **Dépôt** (connecté) | Formateurs, contributeurs, stagiaires « connectés » | On **clone le dépôt**, on installe Java 25 + git, et `piscine-bootstrap` compile la console et crée le workspace de rendu. | Java 25, git, accès au dépôt. Voir [`docs/setup-dev.md`](docs/setup-dev.md). |
+| **Standalone** (hors-ligne) | Stagiaire autonome | On reçoit un **ZIP complet** : JDK, git, moulinette pré-compilée et site de cours sont **embarqués**. On décompresse et on lance — **aucune installation, aucun réseau**. | Aucun (tout est dans le ZIP). |
+
+> **Le mode standalone est en cours de finalisation** (itération [#56](docs/backlog.md), brief [`docs/superpowers/2026-06-02-standalone-kickoff.md`](docs/superpowers/2026-06-02-standalone-kickoff.md)) : le bundle moulinette + JDK existe déjà (`scripts/build-bundle.sh`), l'itération ajoute le **site de cours servi en local**, un **git portable embarqué** et un **launcher Windows unique**.
+
+Dans les deux modes, la boucle pédagogique est identique : on édite un exercice, on rend via Git, et la **moulinette** produit un rapport explicatif. Détails côté stagiaire : [`docs/piscine-stagiaire.md`](docs/piscine-stagiaire.md).
+
 ## Organisation du dépôt
 
 | Dossier | Contenu |
