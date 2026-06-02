@@ -1,0 +1,20 @@
+slug: comptage-occurrences
+titre: "Comptage d'occurrences"
+module: 2
+sous_groupe: "2.2"
+position: 2
+difficulte: facile
+duree_estimee_min: 20
+prerequis: []
+objectifs_pedagogiques:
+  - "Lire un texte et un caractère au clavier"
+  - "Parcourir une chaîne caractère par caractère avec charAt et length"
+  - "Compter les occurrences en respectant la casse"
+notions:
+  - chaine
+  - boucle
+  - charAt
+  - comptage
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-02
