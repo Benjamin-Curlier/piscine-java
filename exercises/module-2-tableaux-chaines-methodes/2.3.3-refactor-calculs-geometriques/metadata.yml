@@ -1,0 +1,20 @@
+slug: refactor-calculs-geometriques
+titre: "Calculs géométriques (refactor)"
+module: 2
+sous_groupe: "2.3"
+position: 3
+difficulte: moyen
+duree_estimee_min: 35
+prerequis: []
+objectifs_pedagogiques:
+  - "Extraire un calcul répété dans une méthode static"
+  - "Surcharger une méthode selon le nombre de paramètres (cercle / rectangle)"
+  - "Réutiliser Math.PI"
+notions:
+  - methode
+  - static
+  - surcharge
+  - geometrie
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-02
