@@ -1,0 +1,21 @@
+slug: biblio-maths
+titre: "Bibliothèque mathématique"
+module: 2
+sous_groupe: "2.3"
+position: 1
+difficulte: moyen
+duree_estimee_min: 40
+prerequis: []
+objectifs_pedagogiques:
+  - "Écrire des méthodes static avec une signature imposée"
+  - "Renvoyer une valeur avec return plutôt que d'afficher"
+  - "Implémenter trois algorithmes classiques (PGCD, primalité, somme des chiffres)"
+notions:
+  - methode
+  - static
+  - valeur-de-retour
+  - pgcd
+  - nombre-premier
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-02
