@@ -1,0 +1,20 @@
+slug: recherche-lineaire
+titre: "Recherche linéaire"
+module: 2
+sous_groupe: "2.1"
+position: 3
+difficulte: facile
+duree_estimee_min: 20
+prerequis: []
+objectifs_pedagogiques:
+  - "Parcourir un tableau à la recherche d'une valeur"
+  - "S'arrêter à la première occurrence trouvée"
+  - "Gérer le cas où la valeur est absente"
+notions:
+  - tableau
+  - boucle
+  - recherche
+  - conditions
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-02
