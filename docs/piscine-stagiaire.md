@@ -2,6 +2,36 @@
 
 Ce guide te permet d'utiliser la Piscine **en autonomie sur ta machine**, sans serveur.
 
+## Deux façons de démarrer
+
+| Mode | Quand l'utiliser | Ce que tu fais |
+|------|------------------|----------------|
+| **Standalone (ZIP)** | Le formateur t'a remis un **ZIP** | Tu décompresses et tu lances — **rien à installer, pas de réseau**. Voir la section **« Mode standalone »** ci-dessous. |
+| **Dépôt (clone)** | Tu as accès au dépôt Git du projet | Tu installes Java 25 + git, tu clones, et tu lances le bootstrap. Voir les sections **1 à 8** ci-dessous. |
+
+La **boucle de travail** (éditer un exercice → rendre via Git → lire le rapport de la moulinette) est **identique** dans les deux modes ; seule la mise en route diffère.
+
+---
+
+## Mode standalone (ZIP)
+
+> 🚧 **En cours de finalisation** (itération [#56](backlog.md)). Le ZIP embarque déjà la moulinette et un JDK ; l'itération ajoute le **site de cours servi en local**, un **git portable** et un **launcher Windows unique**. Cette section sera complétée avec le pas-à-pas définitif une fois le bundle validé.
+
+Principe (cible) :
+
+1. Décompresse le ZIP `piscine-etnc-stagiaire-*.zip` où tu veux.
+2. Lance le launcher (Windows : `piscine.bat` ; Unix : `./piscine.sh`).
+3. Le launcher prépare l'environnement (JDK + git embarqués), **ouvre le site de cours** dans ton navigateur (servi en local) et démarre la **console de correction** (REPL).
+4. Tu travailles exactement comme aux sections **4 à 8** ci-dessous (`submit-start`, rendu Git, rapport).
+
+Aucune installation, aucun accès réseau requis : tout est dans le ZIP.
+
+---
+
+## Mode dépôt (clone du projet)
+
+Les sections suivantes (1 à 8) décrivent la mise en route quand tu **clones le dépôt** (Java 25 + git à installer toi-même).
+
 ## 1. Installer les prérequis
 
 - **Java 25** et **git** : voir [`setup-dev.md`](setup-dev.md) (instructions Windows sans droits admin incluses).
