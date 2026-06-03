@@ -1,0 +1,19 @@
+slug: coordonnees
+titre: "Coordonnées (record)"
+module: 3
+sous_groupe: "3.4"
+position: 1
+difficulte: moyen
+duree_estimee_min: 30
+prerequis: []
+objectifs_pedagogiques:
+  - "Utiliser un record et ses accesseurs générés"
+  - "S'appuyer sur l'equals généré (comparaison par valeurs)"
+  - "Respecter l'immuabilité en renvoyant un nouvel objet"
+notions:
+  - record
+  - immuabilite
+  - equals-genere
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-03
