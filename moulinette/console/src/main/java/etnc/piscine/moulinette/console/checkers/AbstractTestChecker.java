@@ -31,6 +31,13 @@ abstract class AbstractTestChecker implements Checker {
     /** Nom lisible du jeu de tests, pour les messages. */
     protected abstract String label();
 
+    /**
+     * Vrai si l'absence de classe de test sélectionnée doit être tolérée (jeu de tests optionnel).
+     * Par défaut {@code false} : un jeu de tests vide est une erreur (cas des tests publics, obligatoires).
+     * Les tests privés, optionnels (cf. {@code format-exercice.md} §2), surchargent à {@code true}.
+     */
+    protected boolean optionalWhenEmpty() { return false; }
+
     @Override
     public CheckResult check(CheckerContext ctx) {
         Path mainSrc = ctx.renduPath().resolve("starter/src/main/java");
@@ -52,7 +59,9 @@ abstract class AbstractTestChecker implements Checker {
             }
             List<String> select = FqcnExtractor.fqcnsUnder(ctx.exerciseRefPath().resolve(selectedTestDir(ctx)));
             if (select.isEmpty()) {
-                return CheckResult.error("Aucune classe de test trouvée pour les " + label() + ".");
+                return optionalWhenEmpty()
+                    ? CheckResult.ok()
+                    : CheckResult.error("Aucune classe de test trouvée pour les " + label() + ".");
             }
             String runCp = tooling + File.pathSeparator + classesMain + File.pathSeparator + classesTest;
             ProcessResult run = toolkit.runJUnit(classesTest, runCp, select);

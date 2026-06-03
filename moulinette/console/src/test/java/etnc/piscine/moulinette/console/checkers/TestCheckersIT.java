@@ -39,6 +39,15 @@ class TestCheckersIT {
         assertThat(r.status()).isEqualTo(CheckResult.Status.OK);
     }
 
+    @Test
+    void tests_prives_absents_sont_ignores(@TempDir Path tmp) throws IOException {
+        // tests-prives/ est OPTIONNEL (format §2) : un exo simple sans tests privés
+        // ne doit pas échouer, il doit être considéré comme OK (rien à vérifier).
+        var ctx = scenario(tmp, SOLUTION_MAIN, false);
+        CheckResult r = new PrivateTestChecker(tk).check(ctx);
+        assertThat(r.status()).isEqualTo(CheckResult.Status.OK);
+    }
+
     // ── Fixtures ────────────────────────────────────────────────────────────
 
     private static final String SOLUTION_MAIN =
@@ -48,6 +57,11 @@ class TestCheckersIT {
 
     /** Construit un rendu + un dossier de référence avec tests publics, privés et l'util CaptureSortie. */
     private static CheckerContext scenario(Path tmp, String mainCode) throws IOException {
+        return scenario(tmp, mainCode, true);
+    }
+
+    /** Variante : {@code withPrivateTests=false} omet le dossier tests-prives/ (cas optionnel). */
+    private static CheckerContext scenario(Path tmp, String mainCode, boolean withPrivateTests) throws IOException {
         Path rendu = tmp.resolve("ws/exo");
         Path mainSrc = rendu.resolve("starter/src/main/java/etnc/m1");
         Files.createDirectories(mainSrc);
@@ -89,6 +103,10 @@ class TestCheckersIT {
               }
             }
             """);
+
+        if (!withPrivateTests) {
+            return new CheckerContext("1.1.1", rendu, ref);
+        }
 
         Path priv = ref.resolve("tests-prives/src/test/java/etnc/m1");
         Files.createDirectories(priv);
