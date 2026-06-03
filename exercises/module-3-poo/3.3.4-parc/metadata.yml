@@ -1,0 +1,20 @@
+slug: parc
+titre: "Parc de formes (polymorphisme)"
+module: 3
+sous_groupe: "3.3"
+position: 4
+difficulte: moyen
+duree_estimee_min: 35
+prerequis: []
+objectifs_pedagogiques:
+  - "Parcourir un tableau d'objets via leur type de base"
+  - "Appeler une méthode polymorphe sur chaque élément"
+  - "Identifier un sous-type avec instanceof et faire un downcast"
+notions:
+  - heritage
+  - polymorphisme
+  - instanceof
+  - tableau
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-03

@@ -1,0 +1,20 @@
+slug: forme
+titre: "Formes géométriques"
+module: 3
+sous_groupe: "3.3"
+position: 1
+difficulte: moyen
+duree_estimee_min: 35
+prerequis: []
+objectifs_pedagogiques:
+  - "Définir une classe abstraite avec des méthodes abstraites"
+  - "Implémenter des sous-classes concrètes (extends, @Override)"
+  - "Utiliser le polymorphisme via le type de base"
+notions:
+  - heritage
+  - polymorphisme
+  - classe-abstraite
+  - override
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-03
