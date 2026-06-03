@@ -1,0 +1,19 @@
+slug: comparable
+titre: "Comparaison personnalisée (interface)"
+module: 3
+sous_groupe: "3.4"
+position: 3
+difficulte: moyen
+duree_estimee_min: 35
+prerequis: []
+objectifs_pedagogiques:
+  - "Implémenter le contrat d'une interface (implements)"
+  - "Écrire une comparaison renvoyant un signe (négatif/nul/positif)"
+  - "Programmer à travers le type interface"
+notions:
+  - interface
+  - implements
+  - comparaison
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-03
