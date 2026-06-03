@@ -1,0 +1,20 @@
+slug: personnel
+titre: "Hiérarchie de personnels"
+module: 3
+sous_groupe: "3.3"
+position: 3
+difficulte: moyen
+duree_estimee_min: 35
+prerequis: []
+objectifs_pedagogiques:
+  - "Concevoir une hiérarchie abstraite (classe de base + sous-classes)"
+  - "Spécialiser des méthodes abstraites par catégorie"
+  - "Combiner les méthodes redéfinies dans une méthode concrète (polymorphisme)"
+notions:
+  - heritage
+  - polymorphisme
+  - classe-abstraite
+  - override
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-03
