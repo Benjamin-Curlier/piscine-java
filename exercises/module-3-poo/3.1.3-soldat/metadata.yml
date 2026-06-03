@@ -1,0 +1,21 @@
+slug: soldat
+titre: "Soldat"
+module: 3
+sous_groupe: "3.1"
+position: 3
+difficulte: moyen
+duree_estimee_min: 30
+prerequis: []
+objectifs_pedagogiques:
+  - "Modéliser un objet avec plusieurs méthodes de comportement"
+  - "Gérer un état mutable borné (points de vie plancher à 0)"
+  - "Exposer un état booléen dérivé (estVivant) et redéfinir toString"
+notions:
+  - classe
+  - objet
+  - encapsulation
+  - methode
+  - etat-derive
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-03
