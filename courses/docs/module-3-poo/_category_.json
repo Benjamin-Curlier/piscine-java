@@ -2,7 +2,7 @@
   "label": "Module 3 — Programmation Orientée Objet",
   "position": 4,
   "collapsible": true,
-  "collapsed": true,
+  "collapsed": false,
   "link": {
     "type": "generated-index",
     "title": "Module 3 — Programmation Orientée Objet",
