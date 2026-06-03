@@ -42,4 +42,31 @@ class ProcessGitClientIT {
         assertThat(git.lastPushRefs(repo))
             .anySatisfy(r -> assertThat(r.ref()).isEqualTo("refs/heads/main"));
     }
+
+    /**
+     * Régression : une commande git qui déverse un gros volume sur stderr (un avertissement
+     * CRLF par fichier, comme MinGit sur une machine vierge) ne doit pas interbloquer la lecture
+     * des flux. On force les avertissements via {@code -c core.autocrlf=true} pour être
+     * déterministe quelle que soit la config git de la machine.
+     */
+    @Test
+    void ne_pas_interbloquer_quand_stderr_est_volumineux(@TempDir Path tmp) throws IOException {
+        Path repo = tmp.resolve("work");
+        Files.createDirectories(repo);
+        ProcessGitClient git = new ProcessGitClient();
+
+        assertThat(git.run(repo, List.of("init")).ok()).isTrue();
+        // Beaucoup de fichiers en LF -> 1 avertissement CRLF par fichier sur stderr (≈ 40 Ko),
+        // bien au-delà du buffer du pipe : déclenche l'interblocage si stderr n'est pas drainé.
+        for (int i = 0; i < 400; i++) {
+            Files.writeString(repo.resolve("f" + i + ".txt"), "ligne1\nligne2\n");
+        }
+
+        GitResult add = git.run(repo, List.of("-c", "core.autocrlf=true", "add", "."));
+
+        assertThat(add.ok())
+            .as("git add ne doit pas timeouter (stderr=%s)", add.stderr())
+            .isTrue();
+        assertThat(add.exitCode()).isZero();
+    }
 }

@@ -11,6 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class ProcessGitClient implements GitClient {
     private static final Logger LOG = LoggerFactory.getLogger(ProcessGitClient.class);
@@ -27,12 +28,27 @@ public class ProcessGitClient implements GitClient {
         pb.environment().put("LC_ALL", "C");
         try {
             Process p = pb.start();
+            // On draine stderr dans un thread dédié : lire stdout jusqu'à EOF *puis* stderr
+            // peut interbloquer si git remplit le buffer du pipe stderr (ex. MinGit émet un
+            // avertissement CRLF par fichier sur `git add .`) pendant qu'on est bloqué sur stdout.
+            AtomicReference<String> stderrRef = new AtomicReference<>("");
+            Thread errDrain = new Thread(() -> {
+                try {
+                    stderrRef.set(readAll(p.getErrorStream()));
+                } catch (IOException ignored) {
+                    // flux fermé / process tué : stderr reste vide
+                }
+            }, "git-stderr-drain");
+            errDrain.setDaemon(true);
+            errDrain.start();
             String stdout = readAll(p.getInputStream());
-            String stderr = readAll(p.getErrorStream());
             if (!p.waitFor(TIMEOUT_SECONDS, TimeUnit.SECONDS)) {
                 p.destroyForcibly();
+                errDrain.join(1000);
                 return new GitResult(-1, stdout, "timeout après " + TIMEOUT_SECONDS + "s");
             }
+            errDrain.join(1000);
+            String stderr = stderrRef.get();
             GitResult res = new GitResult(p.exitValue(), stdout, stderr);
             if (!args.isEmpty() && "push".equals(args.get(0)) && res.ok()) {
                 lastPushByRepo.put(repo.toAbsolutePath().normalize(), parsePushRefs(stdout));
