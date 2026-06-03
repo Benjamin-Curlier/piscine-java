@@ -1,0 +1,19 @@
+total: 20
+seuil_reussite: 12
+criteres:
+  - id: conception-oo
+    description: "Conception OO : encapsulation, enum, agrégation, héritage/polymorphisme à bon escient (le polymorphisme est valorisé quand il est pertinent, non pénalisé sinon)"
+    poids: 8
+    type: formateur
+  - id: perimetre
+    description: "Périmètre fonctionnel : opérations affecter/promouvoir/lister conformes, refus propre des cas invalides sans exception"
+    poids: 5
+    type: formateur
+  - id: lisibilite
+    description: "Lisibilité et idiomatisme POO : noms clairs, méthodes courtes, code propre"
+    poids: 4
+    type: formateur
+  - id: collaboration
+    description: "Collaboration : contributions équilibrées (historique Git) et README décrivant la répartition"
+    poids: 3
+    type: formateur

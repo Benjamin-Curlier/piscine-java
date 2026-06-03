@@ -183,7 +183,7 @@ Trois projets en binôme jalonnent la Piscine. Chaque projet est volontairement 
 | **Projet 2** | Après module 5 | Application OO + persistance fichier | **Gestionnaire de tâches CLI** — ajouter, lister, marquer fait, persistance CSV ou JSON, gestion d'erreurs propre. |
 | **Projet 3** | Après module 6 (final) | Application complète : OO + persistance + tests + Git collaboratif | **Mini-moulinette pédagogique** — checker simple qui compile un fichier Java, l'exécute sur des cas, génère un rapport explicatif. Le binôme doit produire ≥ 70 % de couverture JUnit et utiliser des branches + PR. |
 
-Chaque projet a son propre dossier dans [`exercises/`](../exercises/) (à venir) avec sujet, critères d'évaluation, livrables attendus et grille de notation pédagogique.
+Chaque projet a son propre dossier dans [`exercises/`](../exercises/) avec sujet, critères d'évaluation, livrables attendus et grille de notation pédagogique. Le **Projet 1** est disponible : [`exercises/projets-binome/projet-1-mini-domaine/`](../exercises/projets-binome/projet-1-mini-domaine/). Les projets 2 et 3 sont à venir.
 
 ## 6. Progression et prérequis
 

@@ -388,7 +388,7 @@ Pour chaque module, créer une tâche dédiée listant ses chapitres et exercice
 
 ### #23 — Projet binôme #1 — Mini-domaine OO (Caserne)
 **Pré-requis** : #19
-Voir `referentiel.md` §5. Format à définir dans `exercises/projets-binome/projet-1-mini-domaine/`.
+Voir `referentiel.md` §5. ✅ **Fiche livrée** dans `exercises/projets-binome/projet-1-mini-domaine/` (sujet, consignes, grille, métadonnées). Conception : spec [`specs/2026-06-03-projet-binome-1-design.md`](superpowers/specs/2026-06-03-projet-binome-1-design.md) + plan [`plans/2026-06-03-projet-binome-1.md`](superpowers/plans/2026-06-03-projet-binome-1.md).
 
 ### #24 — Projet binôme #2 — App + persistance fichier (TaskManager CLI)
 **Pré-requis** : #21
