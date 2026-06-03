@@ -1,0 +1,20 @@
+slug: evenement
+titre: "Journal d'événements (sealed)"
+module: 3
+sous_groupe: "3.4"
+position: 4
+difficulte: difficile
+duree_estimee_min: 40
+prerequis: []
+objectifs_pedagogiques:
+  - "Exploiter une hiérarchie sealed fermée"
+  - "Écrire un switch exhaustif par pattern matching (sans default)"
+  - "Accéder aux composants de records dans les branches"
+notions:
+  - sealed
+  - record
+  - pattern-matching
+  - switch
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-03
