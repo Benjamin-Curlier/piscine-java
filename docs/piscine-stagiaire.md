@@ -15,16 +15,12 @@ La **boucle de travail** (éditer un exercice → rendre via Git → lire le rap
 
 ## Mode standalone (ZIP)
 
-> 🚧 **En cours de finalisation** (itération [#56](backlog.md)). Le ZIP embarque déjà la moulinette et un JDK ; l'itération ajoute le **site de cours servi en local**, un **git portable** et un **launcher Windows unique**. Cette section sera complétée avec le pas-à-pas définitif une fois le bundle validé.
-
-Principe (cible) :
+Le ZIP `piscine-etnc-stagiaire-*.zip` embarque **tout** : un JDK, git, la moulinette pré-compilée et le **site de cours servi en local**. Aucune installation, aucun réseau.
 
 1. Décompresse le ZIP `piscine-etnc-stagiaire-*.zip` où tu veux.
-2. Lance le launcher (Windows : `piscine.bat` ; Unix : `./piscine.sh`).
-3. Le launcher prépare l'environnement (JDK + git embarqués), **ouvre le site de cours** dans ton navigateur (servi en local) et démarre la **console de correction** (REPL).
+2. Lance le launcher (Windows : double-clic sur `piscine.bat` ; Unix : `./piscine.sh`).
+3. Au premier lancement, ton espace de travail est créé, **le site de cours s'ouvre dans ton navigateur** (sinon, ouvre l'URL affichée, par défaut `http://127.0.0.1:8800/`) et la **console** démarre.
 4. Tu travailles exactement comme aux sections **4 à 8** ci-dessous (`submit-start`, rendu Git, rapport).
-
-Aucune installation, aucun accès réseau requis : tout est dans le ZIP.
 
 ---
 

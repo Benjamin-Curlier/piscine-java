@@ -4,6 +4,8 @@
 > sur le projet en local (rédiger des exercices, valider des solutions, lancer la moulinette).
 >
 > Pour les **stagiaires**, consultez les instructions dans `exercises/README.md` (à venir).
+>
+> Ce guide concerne le **mode dépôt** (développement / contribution). Si tu utilises la Piscine via le **ZIP standalone**, tu n'as **rien à installer** : voir [`piscine-stagiaire.md`](piscine-stagiaire.md#mode-standalone-zip).
 
 ---
 
