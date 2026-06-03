@@ -221,4 +221,4 @@ public class Demo {
 
 ## Prochain chapitre
 
-→ **[Chapitre 3.6 — Polymorphisme](3-6-polymorphisme)**
+→ **Chapitre 3.6 — Polymorphisme** *(à venir)*
