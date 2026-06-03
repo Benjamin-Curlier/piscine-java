@@ -13,6 +13,9 @@ public final class PrivateTestChecker extends AbstractTestChecker {
     @Override public String id() { return "tests-prives"; }
     @Override protected String label() { return "tests privés"; }
 
+    /** Les tests privés sont optionnels (format §2) : leur absence n'est pas une erreur. */
+    @Override protected boolean optionalWhenEmpty() { return true; }
+
     @Override protected Path selectedTestDir(CheckerContext ctx) {
         return Path.of("tests-prives/src/test/java");
     }
