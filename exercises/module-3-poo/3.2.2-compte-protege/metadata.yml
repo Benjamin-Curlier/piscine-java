@@ -1,0 +1,21 @@
+slug: compte-protege
+titre: "Compte protégé"
+module: 3
+sous_groupe: "3.2"
+position: 2
+difficulte: moyen
+duree_estimee_min: 30
+prerequis: []
+objectifs_pedagogiques:
+  - "Ajouter des gardes à un objet à état mutable"
+  - "Protéger un invariant métier (solde jamais négatif)"
+  - "Refuser une opération invalide en laissant l'objet inchangé"
+notions:
+  - encapsulation
+  - invariant
+  - constructeur
+  - validation
+  - garde
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-03
