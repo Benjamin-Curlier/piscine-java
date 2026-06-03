@@ -148,4 +148,4 @@ public class SommeRecursive {
 
 ## Prochain chapitre
 
-→ **Module 3 — Programmation orientée objet** *(à venir)*
+→ **[Module 3 — Classes et objets](../module-3-poo/3-1-classes-et-objets)**
