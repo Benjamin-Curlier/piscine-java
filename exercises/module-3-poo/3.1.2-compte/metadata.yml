@@ -1,0 +1,21 @@
+slug: compte
+titre: "Compte bancaire simple"
+module: 3
+sous_groupe: "3.1"
+position: 2
+difficulte: facile
+duree_estimee_min: 25
+prerequis: []
+objectifs_pedagogiques:
+  - "Modéliser un objet à l'état mutable (solde) avec des attributs privés"
+  - "Écrire des méthodes qui modifient l'état (deposer, retirer)"
+  - "Formater une valeur monétaire dans toString avec Locale.ROOT"
+notions:
+  - classe
+  - objet
+  - encapsulation
+  - etat-mutable
+  - toString
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-03
