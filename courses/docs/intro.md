@@ -7,6 +7,8 @@ slug: /intro
 
 # Bienvenue à la Piscine ETNC
 
+> 👉 Pressé de démarrer ? Va directement à **[Comment lancer la Piscine](lancer-la-piscine.md)**.
+
 Bienvenue ! Vous vous apprêtez à suivre la **Piscine ETNC**, le parcours d'initiation au développement Java de l'**École des Transmissions, du Numérique et du Cyber**.
 
 ## À quoi ressemble la Piscine
@@ -23,7 +25,7 @@ Vous rendez votre travail via **Git**. Une **moulinette** automatique corrige vo
 
 ## Ce dont vous aurez besoin
 
-- Un ordinateur (Windows, Linux ou macOS) sur lequel vous pouvez installer **Java 25** et un éditeur de code.
+- Un ordinateur (Windows, Linux ou macOS). **Selon ce que ton formateur te remet, tu n'auras peut-être rien à installer** : voir **[Comment lancer la Piscine](lancer-la-piscine.md)**. Dans tous les cas, prévois un éditeur de code.
 - Un compte Git (GitHub pendant la phase de développement de la Piscine, GitLab interne en production).
 - De la curiosité et de la persévérance. Aucune connaissance préalable en programmation n'est requise.
 
