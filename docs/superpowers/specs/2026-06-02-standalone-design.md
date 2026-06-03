@@ -52,8 +52,8 @@ Nouvelle classe dans la console (`etnc.piscine.moulinette.console`), responsabil
 - **Routing Docusaurus** : `SimpleFileServer` redirige une requête de répertoire (`/docs/intro`) vers `/docs/intro/` puis sert `index.html`. `baseUrl` du site = `/` (déjà le cas). À vérifier en validation que la navigation profonde fonctionne.
 
 ### 4.2 Intégration au REPL
-- La commande `repl` (picocli) gagne une option `--site <dir>` (optionnelle).
-- Si `--site` est fourni et que le dossier existe : au démarrage du REPL, `CourseSiteServer.start(...)`, puis :
+- La commande `repl` gagne une option `--site <dir>` (optionnelle), via le parsing manuel existant (`optional(args, "--site", null)` dans `Main`). Pas de picocli dans ce module.
+- L'orchestration vit dans `Main.runRepl` (et non dans la classe `Repl`, laissée inchangée) : si `--site` est fourni et que le dossier existe, démarrer `CourseSiteServer.start(...)`, puis exécuter `repl.run()` dans un `try`/`finally` qui appelle `stop()`. Au démarrage :
   - **ouverture navigateur** cross-OS : Windows `cmd /c start "" <url>`, macOS `open <url>`, Linux `xdg-open <url>` ; échec silencieux (best-effort).
   - **affichage console** systématique : `Site de cours : http://127.0.0.1:<port>/` (fallback manuel).
 - **Arrêt propre** : `stop()` appelé à la sortie du REPL (bloc `finally` / hook), pour libérer le port.
