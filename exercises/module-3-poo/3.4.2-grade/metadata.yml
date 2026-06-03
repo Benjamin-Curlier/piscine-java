@@ -1,0 +1,19 @@
+slug: grade
+titre: "Grade (enum)"
+module: 3
+sous_groupe: "3.4"
+position: 2
+difficulte: moyen
+duree_estimee_min: 30
+prerequis: []
+objectifs_pedagogiques:
+  - "Définir un enum avec un attribut et un constructeur"
+  - "Écrire une méthode d'instance sur un enum"
+  - "Brancher avec un switch exhaustif sur les constantes (sans default)"
+notions:
+  - enum
+  - switch
+  - methode
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-03
