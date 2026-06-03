@@ -1,0 +1,27 @@
+slug: projet-1-mini-domaine
+titre: "Projet binôme #1 — Caserne"
+binome: true
+module: 3
+duree_estimee_h: 12
+prerequis:
+  - "3.1"
+  - "3.2"
+  - "3.3"
+  - "3.4"
+objectifs_pedagogiques:
+  - "Concevoir un mini-domaine OO (entités, encapsulation, agrégation)"
+  - "Gérer des ensembles avec des tableaux à capacité fixe (sans collections)"
+  - "Traiter les cas invalides par refus/correction, sans exception"
+  - "Collaborer en binôme avec un historique Git équilibré"
+notions:
+  - classe
+  - objet
+  - encapsulation
+  - enum
+  - heritage
+  - polymorphisme
+  - tableau
+  - agregation
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-03
