@@ -377,7 +377,8 @@ Pour chaque module, créer une tâche dédiée listant ses chapitres et exercice
     - **Volet chapitres** ✅ **LIVRÉ** (2 PR de 5) :
         - ✅ **PR-A — 3-1 à 3-5** (bases & héritage) : `classes-et-objets`, `encapsulation`, `constructeurs`, `this-et-static`, `heritage` + `_category_.json` + liaison module 2→3. Mergée.
         - ✅ **PR-B — 3-6 à 3-10** (abstraction & types modernes) : `polymorphisme`, `classes-abstraites`, `interfaces`, `enums`, `records-et-sealed`. Build Docusaurus vert ; exemple 3-10 (record/sealed/pattern matching) compilé en Java 25.
-    - **Volet exercices** (4 sous-groupes, cycles séparés) : ⬜ 3.1 ⬜ 3.2 ⬜ 3.3 ⬜ 3.4. Décisions transverses figées en annexe §10 de la spec.
+    - **Volet exercices** (4 sous-groupes, cycles séparés) : ✅ 3.1 ⬜ 3.2 ⬜ 3.3 ⬜ 3.4. Décisions transverses figées en annexe §10 de la spec.
+        - ✅ **3.1 Classes et objets** : `3.1.1-point2d`, `3.1.2-compte`, `3.1.3-soldat`. Tests par API/AssertJ (on teste des objets), starter à signatures complètes à corps vide, frontière « 3.1 douce, 3.2 stricte » (pas de validation d'invariants). Solutions validées en local (`valider-solutions` 25/25 + lint 0 erreur). Spec [`specs/2026-06-03-m3-exos-3-1-design.md`](superpowers/specs/2026-06-03-m3-exos-3-1-design.md), plan [`plans/2026-06-03-m3-exos-3-1.md`](superpowers/plans/2026-06-03-m3-exos-3-1.md).
 - **#20 — Module 4** (8 chapitres, 12 exercices, 3 sous-groupes)
 - **#21 — Module 5** (7 chapitres, 10 exercices, 3 sous-groupes) → débloque le **Projet binôme #2**
 - **#22 — Module 6** (8 chapitres, 7 exercices, 2 sous-groupes) → débloque le **Projet binôme #3** (final)
