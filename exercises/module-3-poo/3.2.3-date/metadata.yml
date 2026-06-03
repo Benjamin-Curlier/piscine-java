@@ -1,0 +1,21 @@
+slug: date
+titre: "Date simple"
+module: 3
+sous_groupe: "3.2"
+position: 3
+difficulte: moyen
+duree_estimee_min: 30
+prerequis: []
+objectifs_pedagogiques:
+  - "Borner des attributs à une plage valide (invariants de plage)"
+  - "Valider au constructeur (bornage) et au setter (refus)"
+  - "Formater une sortie avec zéro-padding"
+notions:
+  - encapsulation
+  - invariant
+  - constructeur
+  - validation
+  - bornage
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-03
