@@ -6,6 +6,7 @@ import etnc.piscine.moulinette.console.git.GitClient;
 import etnc.piscine.moulinette.console.git.ProcessGitClient;
 import etnc.piscine.moulinette.framework.Checker;
 import etnc.piscine.moulinette.runner.ProcessRunner;
+import etnc.piscine.moulinette.console.repl.CourseSiteServer;
 import etnc.piscine.moulinette.console.repl.Repl;
 import etnc.piscine.moulinette.console.repl.ReplContext;
 import etnc.piscine.moulinette.console.repl.ReplIo;
@@ -78,8 +79,51 @@ public final class Main {
         var runner = new MoulinetteRunner.Default(catalog, checkers, repo.resolve(".piscine/reports"));
         var trigger = new SubmissionTrigger(runner);
         var ctx = new ReplContext(repo, git, catalog, Mode.LOCAL);
-        new Repl(ctx, CommandRegistry.defaults(trigger), ReplIo.stdio()).run();
+        var repl = new Repl(ctx, CommandRegistry.defaults(trigger), ReplIo.stdio());
+
+        String siteArg = optional(args, "--site", null);
+        CourseSiteServer site = startSiteIfRequested(siteArg);
+        try {
+            repl.run();
+        } finally {
+            if (site != null) {
+                site.stop();
+            }
+        }
         return 0;
+    }
+
+    private static CourseSiteServer startSiteIfRequested(String siteArg) {
+        if (siteArg == null) {
+            return null;
+        }
+        Path siteDir = Paths.get(siteArg);
+        if (!java.nio.file.Files.isDirectory(siteDir)) {
+            System.out.println("[console] Site de cours introuvable (" + siteDir
+                + ") — démarrage sans site.");
+            return null;
+        }
+        CourseSiteServer server = CourseSiteServer.start(siteDir, 8800, 8810);
+        System.out.println("[console] Site de cours : " + server.url());
+        tryOpenBrowser(server.url().toString());
+        return server;
+    }
+
+    private static void tryOpenBrowser(String url) {
+        String os = System.getProperty("os.name", "").toLowerCase(Locale.ROOT);
+        List<String> cmd;
+        if (os.contains("win")) {
+            cmd = List.of("cmd", "/c", "start", "", url);
+        } else if (os.contains("mac")) {
+            cmd = List.of("open", url);
+        } else {
+            cmd = List.of("xdg-open", url);
+        }
+        try {
+            new ProcessBuilder(cmd).inheritIO().start();
+        } catch (Exception e) {
+            System.out.println("[console] Ouvre le site manuellement : " + url);
+        }
     }
 
     private static Mode parseMode(List<String> args) {
@@ -106,7 +150,7 @@ public final class Main {
 
             Usage :
               moulinette-console init --nom <slug> --dest <dossier> [--piscine-repo <chemin>] [--mode local]
-              moulinette-console repl --repo <dossier> [--piscine-repo <chemin>] [--mode local]
+              moulinette-console repl --repo <dossier> [--piscine-repo <chemin>] [--site <dossier-site>] [--mode local]
 
             Documentation : docs/piscine-stagiaire.md
             """);
