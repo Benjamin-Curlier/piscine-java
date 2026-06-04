@@ -1,0 +1,23 @@
+slug: export-csv-trie
+titre: "Export CSV trié (Comparator + String.join + Files.write)"
+module: 5
+sous_groupe: "5.3"
+position: 2
+difficulte: moyen
+duree_estimee_min: 30
+prerequis: []
+objectifs_pedagogiques:
+  - "Trier une liste avec un Comparator chaîné (ancienneté décroissante puis nom croissant)"
+  - "Faire une copie défensive avant de trier pour ne pas muter la liste source"
+  - "Construire une ligne CSV avec String.join sans concaténation manuelle"
+  - "Écrire un fichier texte avec Files.write et StandardCharsets.UTF_8"
+  - "Utiliser grade().name() pour obtenir le nom de la constante enum"
+notions:
+  - CSV
+  - Comparator
+  - String.join
+  - Files.write
+  - record
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-04

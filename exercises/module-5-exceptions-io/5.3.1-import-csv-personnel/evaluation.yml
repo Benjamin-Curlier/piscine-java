@@ -1,0 +1,19 @@
+total: 20
+seuil_reussite: 12
+criteres:
+  - id: tests-publics
+    description: "Tests publics passants"
+    poids: 8
+    type: automatique
+  - id: tests-prives
+    description: "Tests privés passants (cas limites)"
+    poids: 8
+    type: automatique
+  - id: style
+    description: "Style et lisibilité (Checkstyle + PMD)"
+    poids: 2
+    type: automatique
+  - id: demarche
+    description: "Démarche de parsing : boucle structurée (saut d'en-tête, ignore des lignes blanches, validation du nombre de champs AVANT conversion), conversions gardées par try/catch, et CHAÎNAGE de la cause d'origine (constructeur IllegalArgumentException(message, cause)) pour grade et ancienneté ; accumulation de la liste dans l'ordre du fichier"
+    poids: 2
+    type: formateur

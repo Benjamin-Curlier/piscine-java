@@ -1,0 +1,26 @@
+slug: import-csv-personnel
+titre: "Import CSV de personnel (split + records + exceptions chaînées)"
+module: 5
+sous_groupe: "5.3"
+position: 1
+difficulte: moyen
+duree_estimee_min: 35
+prerequis: []
+objectifs_pedagogiques:
+  - "Lire un fichier CSV simple avec Files.readAllLines (NIO.2, UTF-8 explicite)"
+  - "Sauter la ligne d'en-tête et ignorer les lignes blanches"
+  - "Découper une ligne en champs avec String.split(\",\") et nettoyer avec trim()"
+  - "Convertir un champ texte en constante enum (Grade.valueOf) et en entier (Integer.parseInt)"
+  - "Lever une IllegalArgumentException sur entrée invalide en chaînant la cause d'origine"
+  - "Construire une liste de records Personnel à partir des lignes valides"
+notions:
+  - CSV
+  - parsing
+  - split
+  - record
+  - enum
+  - exception
+  - chainage
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-04

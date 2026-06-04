@@ -1,0 +1,23 @@
+slug: parseur-commandes
+titre: "Parseur de commandes texte (split + switch + exceptions)"
+module: 5
+sous_groupe: "5.3"
+position: 3
+difficulte: moyen
+duree_estimee_min: 30
+prerequis: []
+objectifs_pedagogiques:
+  - "Découper une chaîne de caractères sur les espaces avec split(\"\\\\s+\")"
+  - "Dispatcher sur la commande avec un switch"
+  - "Valider le nombre d'arguments avant toute conversion"
+  - "Lever IllegalArgumentException sur entrée invalide (commande inconnue, arguments)"
+  - "Propager NumberFormatException depuis Integer.parseInt sans l'absorber"
+notions:
+  - parsing
+  - split
+  - switch
+  - dispatch
+  - exception
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-04
