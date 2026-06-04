@@ -1,0 +1,22 @@
+slug: calculs-geometriques-exceptions
+titre: "Calculs géométriques avec gardes (refactor 2.3.3)"
+module: 5
+sous_groupe: "5.1"
+position: 3
+difficulte: moyen
+duree_estimee_min: 25
+prerequis: []
+objectifs_pedagogiques:
+  - "Ajouter des gardes défensives sur des dimensions négatives"
+  - "Lever une IllegalArgumentException avec un message explicite"
+  - "Mutualiser la garde dans un helper privé (idiomatisme, pas de duplication)"
+  - "Distinguer paramètre fautif dans le message d'erreur"
+notions:
+  - exception
+  - IllegalArgumentException
+  - garde
+  - surcharge
+  - refactor
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-04
