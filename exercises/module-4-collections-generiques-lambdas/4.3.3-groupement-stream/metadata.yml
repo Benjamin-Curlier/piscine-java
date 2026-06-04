@@ -1,0 +1,21 @@
+slug: groupement-stream
+titre: "Groupement par collecteurs (streams)"
+module: 4
+sous_groupe: "4.3"
+position: 3
+difficulte: moyen
+duree_estimee_min: 35
+prerequis: []
+objectifs_pedagogiques:
+  - "Utiliser Collectors.groupingBy pour regrouper des éléments par clé"
+  - "Utiliser Collectors.partitioningBy pour séparer en deux groupes"
+  - "Combiner groupingBy avec Collectors.counting()"
+notions:
+  - streams
+  - Collectors.groupingBy
+  - Collectors.partitioningBy
+  - Collectors.counting
+  - Map
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-04

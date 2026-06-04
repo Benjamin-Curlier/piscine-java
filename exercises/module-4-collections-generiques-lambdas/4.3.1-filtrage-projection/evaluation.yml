@@ -1,0 +1,19 @@
+total: 20
+seuil_reussite: 12
+criteres:
+  - id: tests-publics
+    description: "Tests publics passants"
+    poids: 8
+    type: automatique
+  - id: tests-prives
+    description: "Tests privés passants (cas limites)"
+    poids: 8
+    type: automatique
+  - id: style
+    description: "Style et lisibilité (Checkstyle + PMD)"
+    poids: 2
+    type: automatique
+  - id: idiomatisme
+    description: "Pipeline filter/map/collect idiomatique ; lambda Predicate en paramètre"
+    poids: 2
+    type: formateur

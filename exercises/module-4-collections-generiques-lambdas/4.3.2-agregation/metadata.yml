@@ -1,0 +1,20 @@
+slug: agregation
+titre: "Réductions numériques (streams)"
+module: 4
+sous_groupe: "4.3"
+position: 2
+difficulte: debutant
+duree_estimee_min: 25
+prerequis: []
+objectifs_pedagogiques:
+  - "Utiliser mapToInt/average/max avec orElse pour gérer la liste vide"
+  - "Comprendre la valeur-sentinelle comme alternative à l'exception"
+  - "Appliquer une réduction scalaire sur un stream"
+notions:
+  - streams
+  - mapToInt
+  - reduction
+  - valeur-sentinelle
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-04
