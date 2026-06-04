@@ -1,0 +1,23 @@
+slug: compteur-lignes
+titre: "Compteur de lignes (Files.lines + try-with-resources)"
+module: 5
+sous_groupe: "5.2"
+position: 1
+difficulte: facile
+duree_estimee_min: 25
+prerequis: []
+objectifs_pedagogiques:
+  - "Lire un fichier texte en flux avec Files.lines dans un try-with-resources"
+  - "Fermer un Stream<String> automatiquement (ressource AutoCloseable)"
+  - "Compter toutes les lignes d'un fichier avec Stream.count()"
+  - "Filtrer les lignes blanches avec String.isBlank() pour un décompte précis"
+  - "Propager throws IOException depuis une méthode qui lit un fichier"
+notions:
+  - NIO.2
+  - Files.lines
+  - try-with-resources
+  - stream
+  - IOException
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-04
