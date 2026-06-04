@@ -1,0 +1,22 @@
+slug: comparator-chaine
+titre: "Tri par chaînage de Comparator"
+module: 4
+sous_groupe: "4.2"
+position: 4
+difficulte: moyen
+duree_estimee_min: 35
+prerequis: []
+objectifs_pedagogiques:
+  - "Utiliser Comparator.comparing avec une référence de méthode"
+  - "Chaîner les critères avec thenComparing"
+  - "Inverser un ordre avec reversed"
+  - "Renvoyer une nouvelle liste sans muter la source"
+notions:
+  - Comparator
+  - reference-de-methode
+  - thenComparing
+  - reversed
+  - immuabilite-collection
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-04
