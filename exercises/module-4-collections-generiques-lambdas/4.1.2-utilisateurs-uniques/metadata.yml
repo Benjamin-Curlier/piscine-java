@@ -1,0 +1,20 @@
+slug: utilisateurs-uniques
+titre: "Utilisateurs uniques (equals / hashCode)"
+module: 4
+sous_groupe: "4.1"
+position: 2
+difficulte: moyen
+duree_estimee_min: 40
+prerequis: []
+objectifs_pedagogiques:
+  - "Définir une égalité logique entre objets (equals)"
+  - "Écrire un hashCode cohérent avec equals (Objects.hash)"
+  - "Comprendre comment un HashSet déduplique grâce à equals/hashCode"
+notions:
+  - equals
+  - hashCode
+  - Set
+  - HashSet
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-04

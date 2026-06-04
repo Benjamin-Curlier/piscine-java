@@ -1,0 +1,23 @@
+slug: groupement-par-grade
+titre: "Groupement de personnel par grade"
+module: 4
+sous_groupe: "4.1"
+position: 4
+difficulte: moyen
+duree_estimee_min: 30
+prerequis: []
+objectifs_pedagogiques:
+  - "Utiliser une Map<K, List<V>> pour regrouper des valeurs par clé"
+  - "Maîtriser computeIfAbsent pour initialiser une liste à la demande"
+  - "Distinguer getOrDefault pour la lecture sans effet de bord"
+notions:
+  - Map
+  - HashMap
+  - List
+  - ArrayList
+  - computeIfAbsent
+  - getOrDefault
+  - enum
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-04
