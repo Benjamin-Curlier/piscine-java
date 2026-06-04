@@ -1,0 +1,20 @@
+slug: tri-soldats
+titre: "Tri de soldats (Comparable<T>)"
+module: 4
+sous_groupe: "4.2"
+position: 3
+difficulte: moyen
+duree_estimee_min: 35
+prerequis: []
+objectifs_pedagogiques:
+  - "Implémenter Comparable<T> sur un record"
+  - "Composer plusieurs critères de tri (grade puis nom)"
+  - "Utiliser l'ordre naturel via Collections.sort"
+notions:
+  - Comparable
+  - record
+  - enum
+  - tri naturel
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-04

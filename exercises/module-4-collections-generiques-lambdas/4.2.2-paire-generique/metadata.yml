@@ -1,0 +1,20 @@
+slug: paire-generique
+titre: "Paire générique (deux paramètres de type)"
+module: 4
+sous_groupe: "4.2"
+position: 2
+difficulte: moyen
+duree_estimee_min: 35
+prerequis: []
+objectifs_pedagogiques:
+  - "Écrire une classe paramétrée par deux types <A, B>"
+  - "Garantir l'immuabilité avec des champs final et aucun mutateur"
+  - "Écrire une méthode générique de fabrique (static <X, Y>)"
+notions:
+  - generiques
+  - parametres-de-type
+  - immuabilite
+  - methode-generique
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-04

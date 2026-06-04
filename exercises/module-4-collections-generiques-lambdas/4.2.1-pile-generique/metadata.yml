@@ -1,0 +1,19 @@
+slug: pile-generique
+titre: "Pile générique (LIFO)"
+module: 4
+sous_groupe: "4.2"
+position: 1
+difficulte: moyen
+duree_estimee_min: 35
+prerequis: []
+objectifs_pedagogiques:
+  - "Écrire une classe paramétrée par un type <T>"
+  - "Propager le paramètre de type sans recourir à Object ni au cast"
+  - "Implémenter une structure LIFO (empiler / dépiler / sommet)"
+notions:
+  - generiques
+  - parametre-de-type
+  - pile-lifo
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-04
