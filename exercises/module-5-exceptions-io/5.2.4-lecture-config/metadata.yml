@@ -1,0 +1,24 @@
+slug: lecture-config
+titre: "Lecture de configuration (cle=valeur, parse a la main)"
+module: 5
+sous_groupe: "5.2"
+position: 4
+difficulte: moyen
+duree_estimee_min: 30
+prerequis: []
+objectifs_pedagogiques:
+  - "Lire un fichier texte ligne par ligne avec Files.readAllLines en UTF-8 explicite"
+  - "Parser un format cle=valeur a la main, sans java.util.Properties"
+  - "Couper au PREMIER '=' (split(\"=\", 2) ou indexOf) pour preserver les '=' dans la valeur"
+  - "Ignorer proprement lignes blanches et commentaires (#), trimer cle et valeur"
+  - "Construire une Map et exposer une valeur par defaut via Map.getOrDefault"
+notions:
+  - NIO.2
+  - parsing
+  - split
+  - Map
+  - getOrDefault
+  - IOException
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-04

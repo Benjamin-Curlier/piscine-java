@@ -1,0 +1,22 @@
+slug: journal-evenements
+titre: "Journal d'événements (append-only)"
+module: 5
+sous_groupe: "5.2"
+position: 3
+difficulte: moyen
+duree_estimee_min: 25
+prerequis: []
+objectifs_pedagogiques:
+  - "Comprendre que l'écriture par défaut écrase le fichier existant"
+  - "Utiliser StandardOpenOption.CREATE + APPEND pour un journal append-only"
+  - "Gérer le cas du fichier absent sans lever d'exception (Files.exists)"
+  - "Lire un fichier ligne par ligne avec Files.readAllLines et UTF-8 explicite"
+notions:
+  - NIO.2
+  - append
+  - StandardOpenOption
+  - Files.readAllLines
+  - IOException
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-04
