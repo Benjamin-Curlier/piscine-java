@@ -1,0 +1,21 @@
+slug: copie-fichier
+titre: "Copie de fichier (Files.copy octet-exact)"
+module: 5
+sous_groupe: "5.2"
+position: 2
+difficulte: facile
+duree_estimee_min: 20
+prerequis: []
+objectifs_pedagogiques:
+  - "Utiliser Files.copy pour copier un fichier de façon octet-exacte"
+  - "Appliquer StandardCopyOption.REPLACE_EXISTING pour écraser une destination existante"
+  - "Propager throws IOException en signature sans la gérer soi-même"
+  - "Distinguer la copie binaire octet-exacte d'un ré-encodage texte (readAllLines + write)"
+notions:
+  - NIO.2
+  - Files.copy
+  - REPLACE_EXISTING
+  - IOException
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-04
