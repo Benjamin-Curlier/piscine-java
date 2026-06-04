@@ -1,0 +1,22 @@
+slug: recherche-optional
+titre: "Recherche avec Optional (streams et idiomatisme)"
+module: 4
+sous_groupe: "4.3"
+position: 4
+difficulte: moyen
+duree_estimee_min: 35
+prerequis: []
+objectifs_pedagogiques:
+  - "Utiliser findFirst() pour obtenir un Optional"
+  - "Chainer map/orElse sur un Optional sans appeler get()"
+  - "Comparer avec Comparator.comparing pour trouver un maximum"
+notions:
+  - Optional
+  - Predicate
+  - stream
+  - findFirst
+  - map
+  - orElse
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-04

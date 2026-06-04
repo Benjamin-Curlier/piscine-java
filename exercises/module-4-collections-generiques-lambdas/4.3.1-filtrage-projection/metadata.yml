@@ -1,0 +1,22 @@
+slug: filtrage-projection
+titre: "Filtrage et projection (streams)"
+module: 4
+sous_groupe: "4.3"
+position: 1
+difficulte: debutant
+duree_estimee_min: 30
+prerequis: []
+objectifs_pedagogiques:
+  - "Écrire un pipeline filter/map/collect idiomatique"
+  - "Passer une lambda (Predicate) en paramètre de méthode"
+  - "Distinguer filtrage (filter) et projection (map)"
+notions:
+  - stream
+  - filter
+  - map
+  - collect
+  - Predicate
+  - lambda
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-04
