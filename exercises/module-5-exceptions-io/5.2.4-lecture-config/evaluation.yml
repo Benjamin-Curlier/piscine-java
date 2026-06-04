@@ -1,0 +1,19 @@
+total: 20
+seuil_reussite: 12
+criteres:
+  - id: tests-publics
+    description: "Tests publics passants"
+    poids: 8
+    type: automatique
+  - id: tests-prives
+    description: "Tests privés passants (cas limites)"
+    poids: 8
+    type: automatique
+  - id: style
+    description: "Style et lisibilité (Checkstyle + PMD)"
+    poids: 2
+    type: automatique
+  - id: idiomatisme
+    description: "Parsing idiomatique : coupure au PREMIER '=' (split(\"=\", 2) ou indexOf, jamais split sans limite), trim de la clé ET de la valeur, lignes blanches et commentaires '#' ignorés proprement, clé dupliquée gérée par put (dernière gagne), lireValeur déléguant à lireConfig via Map.getOrDefault — SANS java.util.Properties"
+    poids: 2
+    type: formateur
