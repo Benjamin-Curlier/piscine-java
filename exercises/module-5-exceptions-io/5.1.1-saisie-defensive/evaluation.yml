@@ -1,0 +1,19 @@
+total: 20
+seuil_reussite: 12
+criteres:
+  - id: tests-publics
+    description: "Tests publics passants"
+    poids: 8
+    type: automatique
+  - id: tests-prives
+    description: "Tests privés passants (cas limites)"
+    poids: 8
+    type: automatique
+  - id: style
+    description: "Style et lisibilité (Checkstyle + PMD)"
+    poids: 2
+    type: automatique
+  - id: respect-consignes
+    description: "Respect des consignes d'exception : garde null explicite avant trim, NumberFormatException pour les entrées illisibles (type précis, pas IAE générique), IllegalArgumentException levée en propre pour le hors-plage avec message nommant min, max et la valeur fautive"
+    poids: 2
+    type: formateur
