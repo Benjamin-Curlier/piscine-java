@@ -1,0 +1,21 @@
+slug: annuaire-militaire
+titre: "Annuaire militaire (Map)"
+module: 4
+sous_groupe: "4.1"
+position: 1
+difficulte: debutant
+duree_estimee_min: 25
+prerequis: []
+objectifs_pedagogiques:
+  - "Utiliser une Map pour associer des clés à des valeurs"
+  - "Appliquer les opérations fondamentales : put, getOrDefault, remove, size"
+  - "Trier les clés d'une Map avec Collections.sort"
+notions:
+  - Map
+  - HashMap
+  - getOrDefault
+  - Collections.sort
+  - List
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-04
