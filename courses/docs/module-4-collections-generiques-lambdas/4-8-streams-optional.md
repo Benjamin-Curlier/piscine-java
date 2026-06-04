@@ -392,4 +392,4 @@ public class ExerciceMots {
 
 ## Prochain chapitre
 
-→ **Module 5 — Exceptions et I/O** *(à venir)*
+→ **[Module 5 · Chapitre 5-1 — Hiérarchie des exceptions](../module-5-exceptions-io/5-1-hierarchie-exceptions)**
