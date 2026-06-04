@@ -166,4 +166,4 @@ public class Demo {
 
 ## Prochain chapitre
 
-→ **Module 4 — Collections, génériques, lambdas** *(à venir)*
+→ **[Module 4 — Collections, génériques, lambdas](../module-4-collections-generiques-lambdas/4-1-list-arraylist)**
