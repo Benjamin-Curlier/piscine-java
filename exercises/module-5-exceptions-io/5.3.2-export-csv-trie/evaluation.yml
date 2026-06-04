@@ -1,0 +1,19 @@
+total: 20
+seuil_reussite: 12
+criteres:
+  - id: tests-publics
+    description: "Tests publics passants"
+    poids: 8
+    type: automatique
+  - id: tests-prives
+    description: "Tests privés passants (cas limites)"
+    poids: 8
+    type: automatique
+  - id: style
+    description: "Style et lisibilité (Checkstyle + PMD)"
+    poids: 2
+    type: automatique
+  - id: idiomatisme
+    description: "Idiomatisme : Comparator chaîné avec .reversed().thenComparing() (pas de tri manuel), String.join pour chaque ligne CSV (pas de concaténation +), Files.write avec StandardCharsets.UTF_8 explicite, copie défensive new ArrayList<>(personnels) avant sort"
+    poids: 2
+    type: formateur
