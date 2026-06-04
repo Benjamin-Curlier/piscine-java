@@ -1,0 +1,22 @@
+slug: effectif-invalide
+titre: "Effectif invalide (exception personnalisée + chaînage)"
+module: 5
+sous_groupe: "5.1"
+position: 2
+difficulte: moyen
+duree_estimee_min: 30
+prerequis: []
+objectifs_pedagogiques:
+  - "Écrire une exception personnalisée héritant de RuntimeException (unchecked)"
+  - "Lever une exception métier avec un message explicite (valeur fautive + contexte)"
+  - "Chaîner la cause d'origine (constructeur message + Throwable, getCause)"
+  - "Préserver l'état d'un objet quand une affectation invalide est rejetée"
+notions:
+  - exception
+  - RuntimeException
+  - exception-personnalisee
+  - chainage
+  - getCause
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-04
