@@ -1,0 +1,23 @@
+total: 20
+seuil_reussite: 12
+criteres:
+  - id: conception-oo
+    description: "Conception OO : record Tache immuable, enum Statut, encapsulation du gestionnaire, collection à bon escient, immuabilité bien exploitée"
+    poids: 5
+    type: formateur
+  - id: perimetre
+    description: "Périmètre fonctionnel : opérations ajouter/lister/marquer faite et menu console complet (les 5 commandes imposées) conformes"
+    poids: 4
+    type: formateur
+  - id: persistance-robustesse
+    description: "Persistance et robustesse : charger/sauvegarder en CSV (UTF-8) corrects, fichier absent géré, ligne corrompue signalée puis ignorée, erreurs gérées par exceptions propres (custom unchecked + IOException)"
+    poids: 5
+    type: formateur
+  - id: lisibilite
+    description: "Lisibilité et idiomatisme : noms clairs, méthodes courtes, code propre"
+    poids: 3
+    type: formateur
+  - id: collaboration
+    description: "Collaboration : contributions équilibrées (historique Git) et README décrivant la répartition"
+    poids: 3
+    type: formateur

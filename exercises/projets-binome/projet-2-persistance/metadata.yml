@@ -1,0 +1,29 @@
+slug: projet-2-persistance
+titre: "Projet binôme #2 — Gestionnaire de tâches CLI"
+binome: true
+module: 5
+duree_estimee_h: 14
+prerequis:
+  - "4.1"
+  - "5.1"
+  - "5.2"
+  - "5.3"
+objectifs_pedagogiques:
+  - "Concevoir une petite application OO avec collections (record, enum, gestionnaire)"
+  - "Persister l'état dans un fichier CSV à la main (NIO.2, UTF-8)"
+  - "Gérer les erreurs proprement avec des exceptions (custom unchecked + IOException)"
+  - "Être robuste aux données corrompues (ligne CSV invalide ignorée)"
+  - "Collaborer en binôme avec un historique Git équilibré"
+notions:
+  - classe
+  - record
+  - enum
+  - collection
+  - exception
+  - fichier
+  - csv
+  - persistance
+  - collaboration
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-05

@@ -180,10 +180,10 @@ Trois projets en binôme jalonnent la Piscine. Chaque projet est volontairement 
 | # | Quand | Thème pédagogique | Exemple de sujet |
 |---|---|---|---|
 | **Projet 1** | Après module 3 | Conception orientée objet d'un mini-domaine | **Gestion d'une caserne** — soldats, grades, unités, opérations simples (affecter, promouvoir, lister). |
-| **Projet 2** | Après module 5 | Application OO + persistance fichier | **Gestionnaire de tâches CLI** — ajouter, lister, marquer fait, persistance CSV ou JSON, gestion d'erreurs propre. |
+| **Projet 2** | Après module 5 | Application OO + persistance fichier | **Gestionnaire de tâches CLI** — ajouter, lister, marquer fait, persistance CSV (à la main), gestion d'erreurs propre. |
 | **Projet 3** | Après module 6 (final) | Application complète : OO + persistance + tests + Git collaboratif | **Mini-moulinette pédagogique** — checker simple qui compile un fichier Java, l'exécute sur des cas, génère un rapport explicatif. Le binôme doit produire ≥ 70 % de couverture JUnit et utiliser des branches + PR. |
 
-Chaque projet a son propre dossier dans [`exercises/`](../exercises/) avec sujet, critères d'évaluation, livrables attendus et grille de notation pédagogique. Le **Projet 1** est disponible : [`exercises/projets-binome/projet-1-mini-domaine/`](../exercises/projets-binome/projet-1-mini-domaine/). Les projets 2 et 3 sont à venir.
+Chaque projet a son propre dossier dans [`exercises/`](../exercises/) avec sujet, critères d'évaluation, livrables attendus et grille de notation pédagogique. Les **Projets 1 et 2** sont disponibles : [`projet-1-mini-domaine/`](../exercises/projets-binome/projet-1-mini-domaine/) et [`projet-2-persistance/`](../exercises/projets-binome/projet-2-persistance/). Le projet 3 est à venir.
 
 ## 6. Progression et prérequis
 

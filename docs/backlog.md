@@ -399,6 +399,7 @@ Voir `referentiel.md` §5. ✅ **Fiche livrée** dans `exercises/projets-binome/
 
 ### #24 — Projet binôme #2 — App + persistance fichier (TaskManager CLI)
 **Pré-requis** : #21
+Voir `referentiel.md` §5. ✅ **Fiche livrée** dans `exercises/projets-binome/projet-2-persistance/` (sujet, consignes, grille, métadonnées). Conception : spec [`specs/2026-06-05-projet-binome-2-design.md`](superpowers/specs/2026-06-05-projet-binome-2-design.md) + plan [`plans/2026-06-05-projet-binome-2.md`](superpowers/plans/2026-06-05-projet-binome-2.md).
 
 ### #25 — Projet binôme #3 — Mini-moulinette testée (final)
 **Pré-requis** : #22
