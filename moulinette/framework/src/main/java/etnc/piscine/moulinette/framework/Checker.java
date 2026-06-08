@@ -51,4 +51,20 @@ public interface Checker {
     default boolean isBlocking() {
         return true;
     }
+
+    /**
+     * Indique si ce vérificateur s'applique à l'exercice décrit par le contexte.
+     *
+     * <p>Par défaut {@code true} (le checker s'exécute sur tous les exercices) — comportement
+     * historique inchangé. Un checker spécifique à un type d'exercice (ex. le
+     * {@code MutationChecker}, réservé aux exos « écriture de tests » porteurs d'un dossier
+     * {@code mutants/}) redéfinit ce contrat, et les checkers normaux le redéfinissent à
+     * {@code false} sur ces exos pour ne pas grader trivialement l'implémentation fournie.
+     *
+     * @param context décrit l'exercice et le répertoire rendu par l'étudiant
+     * @return {@code true} si ce checker doit s'exécuter sur cet exercice (défaut)
+     */
+    default boolean appliesTo(CheckerContext context) {
+        return true;
+    }
 }

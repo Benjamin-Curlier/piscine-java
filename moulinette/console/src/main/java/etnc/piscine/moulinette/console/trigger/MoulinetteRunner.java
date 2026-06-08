@@ -65,8 +65,10 @@ public interface MoulinetteRunner {
                 Map<String, CheckResult> parChecker = new LinkedHashMap<>();
                 boolean ok = true;
                 StringBuilder msg = new StringBuilder();
+                CheckerContext ctx = new CheckerContext(e.id(), renduDir, e.exerciseDir());
                 for (Checker c : checkers) {
-                    CheckResult r = c.check(new CheckerContext(e.id(), renduDir, e.exerciseDir()));
+                    if (!c.appliesTo(ctx)) continue; // ex. MutationChecker hors exos « écriture de tests »
+                    CheckResult r = c.check(ctx);
                     parChecker.put(c.id(), r == null ? CheckResult.error("résultat null") : r);
                     boolean nonOk = (r == null || r.status() != CheckResult.Status.OK);
                     if (nonOk && r != null) {

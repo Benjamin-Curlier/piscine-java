@@ -75,6 +75,7 @@ public final class Main {
             new CompileChecker(toolkit),
             new PublicTestChecker(toolkit),
             new PrivateTestChecker(toolkit),
+            new MutationChecker(toolkit), // ne s'active que sur les exos « écriture de tests » (mutants/)
             new StyleChecker(toolkit, styleConfig));
         var runner = new MoulinetteRunner.Default(catalog, checkers, repo.resolve(".piscine/reports"));
         var trigger = new SubmissionTrigger(runner);
