@@ -72,6 +72,24 @@ fi
 EOF
 chmod +x "$STAGE/piscine.sh"
 
+# Launcher Windows (double-cliquable). Le bundle cible Windows : on l'émet aussi depuis le .sh.
+cat > "$STAGE/piscine.bat" <<'EOF'
+@echo off
+setlocal
+set "HERE=%~dp0"
+set "JAVA_HOME=%HERE%jdk"
+set "PATH=%HERE%jdk\bin;%HERE%git\cmd;%PATH%"
+set "JAVA=%HERE%jdk\bin\java.exe"
+set "JAR=%HERE%app\moulinette-console.jar"
+if not exist "%HERE%workspace\.git" (
+    "%JAVA%" -jar "%JAR%" init --nom stagiaire --dest "%HERE%workspace" --piscine-repo "%HERE%piscine"
+)
+"%JAVA%" -jar "%JAR%" repl --repo "%HERE%workspace" --piscine-repo "%HERE%piscine" --site "%HERE%site"
+endlocal
+EOF
+# .bat fiable au double-clic : fins de ligne CRLF.
+sed -i 's/$/\r/' "$STAGE/piscine.bat"
+
 cat > "$STAGE/LISEZMOI.txt" <<'EOF'
 Piscine ETNC — version autonome (standalone)
 Lancez ./piscine.sh (ou piscine.bat sous Windows) pour demarrer.
