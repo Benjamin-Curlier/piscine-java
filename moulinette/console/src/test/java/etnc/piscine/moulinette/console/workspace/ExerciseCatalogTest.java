@@ -75,6 +75,34 @@ class ExerciseCatalogTest {
         assertThat(cat.sousGroupe("1.1").exercices()).hasSize(1);
     }
 
+    @Test
+    void projet_binome_est_ignore_proprement_du_catalogue(@TempDir Path piscine) throws IOException {
+        writeExo(piscine, "module-1-fondamentaux/1.1.1-ok", """
+            slug: ok
+            module: 1
+            sous_groupe: "1.1"
+            position: 1
+            notions: []
+            """);
+        // Schéma binôme : binome: true, duree_estimee_h, pas de position ni de sous_groupe.
+        // Ces projets sont évalués par le formateur, pas notés par la console : ils ne doivent
+        // pas figurer au catalogue, et ne doivent PAS provoquer de warning « metadata invalide ».
+        Path binome = piscine.resolve("exercises/projets-binome/projet-1-mini-domaine");
+        Files.createDirectories(binome);
+        Files.writeString(binome.resolve("metadata.yml"), """
+            slug: projet-1
+            titre: "Projet binôme #1"
+            binome: true
+            module: 3
+            duree_estimee_h: 14
+            notions: []
+            """);
+
+        ExerciseCatalog cat = ExerciseCatalog.scan(piscine.resolve("exercises"));
+
+        assertThat(cat.sousGroupes()).extracting(SousGroupe::id).containsExactly("1.1");
+    }
+
     private static void writeExo(Path piscine, String relPath, String metadata) throws IOException {
         Path dir = piscine.resolve("exercises").resolve(relPath);
         Files.createDirectories(dir);

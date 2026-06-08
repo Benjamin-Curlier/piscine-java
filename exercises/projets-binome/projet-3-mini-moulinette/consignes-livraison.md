@@ -18,6 +18,22 @@ Contrairement aux projets #1 et #2, un **vrai workflow collaboratif** est attend
 - **Les deux membres** commitent régulièrement. L'historique doit refléter une
   **contribution équilibrée** : il sert de preuve du travail de chacun.
 
+## Mesurer la couverture des tests (≥ 70 %)
+
+Pour ne pas perdre de temps sur la configuration, un **`pom.xml` d'exemple est fourni**
+dans [`ressources/pom-exemple.xml`](ressources/pom-exemple.xml) : il câble JUnit 5, AssertJ
+et **JaCoCo** (vérifié avec le JDK 25 de la Piscine). Adaptez-le (`groupId`, `artifactId`,
+package), puis :
+
+```bash
+mvn test
+# ouvrez ensuite : target/site/jacoco/index.html  → pourcentage de couverture
+```
+
+Reportez le **taux obtenu** dans votre `README.md`. Un bloc commenté dans le `pom-exemple`
+permet, si vous le souhaitez, de faire **échouer le build** sous 70 % (garde-fou automatique).
+Vous pouvez aussi utiliser la couverture intégrée de votre IDE (IntelliJ : « Run with Coverage »).
+
 ## README attendu
 
 Le dépôt contient un fichier `README.md` qui précise :

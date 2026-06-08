@@ -45,13 +45,20 @@ Dans les deux modes, la boucle pédagogique est identique : on édite un exercic
 
 ## Architecture technique
 
-- **Java 25 LTS** (OpenJDK Temurin)
-- **Maven** multi-module pour la moulinette
-- **JUnit 5** + **AssertJ** + **JaCoCo** pour les tests
-- **Checkstyle / PMD / SpotBugs** pour l'analyse statique
-- **Docker** pour l'isolation du runner
-- **Docusaurus** pour le site de cours
-- **GitHub** (dev) → **GitLab CE on-premise** (prod)
+**En place (RC) :**
+- **Java 25 LTS** (OpenJDK Temurin) — moulinette **multi-module Maven**.
+- **JUnit 5** + **AssertJ** pour les tests ; notation hors-ligne via **`javac` + JUnit ConsoleLauncher** (zéro Maven/réseau à l'exécution, mode standalone).
+- **Checkstyle** pour le style (en mode *advisory* / non bloquant pour la beta).
+- **Docusaurus** pour le site de cours (servi en local dans le bundle standalone).
+- **Git** pour le rendu (MinGit embarqué dans le bundle) ; dépôt de dev sur **GitHub**.
+
+**Cible / à venir** (voir [`docs/backlog.md`](docs/backlog.md)) :
+- **Docker** pour l'isolation du runner (#30).
+- **PMD / SpotBugs** en complément de Checkstyle, **JaCoCo** côté moulinette.
+- **GitLab CE on-premise** pour la production militaire (#26).
+- **Anti-triche** (JPlag, #29).
+
+> JaCoCo est aujourd'hui utilisé **côté projet binôme #3** (couverture ≥ 70 %), pas dans la moulinette elle-même.
 
 ## Démarrage rapide
 
@@ -71,7 +78,7 @@ Formateur ? Voir **[`CONTRIBUTING.md`](CONTRIBUTING.md)** : workflow Git, checkl
 
 ## Statut
 
-Projet en cours de construction. Voir [`docs/backlog.md`](docs/backlog.md) pour les tâches en cours et [`docs/referentiel.md`](docs/referentiel.md) pour le plan pédagogique complet.
+**Release Candidate** — contenu pédagogique complet (6 modules : 65 exercices + 3 projets binôme), moulinette évaluante, mode standalone hors-ligne. Voir [`CHANGELOG.md`](CHANGELOG.md) pour le détail de la version et les *known issues*, [`docs/backlog.md`](docs/backlog.md) pour la suite (Phase 4 — déploiement militaire), et [`docs/referentiel.md`](docs/referentiel.md) pour le plan pédagogique complet.
 
 ## Licence
 

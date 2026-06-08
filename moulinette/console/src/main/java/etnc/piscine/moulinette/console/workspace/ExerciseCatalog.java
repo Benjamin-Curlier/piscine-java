@@ -60,6 +60,13 @@ public final class ExerciseCatalog {
                 m = new Yaml().load(reader);
             }
             if (m == null) throw new IOException("vide");
+            // Les projets binôme (schéma distinct : binome:true, duree_estimee_h, sans position)
+            // sont évalués par le formateur, pas notés par la console : on les ignore proprement
+            // du catalogue (sans warning « metadata invalide », qui polluerait la console stagiaire).
+            if (Boolean.TRUE.equals(m.get("binome"))) {
+                LOG.debug("projet binôme ignoré du catalogue console (évalué par le formateur) : {}", metadataYml);
+                return Optional.empty();
+            }
             Path exoDir = metadataYml.getParent();
             String slug = String.valueOf(m.get("slug"));
             int module = ((Number) m.get("module")).intValue();
