@@ -354,4 +354,4 @@ public class BibliothequeApp {
 
 ## Prochain chapitre
 
-→ **Module 6 — Tests et Git** *(à venir)*
+→ **[Module 6 · Chapitre 6-1 — Pourquoi tester](../module-6-tests-git/6-1-pourquoi-tester)**
