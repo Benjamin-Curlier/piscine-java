@@ -1,0 +1,22 @@
+slug: calculatrice-tdd
+titre: "Calculatrice en TDD"
+module: 6
+sous_groupe: "6.1"
+position: 3
+difficulte: moyen
+mode: ecriture-tests
+duree_estimee_min: 35
+prerequis: []
+objectifs_pedagogiques:
+  - "Écrire une suite de tests couvrant les quatre opérations et un cas d'erreur"
+  - "Tester qu'une méthode lève une exception avec assertThatThrownBy"
+  - "Adopter une démarche de test exhaustive (chaque comportement a son test)"
+notions:
+  - junit
+  - assertj
+  - assertThatThrownBy
+  - exception
+  - tdd
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-08
