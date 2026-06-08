@@ -1,0 +1,27 @@
+total: 20
+seuil_reussite: 12
+criteres:
+  - id: conception-oo
+    description: "Conception OO : pipeline en étapes clairement séparées (compilation, exécution, rapport), classes cohérentes, encapsulation, exceptions à bon escient"
+    poids: 4
+    type: formateur
+  - id: pipeline-fonctionnel
+    description: "Pipeline fonctionnel : compile le fichier Operation.java, exécute appliquer(n) sur les cas lus depuis cas.csv, génère un rapport Markdown lisible (entrée/attendu/obtenu/statut + synthèse)"
+    poids: 4
+    type: formateur
+  - id: robustesse
+    description: "Robustesse : compilation impossible signalée sans planter, fichier cas.csv absent géré, ligne corrompue signalée puis ignorée, exception sur un cas isolée (les autres continuent), IOException traitée proprement"
+    poids: 3
+    type: formateur
+  - id: tests-couverture
+    description: "Tests : suite JUnit 5 / AssertJ pertinente sur les composants de la moulinette (parsing CSV, comparaison, rapport, cas limites) avec une couverture ≥ 70 % mesurée et reportée dans le README"
+    poids: 4
+    type: formateur
+  - id: git-collaboration
+    description: "Collaboration Git : développement sur branches de fonctionnalité, au moins une Pull Request relue, historique équilibré entre les deux membres, README décrivant la répartition"
+    poids: 3
+    type: formateur
+  - id: lisibilite
+    description: "Lisibilité et idiomatisme : noms clairs, méthodes courtes, code propre, README complet"
+    poids: 2
+    type: formateur
