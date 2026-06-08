@@ -54,13 +54,23 @@ for module_dir in "$EX_ROOT"/module-*/; do
       [[ -f "$exo_dir$f" ]] || fail "fichier manquant : $f"
     done
 
-    # tests/ : dossier présent avec au moins un .java
-    if [[ -d "${exo_dir}tests" ]]; then
+    # Layout des tests : deux types d'exercices.
+    if [[ -d "${exo_dir}mutants" ]]; then
+      # Exo « écriture de tests » (sous-groupe 6.1, cf. format-exercice §11bis) : le livrable
+      # est la suite de tests du stagiaire ; pas de dossier tests/ figé. On exige à la place le
+      # squelette de test du stagiaire, la suite modèle, et au moins un mutant.
+      [[ -n "$(find "${exo_dir}starter/src/test/java" -name '*.java' -print -quit 2>/dev/null)" ]] \
+        || fail "écriture-de-tests : starter/src/test/java (squelette stagiaire) absent ou vide"
+      [[ -n "$(find "${exo_dir}solution/src/test/java" -name '*.java' -print -quit 2>/dev/null)" ]] \
+        || fail "écriture-de-tests : solution/src/test/java (suite modèle) absente"
+      [[ -n "$(find "${exo_dir}mutants" -name '*.java' -print -quit 2>/dev/null)" ]] \
+        || fail "écriture-de-tests : mutants/ ne contient aucun .java"
+    elif [[ -d "${exo_dir}tests" ]]; then
       if [[ -z "$(find "${exo_dir}tests" -name '*.java' -print -quit)" ]]; then
         fail "tests/ ne contient aucun .java"
       fi
     else
-      fail "dossier manquant : tests/"
+      fail "dossier manquant : tests/ (ou mutants/ pour un exo écriture-de-tests)"
     fi
 
     if [[ $have_python -eq 1 ]]; then
