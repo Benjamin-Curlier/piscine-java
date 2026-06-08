@@ -84,5 +84,12 @@ EOF
 STAMP="$(date +%Y%m%d)"
 ZIP="$OUT_DIR/piscine-etnc-stagiaire-$STAMP.zip"
 rm -f "$ZIP"
-( cd "$OUT_DIR" && zip -rq "$ZIP" "piscine-etnc-stagiaire" )
+if command -v zip >/dev/null 2>&1; then
+  ( cd "$OUT_DIR" && zip -rq "$ZIP" "piscine-etnc-stagiaire" )
+else
+  # `zip` est souvent absent sous Git-Bash Windows. Fallback sur `jar` du JDK, qui
+  # produit une archive au format ZIP compatible (vérifié : extraction + lancement OK).
+  echo "[bundle] zip absent — fallback sur 'jar' du JDK ..."
+  ( cd "$OUT_DIR" && "$JDK_PATH/bin/jar" -c -M -f "$ZIP" "piscine-etnc-stagiaire" )
+fi
 echo "[bundle] OK : $ZIP"
