@@ -1,0 +1,22 @@
+slug: refactor-sous-tests
+titre: "Filet de tests avant refactor"
+module: 6
+sous_groupe: "6.1"
+position: 4
+difficulte: moyen
+mode: ecriture-tests
+duree_estimee_min: 35
+prerequis: []
+objectifs_pedagogiques:
+  - "Écrire une suite de tests qui sécurise un refactor (filet de sécurité)"
+  - "Tester les invariants d'une classe (dimensions corrigées si invalides)"
+  - "Couvrir le comportement nominal ET les cas de bordure d'une classe orientée objet"
+notions:
+  - junit
+  - assertj
+  - invariant
+  - non-regression
+  - poo
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-08

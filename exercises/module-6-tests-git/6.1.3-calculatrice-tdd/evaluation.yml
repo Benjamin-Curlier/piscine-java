@@ -1,0 +1,15 @@
+total: 20
+seuil_reussite: 12
+criteres:
+  - id: mutation
+    description: "Tes tests passent sur l'implémentation correcte ET détectent (tuent) chaque mutant caché"
+    poids: 16
+    type: automatique
+  - id: style
+    description: "Style et lisibilité du code de test (Checkstyle)"
+    poids: 2
+    type: automatique
+  - id: demarche
+    description: "Démarche TDD : les quatre opérations et le cas d'erreur sont couverts, un comportement par test, noms explicites, usage correct de assertThatThrownBy"
+    poids: 2
+    type: formateur

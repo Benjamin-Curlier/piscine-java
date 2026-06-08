@@ -1,0 +1,21 @@
+slug: tests-parametres
+titre: "Tests paramétrés"
+module: 6
+sous_groupe: "6.1"
+position: 2
+difficulte: moyen
+mode: ecriture-tests
+duree_estimee_min: 30
+prerequis: []
+objectifs_pedagogiques:
+  - "Écrire un test paramétré avec @ParameterizedTest et @CsvSource"
+  - "Couvrir tous les paliers d'une fonction par intervalles, y compris les frontières"
+  - "Comprendre qu'un seul test paramétré remplace de nombreux tests répétitifs"
+notions:
+  - junit
+  - parameterized-test
+  - csvsource
+  - cas-limite
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-08
