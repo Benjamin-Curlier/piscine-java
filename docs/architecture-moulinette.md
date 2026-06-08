@@ -26,10 +26,22 @@ git push origin rendu/1.1
   → PushCommand → SubmissionTrigger.onPushSucceeded
       → MoulinetteRunner.Default.runGroup("1.1", workspace)
           pour chaque exo (difficulté croissante) :
-            CompileChecker → PublicTestChecker → PrivateTestChecker → StyleChecker
+            checkers filtrés par Checker.appliesTo(ctx) (défaut true), puis :
+            CompileChecker → PublicTestChecker → PrivateTestChecker → MutationChecker → StyleChecker
             (arrêt au 1er Checker BLOQUANT non-OK ; arrêt au 1er exo non-OK)
             (le StyleChecker est advisory en beta : isBlocking()==false → rapporté mais ne bloque pas)
             → EvaluationReport → ReportGenerator (md + json) dans .piscine/reports/
+```
+
+### Exercices « écriture de tests » (sous-groupe 6.1)
+
+Pour ces exos, le livrable du stagiaire est **le test**, pas le code (cf. `format-exercice.md` §11bis). La sélection des checkers est **dépendante de l'exo** via `Checker.appliesTo(ctx)` :
+
+- Détection : présence d'un dossier `mutants/` dans l'exo de référence (`MutationChecker.estEcritureDeTests`).
+- Sur ces exos : seul le **`MutationChecker`** s'applique ; `CompileChecker`/`PublicTestChecker`/`PrivateTestChecker` renvoient `appliesTo == false`.
+- Le `MutationChecker` compile le **test du stagiaire** et l'exécute contre l'impl **correcte** de référence (doit passer) puis contre chaque impl **mutée** (`mutants/<id>/`, doit échouer = mutant « tué »). Verdict **binaire** (OK ssi tous les mutants tués) ; le détail proportionnel (`N/total`) vit dans le message.
+
+```
       → récap console + chemin du rapport
 ```
 
@@ -47,6 +59,7 @@ La console est packagée en uber-jar (maven-shade) qui embarque JUnit, AssertJ e
 2. Utiliser `JavaToolkit` pour compiler/exécuter au besoin ; renvoyer `CheckResult.ok()/fail(...)/error(...)`.
 3. L'enregistrer dans `Main.runRepl` (liste `checkers`, dans l'ordre voulu).
 4. Pour un Checker **non bloquant** (advisory), redéfinir `default boolean isBlocking()` à `false` : son échec est rapporté mais n'arrête pas la chaîne ni ne fait échouer l'exo (cas du `StyleChecker` en beta).
+5. Pour un Checker **spécifique à un type d'exo**, redéfinir `default boolean appliesTo(CheckerContext)` : `MoulinetteRunner.Default` filtre la liste dessus avant exécution (cas du `MutationChecker`, actif seulement sur les exos « écriture de tests »).
 
 ## Ajouter un exercice
 
