@@ -1,0 +1,31 @@
+slug: projet-3-mini-moulinette
+titre: "Projet binôme #3 — Mini-moulinette pédagogique"
+binome: true
+module: 6
+duree_estimee_h: 16
+prerequis:
+  - "3.4"
+  - "5.3"
+  - "6.1"
+  - "6.2"
+objectifs_pedagogiques:
+  - "Concevoir un pipeline OO : compiler, exécuter et rapporter sur du code Java"
+  - "Compiler et exécuter du code Java depuis un programme (javac/JavaCompiler, réflexion/sous-processus)"
+  - "Lire des cas depuis un CSV à la main et générer un rapport Markdown explicatif"
+  - "Gérer les erreurs avec des exceptions (compilation, fichier, cas en échec)"
+  - "Tester son propre code avec JUnit et atteindre une couverture ≥ 70 %"
+  - "Collaborer en binôme avec un workflow Git : branches et Pull Request"
+notions:
+  - moulinette
+  - compilation
+  - reflection
+  - junit
+  - couverture
+  - exception
+  - csv
+  - git
+  - pull-request
+  - collaboration
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-08

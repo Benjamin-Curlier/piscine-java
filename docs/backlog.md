@@ -412,6 +412,7 @@ Voir `referentiel.md` §5. ✅ **Fiche livrée** dans `exercises/projets-binome/
 
 ### #25 — Projet binôme #3 — Mini-moulinette testée (final)
 **Pré-requis** : #22
+**Statut** : ✅ **Fiche livrée** (branche `feature/projet-binome-3`, **PR à ouvrir/merger**) dans `exercises/projets-binome/projet-3-mini-moulinette/` (sujet, consignes, grille, métadonnées). **Mini-moulinette pédagogique** : pipeline compiler→exécuter→rapport sur un `Operation.java` à contrat fixe (`appliquer(int):int`), cas lus depuis `cas.csv` (à la main), **tests JUnit ≥70 % couverture** + **workflow Git branches/PR** exigés (premier projet). Synthèse OO/persistance/tests/Git. Conception : spec [`specs/2026-06-08-projet-binome-3-design.md`](superpowers/specs/2026-06-08-projet-binome-3-design.md). **→ Phase 3 TERMINÉE** (modules 2-6 + 3 projets binôme).
 
 ---
 
