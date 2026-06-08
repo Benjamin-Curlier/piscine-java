@@ -13,6 +13,9 @@ public final class PublicTestChecker extends AbstractTestChecker {
     @Override public String id() { return "tests-publics"; }
     @Override protected String label() { return "tests publics"; }
 
+    /** Inactif sur les exos « écriture de tests » (le MutationChecker prend le relais). */
+    @Override public boolean appliesTo(CheckerContext ctx) { return !MutationChecker.estEcritureDeTests(ctx); }
+
     @Override protected Path selectedTestDir(CheckerContext ctx) {
         return Path.of("tests/src/test/java");
     }

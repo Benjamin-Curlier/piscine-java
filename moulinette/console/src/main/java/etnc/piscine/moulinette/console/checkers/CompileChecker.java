@@ -18,6 +18,13 @@ public final class CompileChecker implements Checker {
 
     @Override public String id() { return "compile"; }
 
+    /**
+     * Inactif sur les exos « écriture de tests » : il n'y a pas de code stagiaire à compiler
+     * (l'impl est fournie correcte), et le {@link MutationChecker} porte le diagnostic de
+     * compilation du fichier de test du stagiaire.
+     */
+    @Override public boolean appliesTo(CheckerContext ctx) { return !MutationChecker.estEcritureDeTests(ctx); }
+
     @Override
     public CheckResult check(CheckerContext ctx) {
         Path mainSrc = ctx.renduPath().resolve("starter/src/main/java");

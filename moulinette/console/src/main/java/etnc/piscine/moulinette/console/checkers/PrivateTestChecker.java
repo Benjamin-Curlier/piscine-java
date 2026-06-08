@@ -13,6 +13,9 @@ public final class PrivateTestChecker extends AbstractTestChecker {
     @Override public String id() { return "tests-prives"; }
     @Override protected String label() { return "tests privés"; }
 
+    /** Inactif sur les exos « écriture de tests » (le MutationChecker prend le relais). */
+    @Override public boolean appliesTo(CheckerContext ctx) { return !MutationChecker.estEcritureDeTests(ctx); }
+
     /** Les tests privés sont optionnels (format §2) : leur absence n'est pas une erreur. */
     @Override protected boolean optionalWhenEmpty() { return true; }
 
