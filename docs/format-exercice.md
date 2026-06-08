@@ -277,6 +277,38 @@ projets-binome/projet-1-mini-domaine/
 
 Pas de `starter/`, `solution/`, `tests/` figés : le binôme conçoit le projet de A à Z. La moulinette n'exécute pas — l'évaluation est manuelle, guidée par `evaluation.yml`.
 
+## 11bis. Exercices « écriture de tests » (sous-groupe 6.1)
+
+Certains exercices du module 6 inversent le contrat habituel : **le livrable du stagiaire est la suite de tests**, pas le code. L'implémentation est **fournie correcte** ; le stagiaire écrit les tests qui la valident. La moulinette les grade par **mutation** (voir [`architecture-moulinette.md`](architecture-moulinette.md) → `MutationChecker`) : les tests du stagiaire doivent **passer** sur l'implémentation correcte et **échouer** (« tuer ») sur chaque implémentation **mutée** cachée.
+
+### Marqueur
+- `metadata.yml` porte `mode: ecriture-tests` (intention lisible, vérifiable par le lint).
+- Au runtime, la moulinette reconnaît ces exos à la **présence du dossier `mutants/`** ; le `MutationChecker` s'active et les checkers normaux (`compile`, `tests-publics`, `tests-prives`) se désactivent.
+
+### Arborescence
+```
+6.1.1-<slug>/
+├── metadata.yml            # + mode: ecriture-tests
+├── sujet.md                # « écris la suite de tests de la classe fournie »
+├── correction.md
+├── evaluation.yml          # tests-valides + mutants-tues + style + formateur
+├── starter/
+│   └── src/
+│       ├── main/java/etnc/m6/Xxx.java       # FOURNI correct — le stagiaire le TESTE, ne le modifie pas
+│       └── test/java/etnc/m6/XxxTest.java   # squelette à compléter (≥ 1 @Test à écrire)
+├── solution/
+│   ├── src/main/java/etnc/m6/Xxx.java       # impl correcte de référence (identique au starter/main)
+│   └── src/test/java/etnc/m6/XxxTest.java   # suite de tests MODÈLE (valide l'exo en CI)
+└── mutants/
+    ├── <id-1>/etnc/m6/Xxx.java              # variante buggée (même FQCN), un dossier par mutant
+    └── <id-2>/etnc/m6/Xxx.java              # 3 à 5 mutants, un par règle / cas limite
+```
+
+### Règles
+- Chaque mutant est une **altération minime et réaliste** d'une règle de la classe (`+`→`-`, `<`→`<=`, retour constant, oubli d'un cas). Nommer le dossier par le défaut injecté (`operateur-inverse`, `borne-inferieure`…) — le nom apparaît dans le rapport quand le mutant survit.
+- La suite de tests **modèle** (`solution/.../test`) doit passer sur le correct **et** tuer **tous** les mutants : c'est le filet `valider-solutions` (un mutant non tué par le modèle = exo mal calibré).
+- Verdict de la moulinette : **OK** seulement si les tests du stagiaire passent sur le correct **et** tuent tous les mutants ; sinon **FAIL** avec le détail « N/M mutants détectés » et les survivants nommés (le score proportionnel vit dans le message — le modèle de note est binaire par checker).
+
 ## 12. Validation d'un nouvel exercice
 
 Avant merge dans `main`, un nouvel exercice doit :
