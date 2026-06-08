@@ -1,0 +1,15 @@
+total: 20
+seuil_reussite: 12
+criteres:
+  - id: mutation
+    description: "Tes tests passent sur l'implémentation correcte ET détectent (tuent) chaque mutant caché"
+    poids: 16
+    type: automatique
+  - id: style
+    description: "Style et lisibilité du code de test (Checkstyle)"
+    poids: 2
+    type: automatique
+  - id: demarche
+    description: "Démarche de test : cas nominaux et cas limites couverts, un comportement par test, noms explicites, valeurs choisies pour distinguer un code correct d'un code buggé"
+    poids: 2
+    type: formateur

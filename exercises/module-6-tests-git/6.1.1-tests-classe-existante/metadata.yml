@@ -1,0 +1,22 @@
+slug: tests-classe-existante
+titre: "Tester une classe existante"
+module: 6
+sous_groupe: "6.1"
+position: 1
+difficulte: facile
+mode: ecriture-tests
+duree_estimee_min: 25
+prerequis: []
+objectifs_pedagogiques:
+  - "Écrire une classe de test JUnit 5 sur une classe fournie"
+  - "Couvrir les cas nominaux ET les cas limites (valeur zéro, frontière)"
+  - "Choisir des valeurs de test qui distinguent un code correct d'un code buggé"
+  - "Utiliser les assertions fluides d'AssertJ (assertThat)"
+notions:
+  - junit
+  - assertj
+  - test-unitaire
+  - cas-limite
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-08
