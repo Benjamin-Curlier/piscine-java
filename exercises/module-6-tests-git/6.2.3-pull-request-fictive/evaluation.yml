@@ -1,0 +1,19 @@
+total: 20
+seuil_reussite: 12
+criteres:
+  - id: tests-publics
+    description: "Tests publics passants (retour sur main, LICENSE fusionnée, PULL_REQUEST.md présent)"
+    poids: 8
+    type: automatique
+  - id: tests-prives
+    description: "Tests privés passants (commit de la branche dans main, PULL_REQUEST.md structuré)"
+    poids: 8
+    type: automatique
+  - id: style
+    description: "Style et lisibilité (Checkstyle)"
+    poids: 2
+    type: automatique
+  - id: respect-consignes
+    description: "Cycle PR complet (branche, commit, merge dans main) et description de PR claire (titre, description, checklist de revue)"
+    poids: 2
+    type: formateur

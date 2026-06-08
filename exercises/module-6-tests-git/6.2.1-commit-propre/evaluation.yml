@@ -1,0 +1,19 @@
+total: 20
+seuil_reussite: 12
+criteres:
+  - id: tests-publics
+    description: "Tests publics passants (deux commits, les deux fichiers présents)"
+    poids: 8
+    type: automatique
+  - id: tests-prives
+    description: "Tests privés passants (atomicité, messages, arbre propre)"
+    poids: 8
+    type: automatique
+  - id: style
+    description: "Style et lisibilité (Checkstyle)"
+    poids: 2
+    type: automatique
+  - id: respect-consignes
+    description: "Commits atomiques (un fichier par commit), messages à l'impératif et informatifs, usage correct de add puis commit"
+    poids: 2
+    type: formateur

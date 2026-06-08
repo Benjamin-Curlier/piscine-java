@@ -1,0 +1,20 @@
+slug: resolution-conflit
+titre: "Résolution de conflit"
+module: 6
+sous_groupe: "6.2"
+position: 2
+difficulte: moyen
+duree_estimee_min: 35
+prerequis: []
+objectifs_pedagogiques:
+  - "Lire et comprendre les marqueurs d'un conflit de fusion"
+  - "Résoudre un conflit en conservant les contributions des deux branches"
+  - "Conclure la fusion par un commit de merge"
+notions:
+  - git
+  - merge
+  - conflit
+  - branche
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-08

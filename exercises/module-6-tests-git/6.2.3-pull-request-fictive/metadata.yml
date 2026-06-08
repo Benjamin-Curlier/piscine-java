@@ -1,0 +1,21 @@
+slug: pull-request-fictive
+titre: "Pull Request fictive"
+module: 6
+sous_groupe: "6.2"
+position: 3
+difficulte: moyen
+duree_estimee_min: 35
+prerequis: []
+objectifs_pedagogiques:
+  - "Dérouler le cycle d'une Pull Request en local (branche, commit, merge)"
+  - "Rédiger une description de PR claire (titre, description, checklist de revue)"
+  - "Comprendre qu'une PR propose un changement avant de l'intégrer à main"
+notions:
+  - git
+  - pull-request
+  - branche
+  - merge
+  - revue-de-code
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-08

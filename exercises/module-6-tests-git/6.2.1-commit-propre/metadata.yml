@@ -1,0 +1,20 @@
+slug: commit-propre
+titre: "Commit propre"
+module: 6
+sous_groupe: "6.2"
+position: 1
+difficulte: facile
+duree_estimee_min: 25
+prerequis: []
+objectifs_pedagogiques:
+  - "Enchaîner add et commit pour enregistrer un instantané"
+  - "Faire des commits atomiques (un changement cohérent par commit)"
+  - "Rédiger des messages de commit clairs à l'impératif"
+notions:
+  - git
+  - commit
+  - staging
+  - message-de-commit
+auteur: "ETNC"
+version: 1
+date_creation: 2026-06-08

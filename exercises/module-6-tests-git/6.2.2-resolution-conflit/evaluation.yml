@@ -1,0 +1,19 @@
+total: 20
+seuil_reussite: 12
+criteres:
+  - id: tests-publics
+    description: "Tests publics passants (plus de marqueurs, arbre de travail propre)"
+    poids: 8
+    type: automatique
+  - id: tests-prives
+    description: "Tests privés passants (deux contributions conservées, commit de merge à deux parents)"
+    poids: 8
+    type: automatique
+  - id: style
+    description: "Style et lisibilité (Checkstyle)"
+    poids: 2
+    type: automatique
+  - id: demarche
+    description: "Résolution propre : marqueurs retirés, contributions des deux branches conservées, fusion conclue correctement"
+    poids: 2
+    type: formateur
