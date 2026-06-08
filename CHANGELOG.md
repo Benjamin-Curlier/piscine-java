@@ -36,10 +36,18 @@ moulinette est évaluante, et le mode standalone hors-ligne est en place.
 - E2E `BundleGradingE2EIT` : valide le **chemin de notation console** (celui du bundle) sur de
   vrais exos M4-M6, dont le `MutationChecker` (6.1) et les tests forkant git (6.2).
 
+### Validation du bundle standalone (2026-06-08)
+Le bundle a été **assemblé et exécuté de bout en bout** sur une machine Windows (build-bundle :
+JDK 25 portable + **MinGit 2.54.0 SHA-256 vérifié** + uber-jar + site + 65 exos ; ZIP de ~200 Mo
+produit). Depuis le **bundle assemblé** (toolchain embarquée), un `init` puis un rendu réel ont
+**noté ✓ OK les 7 exercices du module 6** : 6.1 (4/4, via le `MutationChecker` du jar) et 6.2 (3/3,
+tests forkant `git`). Correctif au passage : `build-bundle.sh` retombe sur `jar` du JDK quand `zip`
+est absent (fréquent sous Git-Bash Windows).
+
 ### Known issues / à finaliser avant GA
-- **Validation du bundle sur machine Windows propre** : le *chemin de notation* est validé
-  automatiquement (E2E), mais l'**empaquetage** (MinGit/JDK/`.bat`, `PATH`) reste à fumer sur une
-  Windows vierge (run formateur) — dernier gate avant de figer la RC.
+- **Dernier smoke recommandé** : décompresser le ZIP et lancer **`piscine.bat`** sur une machine
+  Windows *vierge* (sans Java/git) — le runtime et l'empaquetage sont validés ; ne reste que la
+  double-cliquabilité du `.bat` sur poste neuf.
 - **Style en mode advisory** (non bloquant) — choix beta ; durcissement prévu (#53).
 - **Pas de note pondérée /20** : verdict binaire pass/fail par checker (la pondération
   `evaluation.yml` n'est pas encore consommée par le runtime).
