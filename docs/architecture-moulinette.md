@@ -100,4 +100,4 @@ La tâche `test` par défaut exclut les tags `git`, `e2e`, `tools` (les suites l
 - **`ReportGenerator` JSON fait main** : migration vers Jackson prévue (tâche #55) quand le format se stabilise.
 - **Anti-triche** (tests-prives visibles dans le bundle) : tâche #29.
 - **Isolation Docker** du runner : tâche #30.
-- **Mode `nominal`** (plateforme serveur) : rejeté pour l'instant (tâches #26-#28).
+- **Mode `nominal`** (plateforme serveur) : **abandonné en v1** (piscine 100 % locale, auto-rythmée) ; l'enum `Mode` ne garde que `LOCAL`.

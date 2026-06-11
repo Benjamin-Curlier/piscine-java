@@ -32,11 +32,6 @@ public final class Main {
         if (args.isEmpty() || "--help".equals(args.get(0))) { printUsage(); return 0; }
         String cmd = args.get(0);
         List<String> rest = args.subList(1, args.size());
-        Mode mode = parseMode(rest);
-        if (mode == Mode.NOMINAL) {
-            throw new ConsoleException(
-                "--mode nominal non implémenté dans le MVP (voir tâches #26-#28 du backlog).");
-        }
         return switch (cmd) {
             case "init" -> runInit(rest);
             case "repl" -> runRepl(rest);
@@ -109,12 +104,6 @@ public final class Main {
         }
     }
 
-    private static Mode parseMode(List<String> args) {
-        int i = args.indexOf("--mode");
-        if (i < 0 || i + 1 >= args.size()) return Mode.LOCAL;
-        return Mode.valueOf(args.get(i + 1).toUpperCase(Locale.ROOT));
-    }
-
     private static String required(List<String> args, String flag) {
         int i = args.indexOf(flag);
         if (i < 0 || i + 1 >= args.size())
@@ -132,8 +121,8 @@ public final class Main {
             Moulinette ETNC — console locale
 
             Usage :
-              moulinette-console init --nom <slug> --dest <dossier> [--piscine-repo <chemin>] [--mode local]
-              moulinette-console repl --repo <dossier> [--piscine-repo <chemin>] [--site <dossier-site>] [--mode local]
+              moulinette-console init --nom <slug> --dest <dossier> [--piscine-repo <chemin>]
+              moulinette-console repl --repo <dossier> [--piscine-repo <chemin>] [--site <dossier-site>]
 
             Documentation : docs/piscine-stagiaire.md
             """);

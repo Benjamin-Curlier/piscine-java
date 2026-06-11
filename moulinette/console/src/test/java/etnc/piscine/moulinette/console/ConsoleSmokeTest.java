@@ -7,6 +7,6 @@ class ConsoleSmokeTest {
 
     @Test
     void le_module_console_est_chargeable() {
-        assertThat(Mode.values()).containsExactly(Mode.LOCAL, Mode.NOMINAL);
+        assertThat(Mode.values()).containsExactly(Mode.LOCAL);
     }
 }
