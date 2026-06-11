@@ -3,6 +3,7 @@
 (function () {
   "use strict";
 
+  const BACKSPACE = String.fromCharCode(127); // DEL, envoyé par xterm.js
   const term = new Terminal({
     cursorBlink: true,
     fontSize: 15,
@@ -71,7 +72,7 @@
         buffer = "";
         if (line.length === 0) { prompt(); continue; }
         run(line);
-      } else if (ch === "" || ch === "") { // backspace
+      } else if (ch === BACKSPACE || ch === "\b") {
         if (buffer.length > 0) {
           buffer = buffer.slice(0, -1);
           term.write("\b \b");
