@@ -29,7 +29,7 @@ if ([int]$Matches[1] -lt 25) {
     Write-Error "Java 25+ requis (détecté : $($Matches[1])). Voir docs/setup-dev.md. Astuce : définis JAVA_HOME vers un JDK 25."
 }
 
-$Jar = "$RepoRoot\moulinette\console\target\moulinette-console.jar"
+$Jar = "$RepoRoot\moulinette\console\build\libs\moulinette-console.jar"
 
 if ((Test-Path $Dest) -and -not $Force) {
     Write-Host "Workspace déjà présent : $Dest"
@@ -43,16 +43,9 @@ if ((Test-Path $Dest) -and $Force) {
     Remove-Item -Recurse -Force $Dest
 }
 
-# Maven : préfère un mvn système (déjà installé), sinon le wrapper mvnw.cmd
-if (Get-Command mvn -ErrorAction SilentlyContinue) {
-    $MvnCmd = "mvn"
-} else {
-    $MvnCmd = "$RepoRoot\mvnw.cmd"
-}
-
-Write-Host "[bootstrap] Build moulinette-console (via $MvnCmd) ..."
-& $MvnCmd -f "$RepoRoot\moulinette\pom.xml" -pl console -am -q package
-if ($LASTEXITCODE -ne 0) { throw "Build Maven échoué." }
+Write-Host "[bootstrap] Build moulinette-console (via gradlew) ..."
+& "$RepoRoot\moulinette\gradlew.bat" -p "$RepoRoot\moulinette" -q :console:shadowJar
+if ($LASTEXITCODE -ne 0) { throw "Build Gradle échoué." }
 
 if (-not (Test-Path $Jar)) { throw "Build du jar échoué : $Jar introuvable." }
 
