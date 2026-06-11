@@ -19,10 +19,15 @@ Dépendances : `console`/`cli` → `framework` + `runner` + `reports`. Pas de cy
 - **`cli`** : usage machine/CI, sans interaction.
 - **`console`** : REPL git sandbox pour le stagiaire (commandes `add/commit/push/...`, `submit-start`). Un `git push origin rendu/<sous-groupe>` déclenche l'évaluation.
 
+La logique console est portée par la façade **`ConsoleSession`** (bibliothèque) :
+`ConsoleSession.open(repo, piscineRepo)` fait tout le câblage (git, catalogue, checkers,
+runner, trigger) et `execute(ligne) → CommandResult` tokenise puis dispatch. Le REPL
+terminal (`Repl`) n'est qu'un client ; la GUI v1 en sera un autre.
+
 ## Flux d'évaluation (`console`)
 
 ```
-git push origin rendu/1.1
+ConsoleSession.execute("git push origin rendu/1.1")
   → PushCommand → SubmissionTrigger.onPushSucceeded
       → MoulinetteRunner.Default.runGroup("1.1", workspace)
           pour chaque exo (difficulté croissante) :

@@ -1,5 +1,6 @@
 package etnc.piscine.moulinette.console.e2e;
 
+import etnc.piscine.moulinette.console.ConsoleSession;
 import etnc.piscine.moulinette.console.Mode;
 import etnc.piscine.moulinette.console.checkers.*;
 import etnc.piscine.moulinette.console.commands.CommandRegistry;
@@ -64,7 +65,8 @@ class HappyPathE2EIT {
             "submit-start 1.1", "git add .", "git commit -m \"rendu 1.1.1\"",
             "git push origin rendu/1.1", "exit", "");
         var sw = new StringWriter();
-        new Repl(ctx, CommandRegistry.defaults(trigger), new ReplIo(new StringReader(script), sw)).run();
+        var session = ConsoleSession.of(ctx, CommandRegistry.defaults(trigger));
+        new Repl(session, new ReplIo(new StringReader(script), sw)).run();
         return sw.toString();
     }
 
