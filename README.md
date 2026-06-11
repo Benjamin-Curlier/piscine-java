@@ -55,8 +55,10 @@ Dans les deux modes, la boucle pédagogique est identique : on édite un exercic
 **Cible / à venir** (voir [`docs/backlog.md`](docs/backlog.md)) :
 - **Docker** pour l'isolation du runner (#30).
 - **PMD / SpotBugs** en complément de Checkstyle, **JaCoCo** côté moulinette.
-- **GitLab CE on-premise** pour la production militaire (#26).
 - **Anti-triche** (JPlag, #29).
+
+> Depuis la **v1**, la piscine est **100 % locale et auto-rythmée** : pas de forge distante
+> ni de notation externe — le stagiaire avance à son rythme, la moulinette locale est l'arbitre.
 
 > JaCoCo est aujourd'hui utilisé **côté projet binôme #3** (couverture ≥ 70 %), pas dans la moulinette elle-même.
 

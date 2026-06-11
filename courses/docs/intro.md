@@ -26,7 +26,6 @@ Vous rendez votre travail via **Git**. Une **moulinette** automatique corrige vo
 ## Ce dont vous aurez besoin
 
 - Un ordinateur (Windows, Linux ou macOS). **Selon ce que ton formateur te remet, tu n'auras peut-être rien à installer** : voir **[Comment lancer la Piscine](lancer-la-piscine.md)**. Dans tous les cas, prévois un éditeur de code.
-- Un compte Git (GitHub pendant la phase de développement de la Piscine, GitLab interne en production).
 - De la curiosité et de la persévérance. Aucune connaissance préalable en programmation n'est requise.
 
 ## Comment progresser

@@ -21,6 +21,11 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/). Versions 
 - La moulinette **persiste la progression** dans `<workspace>/.piscine/progress.json`
   (un exo validé ne redescend jamais).
 
+### Retiré (v1 : piscine 100 % locale)
+- **Mode `nominal`** (plateforme serveur) et option `--mode` : abandonnés, l'enum `Mode` ne
+  garde que `LOCAL`. Plus aucune mention de GitLab/forge distante/notation externe dans le
+  parcours stagiaire (cours, README).
+
 ## [0.6.0-rc.1] — Release Candidate (2026-06-08)
 
 Première **release candidate** : tout le contenu pédagogique des 6 modules est livré, la
