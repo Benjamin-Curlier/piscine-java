@@ -1,0 +1,41 @@
+:root {
+  --bg: #1e1e2e;
+  --fg: #cdd6f4;
+  --accent: #89b4fa;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, sans-serif;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #313244;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--accent);
+}
+
+.muted { color: #7f849c; font-size: 0.85rem; }
+
+main {
+  flex: 1;
+  padding: 0.5rem;
+  min-height: 0;
+}
+
+#terminal { height: 100%; }
