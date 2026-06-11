@@ -18,9 +18,9 @@ La piscine s'utilise de **deux façons**, selon le public :
 | Mode | Pour qui | Comment | Prérequis |
 |------|----------|---------|-----------|
 | **Dépôt** (connecté) | Formateurs, contributeurs, stagiaires « connectés » | On **clone le dépôt**, on installe Java 25 + git, et `piscine-bootstrap` compile la console et crée le workspace de rendu. | Java 25, git, accès au dépôt. Voir [`docs/setup-dev.md`](docs/setup-dev.md). |
-| **Standalone** (hors-ligne) | Stagiaire autonome | On reçoit un **ZIP complet** : JDK, git, moulinette pré-compilée et site de cours sont **embarqués**. On décompresse et on lance — **aucune installation, aucun réseau**. | Aucun (tout est dans le ZIP). |
+| **Installeur** (hors-ligne) | Stagiaire autonome | On reçoit un **installeur** (`.exe` Windows per-user, `.deb`/portable Linux) : JRE, git, moulinette, exercices et site de cours sont **embarqués**. Double-clic → la GUI s'ouvre dans le navigateur. **Aucun droit admin, aucun réseau.** | Aucun (tout est dans l'installeur). |
 
-> Le mode standalone est produit par [`scripts/build-bundle.ps1`](scripts/build-bundle.ps1) / [`.sh`](scripts/build-bundle.sh) (voir [`CONTRIBUTING.md`](CONTRIBUTING.md#7-produire-le-bundle-standalone)).
+> Les installeurs sont produits par le workflow **Release** (jpackage) — voir [`docs/deploiement-instructeur.md`](docs/deploiement-instructeur.md).
 
 Dans les deux modes, la boucle pédagogique est identique : on édite un exercice, on rend via Git, et la **moulinette** produit un rapport explicatif. Détails côté stagiaire : [`docs/piscine-stagiaire.md`](docs/piscine-stagiaire.md).
 

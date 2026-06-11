@@ -21,6 +21,15 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/). Versions 
 - La moulinette **persiste la progression** dans `<workspace>/.piscine/progress.json`
   (un exo validé ne redescend jamais).
 
+### Distribution
+- **Installeur jpackage** « Piscine ETNC » : `.exe` Windows **par utilisateur** (sans admin,
+  JRE + MinGit + exercices + site de cours embarqués, répertoire modifiable), `.deb` et
+  app-image portable Linux — workflow CI **Release** sur tag `v*`. Mode zéro-argument de la
+  GUI : workspace auto-initialisé dans `~/PiscineETNC` (env `PISCINE_HOME`), données hors du
+  répertoire d'installation. Remplace le bundle ZIP (`build-bundle` retiré).
+- Résolution git explicite : propriété `piscine.git` (MinGit embarqué) → env
+  `PISCINE_GIT_HOME` → `git` du PATH.
+
 ### Retiré (v1 : piscine 100 % locale)
 - **Mode `nominal`** (plateforme serveur) et option `--mode` : abandonnés, l'enum `Mode` ne
   garde que `LOCAL`. Plus aucune mention de GitLab/forge distante/notation externe dans le

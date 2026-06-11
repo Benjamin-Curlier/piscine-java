@@ -1,56 +1,59 @@
-# Déploiement Piscine ETNC sur un PC stagiaire
+# Déploiement — guide instructeur
 
-Ce guide s'adresse à l'**instructeur** qui prépare et déploie l'application sur les postes des stagiaires. Le PC stagiaire n'a **rien à pré-installer** (ni Java, ni Maven, ni internet).
+Depuis la **v1**, la Piscine se distribue comme un **installeur autonome** : le stagiaire
+double-clique, l'application s'ouvre dans son navigateur, et tout est embarqué (JRE, git,
+exercices, site de cours). Aucun droit administrateur, aucun réseau à l'exécution.
 
-## 1. Prérequis (machine de l'instructeur uniquement)
+## 1. Obtenir les installeurs
 
-- Le dépôt Piscine ETNC cloné.
-- Un **JDK 25** (Temurin recommandé). Par défaut le script prend `JAVA_HOME` ; sinon passez `-JdkPath`.
-- `git` et un Maven (`mvn` système ou le wrapper `./mvnw`).
+### Via le CI (recommandé)
 
-## 2. Construire le bundle
+Le workflow **Release** (`.github/workflows/release.yml`) construit les artefacts à chaque
+tag `v*` (ou manuellement via *Run workflow*) :
 
-```powershell
-# Windows
-.\scripts\build-bundle.ps1            # utilise %JAVA_HOME%
-.\scripts\build-bundle.ps1 -JdkPath "E:\java\jdk-25.0.3+9"
-```
-```bash
-# Linux/macOS
-./scripts/build-bundle.sh --jdk /opt/jdk-25
-```
-
-Résultat : `dist/piscine-etnc-stagiaire-<date>.zip` (contient le JDK portable, l'uber-jar, les exercices et un lanceur).
-
-## 3. Déployer sur le PC stagiaire
-
-1. Copier le ZIP sur le poste (clé USB, partage réseau).
-2. Décompresser **où on veut** (Bureau, `C:\Piscine`, une clé USB…). Aucun droit administrateur requis.
-
-## 4. Lancer
-
-- Windows : double-cliquer **`piscine.bat`**.
-- Linux/macOS : `./piscine.sh`.
-
-Au **premier lancement**, l'espace de travail du stagiaire est créé automatiquement (`workspace/`), puis la console interactive (REPL) démarre. Les lancements suivants reprennent le même espace.
-
-## 5. Ce que fait le stagiaire ensuite
-
-Voir [`piscine-stagiaire.md`](piscine-stagiaire.md) (inclus dans le bundle sous `piscine/docs/`). En résumé : `submit-start 1.1` → éditer le code → `git add` / `commit` / `push origin rendu/1.1` → lecture du rapport.
-
-## 6. Dépannage
-
-| Symptôme | Cause probable | Solution |
+| Artefact | Plateforme | Contenu |
 |---|---|---|
-| « java introuvable » / la fenêtre se ferme | bundle incomplet (dossier `jdk/` manquant) | Reconstruire le bundle, vérifier que `jdk/bin/java.exe` existe dans le ZIP. |
-| L'antivirus bloque `piscine.bat` | politique locale | Autoriser le script, ou lancer la commande du `.bat` à la main dans un terminal. |
-| Erreurs sur des chemins avec accents/espaces | chemin d'extraction exotique | Extraire dans un chemin simple (ex. `C:\Piscine`). |
-| « Où sont mes résultats ? » | — | `workspace\.piscine\reports\<exo>.md` (et `.json`). |
-| Repartir de zéro | — | Fermer la console, supprimer le dossier `workspace\`, relancer `piscine.bat`. |
-| La correction est toujours OK alors que le code est faux | tests de référence absents pour cet exo | Vérifier que `piscine/exercises/.../<exo>/tests` et `tests-prives` sont bien dans le bundle. |
+| `Piscine ETNC-1.0.0.exe` | Windows | Installeur **par utilisateur** (sans admin), JRE + MinGit embarqués |
+| `piscine-etnc_1.0.0_amd64.deb` | Debian/Ubuntu | Paquet deb (git système requis) |
+| `piscine-etnc-linux-portable.tar.gz` | Linux (toutes distros) | App-image portable, à extraire et lancer |
 
-## 7. Limites connues (phase de test)
+### En local
 
-- Le bundle contient `tests-prives/` et `solution/` : un stagiaire curieux peut les ouvrir. Acceptable en phase de test ; l'anti-triche est prévu ultérieurement (tâche #29).
-- Le style est en mode **advisory** (non bloquant) pendant la beta : un problème de style est signalé mais ne bloque pas la validation (tâche #53 pour le durcissement).
-- Bundle Windows-first ; la variante `.sh` est fournie mais non durcie.
+```bash
+# Site de cours (une fois) : cd courses && npm ci && npm run build
+moulinette/gradlew -p moulinette :gui:jpackageApp            # .exe sur Windows (WiX requis*)
+moulinette/gradlew -p moulinette :gui:jpackageApp -PjpackageType=app-image   # dossier portable
+```
+
+\* WiX 3.x portable (sans admin) : dézipper `wix314-binaries.zip` et passer
+`-PwixDir=<dossier>` (ou env `WIX_DIR`). Sortie : `moulinette/gui/build/jpackage/out/`.
+
+## 2. Installer sur le poste stagiaire
+
+**Windows** : copier le `.exe` (clé USB, partage), double-clic. Installation par défaut dans
+`%LOCALAPPDATA%` (modifiable), raccourci « Piscine ETNC » dans le menu Démarrer. Aucun droit
+admin demandé.
+
+**Linux** : `sudo apt install ./piscine-etnc_*.deb`, ou extraire le tar.gz et lancer
+`Piscine ETNC/bin/Piscine ETNC` (git doit être présent : `sudo apt install git`).
+
+## 3. Premier lancement
+
+Au premier démarrage, l'application :
+1. initialise le **workspace** du stagiaire dans `~/PiscineETNC/workspace`
+   (surchargeable par la variable d'environnement `PISCINE_HOME`) — git local, remote
+   simulé, exercices copiés ;
+2. démarre le serveur local (127.0.0.1, port libre) et **ouvre le navigateur** ;
+3. le stagiaire travaille : tableau de bord, cours, terminal git intégré.
+
+Les données du stagiaire vivent **hors du répertoire d'installation** : une mise à jour de
+l'application ne touche jamais à son travail.
+
+## 4. Dépannage
+
+| Symptôme | Cause probable | Remède |
+|---|---|---|
+| Le navigateur ne s'ouvre pas | Politique du poste | Ouvrir manuellement l'URL affichée dans la fenêtre console |
+| « Contenu piscine introuvable » | Installation incomplète | Réinstaller ; vérifier `app/piscine/exercises` dans le dossier d'installation |
+| git introuvable (Linux) | git non installé | `sudo apt install git` (le .exe Windows embarque MinGit) |
+| Réinitialiser un stagiaire | — | Supprimer `~/PiscineETNC` (l'app le recrée au lancement) |
