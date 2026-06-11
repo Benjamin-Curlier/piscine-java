@@ -17,9 +17,10 @@
 | **Git** | 2.x | Cloner le dépôt, soumettre des rendus |
 | **Node.js** | 22 LTS | Construire le site Docusaurus (cours) |
 
-Maven **n'est pas à installer** : le Maven Wrapper `./mvnw` (à la racine du repo) fournit
-Maven. Le `maven-wrapper.jar` est **versionné dans le dépôt** (#54), donc `./mvnw` fonctionne
-même **sans accès réseau** au premier appel.
+Aucun outil de build **n'est à installer** : deux wrappers sont versionnés dans le dépôt
+(jars inclus, cf. #54), donc ils fonctionnent même **sans accès réseau** au premier appel :
+- **Gradle Wrapper** `moulinette/gradlew` — build de la **moulinette** ;
+- **Maven Wrapper** `./mvnw` (racine) — projets des **exercices** (`starter/`, `solution/`).
 
 ---
 
@@ -28,7 +29,7 @@ même **sans accès réseau** au premier appel.
 Des scripts préparent l'environnement en une commande : vérification de git/Node,
 installation d'un JDK **Temurin 25 portable** si Java 25+ est absent (téléchargé depuis
 Adoptium, extrait dans votre dossier utilisateur), configuration de `JAVA_HOME`/`PATH`
-au niveau utilisateur, puis vérification du Maven Wrapper.
+au niveau utilisateur, puis vérification des wrappers Gradle (moulinette) et Maven (exercices).
 
 ```powershell
 # Windows (PowerShell) — depuis la racine du repo
@@ -41,7 +42,7 @@ au niveau utilisateur, puis vérification du Maven Wrapper.
 ```
 
 Après exécution, **rouvrez votre terminal** pour que `JAVA_HOME` soit pris en compte, puis
-vérifiez : `java --version` (→ 25) et `./mvnw -v`.
+vérifiez : `java --version` (→ 25), `moulinette/gradlew -p moulinette -v` et `./mvnw -v`.
 
 Les sections 1 à 6 ci-dessous décrivent la **procédure manuelle** équivalente, utile si vous
 préférez maîtriser chaque étape ou si un script échoue (proxy, OS non géré, etc.).
@@ -139,40 +140,47 @@ cd Piscine-ETNC
 
 ---
 
-## 4. Utiliser le Maven Wrapper
+## 4. Utiliser les wrappers de build
 
-Le repo contient `mvnw` (Unix) et `mvnw.cmd` (Windows) à sa racine, ainsi que le
-`maven-wrapper.jar` versionné (#54). Maven 3.9.9 est téléchargé dans `~/.m2/wrapper/dists/`
-au premier appel ; le `.jar` du wrapper, lui, est déjà présent (pas de téléchargement
-préalable nécessaire pour amorcer `./mvnw`).
+### Moulinette → Gradle Wrapper
+
+Le build de la moulinette utilise Gradle via `moulinette/gradlew` (Unix) et
+`moulinette/gradlew.bat` (Windows), avec le `gradle-wrapper.jar` versionné (même
+politique offline que #54).
+
+```bash
+# Unix — rendre le script exécutable (une seule fois après le clone)
+chmod +x moulinette/gradlew
+
+# Vérifier la version de Gradle
+moulinette/gradlew -p moulinette -v       # Unix
+moulinette\gradlew.bat -p moulinette -v   # Windows PowerShell
+
+# Tous les modules (build + tests unitaires + uber-jar)
+moulinette/gradlew -p moulinette build :console:shadowJar
+
+# Un seul module
+moulinette/gradlew -p moulinette :framework:test
+
+# Suites lourdes à la demande
+moulinette/gradlew -p moulinette :console:testGit    # ou :console:testTools / :console:testE2e
+```
+
+### Exercices → Maven Wrapper
+
+Les projets des exercices (`starter/`, `solution/`) restent des projets Maven : le repo
+contient `mvnw` (Unix) et `mvnw.cmd` (Windows) à sa racine, avec le `maven-wrapper.jar`
+versionné (#54). Maven 3.9.9 est téléchargé dans `~/.m2/wrapper/dists/` au premier appel.
 
 ```bash
 # Unix — rendre le script exécutable (une seule fois après le clone)
 chmod +x mvnw
 
-# Vérifier la version de Maven téléchargée
-./mvnw -v          # Unix
-mvnw.cmd -v        # Windows PowerShell
-```
-
-### Lancer les tests d'un exercice
-
-```bash
 # Tests publics du starter (depuis la racine du repo)
 ./mvnw -f exercises/module-1-fondamentaux/1.1.1-hello-world/starter/pom.xml test
 
 # Tests complets de la solution de référence (publics + privés)
 ./mvnw -f exercises/module-1-fondamentaux/1.1.1-hello-world/solution/pom.xml test
-```
-
-### Lancer les tests de la moulinette
-
-```bash
-# Tous les modules
-./mvnw -f moulinette/pom.xml verify
-
-# Un seul module
-./mvnw -f moulinette/pom.xml -pl framework test
 ```
 
 ---

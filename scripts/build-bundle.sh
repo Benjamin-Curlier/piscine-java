@@ -24,10 +24,10 @@ STAGE="$OUT_DIR/piscine-etnc-stagiaire"
 
 [[ -x "$JDK_PATH/bin/java" ]] || { echo "JDK introuvable à '$JDK_PATH' (utilise --jdk)."; exit 1; }
 
-if command -v mvn >/dev/null 2>&1; then MVN=(mvn); else MVN=("$REPO_ROOT/mvnw"); fi
+# Build de l'uber-jar via le wrapper Gradle (versionné, fonctionne offline)
 echo "[bundle] Build de l'uber-jar ..."
-"${MVN[@]}" -f "$REPO_ROOT/moulinette/pom.xml" -pl console -am -q -DskipTests package
-JAR="$REPO_ROOT/moulinette/console/target/moulinette-console.jar"
+"$REPO_ROOT/moulinette/gradlew" -p "$REPO_ROOT/moulinette" -q :console:shadowJar
+JAR="$REPO_ROOT/moulinette/console/build/libs/moulinette-console.jar"
 [[ -f "$JAR" ]] || { echo "Uber-jar introuvable : $JAR"; exit 1; }
 
 rm -rf "$STAGE"

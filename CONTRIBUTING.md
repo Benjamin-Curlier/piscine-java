@@ -31,7 +31,7 @@
 
 La PR ne se merge pas tant que les jobs de [`.github/workflows/ci.yml`](.github/workflows/ci.yml) ne passent pas :
 
-- **Moulinette (build + tests)** — `mvn verify` du reactor + suites taguées (`git`, `tools`, `e2e`).
+- **Moulinette (build + tests)** — `gradlew build shadowJar` + suites taguées (`testGit`, `testTools`, `testE2e`).
 - **Lint exercices** — présence des fichiers obligatoires + cohérence YAML (`scripts/lint-exercices.sh`).
 - **Build site Docusaurus** — `npm run build` ; un lien cassé casse le build (`onBrokenLinks: throw`).
 - **Valider les solutions de référence** — chaque `solution/` doit passer **tous** ses tests (publics + privés).

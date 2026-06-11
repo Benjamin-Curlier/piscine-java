@@ -112,8 +112,12 @@ else
     echo "OK java   : version $MAJOR installée dans $JAVA_HOME_PATH"
 fi
 
-# 4. Maven Wrapper (jar versionné depuis #54 → fonctionne offline)
-echo "Vérification du Maven Wrapper..."
+# 4. Wrappers de build (jars versionnés → fonctionnent offline, cf. #54)
+#    Gradle : build de la moulinette ; Maven : projets des exercices.
+echo "Vérification du Gradle Wrapper (moulinette)..."
+chmod +x "$REPO_ROOT/moulinette/gradlew"
+"$REPO_ROOT/moulinette/gradlew" -p "$REPO_ROOT/moulinette" -v
+echo "Vérification du Maven Wrapper (exercices)..."
 chmod +x "$REPO_ROOT/mvnw"
 "$REPO_ROOT/mvnw" -v
 echo "== Environnement prêt =="

@@ -31,7 +31,7 @@ Dans les deux modes, la boucle pédagogique est identique : on édite un exercic
 | `docs/` | Documentation du projet : référentiel pédagogique, format d'exercice, charte de rédaction, procédures de déploiement. |
 | `courses/` | Site Docusaurus regroupant les 6 modules de cours, organisés en chapitres progressifs. |
 | `exercises/` | 65 exercices individuels + 3 projets en binôme, au format standardisé (sujet, métadonnées, tests, solution de référence). |
-| `moulinette/` | Code Java de la moulinette de correction automatique (multi-module Maven). |
+| `moulinette/` | Code Java de la moulinette de correction automatique (multi-module Gradle). |
 | `.claude/` | Configuration Claude Code du projet (skills, hooks, subagents). |
 
 ## Modules
@@ -46,8 +46,8 @@ Dans les deux modes, la boucle pédagogique est identique : on édite un exercic
 ## Architecture technique
 
 **En place (RC) :**
-- **Java 25 LTS** (OpenJDK Temurin) — moulinette **multi-module Maven**.
-- **JUnit 5** + **AssertJ** pour les tests ; notation hors-ligne via **`javac` + JUnit ConsoleLauncher** (zéro Maven/réseau à l'exécution, mode standalone).
+- **Java 25 LTS** (OpenJDK Temurin) — moulinette **multi-module Gradle** (les exercices restent des projets Maven côté stagiaire).
+- **JUnit 5** + **AssertJ** pour les tests ; notation hors-ligne via **`javac` + JUnit ConsoleLauncher** (zéro outil de build/réseau à l'exécution, mode standalone).
 - **Checkstyle** pour le style (en mode *advisory* / non bloquant pour la beta).
 - **Docusaurus** pour le site de cours (servi en local dans le bundle standalone).
 - **Git** pour le rendu (MinGit embarqué dans le bundle) ; dépôt de dev sur **GitHub**.
@@ -66,10 +66,10 @@ Voir **[`docs/setup-dev.md`](docs/setup-dev.md)** pour installer Java 25 (sans d
 
 ```bash
 # Unix — rendre le wrapper exécutable (une seule fois)
-chmod +x mvnw
+chmod +x moulinette/gradlew
 
-# Vérifier la version de Maven téléchargée
-./mvnw -v
+# Vérifier la version de Gradle (wrapper versionné, fonctionne offline)
+moulinette/gradlew -p moulinette -v
 ```
 
 ## Contribuer
