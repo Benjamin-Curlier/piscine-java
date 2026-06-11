@@ -12,6 +12,9 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/). Versions 
 ### Moulinette
 - Logique console extraite en bibliothèque (**`ConsoleSession`**) — le REPL terminal devient
   un client de la façade ; prépare la GUI v1.
+- Nouveau module **`gui`** : serveur HTTP local (JDK, lié à 127.0.0.1, port éphémère ou `--port`)
+  + terminal web **xterm.js vendoré** (zéro réseau à l'exécution). Uber-jar `moulinette-gui.jar`
+  (l'uber-jar reste le classpath d'outillage des checkers).
 
 ## [0.6.0-rc.1] — Release Candidate (2026-06-08)
 

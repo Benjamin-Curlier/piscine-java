@@ -9,8 +9,9 @@ Projet Gradle multi-module sous `moulinette/` (wrapper versionné `moulinette/gr
 | `framework` | Contrats : `Checker`, `CheckerContext`, `CheckResult`, `EvaluationReport`. |
 | `runner` | `ProcessRunner` : exécution de commandes système en sous-processus (timeout 30 s). |
 | `reports` | `ReportGenerator` : rapport Markdown + JSON depuis un `EvaluationReport`. |
-| `cli` | Point d'entrée headless (CI) : `run --exo X --rendu Y`. |
-| `console` | Point d'entrée interactif stagiaire : REPL git + évaluation locale. |
+| `cli` | Point d'entrée headless (CI interne uniquement, non livré au stagiaire) : `run --exo X --rendu Y`. |
+| `console` | Bibliothèque `ConsoleSession` (git sandbox + évaluation locale) + REPL terminal legacy. |
+| `gui` | Point d'entrée stagiaire v1 : serveur HTTP local (`127.0.0.1`) + terminal web xterm.js, client de `ConsoleSession`. |
 
 Dépendances : `console`/`cli` → `framework` + `runner` + `reports`. Pas de cycle.
 

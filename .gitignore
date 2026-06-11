@@ -75,4 +75,5 @@ dist/
 
 # --- Claude Code local user settings (per-user, not shared) ---
 .claude/settings.local.json
+.claude/launch.json
 
