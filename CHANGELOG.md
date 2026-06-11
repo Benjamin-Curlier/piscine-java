@@ -2,6 +2,13 @@
 
 Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/). Versions en [SemVer](https://semver.org/lang/fr/).
 
+## [Unreleased]
+
+### Build
+- Build de la moulinette migré de **Maven** vers **Gradle 9.5.1** (wrapper versionné
+  `moulinette/gradlew`, uber-jar via plugin Shadow, suites taguées `testGit`/`testTools`/`testE2e`).
+  Les projets des **exercices restent en Maven** (`./mvnw` conservé à la racine).
+
 ## [0.6.0-rc.1] — Release Candidate (2026-06-08)
 
 Première **release candidate** : tout le contenu pédagogique des 6 modules est livré, la

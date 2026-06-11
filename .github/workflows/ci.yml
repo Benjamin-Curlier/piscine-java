@@ -23,31 +23,30 @@ jobs:
         with:
           distribution: temurin
           java-version: '25'
-          cache: maven
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
 
       - name: Configurer l'identité git (suite @Tag("git"))
         run: |
           git config --global user.email "ci@etnc.local"
           git config --global user.name "CI ETNC"
 
-      - name: Build + tests unitaires (reactor)
-        run: mvn -B -f moulinette/pom.xml verify
+      - name: Build + tests unitaires + uber-jar
+        run: ./gradlew build shadowJar
+        working-directory: moulinette
 
       - name: Suite d'intégration git
-        run: >-
-          mvn -B -f moulinette/pom.xml -pl console -am test
-          -Dsurefire.excludedGroups=e2e,tools -Dgroups=git
+        run: ./gradlew :console:testGit
+        working-directory: moulinette
 
       - name: Suite outillage (compile/test/style réels)
-        run: >-
-          mvn -B -f moulinette/pom.xml -pl console -am test
-          -Dsurefire.excludedGroups=git,e2e -Dgroups=tools
-          -Dsurefire.failIfNoSpecifiedTests=false
+        run: ./gradlew :console:testTools
+        working-directory: moulinette
 
       - name: Suite bout en bout
-        run: >-
-          mvn -B -f moulinette/pom.xml -pl console -am test
-          -Dsurefire.excludedGroups=git,tools -Dgroups=e2e
+        run: ./gradlew :console:testE2e
+        working-directory: moulinette
 
   lint-exercices:
     name: Lint exercices

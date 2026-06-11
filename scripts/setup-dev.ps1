@@ -86,7 +86,10 @@ if ($major -ge 25 -and -not $Force) {
     Write-Host "   (JAVA_HOME défini pour l'utilisateur — rouvre tes terminaux pour qu'il soit pris en compte)"
 }
 
-# 4. Maven Wrapper (le jar est versionné depuis #54 → fonctionne offline)
-Write-Host "Vérification du Maven Wrapper..."
+# 4. Wrappers de build (jars versionnés → fonctionnent offline, cf. #54)
+#    Gradle : build de la moulinette ; Maven : projets des exercices.
+Write-Host "Vérification du Gradle Wrapper (moulinette)..."
+& "$RepoRoot\moulinette\gradlew.bat" -p "$RepoRoot\moulinette" -v
+Write-Host "Vérification du Maven Wrapper (exercices)..."
 & "$RepoRoot\mvnw.cmd" -v
 Write-Host "== Environnement prêt ==" -ForegroundColor Green

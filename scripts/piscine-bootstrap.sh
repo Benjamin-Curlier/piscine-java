@@ -44,7 +44,7 @@ if [[ -z "$JAVA_MAJOR" || "$JAVA_MAJOR" -lt 25 ]]; then
     exit 1
 fi
 
-JAR="$REPO_ROOT/moulinette/console/target/moulinette-console.jar"
+JAR="$REPO_ROOT/moulinette/console/build/libs/moulinette-console.jar"
 
 if [[ -d "$DEST" && "$FORCE" -eq 0 ]]; then
     echo "Workspace déjà présent : $DEST"
@@ -58,15 +58,8 @@ if [[ -d "$DEST" && "$FORCE" -eq 1 ]]; then
     rm -rf "$DEST"
 fi
 
-# Maven : préfère un mvn système (déjà installé), sinon le wrapper ./mvnw
-if command -v mvn >/dev/null 2>&1; then
-    MVN_CMD=(mvn)
-else
-    MVN_CMD=("$REPO_ROOT/mvnw")
-fi
-
-echo "[bootstrap] Build moulinette-console (via ${MVN_CMD[0]}) ..."
-"${MVN_CMD[@]}" -f "$REPO_ROOT/moulinette/pom.xml" -pl console -am -q package
+echo "[bootstrap] Build moulinette-console (via gradlew) ..."
+"$REPO_ROOT/moulinette/gradlew" -p "$REPO_ROOT/moulinette" -q :console:shadowJar
 
 [[ -f "$JAR" ]] || { echo "Build du jar échoué : $JAR introuvable."; exit 1; }
 

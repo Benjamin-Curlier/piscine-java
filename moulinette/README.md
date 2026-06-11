@@ -33,7 +33,7 @@ runner    reports
 | Outil | Version minimale | Notes |
 |-------|-----------------|-------|
 | Java (Temurin) | **25** LTS | Voir `docs/setup-dev.md` pour l'installation sans droits admin |
-| Maven | **3.9+** | Ou utiliser `./mvnw` à la racine du repo (tâche #10) |
+| Gradle | — | Fourni par le wrapper versionné `moulinette/gradlew` (rien à installer) |
 
 > **Pas encore de Java 25 ?**
 > Consultez la tâche **#12** (`docs/setup-dev.md` à venir) pour l'installation portable
@@ -45,14 +45,17 @@ runner    reports
 ## Lancer les tests
 
 ```bash
-# Depuis la racine du repo — via Maven Wrapper (après tâche #10)
-./mvnw -f moulinette/pom.xml verify
+# Depuis la racine du repo — via Gradle Wrapper (versionné, offline)
+moulinette/gradlew -p moulinette build
 
-# Ou avec Maven installé globalement
-mvn -f moulinette/pom.xml verify
+# Uber-jar de la console
+moulinette/gradlew -p moulinette :console:shadowJar
 
 # Un seul module
-mvn -f moulinette/pom.xml -pl framework test
+moulinette/gradlew -p moulinette :framework:test
+
+# Suites lourdes à la demande
+moulinette/gradlew -p moulinette :console:testGit     # ou :console:testTools / :console:testE2e
 ```
 
 ---
@@ -60,9 +63,7 @@ mvn -f moulinette/pom.xml -pl framework test
 ## Lancer la CLI (développement)
 
 ```bash
-mvn -f moulinette/pom.xml -pl cli exec:java \
-    -Dexec.mainClass="etnc.piscine.moulinette.cli.Main" \
-    -Dexec.args="run --exo 1.1.1 --rendu /chemin/vers/rendu"
+moulinette/gradlew -p moulinette :cli:run --args="run --exo 1.1.1 --rendu /chemin/vers/rendu"
 ```
 
 ---
@@ -76,9 +77,8 @@ mvn -f moulinette/pom.xml -pl cli exec:java \
 | AssertJ | 3.26.3 |
 | SLF4J | 2.0.16 |
 | Logback | 1.5.12 |
-| Maven Compiler Plugin | 3.13.0 |
-| Maven Surefire Plugin | 3.5.2 |
-| Exec Maven Plugin | 3.4.1 |
+| Gradle (wrapper) | 9.5.1 |
+| Plugin Shadow (uber-jar) | 9.4.2 |
 
 ---
 

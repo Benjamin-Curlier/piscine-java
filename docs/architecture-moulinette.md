@@ -2,7 +2,7 @@
 
 ## Vue d'ensemble
 
-Projet Maven multi-module sous `moulinette/` :
+Projet Gradle multi-module sous `moulinette/` (wrapper versionné `moulinette/gradlew` ; les exercices restent des projets Maven) :
 
 | Module | Rôle |
 |---|---|
@@ -47,9 +47,9 @@ Pour ces exos, le livrable du stagiaire est **le test**, pas le code (cf. `forma
 
 ## L'astuce « l'uber-jar EST le classpath »
 
-La console est packagée en uber-jar (maven-shade) qui embarque JUnit, AssertJ et Checkstyle (déclarés en scope `runtime`). À l'exécution, les Checkers compilent et lancent le code stagiaire avec ce **même jar** comme classpath : aucune dépendance réseau, aucun Maven requis sur le PC stagiaire.
+La console est packagée en uber-jar (plugin Shadow, tâche `:console:shadowJar`) qui embarque JUnit, AssertJ et Checkstyle (déclarés en `runtimeOnly`). À l'exécution, les Checkers compilent et lancent le code stagiaire avec ce **même jar** comme classpath : aucune dépendance réseau, aucun Maven requis sur le PC stagiaire.
 
-- `JavaToolkit.toolingClasspath()` renvoie le chemin de l'uber-jar quand on tourne depuis un `.jar` ; sinon (dev/surefire) il retombe sur `System.getProperty("java.class.path")`, qui contient déjà ces dépendances (scope `runtime` ⇒ présent au classpath de test).
+- `JavaToolkit.toolingClasspath()` renvoie le chemin de l'uber-jar quand on tourne depuis un `.jar` ; sinon (dev/tests Gradle) il retombe sur `System.getProperty("java.class.path")`, qui contient déjà ces dépendances (`runtimeOnly` ⇒ présent au classpath de test).
 - Les outils sont invoqués par nom de classe : `org.junit.platform.console.ConsoleLauncher`, `com.puppycrawl.tools.checkstyle.Main`.
 - Le shade exclut les fichiers de signature des dépendances (`META-INF/*.SF|DSA|RSA`) : Checkstyle et ses transitives sont signées, et sans ce filtre le manifeste fusionné lève `Invalid signature file digest`.
 
@@ -77,16 +77,14 @@ Le `MoulinetteRunner` évalue les exos d'un sous-groupe dans l'ordre `position` 
 
 ## Tests
 
-| Suite | Tag | Lancer |
+| Suite | Tag | Lancer (depuis la racine) |
 |---|---|---|
-| Unitaires | (aucun) | `mvn -f moulinette/pom.xml -pl console -am test` |
-| Intégration git | `git` | `... -Dsurefire.excludedGroups=e2e,tools -Dgroups=git` |
-| Outillage (compile/test/style réels) | `tools` | `... -Dsurefire.excludedGroups=git,e2e -Dgroups=tools` |
-| Bout en bout | `e2e` | `... -Dsurefire.excludedGroups=git,tools -Dgroups=e2e` |
+| Unitaires | (aucun) | `moulinette/gradlew -p moulinette :console:test` |
+| Intégration git | `git` | `moulinette/gradlew -p moulinette :console:testGit` |
+| Outillage (compile/test/style réels) | `tools` | `moulinette/gradlew -p moulinette :console:testTools` |
+| Bout en bout | `e2e` | `moulinette/gradlew -p moulinette :console:testE2e` |
 
-Exclusions par défaut : `surefire.excludedGroups = git,e2e,tools` (les suites lourdes ne tournent qu'à la demande). Le CI GitHub Actions (#11a) exécute les quatre suites.
-
-**Maven** : `mvnw` peut échouer à télécharger Maven dans un réseau restreint ; préférer un `mvn` système si présent (les scripts le font).
+La tâche `test` par défaut exclut les tags `git`, `e2e`, `tools` (les suites lourdes ne tournent qu'à la demande, via leurs tâches dédiées). Le CI GitHub Actions (#11a) exécute les quatre suites.
 
 ## Limites connues & dette
 

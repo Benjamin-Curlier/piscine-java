@@ -20,12 +20,11 @@ if (-not (Test-Path "$JdkPath\bin\java.exe")) {
     Write-Error "JDK introuvable à '$JdkPath'. Passe -JdkPath <chemin d'un JDK 25>."
 }
 
-# 1. Build de l'uber-jar (préfère mvn système)
-$MvnCmd = if (Get-Command mvn -ErrorAction SilentlyContinue) { "mvn" } else { "$RepoRoot\mvnw.cmd" }
-Write-Host "[bundle] Build de l'uber-jar (via $MvnCmd) ..."
-& $MvnCmd -f "$RepoRoot\moulinette\pom.xml" -pl console -am -q -DskipTests package
-if ($LASTEXITCODE -ne 0) { throw "Build Maven échoué." }
-$Jar = "$RepoRoot\moulinette\console\target\moulinette-console.jar"
+# 1. Build de l'uber-jar via le wrapper Gradle (versionné, fonctionne offline)
+Write-Host "[bundle] Build de l'uber-jar (via gradlew) ..."
+& "$RepoRoot\moulinette\gradlew.bat" -p "$RepoRoot\moulinette" -q :console:shadowJar
+if ($LASTEXITCODE -ne 0) { throw "Build Gradle échoué." }
+$Jar = "$RepoRoot\moulinette\console\build\libs\moulinette-console.jar"
 if (-not (Test-Path $Jar)) { throw "Uber-jar introuvable : $Jar" }
 
 # 2. Staging

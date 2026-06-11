@@ -12,6 +12,12 @@ replay_pid*
 # Régénéré par maven-shade-plugin à chaque `mvn package`
 **/dependency-reduced-pom.xml
 
+# --- Gradle ---
+.gradle/
+# Le wrapper Gradle est volontairement versionné (build offline reproductible, même politique que #54)
+!moulinette/gradle/wrapper/gradle-wrapper.jar
+# (build/ est déjà ignoré plus bas, section Docusaurus)
+
 # --- IDE ---
 .idea/
 *.iml
