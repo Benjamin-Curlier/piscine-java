@@ -1,3 +1,3 @@
 rootProject.name = "moulinette"
 
-include("framework", "runner", "reports", "cli", "console")
+include("framework", "runner", "reports", "cli", "console", "gui")
