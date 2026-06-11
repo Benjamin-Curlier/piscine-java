@@ -87,7 +87,45 @@ public interface MoulinetteRunner {
                 if (!ok) { stopped = true; break; }
             }
             Path report = writeReport(sgId, outcomes, stopped);
+            persisterProgression(repoRoot, outcomes);
             return new GroupReport(sgId, outcomes, stopped, report);
+        }
+
+        /**
+         * Merge les exos validés dans {@code .piscine/progress.json} ({@code {"1.1.1": true}}).
+         * Un exo validé ne redevient jamais non-validé (la GUI lit ce fichier pour le
+         * tableau de bord). Format plat, écrit à la main comme le reste des rapports.
+         */
+        private void persisterProgression(Path repoRoot, List<ExoOutcome> outcomes) {
+            try {
+                Path file = repoRoot.resolve(".piscine/progress.json");
+                java.util.Set<String> valides = new java.util.TreeSet<>(lireProgression(file));
+                for (ExoOutcome o : outcomes) {
+                    if (o.ok()) valides.add(o.exoId());
+                }
+                Files.createDirectories(file.getParent());
+                StringBuilder sb = new StringBuilder("{\n");
+                var it = valides.iterator();
+                while (it.hasNext()) {
+                    sb.append("  \"").append(it.next()).append("\": true");
+                    if (it.hasNext()) sb.append(',');
+                    sb.append('\n');
+                }
+                sb.append("}\n");
+                Files.writeString(file, sb.toString());
+            } catch (IOException ignore) { /* progression best-effort, comme les rapports */ }
+        }
+
+        /** Ids d'exos marqués {@code true} dans le fichier de progression (absent ⇒ vide). */
+        public static java.util.Set<String> lireProgression(Path file) {
+            java.util.Set<String> valides = new java.util.TreeSet<>();
+            try {
+                if (!Files.isRegularFile(file)) return valides;
+                var m = java.util.regex.Pattern.compile("\"([^\"]+)\"\\s*:\\s*true")
+                    .matcher(Files.readString(file));
+                while (m.find()) valides.add(m.group(1));
+            } catch (IOException ignore) { }
+            return valides;
         }
 
         private void nettoyerBuildDir(Path renduDir) {

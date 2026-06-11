@@ -55,6 +55,7 @@
         return;
       }
       await refreshState();
+      window.dispatchEvent(new Event("piscine:refresh"));
     } catch (e) {
       writeLines("\nErreur de communication avec l'application locale.\n");
     } finally {
@@ -83,6 +84,8 @@
       }
     }
   });
+
+  window.piscineTerm = term;
 
   (async function init() {
     await refreshState();

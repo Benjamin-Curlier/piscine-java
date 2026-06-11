@@ -18,9 +18,18 @@ public final class Main {
         Path piscine = Paths.get(optional(a, "--piscine-repo", defaultPiscine.toString()));
 
         int port = Integer.parseInt(optional(a, "--port", "0"));
+        String siteArg = optional(a, "--site", null);
+        Path site = null;
+        if (siteArg != null) {
+            site = Paths.get(siteArg);
+            if (!java.nio.file.Files.isDirectory(site)) {
+                System.out.println("[gui] Site de cours introuvable (" + site + ") — démarrage sans cours.");
+                site = null;
+            }
+        }
 
         ConsoleSession session = ConsoleSession.open(repo, piscine);
-        GuiServer server = GuiServer.start(session, port);
+        GuiServer server = GuiServer.start(session, port, site);
         Runtime.getRuntime().addShutdownHook(new Thread(server::stop));
 
         System.out.println("[gui] Piscine ETNC : " + server.url());
@@ -66,7 +75,7 @@ public final class Main {
             Piscine ETNC — interface locale
 
             Usage :
-              moulinette-gui --repo <workspace> [--piscine-repo <chemin>] [--port <n>]
+              moulinette-gui --repo <workspace> [--piscine-repo <chemin>] [--site <dossier-site>] [--port <n>]
             """);
     }
 }

@@ -15,6 +15,11 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/). Versions 
 - Nouveau module **`gui`** : serveur HTTP local (JDK, lié à 127.0.0.1, port éphémère ou `--port`)
   + terminal web **xterm.js vendoré** (zéro réseau à l'exécution). Uber-jar `moulinette-gui.jar`
   (l'uber-jar reste le classpath d'outillage des checkers).
+- **Tableau de bord** GUI : progression par module/sous-groupe/exo (✓/●/🔒, séquentiel),
+  historique des rapports moulinette rendus en markdown (marked.js vendoré), boutons
+  « Explorateur » / « Terminal système », site de cours Docusaurus monté sous `/cours/` (`--site`).
+- La moulinette **persiste la progression** dans `<workspace>/.piscine/progress.json`
+  (un exo validé ne redescend jamais).
 
 ## [0.6.0-rc.1] — Release Candidate (2026-06-08)
 

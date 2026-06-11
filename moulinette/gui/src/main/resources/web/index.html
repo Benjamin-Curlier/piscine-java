@@ -11,11 +11,33 @@
   <header>
     <h1>Piscine ETNC</h1>
     <span id="workspace" class="muted"></span>
+    <span class="spacer"></span>
+    <button id="btn-explorer" title="Ouvrir le workspace dans l'explorateur de fichiers">📁 Explorateur</button>
+    <button id="btn-shell" title="Ouvrir un terminal système dans le workspace">⌨ Terminal système</button>
   </header>
-  <main>
-    <div id="terminal"></div>
-  </main>
+  <div class="layout">
+    <nav>
+      <button class="nav-item active" data-view="dashboard">Tableau de bord</button>
+      <a id="nav-cours" class="nav-item hidden" href="/cours/" target="_blank" rel="noopener">Cours ↗</a>
+      <button class="nav-item" data-view="terminal">Terminal</button>
+    </nav>
+    <main>
+      <section id="view-dashboard">
+        <div id="modules"></div>
+        <h2>Rapports de la moulinette</h2>
+        <div class="reports-split">
+          <ul id="reports-list"></ul>
+          <article id="report-view" class="muted">Sélectionne un rapport pour l'afficher.</article>
+        </div>
+      </section>
+      <section id="view-terminal" class="hidden">
+        <div id="terminal"></div>
+      </section>
+    </main>
+  </div>
   <script src="/vendor/xterm.min.js"></script>
+  <script src="/vendor/marked.min.js"></script>
   <script src="/app.js"></script>
+  <script src="/dashboard.js"></script>
 </body>
 </html>

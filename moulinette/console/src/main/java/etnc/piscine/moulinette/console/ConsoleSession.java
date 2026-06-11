@@ -68,6 +68,9 @@ public final class ConsoleSession {
 
     public Path repoRoot() { return ctx.repoRoot(); }
 
+    /** Catalogue des exercices (peut être null sur un assemblage manuel de test). */
+    public ExerciseCatalog catalog() { return ctx.catalog(); }
+
     /**
      * Découpe une ligne en jetons, en respectant les guillemets doubles.
      * Exemple : {@code git commit -m "mon message"} → [git, commit, -m, mon message].
