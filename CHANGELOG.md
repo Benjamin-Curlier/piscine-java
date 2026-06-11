@@ -9,6 +9,10 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/). Versions 
   `moulinette/gradlew`, uber-jar via plugin Shadow, suites taguées `testGit`/`testTools`/`testE2e`).
   Les projets des **exercices restent en Maven** (`./mvnw` conservé à la racine).
 
+### Moulinette
+- Logique console extraite en bibliothèque (**`ConsoleSession`**) — le REPL terminal devient
+  un client de la façade ; prépare la GUI v1.
+
 ## [0.6.0-rc.1] — Release Candidate (2026-06-08)
 
 Première **release candidate** : tout le contenu pédagogique des 6 modules est livré, la
