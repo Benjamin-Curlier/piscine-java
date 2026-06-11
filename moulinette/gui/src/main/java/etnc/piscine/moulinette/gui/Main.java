@@ -1,31 +1,70 @@
 package etnc.piscine.moulinette.gui;
 
 import etnc.piscine.moulinette.console.ConsoleSession;
+import etnc.piscine.moulinette.console.git.ProcessGitClient;
+import etnc.piscine.moulinette.console.workspace.InitRequest;
+import etnc.piscine.moulinette.console.workspace.LocalWorkspaceInitializer;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Locale;
 
-/** Point d'entrée GUI : démarre le serveur local et ouvre le navigateur. */
+/**
+ * Point d'entrée GUI : démarre le serveur local et ouvre le navigateur.
+ *
+ * <p>Sans argument : mode « installé » (jpackage) — contenu piscine et MinGit cherchés à
+ * côté du jar ({@code <app>/piscine}, {@code <app>/git}), workspace auto-initialisé au
+ * premier lancement dans {@code ~/PiscineETNC/workspace} (surchargeable env {@code PISCINE_HOME}).
+ */
 public final class Main {
 
     public static void main(String[] args) throws Exception {
         List<String> a = List.of(args);
-        if (a.isEmpty() || a.contains("--help")) { printUsage(); System.exit(a.isEmpty() ? 1 : 0); }
-        Path repo = Paths.get(required(a, "--repo"));
-        Path defaultPiscine = repo.toAbsolutePath().normalize().getParent().resolve("piscine-etnc");
-        Path piscine = Paths.get(optional(a, "--piscine-repo", defaultPiscine.toString()));
+        if (a.contains("--help")) { printUsage(); System.exit(0); }
+
+        Path repo;
+        Path piscine;
+        if (a.contains("--repo")) {
+            repo = Paths.get(required(a, "--repo"));
+            Path defaultPiscine = repo.toAbsolutePath().normalize().getParent().resolve("piscine-etnc");
+            piscine = Paths.get(optional(a, "--piscine-repo", defaultPiscine.toString()));
+        } else {
+            Path appDir = appDir();
+            piscine = appDir.resolve("piscine");
+            if (!Files.isDirectory(piscine.resolve("exercises"))) {
+                System.err.println("[gui] Contenu piscine introuvable (" + piscine
+                    + ") — en dev, passe --repo/--piscine-repo.");
+                printUsage();
+                System.exit(2);
+            }
+            Path gitHome = appDir.resolve("git");
+            Path gitExe = gitHome.resolve("cmd/git.exe");
+            if (Files.isRegularFile(gitExe)) {
+                System.setProperty("piscine.git", gitExe.toString());
+            }
+            String home = System.getenv("PISCINE_HOME");
+            Path dataDir = home != null && !home.isBlank()
+                ? Paths.get(home)
+                : Paths.get(System.getProperty("user.home"), "PiscineETNC");
+            repo = dataDir.resolve("workspace");
+            if (!Files.isDirectory(repo.resolve(".piscine"))) {
+                System.out.println("[gui] Premier lancement : initialisation du workspace dans " + repo);
+                new LocalWorkspaceInitializer(new ProcessGitClient())
+                    .init(new InitRequest(System.getProperty("user.name", "stagiaire"),
+                        repo, piscine, "module-1-fondamentaux"));
+            }
+        }
 
         int port = Integer.parseInt(optional(a, "--port", "0"));
         String siteArg = optional(a, "--site", null);
-        Path site = null;
-        if (siteArg != null) {
-            site = Paths.get(siteArg);
-            if (!java.nio.file.Files.isDirectory(site)) {
+        Path site = siteArg != null ? Paths.get(siteArg) : appDir().resolve("piscine/site");
+        if (!Files.isDirectory(site)) {
+            if (siteArg != null) {
                 System.out.println("[gui] Site de cours introuvable (" + site + ") — démarrage sans cours.");
-                site = null;
             }
+            site = null;
         }
 
         ConsoleSession session = ConsoleSession.open(repo, piscine);
@@ -36,6 +75,16 @@ public final class Main {
         System.out.println("[gui] Laisse cette fenêtre ouverte ; Ctrl-C pour quitter.");
         tryOpenBrowser(server.url().toString());
         Thread.currentThread().join();
+    }
+
+    /** Dossier contenant le jar de l'app (mode installé) ; le cwd en fallback (dev). */
+    private static Path appDir() {
+        try {
+            Path p = Paths.get(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+            return p.toString().endsWith(".jar") ? p.getParent() : Paths.get(".");
+        } catch (Exception e) {
+            return Paths.get(".");
+        }
     }
 
     private static void tryOpenBrowser(String url) {
@@ -75,6 +124,7 @@ public final class Main {
             Piscine ETNC — interface locale
 
             Usage :
+              moulinette-gui                                  # mode installé : workspace auto (~/PiscineETNC)
               moulinette-gui --repo <workspace> [--piscine-repo <chemin>] [--site <dossier-site>] [--port <n>]
             """);
     }

@@ -74,34 +74,15 @@ Un relecteur **bloque** la PR tant que l'un de ces points n'est pas levé :
 
 Les remarques de moindre importance (formulation, détail de style) sont des *suggestions* et ne bloquent pas le merge.
 
-## 7. Produire le bundle standalone
+## 7. Produire les installeurs
 
-Le **mode standalone** est un ZIP autonome (JDK + git + site de cours + moulinette) que le stagiaire lance sans rien installer. Il est produit par `scripts/build-bundle`.
+Depuis la **v1**, la distribution stagiaire est un **installeur jpackage** (plus de ZIP). Voir
+[`docs/deploiement-instructeur.md`](docs/deploiement-instructeur.md) pour le détail (CI Release
+sur tag `v*`, ou build local `moulinette/gradlew -p moulinette :gui:jpackageApp`).
 
-**Prérequis (côté formateur, machine de build) :**
-- un **JDK 25** local (chemin passé en argument) ;
-- **Node.js** (pour générer le site de cours via `npm run build`) ;
-- un **accès réseau** au premier build (téléchargement de MinGit, version épinglée + SHA-256 vérifié).
-
-**Commandes :**
-
-```powershell
-# Windows (PowerShell)
-.\scripts\build-bundle.ps1 -JdkPath "C:\chemin\jdk-25" [-OutDir dist] [-RebuildSite]
-```
-
-```bash
-# Linux / macOS
-./scripts/build-bundle.sh --jdk /chemin/jdk-25 [--out dist] [--rebuild-site]
-```
-
-- `-JdkPath` / `--jdk` : JDK 25 portable à embarquer (obligatoire ou via `JAVA_HOME`).
-- `-OutDir` / `--out` : dossier de sortie (défaut : `dist/`).
-- `-RebuildSite` / `--rebuild-site` : force la régénération du site de cours même si `courses/build/` existe.
-
-Le ZIP est écrit dans `dist/piscine-etnc-stagiaire-<AAAAMMJJ>.zip`.
-
-**Tester le ZIP :** décompresser sur une machine Windows **sans Java/git/Node**, lancer `piscine.bat`, vérifier que le site s'ouvre, que le REPL démarre et qu'un rendu d'exercice est évalué — **hors-ligne**.
+**Tester l'installeur :** sur une machine Windows **sans Java/git/Node**, installer le `.exe`
+(sans droits admin), lancer « Piscine ETNC » : la GUI s'ouvre dans le navigateur, le workspace
+est créé dans `~/PiscineETNC`, et un rendu d'exercice est évalué — **hors-ligne**.
 
 ---
 

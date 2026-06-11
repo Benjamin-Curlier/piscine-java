@@ -1,0 +1,96 @@
+name: Release
+
+# Construit les installeurs « Piscine ETNC » (v1) : .exe Windows per-user (JRE + MinGit
+# + exercices + site de cours embarqués) et .deb + app-image tar.gz Linux.
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  installer-windows:
+    name: Installeur Windows (.exe)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 25 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: courses/package-lock.json
+
+      - name: Build du site de cours
+        working-directory: courses
+        run: |
+          npm ci
+          npm run build
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      # WiX 3.14 est préinstallé sur windows-latest ; sinon le job échoue avec un message clair.
+      - name: Construire l'installeur
+        working-directory: moulinette
+        run: ./gradlew :gui:jpackageApp
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: piscine-etnc-windows
+          path: moulinette/gui/build/jpackage/out/*.exe
+
+  installer-linux:
+    name: Installeurs Linux (.deb + app-image)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 25 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: courses/package-lock.json
+
+      - name: Build du site de cours
+        working-directory: courses
+        run: |
+          npm ci
+          npm run build
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Construire le .deb
+        working-directory: moulinette
+        run: ./gradlew :gui:jpackageApp -PjpackageType=deb
+
+      - name: Construire l'app-image portable (tar.gz)
+        working-directory: moulinette
+        run: |
+          ./gradlew :gui:jpackageApp -PjpackageType=app-image
+          tar -czf gui/build/jpackage/out/piscine-etnc-linux-portable.tar.gz \
+              -C gui/build/jpackage/out "Piscine ETNC"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: piscine-etnc-linux
+          path: |
+            moulinette/gui/build/jpackage/out/*.deb
+            moulinette/gui/build/jpackage/out/*.tar.gz

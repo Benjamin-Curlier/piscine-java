@@ -19,10 +19,29 @@ public class ProcessGitClient implements GitClient {
 
     private final Map<Path, List<RefUpdate>> lastPushByRepo = new HashMap<>();
 
+    /**
+     * Exécutable git à utiliser : propriété système {@code piscine.git} (chemin complet,
+     * positionnée par la GUI quand un MinGit est embarqué dans l'app installée) →
+     * env {@code PISCINE_GIT_HOME} ({@code <home>/cmd/git.exe} ou {@code <home>/bin/git}) →
+     * {@code git} du PATH.
+     */
+    public static String gitExecutable() {
+        String prop = System.getProperty("piscine.git");
+        if (prop != null && !prop.isBlank()) return prop;
+        String home = System.getenv("PISCINE_GIT_HOME");
+        if (home != null && !home.isBlank()) {
+            Path cmd = Path.of(home, "cmd", "git.exe");
+            if (java.nio.file.Files.isRegularFile(cmd)) return cmd.toString();
+            Path bin = Path.of(home, "bin", "git");
+            if (java.nio.file.Files.isRegularFile(bin)) return bin.toString();
+        }
+        return "git";
+    }
+
     @Override
     public GitResult run(Path repo, List<String> args) {
         List<String> cmd = new ArrayList<>();
-        cmd.add("git");
+        cmd.add(gitExecutable());
         cmd.addAll(args);
         ProcessBuilder pb = new ProcessBuilder(cmd).directory(repo.toFile());
         pb.environment().put("LC_ALL", "C");
