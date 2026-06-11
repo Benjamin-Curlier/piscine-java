@@ -71,7 +71,7 @@
         buffer = "";
         if (line.length === 0) { prompt(); continue; }
         run(line);
-      } else if (ch === "" || ch === "b") { // backspace
+      } else if (ch === "" || ch === "") { // backspace
         if (buffer.length > 0) {
           buffer = buffer.slice(0, -1);
           term.write("\b \b");
