@@ -90,9 +90,13 @@
     });
   });
 
-  /* Lien cours si un site est monté */
+  /* Lien cours si un site est servi (serveur dédié, URL absolue) */
   fetch("/api/state").then((r) => r.json()).then((s) => {
-    if (s.courses) document.getElementById("nav-cours").classList.remove("hidden");
+    if (s.coursesUrl) {
+      const a = document.getElementById("nav-cours");
+      a.href = s.coursesUrl;
+      a.classList.remove("hidden");
+    }
   }).catch(() => {});
 
   /* Raccourcis */

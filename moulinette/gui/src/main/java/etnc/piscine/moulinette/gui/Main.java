@@ -2,6 +2,7 @@ package etnc.piscine.moulinette.gui;
 
 import etnc.piscine.moulinette.console.ConsoleSession;
 import etnc.piscine.moulinette.console.git.ProcessGitClient;
+import etnc.piscine.moulinette.console.repl.CourseSiteServer;
 import etnc.piscine.moulinette.console.workspace.InitRequest;
 import etnc.piscine.moulinette.console.workspace.LocalWorkspaceInitializer;
 
@@ -68,8 +69,14 @@ public final class Main {
         }
 
         ConsoleSession session = ConsoleSession.open(repo, piscine);
-        GuiServer server = GuiServer.start(session, port, site);
-        Runtime.getRuntime().addShutdownHook(new Thread(server::stop));
+        // Le site Docusaurus (baseUrl '/') est servi à la racine de son propre serveur.
+        CourseSiteServer siteServer = site != null ? CourseSiteServer.start(site, 8800, 8899) : null;
+        String coursesUrl = siteServer != null ? siteServer.url().toString() : null;
+        GuiServer server = GuiServer.start(session, port, coursesUrl);
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            server.stop();
+            if (siteServer != null) siteServer.stop();
+        }));
 
         System.out.println("[gui] Piscine ETNC : " + server.url());
         tryOpenBrowser(server.url().toString());
