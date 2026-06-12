@@ -10,6 +10,11 @@ on:
 permissions:
   contents: write
 
+# Les actions v4 tournent encore sur Node 20 (déprécié, retiré des runners en sept. 2026) :
+# on force Node 24 dès maintenant, comme recommandé par GitHub.
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
 jobs:
   installer-windows:
     name: Installeur Windows (.exe)
