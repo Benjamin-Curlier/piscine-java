@@ -29,6 +29,8 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/). Versions 
   répertoire d'installation. Remplace le bundle ZIP (`build-bundle` retiré).
 - Résolution git explicite : propriété `piscine.git` (MinGit embarqué) → env
   `PISCINE_GIT_HOME` → `git` du PATH.
+- **App invisible avec icône de zone de notification** : l'exe jpackage n'a aucune fenêtre
+  console ; un tray « P » (Ouvrir / Quitter, double-clic = ouvrir) est le point de contrôle.
 
 ### Retiré (v1 : piscine 100 % locale)
 - **Mode `nominal`** (plateforme serveur) et option `--mode` : abandonnés, l'enum `Mode` ne

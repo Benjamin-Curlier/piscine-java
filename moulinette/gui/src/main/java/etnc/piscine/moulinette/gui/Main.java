@@ -72,9 +72,53 @@ public final class Main {
         Runtime.getRuntime().addShutdownHook(new Thread(server::stop));
 
         System.out.println("[gui] Piscine ETNC : " + server.url());
-        System.out.println("[gui] Laisse cette fenêtre ouverte ; Ctrl-C pour quitter.");
         tryOpenBrowser(server.url().toString());
+        if (!installTrayIcon(server)) {
+            // pas de zone de notification (Linux headless…) : on reste vivant en console
+            System.out.println("[gui] Ctrl-C pour quitter.");
+        }
         Thread.currentThread().join();
+    }
+
+    /**
+     * Icône de zone de notification : l'app installée n'a aucune fenêtre (jpackage sans
+     * console) — le tray est le seul point de contrôle visible (ouvrir / quitter).
+     * Rend false si le bureau ne propose pas de tray.
+     */
+    private static boolean installTrayIcon(GuiServer server) {
+        try {
+            if (!java.awt.SystemTray.isSupported()) return false;
+            java.awt.PopupMenu menu = new java.awt.PopupMenu();
+            java.awt.MenuItem open = new java.awt.MenuItem("Ouvrir Piscine ETNC");
+            open.addActionListener(e -> tryOpenBrowser(server.url().toString()));
+            java.awt.MenuItem quit = new java.awt.MenuItem("Quitter");
+            quit.addActionListener(e -> System.exit(0));
+            menu.add(open);
+            menu.addSeparator();
+            menu.add(quit);
+            java.awt.TrayIcon icon = new java.awt.TrayIcon(trayImage(), "Piscine ETNC — " + server.url(), menu);
+            icon.setImageAutoSize(true);
+            icon.addActionListener(e -> tryOpenBrowser(server.url().toString())); // double-clic
+            java.awt.SystemTray.getSystemTray().add(icon);
+            return true;
+        } catch (Exception | UnsatisfiedLinkError e) {
+            return false;
+        }
+    }
+
+    /** Icône 16×16 dessinée à la volée (un « P » sur pastille bleue) : zéro ressource binaire. */
+    private static java.awt.Image trayImage() {
+        var img = new java.awt.image.BufferedImage(16, 16, java.awt.image.BufferedImage.TYPE_INT_ARGB);
+        var g = img.createGraphics();
+        g.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING,
+            java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setColor(new java.awt.Color(0x89, 0xB4, 0xFA));
+        g.fillOval(0, 0, 16, 16);
+        g.setColor(java.awt.Color.WHITE);
+        g.setFont(new java.awt.Font(java.awt.Font.SANS_SERIF, java.awt.Font.BOLD, 11));
+        g.drawString("P", 5, 12);
+        g.dispose();
+        return img;
     }
 
     /** Dossier contenant le jar de l'app (mode installé) ; le cwd en fallback (dev). */
