@@ -37,12 +37,12 @@ public final class GuiServer {
 
     private final HttpServer server;
     private final ConsoleSession session;
-    private final Path siteDir; // site de cours (Docusaurus construit), peut être null
+    private final String coursesUrl; // URL du site de cours (serveur dédié), peut être null
 
-    private GuiServer(HttpServer server, ConsoleSession session, Path siteDir) {
+    private GuiServer(HttpServer server, ConsoleSession session, String coursesUrl) {
         this.server = server;
         this.session = session;
-        this.siteDir = siteDir;
+        this.coursesUrl = coursesUrl;
     }
 
     /** Démarre sur {@code port} (0 = port éphémère libre). */
@@ -50,12 +50,16 @@ public final class GuiServer {
         return start(session, port, null);
     }
 
-    /** Variante avec site de cours statique monté sous {@code /cours/}. */
-    public static GuiServer start(ConsoleSession session, int port, Path siteDir) {
+    /**
+     * Variante avec site de cours. Le site Docusaurus est construit avec {@code baseUrl: '/'}
+     * (assets en chemins absolus) : il est servi à la racine de son propre serveur
+     * ({@code CourseSiteServer}) et la GUI ne fait que pointer dessus.
+     */
+    public static GuiServer start(ConsoleSession session, int port, String coursesUrl) {
         try {
             var addr = new InetSocketAddress(InetAddress.getLoopbackAddress(), port);
             HttpServer s = HttpServer.create(addr, 0);
-            GuiServer gui = new GuiServer(s, session, siteDir);
+            GuiServer gui = new GuiServer(s, session, coursesUrl);
             s.createContext("/", gui::handleStatic);
             s.createContext("/api/terminal", gui::handleTerminal);
             s.createContext("/api/state", gui::handleState);
@@ -63,9 +67,6 @@ public final class GuiServer {
             s.createContext("/api/reports", gui::handleReports);
             s.createContext("/api/report", gui::handleReport);
             s.createContext("/api/open", gui::handleOpen);
-            if (siteDir != null) {
-                s.createContext("/cours", gui::handleCours);
-            }
             s.start();
             return gui;
         } catch (IOException e) {
@@ -109,7 +110,8 @@ public final class GuiServer {
         respond(ex, 200, "application/json",
             "{\"branch\":\"" + Json.escape(session.currentBranch())
                 + "\",\"repoRoot\":\"" + Json.escape(session.repoRoot().toString())
-                + "\",\"courses\":" + (siteDir != null) + "}");
+                + "\",\"coursesUrl\":" + (coursesUrl == null ? "null" : "\"" + Json.escape(coursesUrl) + "\"")
+                + "}");
     }
 
     /**
@@ -226,21 +228,6 @@ public final class GuiServer {
         respond(ex, 200, "application/json", "{\"ok\":true}");
     }
 
-    /** Sert le site de cours statique sous /cours/ (index.html par défaut). */
-    private void handleCours(HttpExchange ex) throws IOException {
-        String rel = ex.getRequestURI().getPath().substring("/cours".length());
-        if (rel.isEmpty() || rel.equals("/")) rel = "/index.html";
-        Path root = siteDir.toAbsolutePath().normalize();
-        Path file = root.resolve(rel.substring(1)).normalize();
-        if (!file.startsWith(root)) { respond(ex, 404, "text/plain", "introuvable"); return; }
-        if (Files.isDirectory(file)) file = file.resolve("index.html");
-        if (!Files.isRegularFile(file)) { respond(ex, 404, "text/plain", "introuvable"); return; }
-        byte[] bytes = Files.readAllBytes(file);
-        ex.getResponseHeaders().set("Content-Type", contentType(file.getFileName().toString()));
-        ex.sendResponseHeaders(200, bytes.length);
-        ex.getResponseBody().write(bytes);
-        ex.close();
-    }
 
     private void handleStatic(HttpExchange ex) throws IOException {
         String path = ex.getRequestURI().getPath();
