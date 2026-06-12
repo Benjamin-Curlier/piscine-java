@@ -14,6 +14,7 @@ tag `v*` (ou manuellement via *Run workflow*) :
 | Artefact | Plateforme | Contenu |
 |---|---|---|
 | `Piscine ETNC-1.0.0.exe` | Windows | Installeur **par utilisateur** (sans admin), JRE + MinGit embarqués |
+| `piscine-etnc-windows-portable.zip` | Windows **verrouillé** (AppLocker) | App portable : extraire et lancer `Piscine ETNC.exe` — **aucune installation** |
 | `piscine-etnc_1.0.0_amd64.deb` | Debian/Ubuntu | Paquet deb (git système requis) |
 | `piscine-etnc-linux-portable.tar.gz` | Linux (toutes distros) | App-image portable, à extraire et lancer |
 
@@ -36,6 +37,22 @@ admin demandé.
 
 **Linux** : `sudo apt install ./piscine-etnc_*.deb`, ou extraire le tar.gz et lancer
 `Piscine ETNC/bin/Piscine ETNC` (git doit être présent : `sudo apt install git`).
+
+### Postes Windows verrouillés (AppLocker / SRP)
+
+Sur les parcs durcis, les **installeurs non signés sont refusés** (exe : extraction MSI dans
+`%TEMP%` bloqué ; msi : Windows Installer désactivé pour l'utilisateur), mais l'exécution
+d'un exe depuis un **chemin autorisé par la politique** (lecteur de travail type `E:\`,
+répertoire métier…) fonctionne. Dans ce cas :
+
+1. Extraire `piscine-etnc-windows-portable.zip` dans un chemin autorisé.
+2. Lancer `Piscine ETNC\Piscine ETNC.exe` — identique à la version installée
+   (workspace dans `~/PiscineETNC`, icône de zone de notification).
+
+Vérifié sur un poste ETNC sans droits admin. Pour une distribution « propre » (installeur
+double-clic), la voie durable est de faire **signer l'exe par le certificat interne** de
+l'organisation ou d'obtenir une **règle AppLocker dédiée** (éditeur ou chemin) auprès de la
+DSI/SSI — l'exe jpackage se signe avec `signtool sign` standard.
 
 ## 3. Premier lancement
 

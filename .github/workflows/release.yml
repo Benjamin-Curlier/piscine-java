@@ -49,10 +49,21 @@ jobs:
         working-directory: moulinette
         run: ./gradlew :gui:jpackageApp
 
+      # Version portable (zip) : pour les postes verrouillés (AppLocker) où les installeurs
+      # exe/msi sont refusés mais où un exe lancé depuis un chemin autorisé fonctionne.
+      - name: Construire la version portable (zip)
+        working-directory: moulinette
+        run: |
+          ./gradlew :gui:jpackageApp -PjpackageType=app-image
+          Compress-Archive -Path 'gui/build/jpackage/out/Piscine ETNC' `
+            -DestinationPath 'gui/build/jpackage/out/piscine-etnc-windows-portable.zip'
+
       - uses: actions/upload-artifact@v4
         with:
           name: piscine-etnc-windows
-          path: moulinette/gui/build/jpackage/out/*.exe
+          path: |
+            moulinette/gui/build/jpackage/out/*.exe
+            moulinette/gui/build/jpackage/out/*.zip
 
   installer-linux:
     name: Installeurs Linux (.deb + app-image)
