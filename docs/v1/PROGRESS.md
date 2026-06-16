@@ -4,7 +4,7 @@ Branche `v1`. Démarré le 2026-06-16. Budget ~6 h, auto-rythmé. Un item par it
 
 ## Checklist (cocher quand **vert & commité**)
 
-- [ ] **A1** moulinette : rapport attendu/obtenu + indice
+- [x] **A1** moulinette : rapport attendu/obtenu + indice — `AbstractTestChecker.extraitEchecs`
 - [ ] **A2** chapitre debug / stack trace
 - [ ] **B1** commande `submit` (git masqué)
 - [ ] **B2** Module 0 / Quickstart
@@ -28,4 +28,12 @@ Branche `v1`. Démarré le 2026-06-16. Budget ~6 h, auto-rythmé. Un item par it
   metadata/evaluation conformes. `lint-exercices` toujours 65/0.
 - Suivi (itération ultérieure) : intégrer le capstone au **catalogue/tableau de bord** (la GUI
   groupe par module 1-6 ; les `projets-jeux/` ne sont pas encore listés) — à coupler avec **C1**.
-- **Prochaine itération : A1** (moulinette explique les échecs — attendu/obtenu + indice).
+### Itération 2 — 2026-06-16 ✓
+- **A1 livré** : `extraitEchecs` parse la section « Failures » du ConsoleLauncher et produit,
+  pour chaque test, `✗ intitulé` + `attendu :` / `obtenu :` (ou `a échoué : <exception>`),
+  sans le bruit (MethodSource, stack frames). Indice du checker amélioré. Repli sur l'ancien
+  filtre si format inconnu. Nouveau test unitaire `AbstractTestCheckerTest` (4 cas) vert ;
+  suite unitaire `:console:test` verte (pas de régression, MutationChecker inclus).
+- **Avant** : `Failures (1): MethodSource [className=..., methodName=...]`.
+  **Après** : `✗ affiche la fiche… / attendu : "=== Fiche membre ===…" / obtenu : ""`.
+- **Prochaine itération : B3** (noter tout le sous-groupe au lieu de s'arrêter au 1er échec).

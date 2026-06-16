@@ -68,20 +68,114 @@ abstract class AbstractTestChecker implements Checker {
             if (run.exitCode() == 0) return CheckResult.ok();
             return CheckResult.fail(
                 "Des " + label() + " ont échoué :\n" + extraitEchecs(run.stdout()),
-                "Relis le sujet et corrige ton code pour faire passer ces tests.");
+                "Compare l'attendu et l'obtenu ci-dessus : la différence pointe vers ce qu'il faut corriger.");
         } catch (IOException e) {
             return CheckResult.error("Échec technique sur les " + label() + " : " + e.getMessage());
         }
     }
 
-    /** Garde la section de synthèse du ConsoleLauncher (lignes 'tests ...' + 'Failures'). */
+    /** Un test en échec, prêt à être présenté au stagiaire. */
+    private record Echec(String titre, String description, String attendu, String obtenu, String exception) { }
+
+    /**
+     * Transforme la sortie brute du ConsoleLauncher en un résumé lisible par un débutant :
+     * pour chaque test en échec, son intitulé, et — pour une assertion — la valeur
+     * <strong>attendue</strong> et la valeur <strong>obtenue</strong>. Replie sur l'ancien
+     * filtre brut si le format n'est pas reconnu (pour ne jamais être moins informatif).
+     */
     static String extraitEchecs(String stdout) {
+        List<Echec> echecs = parserEchecs(stdout);
+        if (echecs.isEmpty()) {
+            return filtreBrut(stdout);
+        }
+        StringBuilder sb = new StringBuilder();
+        for (Echec e : echecs) {
+            sb.append("✗ ").append(e.titre()).append('\n');
+            if (e.description() != null && !e.description().isBlank()) {
+                sb.append("   ").append(e.description()).append('\n');
+            }
+            if (e.attendu() != null) {
+                sb.append("   attendu : ").append(e.attendu()).append('\n');
+                sb.append("   obtenu  : ").append(e.obtenu() == null ? "(rien)" : e.obtenu()).append('\n');
+            } else if (e.exception() != null) {
+                sb.append("   a échoué : ").append(e.exception()).append('\n');
+            }
+            sb.append('\n');
+        }
+        return sb.toString().stripTrailing();
+    }
+
+    /** Parse la section « Failures (N): » du ConsoleLauncher en échecs structurés. */
+    private static List<Echec> parserEchecs(String stdout) {
+        List<Echec> res = new ArrayList<>();
+        String titre = null;
+        String description = null;
+        String attendu = null;
+        String obtenu = null;
+        String exception = null;
+        boolean dansEchecs = false;
+        for (String brute : stdout.split("\n")) {
+            String l = brute.strip();
+            if (l.startsWith("Failures (")) {
+                dansEchecs = true;
+                continue;
+            }
+            if (!dansEchecs) {
+                continue;
+            }
+            if (l.startsWith("Test run finished") || l.startsWith("[")) {
+                break; // fin de la section, début du décompte
+            }
+            if (l.startsWith("JUnit ") && l.contains(":")) {
+                if (titre != null) {
+                    res.add(new Echec(titre, description, attendu, obtenu, exception));
+                }
+                titre = l.substring(l.lastIndexOf(':') + 1).strip();
+                description = null;
+                attendu = null;
+                obtenu = null;
+                exception = null;
+            } else if (l.startsWith("=>")) {
+                String apres = l.substring(2).strip();              // "type: message"
+                int sep = apres.indexOf(": ");
+                String type = sep >= 0 ? apres.substring(0, sep).strip() : apres;
+                String message = sep >= 0 ? apres.substring(sep + 2).strip() : "";
+                String typeCourt = type.contains(".") ? type.substring(type.lastIndexOf('.') + 1) : type;
+                int o = message.indexOf('[');
+                int c = message.lastIndexOf(']');
+                if (o >= 0 && c > o) {                                // la description AssertJ : [ ... ]
+                    description = message.substring(o + 1, c).strip();
+                    message = (message.substring(0, o) + message.substring(c + 1)).strip();
+                }
+                exception = message.isBlank() ? typeCourt : typeCourt + " : " + message;
+            } else if (l.startsWith("expected:")) {
+                attendu = l.substring("expected:".length()).strip();
+            } else if (l.startsWith("but was:")) {
+                obtenu = l.substring("but was:".length()).strip();
+            } else if (titre == null && l.startsWith("MethodSource")) {
+                int i = l.indexOf("methodName = '");
+                if (i >= 0) {
+                    int j = l.indexOf('\'', i + 14);
+                    if (j > 0) {
+                        titre = l.substring(i + 14, j);
+                    }
+                }
+            }
+        }
+        if (titre != null) {
+            res.add(new Echec(titre, description, attendu, obtenu, exception));
+        }
+        return res;
+    }
+
+    /** Repli : ancien filtre « lignes de synthèse », utilisé si le format n'est pas reconnu. */
+    static String filtreBrut(String stdout) {
         List<String> garde = new ArrayList<>();
         for (String l : stdout.split("\n")) {
             String t = l.strip();
             if (t.contains("tests successful") || t.contains("tests failed")
                 || t.startsWith("Failures") || t.startsWith("MethodSource")
-                || t.contains("==> expected")) {
+                || t.contains("expected") || t.contains("but was")) {
                 garde.add(l);
             }
         }
