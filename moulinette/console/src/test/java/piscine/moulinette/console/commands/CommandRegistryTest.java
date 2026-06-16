@@ -26,7 +26,7 @@ class CommandRegistryTest {
         var reg = CommandRegistry.defaults(null);
         var r = reg.dispatch(ctx, List.of("git", "checkout", "-b", "x"));
         assertThat(r.exitCode()).isOne();
-        assertThat(r.output()).contains("non supportée").contains("submit-start");
+        assertThat(r.output()).contains("non supportée").contains("submit");
     }
 
     @Test

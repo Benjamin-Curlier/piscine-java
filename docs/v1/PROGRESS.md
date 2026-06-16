@@ -6,7 +6,7 @@ Branche `v1`. Démarré le 2026-06-16. Budget ~6 h, auto-rythmé. Un item par it
 
 - [x] **A1** moulinette : rapport attendu/obtenu + indice — `AbstractTestChecker.extraitEchecs`
 - [ ] **A2** chapitre debug / stack trace
-- [ ] **B1** commande `submit` (git masqué)
+- [x] **B1** commande `submit` (git masqué) — `SubmitCommand` (checkout+add+commit+push en une commande)
 - [ ] **B2** Module 0 / Quickstart
 - [x] **B3** noter tout le sous-groupe (rapport complet ; progression séquentielle préservée)
 - [ ] **C1** moteur gamification (XP/niveaux/streaks/badges) + tableau de bord
@@ -43,4 +43,11 @@ Branche `v1`. Démarré le 2026-06-16. Budget ~6 h, auto-rythmé. Un item par it
   `GroupReport.stoppedEarly` → `tousReussis` ; messages REPL/rapport mis à jour (« Corrige les
   exos en ✗ » / « 🎉 sous-groupe complet »). Nouveau test 2-exos `tous_les_exos_du_groupe_sont_notes`
   + `SubmissionTriggerTest` ajusté ; `:console:test` **et** `:console:testE2e` verts.
-- **Prochaine itération : B1** (commande `submit` qui masque branch/add/commit/push aux débutants).
+### Itération 4 — 2026-06-16 ✓
+- **B1 livré** : nouvelle commande REPL **`submit <sous-groupe>`** = `checkout -B rendu/<g>`
+  + `add -A` + `commit` + `push` (déclenche la moulinette), en une seule commande. Tolère
+  « rien à valider », infère le groupe depuis la branche `rendu/` courante si l'argument est
+  omis. Enregistrée en tête du `CommandRegistry` ; l'aide « commande non supportée » pour
+  `checkout`/`branch` pointe désormais vers `submit`. 4 tests `SubmitCommandTest` + `CommandRegistryTest`
+  ajusté ; `:console:test` vert.
+- **Prochaine itération : B2** (Module 0 / Quickstart — documente `submit` et « comment lancer son code »).
