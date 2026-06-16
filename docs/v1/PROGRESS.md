@@ -19,7 +19,7 @@ vérité.** Chaque itération :
 - [x] **B1** commande `submit` (git masqué) — `SubmitCommand` (checkout+add+commit+push en une commande)
 - [x] **B2** Module 0 / Quickstart — `courses/docs/demarrage-rapide.md` + `lancer-la-piscine.md` modernisé
 - [x] **B3** noter tout le sous-groupe (rapport complet ; progression séquentielle préservée)
-- [ ] **C1** moteur gamification (XP/niveaux/streaks/badges) + tableau de bord
+- [ ] **C1** gamification — **moteur ✓** (`console/gamification/Gamification`, testé) ; reste : câblage commande `profil` + tableau de bord
 - [x] **C2** jeu capstone Snake (cœur noté vert + rendu jouable Swing) — `exercises/projets-jeux/jeu-1-snake/`
 - [ ] **C3** (stretch) 2e jeu
 - [ ] **D1** chapitre Maven/Gradle
@@ -82,3 +82,12 @@ vérité.** Chaque itération :
   avec A1), et méthode de débogage (`println`, réduction, point d'arrêt). Site Docusaurus *builde*.
   **Épic A complet** (A1 + A2).
 - **Prochaine itération : C1** (moteur de gamification : XP/niveaux/streaks/badges — le « wow »).
+
+### Itération 7 — 2026-06-16 ✓ (C1 — partie 1 : moteur)
+- **Moteur de gamification livré** (`console/gamification/`) : `Gamification.evaluer(validés, exos)` →
+  `Profil(xp, niveau, titre, xpProchainNiveau, progression %, badges)`. XP par difficulté
+  (`Difficulte` : tres-facile/debutant=10 … difficile=40), 6 niveaux (Débutant→Maître), badges
+  (Premier sang, Assidu·e, Maître du module N, Mi-parcours, Diplômé·e). Pur, sans effet de bord.
+  6 tests `GamificationTest` verts (`:console:test`).
+- **Prochaine itération : C1 partie 2** — câbler : commande REPL `profil` (lit `progress.json` +
+  catalogue → affiche XP/niveau/badges) et exposer le profil au tableau de bord GUI.
