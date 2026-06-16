@@ -18,15 +18,15 @@ class MembreTest {
     @Test
     @DisplayName("tri par niveau croissant sur liste melangee")
     void tri_par_niveau() {
-        Membre lieutenant = new Membre("Martin", Niveau.PRINCIPAL, 2);
-        Membre membre     = new Membre("Dupont", Niveau.JUNIOR,     5);
-        Membre sergent    = new Membre("Girard", Niveau.SENIOR,    1);
-        Membre caporal    = new Membre("Arnaud", Niveau.CONFIRME,    3);
+        Membre principal = new Membre("Martin", Niveau.PRINCIPAL, 2);
+        Membre membre    = new Membre("Dupont", Niveau.JUNIOR,     5);
+        Membre senior    = new Membre("Girard", Niveau.SENIOR,    1);
+        Membre confirme  = new Membre("Arnaud", Niveau.CONFIRME,    3);
 
-        List<Membre> liste = new ArrayList<>(List.of(lieutenant, membre, sergent, caporal));
+        List<Membre> liste = new ArrayList<>(List.of(principal, membre, senior, confirme));
         Collections.sort(liste);
 
-        assertThat(liste).containsExactly(membre, caporal, sergent, lieutenant);
+        assertThat(liste).containsExactly(membre, confirme, senior, principal);
     }
 
     @Test
