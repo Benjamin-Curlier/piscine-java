@@ -6,7 +6,7 @@ Un journal d'événements est un fichier qui **accumule** des lignes au fil du
 temps : chaque nouvel événement vient s'ajouter après les précédents, sans
 jamais écraser ce qui a déjà été enregistré. C'est un besoin courant dans
 les systèmes de supervision et de traçabilité (logs d'opérations, journaux
-d'audit, traces tactiques…).
+d'audit, traces applicatives…).
 
 En Java, l'écriture dans un fichier **écrase par défaut** le contenu existant.
 Pour construire un journal append-only, il faut explicitement demander à NIO.2
@@ -43,13 +43,13 @@ Journal.ajouter(chemin, "Démarrage du système")
 Journal.lire(chemin)    // → ["Démarrage du système"]
 
 Journal.ajouter(chemin, "Connexion opérateur")
-Journal.ajouter(chemin, "Mission lancée")
-Journal.lire(chemin)    // → ["Démarrage du système", "Connexion opérateur", "Mission lancée"]
+Journal.ajouter(chemin, "Tâche lancée")
+Journal.lire(chemin)    // → ["Démarrage du système", "Connexion opérateur", "Tâche lancée"]
 ```
 
 ## Contraintes
 
-- Package `etnc.m5`. **Ne modifiez pas** les signatures.
+- Package `piscine.m5`. **Ne modifiez pas** les signatures.
 - `ajouter` : **`Files.writeString`** avec `StandardCharsets.UTF_8`,
   `StandardOpenOption.CREATE` et `StandardOpenOption.APPEND` — dans cet ordre.
 - `lire` : tester `Files.exists(journal)` avant tout appel de lecture ;

@@ -5,16 +5,16 @@
 Quatre instructions `System.out.println(...)`, une par ligne de la fiche :
 
 ```java
-System.out.println("=== Fiche militaire ===");
+System.out.println("=== Fiche membre ===");
 System.out.println("Nom    : " + nom);
-System.out.println("Grade  : " + grade);
+System.out.println("Niveau : " + niveau);
 System.out.println("Age    : " + age + " ans");
 ```
 
 Étapes intellectuelles :
 
 1. **Repérer le format exact** demandé dans le sujet : titre encadré, puis trois lignes `libellé : valeur`.
-2. **Aligner les libellés** : ici chaque libellé occupe 7 caractères avant les deux-points (`Nom    `, `Grade  `, `Age    `). C'est ce qui rend la fiche lisible.
+2. **Aligner les libellés** : ici chaque libellé occupe 7 caractères avant les deux-points (`Nom    `, `Niveau `, `Age    `). C'est ce qui rend la fiche lisible.
 3. **Concaténer** texte fixe et variables avec `+`. Pour l'âge, on ajoute aussi le suffixe `" ans"`.
 
 ## Points clés
@@ -35,7 +35,7 @@ System.out.println("Age    : " + age + " ans");
 On pourrait construire toute la fiche dans une seule chaîne avec des `\n`, mais c'est moins lisible pour un débutant :
 
 ```java
-System.out.println("=== Fiche militaire ===\nNom    : " + nom + "\n...");
+System.out.println("=== Fiche membre ===\nNom    : " + nom + "\n...");
 ```
 
 Quatre `println` séparés sont plus clairs et plus faciles à modifier.

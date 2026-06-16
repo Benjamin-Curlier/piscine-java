@@ -2,7 +2,7 @@
 
 ## Contexte
 
-L'état-major veut des statistiques rapides sur un groupe de soldats : combien
+L'état-major veut des statistiques rapides sur un groupe de membres : combien
 sont-ils, quelle est leur ancienneté moyenne, quel est le maximum d'ancienneté ?
 Ces calculs doivent fonctionner **même sur une liste vide** — on attend alors une
 **valeur-sentinelle** (0 ou 0.0) plutôt qu'une exception.
@@ -10,9 +10,9 @@ Ces calculs doivent fonctionner **même sur une liste vide** — on attend alors
 ## Domaine fourni
 
 ```java
-public enum Grade { SOLDAT, CAPORAL, SERGENT, ADJUDANT, LIEUTENANT }
+public enum Niveau { JUNIOR, CONFIRME, SENIOR, LEAD, PRINCIPAL }
 
-public record Soldat(String nom, Grade grade, int anciennete) { }
+public record Membre(String nom, Niveau niveau, int anciennete) { }
 // anciennete = années de service (>= 0)
 ```
 
@@ -23,38 +23,38 @@ Ces deux classes sont **fournies** dans le starter. Ne les modifiez pas.
 Complétez la classe `Statistiques` :
 
 ```java
-/** Renvoie le nombre de soldats dans la liste. */
-static int total(List<Soldat> soldats)
+/** Renvoie le nombre de membres dans la liste. */
+static int total(List<Membre> membres)
 
 /** Renvoie l'ancienneté moyenne ; 0.0 si la liste est vide. */
-static double ancienneteMoyenne(List<Soldat> soldats)
+static double ancienneteMoyenne(List<Membre> membres)
 
 /** Renvoie l'ancienneté maximale ; 0 si la liste est vide. */
-static int ancienneteMax(List<Soldat> soldats)
+static int ancienneteMax(List<Membre> membres)
 ```
 
 ## Démarche attendue
 
 Utilisez les streams Java pour ces réductions :
 
-- `total` : `soldats.size()` (ou `.stream().count()`)
-- `ancienneteMoyenne` : `soldats.stream().mapToInt(Soldat::anciennete).average().orElse(0.0)`
-- `ancienneteMax` : `soldats.stream().mapToInt(Soldat::anciennete).max().orElse(0)`
+- `total` : `membres.size()` (ou `.stream().count()`)
+- `ancienneteMoyenne` : `membres.stream().mapToInt(Membre::anciennete).average().orElse(0.0)`
+- `ancienneteMax` : `membres.stream().mapToInt(Membre::anciennete).max().orElse(0)`
 
 Le mot-clé `orElse` gère le cas de la liste vide sans lever d'exception.
 
 ## Exemple
 
 ```text
-List<Soldat> troupe = List.of(
-    new Soldat("Dupont", Grade.CAPORAL, 3),
-    new Soldat("Martin", Grade.SERGENT, 7),
-    new Soldat("Legrand", Grade.SOLDAT, 1)
+List<Membre> equipe = List.of(
+    new Membre("Dupont", Niveau.CONFIRME, 3),
+    new Membre("Martin", Niveau.SENIOR, 7),
+    new Membre("Legrand", Niveau.JUNIOR, 1)
 );
 
-Statistiques.total(troupe)             // 3
-Statistiques.ancienneteMoyenne(troupe) // 3.666...
-Statistiques.ancienneteMax(troupe)     // 7
+Statistiques.total(equipe)             // 3
+Statistiques.ancienneteMoyenne(equipe) // 3.666...
+Statistiques.ancienneteMax(equipe)     // 7
 
 Statistiques.total(List.of())             // 0
 Statistiques.ancienneteMoyenne(List.of()) // 0.0
@@ -63,7 +63,7 @@ Statistiques.ancienneteMax(List.of())     // 0
 
 ## Contraintes
 
-- Package `etnc.m4`. **Ne modifiez pas** `Grade`, `Soldat`, ni les signatures.
+- Package `piscine.m4`. **Ne modifiez pas** `Niveau`, `Membre`, ni les signatures.
 - Aucune exception ne doit être levée, y compris sur liste vide.
 - Les méthodes sont `static` ; la classe `Statistiques` n'a pas d'état.
 

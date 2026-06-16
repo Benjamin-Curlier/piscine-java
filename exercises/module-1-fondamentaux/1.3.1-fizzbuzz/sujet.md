@@ -39,7 +39,7 @@ FizzBuzz
 
 ## Contraintes
 
-- La classe doit s'appeler `FizzBuzz` et rester dans le package `etnc.m1`.
+- La classe doit s'appeler `FizzBuzz` et rester dans le package `piscine.m1`.
 - Aucune entrée clavier : la boucle va toujours de 1 à 100.
 - Une valeur par ligne.
 

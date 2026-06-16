@@ -1,11 +1,11 @@
-# Guide d'installation — environnement de développement Piscine ETNC
+# Guide d'installation — environnement de développement Piscine Java
 
 > Ce guide s'adresse aux **formateurs et contributeurs** qui souhaitent travailler
 > sur le projet en local (rédiger des exercices, valider des solutions, lancer la moulinette).
 >
 > Pour les **stagiaires**, consultez les instructions dans `exercises/README.md` (à venir).
 >
-> Ce guide concerne le **mode dépôt** (développement / contribution). Si tu utilises la Piscine via le **ZIP standalone**, tu n'as **rien à installer** : voir [`piscine-stagiaire.md`](piscine-stagiaire.md#mode-standalone-zip).
+> Ce guide concerne le **mode dépôt** (développement / contribution). Si tu utilises la Piscine via l'**installeur autonome**, tu n'as **rien à installer** : voir [`piscine-stagiaire.md`](piscine-stagiaire.md#mode-installeur-recommandé).
 
 ---
 
@@ -134,8 +134,8 @@ export PATH="$JAVA_HOME/bin:$PATH"
 ## 3. Cloner le dépôt
 
 ```bash
-git clone https://github.com/Benjamin-Curlier/Piscine-ETNC.git
-cd Piscine-ETNC
+git clone https://github.com/Benjamin-Curlier/piscine-java.git
+cd piscine-java
 ```
 
 ---

@@ -29,7 +29,7 @@ FactoriellePuissance.puissance(2, 10) // 1024
 
 ## Contraintes
 
-- La classe doit s'appeler `FactoriellePuissance` et rester dans le package `etnc.m2`.
+- La classe doit s'appeler `FactoriellePuissance` et rester dans le package `piscine.m2`.
 - **Les deux signatures sont imposées.**
 - **Les deux méthodes doivent être récursives** (cas de base + appel récursif).
 - Les méthodes renvoient leur résultat ; elles n'affichent rien.

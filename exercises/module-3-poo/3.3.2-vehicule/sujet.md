@@ -2,7 +2,7 @@
 
 ## Contexte
 
-Le parc automobile de l'unité comporte des voitures et des motos. Toutes
+Le parc automobile de l'entreprise comporte des voitures et des motos. Toutes
 partagent une marque et une vitesse maximale, mais se décrivent différemment.
 
 ## Énoncé
@@ -29,7 +29,7 @@ new Moto("Yamaha", 220).decrire();         // "Moto Yamaha (220 km/h)"
 
 ## Contraintes
 
-- Package `etnc.m3`. **Ne modifiez pas les signatures publiques** ni `Vehicule`.
+- Package `piscine.m3`. **Ne modifiez pas les signatures publiques** ni `Vehicule`.
 - Le constructeur de chaque sous-classe doit appeler `super(...)`.
 - Le champ `nbPortes` de `Voiture` doit être **privé**.
 - Chaque `decrire()` redéfini porte `@Override`.

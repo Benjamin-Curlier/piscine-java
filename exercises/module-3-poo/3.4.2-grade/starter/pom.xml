@@ -5,12 +5,12 @@
                              https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>etnc.piscine.m3</groupId>
+    <groupId>piscine.m3</groupId>
     <artifactId>grade</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>Grade (starter)</name>
+    <name>Niveau (starter)</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -1,4 +1,4 @@
-# Bootstrap autonome de la Piscine ETNC en mode local (Windows).
+# Bootstrap autonome de la Piscine Java en mode local (Windows).
 # Usage : .\scripts\piscine-bootstrap.ps1 -Nom <slug> [-Dest <dossier>] [-Force]
 
 param(

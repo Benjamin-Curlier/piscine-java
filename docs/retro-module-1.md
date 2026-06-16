@@ -18,7 +18,7 @@ Toutes les solutions de référence passent leurs tests (publics + privés) via 
 - **Un sous-groupe = une PR.** Le module 1 a été livré en cycles courts (1.1, 1.2, 1.3 séparés). Revue plus facile, CI ciblé, moins de conflits.
 - **La solution de référence comme test du format.** Brancher chaque `solution/` dans `valider-solutions` a attrapé les exos cassés *avant* le stagiaire. C'est le filet le plus rentable.
 - **E/S standard + tout dans `main`.** Cohérent avec l'antériorité des notions (pas de méthodes/objets avant leur chapitre). À garder pour le module 1 ; à relâcher dès que le module concerné introduit les méthodes/classes.
-- **Utilitaire de test partagé `CaptureEntree`** (capture de `System.in`/`System.out`) sous `etnc.util` : réutilisable, a évité de dupliquer la plomberie de test dans chaque exo à saisie clavier.
+- **Utilitaire de test partagé `CaptureEntree`** (capture de `System.in`/`System.out`) sous `piscine.util` : réutilisable, a évité de dupliquer la plomberie de test dans chaque exo à saisie clavier.
 - **Graine fixe pour l'aléatoire** (`Random(1789)` fourni dans le starter de 1.3.4) : rend l'exercice testable de façon déterministe sans retirer l'aspect « jeu ».
 - **Entrée clavier insensible à la locale** (pas de séparateur décimal) : a supprimé une classe entière de faux échecs liés au `,` vs `.`.
 

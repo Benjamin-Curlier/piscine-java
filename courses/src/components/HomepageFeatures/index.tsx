@@ -16,7 +16,7 @@ const FeatureList: FeatureItem[] = [
     description: (
       <>
         Pas de chronomètre, pas de pression. Vous progressez quand vous êtes
-        prêt·e, et vous reprenez quand votre service vous le permet.
+        prêt·e, et vous reprenez quand votre emploi du temps vous le permet.
       </>
     ),
   },

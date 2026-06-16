@@ -26,7 +26,7 @@ Surcharge.maximum(2.5, 1.5)   // 2.5
 
 ## Contraintes
 
-- La classe doit s'appeler `Surcharge` et rester dans le package `etnc.m2`.
+- La classe doit s'appeler `Surcharge` et rester dans le package `piscine.m2`.
 - **Les trois signatures sont imposées** : c'est la surcharge qui est évaluée.
 - Les méthodes renvoient leur résultat ; elles n'affichent rien.
 

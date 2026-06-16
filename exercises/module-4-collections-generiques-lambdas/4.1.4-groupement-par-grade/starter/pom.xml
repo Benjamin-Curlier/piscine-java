@@ -5,12 +5,12 @@
                              https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>etnc.piscine.m4</groupId>
-    <artifactId>groupement-par-grade</artifactId>
+    <groupId>piscine.m4</groupId>
+    <artifactId>groupement-par-niveau</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>Groupement par grade (starter)</name>
+    <name>Groupement par niveau (starter)</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

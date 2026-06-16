@@ -2,7 +2,7 @@
 
 ## Contexte
 
-Le service des ressources humaines militaires doit générer des fichiers CSV à
+Le service des ressources humaines membres doit générer des fichiers CSV à
 partir de listes de personnels, **triés par ancienneté décroissante** (les plus
 anciens en premier) puis par **nom alphabétique** pour égalité. Ces fichiers
 servent à produire des tableaux d'affichage et doivent rester lisibles dans
@@ -11,8 +11,8 @@ n'importe quel tableur.
 Vous avez à disposition le modèle fourni :
 
 ```java
-public enum Grade { SOLDAT, CAPORAL, SERGENT, ADJUDANT, LIEUTENANT }
-public record Personnel(String nom, Grade grade, int anciennete) { }
+public enum Niveau { JUNIOR, CONFIRME, SENIOR, LEAD, PRINCIPAL }
+public record Personnel(String nom, Niveau niveau, int anciennete) { }
 ```
 
 Ces deux classes sont **fournies complètes** dans le starter — ne les modifiez pas.
@@ -32,9 +32,9 @@ Cette méthode doit :
    **ne doit pas être modifiée**.
 
 2. **Construire la liste des lignes** CSV :
-   - La première ligne est toujours l'en-tête : `nom,grade,anciennete`
+   - La première ligne est toujours l'en-tête : `nom,niveau,anciennete`
    - Puis une ligne par personnel :
-     `String.join(",", p.nom(), p.grade().name(), String.valueOf(p.anciennete()))`
+     `String.join(",", p.nom(), p.niveau().name(), String.valueOf(p.anciennete()))`
 
 3. **Écrire le fichier** avec `Files.write(csv, lignes, StandardCharsets.UTF_8)`.
    Si le fichier existe déjà, il est écrasé (comportement par défaut).
@@ -43,38 +43,38 @@ Cette méthode doit :
 
 ```text
 Entrée :
-  Personnel("Dupont", SERGENT, 10)
-  Personnel("Martin", SOLDAT, 2)
-  Personnel("Leroy",  CAPORAL, 5)
+  Personnel("Dupont", SENIOR, 10)
+  Personnel("Martin", JUNIOR, 2)
+  Personnel("Leroy",  CONFIRME, 5)
 
 Fichier CSV produit :
-  nom,grade,anciennete
-  Dupont,SERGENT,10
-  Leroy,CAPORAL,5
-  Martin,SOLDAT,2
+  nom,niveau,anciennete
+  Dupont,SENIOR,10
+  Leroy,CONFIRME,5
+  Martin,JUNIOR,2
 ```
 
 ```text
 Entrée : liste vide
 
 Fichier CSV produit :
-  nom,grade,anciennete
+  nom,niveau,anciennete
 ```
 
 ```text
 Anciennetés égales :
-  Personnel("Robert", SERGENT, 7)
-  Personnel("Andre",  CAPORAL, 7)
+  Personnel("Robert", SENIOR, 7)
+  Personnel("Andre",  CONFIRME, 7)
 
 Fichier CSV produit :
-  nom,grade,anciennete
-  Andre,CAPORAL,7
-  Robert,SERGENT,7
+  nom,niveau,anciennete
+  Andre,CONFIRME,7
+  Robert,SENIOR,7
 ```
 
 ## Contraintes
 
-- Package `etnc.m5`. **Ne modifiez pas** les signatures ni les classes fournies.
+- Package `piscine.m5`. **Ne modifiez pas** les signatures ni les classes fournies.
 - Trier une **copie** (`new ArrayList<>(personnels)`) — ne jamais muter la source.
 - Tri avec `Comparator.comparingInt(Personnel::anciennete).reversed().thenComparing(Personnel::nom)`.
 - Construire chaque ligne avec `String.join(",", ...)` — pas de concaténation `+`.
@@ -84,7 +84,7 @@ Fichier CSV produit :
 ## Ce qui sera vérifié
 
 - 3 personnels exportés → relecture : en-tête en 1re ligne + 3 lignes triées.
-- Format de ligne exact : `nom,GRADE,anciennete` (grade en majuscules).
+- Format de ligne exact : `nom,NIVEAU,anciennete` (niveau en majuscules).
 - Égalité d'ancienneté → départagée par nom alphabétique.
 - Liste vide → fichier avec seulement l'en-tête.
 - La liste source **n'est pas mutée** après l'appel.
@@ -97,4 +97,4 @@ Fichier CSV produit :
 - Que se passe-t-il si un champ contient une virgule ? (Limite du CSV simple sans
   guillemets — cf. chapitre 5-7 pour la discussion sur les limites de `split(",")`)
 - Comment écrire avec `StandardOpenOption.APPEND` pour ajouter plutôt qu'écraser ?
-- Pourquoi `grade().name()` est-il préférable à `grade().toString()` ici ?
+- Pourquoi `niveau().name()` est-il préférable à `niveau().toString()` ici ?

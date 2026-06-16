@@ -39,7 +39,7 @@ Moyenne : 5.00
 
 ## Contraintes
 
-- La classe doit s'appeler `MinMaxMoyenne` et rester dans le package `etnc.m2`.
+- La classe doit s'appeler `MinMaxMoyenne` et rester dans le package `piscine.m2`.
 - Lisez l'entrée avec un `Scanner`. Tout le code peut tenir dans `main`.
 - La moyenne doit être calculée en **nombres à virgule** (`double`), sans
   division entière, et affichée à deux décimales avec un point

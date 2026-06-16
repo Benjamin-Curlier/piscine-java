@@ -1,4 +1,4 @@
-# Architecture de la moulinette ETNC (pour les développeurs)
+# Architecture de la moulinette Piscine Java (pour les développeurs)
 
 ## Vue d'ensemble
 

@@ -9,7 +9,7 @@ mémoire. C'est une **égalité logique**, que vous allez définir vous-même.
 
 ## Énoncé
 
-Complétez deux classes (package `etnc.m4`) :
+Complétez deux classes (package `piscine.m4`) :
 
 - `Utilisateur` : un `nom` (String) et un `matricule` (int), champs **privés et
   finaux**, fournis avec le constructeur et les accesseurs `getNom()` /
@@ -39,7 +39,7 @@ r.nombreDistincts();         // 1
 
 ## Contraintes
 
-- Package `etnc.m4`. **Ne changez pas** les signatures fournies.
+- Package `piscine.m4`. **Ne changez pas** les signatures fournies.
 - Les champs de `Utilisateur` restent **privés et finaux**.
 - `equals` doit vérifier le **type** de l'argument (indice :
   `o instanceof Utilisateur u`) et comparer `nom` ET `matricule`.

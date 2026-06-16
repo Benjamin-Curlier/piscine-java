@@ -31,7 +31,7 @@ new Date(40, 1, 2026).getJour();  // 31 (borné)
 
 ## Contraintes
 
-- La classe doit s'appeler `Date` et rester dans le package `etnc.m3`.
+- La classe doit s'appeler `Date` et rester dans le package `piscine.m3`.
 - **Ne modifiez pas les signatures publiques** : les tests s'appuient dessus.
 - Les attributs doivent être **privés**.
 - Aucune exception : une valeur hors plage est **bornée** (constructeur) ou

@@ -1,11 +1,11 @@
-# Projet binôme #1 — Gestion d'une caserne
+# Projet binôme #1 — Gestion d'une entreprise
 
 ## Contexte
 
-Une caserne héberge plusieurs unités. Chaque unité accueille des soldats, dans
-la limite de sa capacité. Chaque soldat porte un grade. L'état-major a besoin
-d'un petit logiciel pour affecter les soldats aux unités, gérer leurs
-promotions et consulter les effectifs.
+Une entreprise héberge plusieurs équipes. Chaque équipe accueille des membres,
+dans la limite de sa capacité. Chaque membre a un niveau de séniorité. La
+direction a besoin d'un petit logiciel pour affecter les membres aux équipes,
+gérer leurs promotions et consulter les effectifs.
 
 Vous concevez ce logiciel **en binôme**, de A à Z. Le sujet impose **ce que** le
 programme doit faire ; vous restez libres du **comment** (noms de classes,
@@ -14,7 +14,7 @@ signatures, découpage).
 ## Objectifs pédagogiques
 
 - Concevoir un mini-domaine orienté objet : entités, encapsulation, agrégation.
-- Réutiliser un `enum` pour modéliser un ensemble fini (les grades).
+- Réutiliser un `enum` pour modéliser un ensemble fini (les niveaux).
 - Gérer des ensembles d'objets avec des **tableaux à capacité fixe**.
 - Traiter les cas invalides par **refus ou correction**, sans exception.
 - Collaborer en binôme avec un historique Git équilibré.
@@ -25,21 +25,21 @@ Vous devez modéliser au minimum les entités suivantes. Les attributs listés s
 un minimum ; les signatures précises et le découpage interne sont à votre
 initiative.
 
-- **Grade** — un `enum` des grades militaires, du plus bas au plus haut. Vous
-  pouvez reprendre la progression vue en module 3 : `SOLDAT`, `CAPORAL`,
-  `SERGENT`, `ADJUDANT`, `LIEUTENANT`. L'ordre des constantes définit le
-  « grade suivant » utilisé pour les promotions.
-- **Soldat** — possède au minimum un nom et un grade.
-- **Unite** — possède un nom et un ensemble de soldats borné par une
+- **Niveau** — un `enum` des niveaux de séniorité, du plus bas au plus haut. Vous
+  pouvez reprendre la progression vue en module 3 : `STAGIAIRE`, `JUNIOR`,
+  `CONFIRME`, `SENIOR`, `LEAD`. L'ordre des constantes définit le
+  « niveau suivant » utilisé pour les promotions.
+- **Membre** — possède au minimum un nom et un niveau.
+- **Equipe** — possède un nom et un ensemble de membres borné par une
   **capacité maximale fixe**. L'ensemble est géré par un **tableau** (pas de
   `List` ni de `ArrayList`).
-- **Caserne** — possède un ensemble d'unités, géré lui aussi par un **tableau**.
+- **Entreprise** — possède un ensemble d'équipes, géré lui aussi par un **tableau**.
 
 ## Opérations obligatoires
 
-1. **Affecter** un soldat à une unité.
-2. **Promouvoir** un soldat : il passe au grade immédiatement supérieur.
-3. **Lister** l'effectif : par unité et/ou pour l'ensemble de la caserne.
+1. **Affecter** un membre à une équipe.
+2. **Promouvoir** un membre : il passe au niveau immédiatement supérieur.
+3. **Lister** l'effectif : par équipe et/ou pour l'ensemble de l'entreprise.
 
 ## Règles métier (sans exception)
 
@@ -47,8 +47,8 @@ Les cas invalides ne doivent **jamais** lever d'exception (`throw` interdit). Vo
 les traitez par **refus ou correction**, avec un message en console et une valeur
 de retour explicite (par exemple un `boolean` indiquant le succès) :
 
-- Affecter un soldat à une **unité pleine** : l'affectation est refusée.
-- Promouvoir un soldat déjà au **grade maximal** : la promotion est refusée.
+- Affecter un membre à une **équipe pleine** : l'affectation est refusée.
+- Promouvoir un membre déjà au **niveau maximal** : la promotion est refusée.
 
 ## Contrainte d'antériorité (importante)
 
@@ -62,7 +62,7 @@ Ce projet n'utilise que les notions des **modules 1 à 3**.
   lambdas/streams (module 4) ; exceptions (`try`/`catch`/`throw`) et
   entrées/sorties fichier (module 5).
 
-Pour gérer les ensembles (soldats d'une unité, unités d'une caserne), vous
+Pour gérer les ensembles (membres d'une équipe, équipes d'une entreprise), vous
 utilisez des **tableaux à capacité fixe**.
 
 ## Démonstration attendue
@@ -71,8 +71,8 @@ Le programme expose un **menu console interactif** (à l'aide de `Scanner`). Le
 formateur lance le programme et saisit des commandes. Votre menu doit au minimum
 proposer :
 
-- `affecter` — affecter un soldat à une unité ;
-- `promouvoir` — promouvoir un soldat ;
+- `affecter` — affecter un membre à une équipe ;
+- `promouvoir` — promouvoir un membre ;
 - `lister` — afficher l'effectif ;
 - `quitter` — terminer le programme.
 
@@ -84,8 +84,8 @@ d'évaluer chaque rendu sur la même base.
 Ces extensions ne sont pas obligatoires mais sont valorisées dans la note de
 conception :
 
-- Une hiérarchie de personnels : une classe abstraite `Personnel` et ses
-  sous-classes `Officier`, `SousOfficier`, `MilitaireDuRang`, avec une méthode
-  `solde()` redéfinie (héritage et polymorphisme).
-- Le calcul de la solde totale d'une unité.
-- Le tri de l'effectif par grade.
+- Une hiérarchie de collaborateurs : une classe abstraite `Collaborateur` et ses
+  sous-classes `Manager`, `Senior`, `Developpeur`, avec une méthode
+  `salaire()` redéfinie (héritage et polymorphisme).
+- Le calcul du salaire total d'une équipe.
+- Le tri de l'effectif par niveau.

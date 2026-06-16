@@ -1,5 +1,5 @@
-slug: annuaire-militaire
-titre: "Annuaire militaire (Map)"
+slug: annuaire-membre
+titre: "Annuaire de l'équipe (Map)"
 module: 4
 sous_groupe: "4.1"
 position: 1
@@ -16,6 +16,6 @@ notions:
   - getOrDefault
   - Collections.sort
   - List
-auteur: "ETNC"
+auteur: "Piscine Java"
 version: 1
 date_creation: 2026-06-04

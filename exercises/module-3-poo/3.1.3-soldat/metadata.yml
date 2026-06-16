@@ -1,5 +1,5 @@
 slug: soldat
-titre: "Soldat"
+titre: "Membre"
 module: 3
 sous_groupe: "3.1"
 position: 3
@@ -9,13 +9,13 @@ prerequis: []
 objectifs_pedagogiques:
   - "Modéliser un objet avec plusieurs méthodes de comportement"
   - "Gérer un état mutable borné (points de vie plancher à 0)"
-  - "Exposer un état booléen dérivé (estVivant) et redéfinir toString"
+  - "Exposer un état booléen dérivé (estActif) et redéfinir toString"
 notions:
   - classe
   - objet
   - encapsulation
   - methode
   - etat-derive
-auteur: "ETNC"
+auteur: "Piscine Java"
 version: 1
 date_creation: 2026-06-03

@@ -1,4 +1,4 @@
-# Correction — Exercice 4.1.1 Annuaire militaire (Map)
+# Correction — Exercice 4.1.1 Annuaire de l'équipe (Map)
 
 ## Démarche attendue
 

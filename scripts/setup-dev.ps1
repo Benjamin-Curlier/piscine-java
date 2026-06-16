@@ -1,4 +1,4 @@
-# Prépare l'environnement de développement Piscine ETNC sous Windows, sans droits admin.
+# Prépare l'environnement de développement Piscine Java sous Windows, sans droits admin.
 # Vérifie git et Node, installe un JDK Temurin 25 portable si Java 25+ est absent,
 # configure JAVA_HOME / PATH au niveau utilisateur, puis vérifie le Maven Wrapper.
 # Usage : .\scripts\setup-dev.ps1 [-JdkDir <dossier>] [-Force]
@@ -21,7 +21,7 @@ function Get-JavaMajor([string] $javaExe) {
     return 0
 }
 
-Write-Host "== Setup dev Piscine ETNC ==" -ForegroundColor Cyan
+Write-Host "== Setup dev Piscine Java ==" -ForegroundColor Cyan
 
 # 1. git (indispensable)
 if (-not (Get-Command git -ErrorAction SilentlyContinue)) {

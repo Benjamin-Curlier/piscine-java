@@ -12,7 +12,7 @@ Un `evaluation.yml` mélange deux familles de critères :
 - `type: automatique` — calculés par la moulinette (tests publics, tests privés, style Checkstyle/PMD). Pas d'humain dans la boucle.
 - `type: formateur` — jugement humain sur la **qualité** du rendu, au-delà du « ça compile et ça passe ».
 
-`format-exercice.md` §10 impose : *« Tout critère `formateur` doit être justifiable par une grille »*. Ce document **est** cette grille. Sans elle, deux instructeurs noteraient différemment le même rendu — ce qui est inacceptable dans un cadre institutionnel/militaire où la note doit pouvoir être défendue devant le stagiaire et la hiérarchie.
+`format-exercice.md` §10 impose : *« Tout critère `formateur` doit être justifiable par une grille »*. Ce document **est** cette grille. Sans elle, deux instructeurs noteraient différemment le même rendu — ce qui est inacceptable dans un cadre institutionnel où la note doit pouvoir être défendue devant le stagiaire et la hiérarchie.
 
 ## 2. Les quatre types de critères humains
 

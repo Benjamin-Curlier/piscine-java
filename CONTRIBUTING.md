@@ -1,6 +1,6 @@
-# Contribuer à la Piscine ETNC
+# Contribuer à la Piscine Java
 
-> Guide destiné aux **formateurs** de l'École des Transmissions, du Numérique et du Cyber qui ajoutent ou modifient du contenu (exercices, chapitres, outillage).
+> Guide destiné aux **formateurs** de la Piscine Java qui ajoutent ou modifient du contenu (exercices, chapitres, outillage).
 > Les stagiaires n'ont pas à lire ce document : ils suivent [`docs/piscine-stagiaire.md`](docs/piscine-stagiaire.md).
 
 ## 1. Principes
@@ -81,9 +81,9 @@ Depuis la **v1**, la distribution stagiaire est un **installeur jpackage** (plus
 sur tag `v*`, ou build local `moulinette/gradlew -p moulinette :gui:jpackageApp`).
 
 **Tester l'installeur :** sur une machine Windows **sans Java/git/Node**, installer le `.exe`
-(sans droits admin), lancer « Piscine ETNC » : la GUI s'ouvre dans le navigateur, le workspace
-est créé dans `~/PiscineETNC`, et un rendu d'exercice est évalué — **hors-ligne**.
+(sans droits admin), lancer « Piscine Java » : la GUI s'ouvre dans le navigateur, le workspace
+est créé dans `~/PiscinePiscine Java`, et un rendu d'exercice est évalué — **hors-ligne**.
 
 ---
 
-*Projet institutionnel ETNC. En cas de doute sur le périmètre ou la diffusion d'une contribution, se référer à la hiérarchie / au RSSI avant de pousser.*
+*Projet open source Piscine Java. En cas de doute sur le périmètre ou la diffusion d'une contribution, voir les conventions ci-dessus.*

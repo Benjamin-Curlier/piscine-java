@@ -29,7 +29,7 @@ Périmètre : 12.566370614359172
 
 ## Contraintes
 
-- La classe doit s'appeler `CalculsGeometriques` et rester dans le package `etnc.m1`.
+- La classe doit s'appeler `CalculsGeometriques` et rester dans le package `piscine.m1`.
 - Utilisez `Math.PI`.
 - Les calculs se font en `double`.
 - Le format de sortie doit être exactement celui de l'exemple.

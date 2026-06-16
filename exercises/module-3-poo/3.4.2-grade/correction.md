@@ -1,4 +1,4 @@
-# Correction — Exercice 3.4.2 Grade (enum)
+# Correction — Exercice 3.4.2 Niveau (enum)
 
 ## Démarche attendue
 
@@ -6,9 +6,9 @@
 
 ```java
 return switch (this) {
-    case SOLDAT, CAPORAL -> "Militaire du rang";
-    case SERGENT, ADJUDANT -> "Sous-officier";
-    case LIEUTENANT -> "Officier";
+    case JUNIOR, CONFIRME -> "Débutant";
+    case SENIOR, LEAD -> "Intermédiaire";
+    case PRINCIPAL -> "Expert";
 };
 ```
 
@@ -16,7 +16,7 @@ return switch (this) {
 
 - **Enum = ensemble fini** : le compilateur connaît toutes les constantes, donc
   le `switch` peut être **exhaustif sans `default`**.
-- **Pas de `default`** : si l'on ajoutait un grade, le compilateur signalerait le
+- **Pas de `default`** : si l'on ajoutait un niveau, le compilateur signalerait le
   `switch` incomplet — un garde-fou précieux qu'un `default` masquerait.
 - **Attribut d'enum** : chaque constante porte sa `soldeBase`, donnée entre
   parenthèses et mémorisée par le constructeur (implicitement `private`).

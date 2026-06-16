@@ -54,7 +54,7 @@ compterLignesNonVides(fichierVide) → 0
 
 ## Contraintes
 
-- Package `etnc.m5`. **Ne modifiez pas** les signatures des méthodes.
+- Package `piscine.m5`. **Ne modifiez pas** les signatures des méthodes.
 - NIO.2 obligatoire : `Files.lines`, `java.nio.file.Path`, `java.nio.file.Files`.
 - `Files.lines` doit être dans un **`try-with-resources`** (le flux doit être
   fermé même si une exception survient pendant le traitement).

@@ -1,4 +1,4 @@
-# Format d'un exercice Piscine ETNC
+# Format d'un exercice Piscine Java
 
 > Standard que **tout exercice individuel** de la Piscine doit respecter.
 > Garantit la cohérence pédagogique, l'automatisation par la moulinette, et la lisibilité pour les stagiaires.
@@ -38,15 +38,15 @@ Chaque dossier d'exercice contient **exactement** :
 ├── metadata.yml          # Métadonnées structurées (pour la moulinette et le site)
 ├── starter/              # Code de départ remis au stagiaire (à compléter)
 │   ├── pom.xml
-│   └── src/main/java/etnc/m1/HelloWorld.java
+│   └── src/main/java/piscine/m1/HelloWorld.java
 ├── tests/                # Tests JUnit 5 PUBLICS (le stagiaire les voit)
-│   └── src/test/java/etnc/m1/HelloWorldTest.java
-│   └── src/test/java/etnc/util/...       # éventuels utilitaires de test partagés
+│   └── src/test/java/piscine/m1/HelloWorldTest.java
+│   └── src/test/java/piscine/util/...       # éventuels utilitaires de test partagés
 ├── tests-prives/         # Tests JUnit 5 PRIVÉS (exécutés par la moulinette uniquement)
-│   └── src/test/java/etnc/m1/HelloWorldPriveTest.java
+│   └── src/test/java/piscine/m1/HelloWorldPriveTest.java
 ├── solution/             # Solution de référence commentée pédagogiquement
 │   ├── pom.xml                            # identique au starter, + injecte tests-prives
-│   └── src/main/java/etnc/m1/HelloWorld.java
+│   └── src/main/java/piscine/m1/HelloWorld.java
 ├── correction.md         # Explication pas-à-pas de la solution (publié APRÈS rendu)
 └── evaluation.yml        # Rubrique de notation pondérée
 ```
@@ -64,7 +64,7 @@ Public cible : **stagiaire débutant** en programmation. Le sujet doit être aut
 
 ## Contexte
 [1–3 phrases qui ancrent l'exercice dans une situation concrète,
-si possible avec une touche militaire — bureau, transmission, ordre, etc.]
+si possible avec une touche métier — bureau, notification, tâche, etc.]
 
 ## Énoncé
 [Description claire de ce qui est demandé, à la 2ᵉ personne du pluriel ("vous").]
@@ -115,7 +115,7 @@ notions:                     # tags libres réutilisables (servent au filtrage D
   - syntaxe-de-base
   - compilation
   - sortie-standard
-auteur: "ETNC"
+auteur: "Piscine Java"
 version: 1
 date_creation: 2026-05-26
 ```
@@ -128,15 +128,15 @@ date_creation: 2026-05-26
 - Java **25** (`<maven.compiler.release>25</maven.compiler.release>`).
 - Dépendances test : JUnit Jupiter et AssertJ.
 - Le `pom.xml` utilise **`build-helper-maven-plugin`** pour ajouter `../tests/src/test/java` comme source de tests, de sorte qu'un `./mvnw test` (ou `mvn test` si Maven est installé globalement) depuis `starter/` exécute les tests publics.
-- Package : `etnc.mN` où N est le numéro de module (ex. `etnc.m1`, `etnc.m3`).
+- Package : `piscine.mN` où N est le numéro de module (ex. `piscine.m1`, `piscine.m3`).
 - Le code de départ contient **strictement** ce qui est nécessaire pour démarrer : signatures de méthodes vides, commentaires `// TODO`, imports nécessaires.
 - **Jamais** de réponse partielle qui orienterait vers une seule solution possible.
 
 **Exemple** :
 
 ```java
-// starter/src/main/java/etnc/m1/HelloWorld.java
-package etnc.m1;
+// starter/src/main/java/piscine/m1/HelloWorld.java
+package piscine.m1;
 
 public class HelloWorld {
     public static void main(String[] args) {
@@ -149,14 +149,14 @@ public class HelloWorld {
 
 Tests **JUnit 5 + AssertJ** que le stagiaire peut lancer en local pour vérifier sa progression. Ils couvrent les cas évidents et nominaux.
 
-- Package miroir du code (`etnc.m1` → `etnc.m1`).
+- Package miroir du code (`piscine.m1` → `piscine.m1`).
 - Nommage : `<Classe>Test.java`.
 - Une assertion claire par test, message d'échec explicite en **français** (via `.as(...)`).
-- Les **utilitaires de test partagés** (ex. : capture de `System.out`) vivent sous `etnc.util` dans le même dossier `tests/src/test/java/`. Ils sont accessibles tant aux tests publics qu'aux tests privés.
+- Les **utilitaires de test partagés** (ex. : capture de `System.out`) vivent sous `piscine.util` dans le même dossier `tests/src/test/java/`. Ils sont accessibles tant aux tests publics qu'aux tests privés.
 
 ```java
-// tests/src/test/java/etnc/m1/HelloWorldTest.java
-package etnc.m1;
+// tests/src/test/java/piscine/m1/HelloWorldTest.java
+package piscine.m1;
 
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -192,8 +192,8 @@ Une implémentation **idiomatique, lisible et commentée pédagogiquement**.
 - `solution/pom.xml` est **identique** au `starter/pom.xml`, à une différence près : `build-helper` ajoute **à la fois** `../tests/src/test/java` **et** `../tests-prives/src/test/java`. Ainsi `./mvnw -f solution/pom.xml test` (ou `cd solution && mvn test`) valide que la solution de référence passe **toutes** les épreuves (publiques et privées) — gage de cohérence pour les formateurs.
 
 ```java
-// solution/src/main/java/etnc/m1/HelloWorld.java
-package etnc.m1;
+// solution/src/main/java/piscine/m1/HelloWorld.java
+package piscine.m1;
 
 /**
  * Programme minimal d'affichage. Sert d'introduction a la structure
@@ -294,14 +294,14 @@ Certains exercices du module 6 inversent le contrat habituel : **le livrable du 
 ├── evaluation.yml          # tests-valides + mutants-tues + style + formateur
 ├── starter/
 │   └── src/
-│       ├── main/java/etnc/m6/Xxx.java       # FOURNI correct — le stagiaire le TESTE, ne le modifie pas
-│       └── test/java/etnc/m6/XxxTest.java   # squelette à compléter (≥ 1 @Test à écrire)
+│       ├── main/java/piscine/m6/Xxx.java       # FOURNI correct — le stagiaire le TESTE, ne le modifie pas
+│       └── test/java/piscine/m6/XxxTest.java   # squelette à compléter (≥ 1 @Test à écrire)
 ├── solution/
-│   ├── src/main/java/etnc/m6/Xxx.java       # impl correcte de référence (identique au starter/main)
-│   └── src/test/java/etnc/m6/XxxTest.java   # suite de tests MODÈLE (valide l'exo en CI)
+│   ├── src/main/java/piscine/m6/Xxx.java       # impl correcte de référence (identique au starter/main)
+│   └── src/test/java/piscine/m6/XxxTest.java   # suite de tests MODÈLE (valide l'exo en CI)
 └── mutants/
-    ├── <id-1>/etnc/m6/Xxx.java              # variante buggée (même FQCN), un dossier par mutant
-    └── <id-2>/etnc/m6/Xxx.java              # 3 à 5 mutants, un par règle / cas limite
+    ├── <id-1>/piscine/m6/Xxx.java              # variante buggée (même FQCN), un dossier par mutant
+    └── <id-2>/piscine/m6/Xxx.java              # 3 à 5 mutants, un par règle / cas limite
 ```
 
 ### Règles

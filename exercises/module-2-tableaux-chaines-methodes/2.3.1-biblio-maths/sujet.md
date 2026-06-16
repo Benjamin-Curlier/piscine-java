@@ -32,7 +32,7 @@ BiblioMaths.sommeChiffres(123) // 6
 
 ## Contraintes
 
-- La classe doit s'appeler `BiblioMaths` et rester dans le package `etnc.m2`.
+- La classe doit s'appeler `BiblioMaths` et rester dans le package `piscine.m2`.
 - **Les signatures des trois méthodes sont imposées** : ne les changez pas.
 - Les méthodes renvoient leur résultat ; elles n'affichent rien et ne lisent rien.
 

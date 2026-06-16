@@ -1,4 +1,4 @@
-# Piscine ETNC — guide stagiaire
+# Piscine Java — guide stagiaire
 
 Ce guide te permet d'utiliser la Piscine **en autonomie sur ta machine**, sans serveur.
 
@@ -6,7 +6,7 @@ Ce guide te permet d'utiliser la Piscine **en autonomie sur ta machine**, sans s
 
 | Mode | Quand l'utiliser | Ce que tu fais |
 |------|------------------|----------------|
-| **Installeur (recommandé)** | Le formateur t'a remis l'**installeur Piscine ETNC** | Tu installes (aucun droit admin) et tu lances — **rien d'autre à installer, pas de réseau**. Voir la section **« Mode installeur »** ci-dessous. |
+| **Installeur (recommandé)** | Le formateur t'a remis l'**installeur Piscine Java** | Tu installes (aucun droit admin) et tu lances — **rien d'autre à installer, pas de réseau**. Voir la section **« Mode installeur »** ci-dessous. |
 | **Dépôt (clone)** | Tu as accès au dépôt Git du projet | Tu installes Java 25 + git, tu clones, et tu lances le bootstrap. Voir les sections **1 à 8** ci-dessous. |
 
 La **boucle de travail** (éditer un exercice → rendre via Git → lire le rapport de la moulinette) est **identique** dans les deux modes ; seule la mise en route diffère.
@@ -17,9 +17,9 @@ La **boucle de travail** (éditer un exercice → rendre via Git → lire le rap
 
 L'installeur embarque **tout** : Java, git, la moulinette, les exercices et le site de cours. Aucune autre installation, aucun réseau.
 
-1. **Windows** : double-clique sur `Piscine ETNC-<version>.exe` (installation par utilisateur, aucun droit admin). **Linux** : installe le `.deb` ou extrais l'archive portable.
-2. Lance « **Piscine ETNC** » (menu Démarrer / lanceur d'applications).
-3. Au premier lancement, ton espace de travail est créé dans `~/PiscineETNC` et **l'application s'ouvre dans ton navigateur** : tableau de bord (ta progression, tes rapports), cours, et terminal git intégré.
+1. **Windows** : double-clique sur `Piscine Java-<version>.exe` (installation par utilisateur, aucun droit admin). **Linux** : installe le `.deb` ou extrais l'archive portable.
+2. Lance « **Piscine Java** » (menu Démarrer / lanceur d'applications).
+3. Au premier lancement, ton espace de travail est créé dans `~/Piscine Java` et **l'application s'ouvre dans ton navigateur** : tableau de bord (ta progression, tes rapports), cours, et terminal git intégré.
 4. Tu travailles exactement comme aux sections **4 à 8** ci-dessous (`submit-start`, rendu Git, rapport) — dans le **terminal intégré** de l'application.
 
 ---
@@ -36,8 +36,8 @@ Les sections suivantes (1 à 8) décrivent la mise en route quand tu **clones le
 ## 2. Cloner le repo
 
 ```bash
-git clone <url-piscine-etnc> piscine-etnc
-cd piscine-etnc
+git clone <url-piscine-java> piscine-java
+cd piscine-java
 ```
 
 ## 3. Démarrer ton workspace personnel

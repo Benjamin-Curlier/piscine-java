@@ -49,7 +49,7 @@ Le dépôt contient un fichier `README.md` qui précise :
 
 ## Arborescence et format
 
-- Les sources Java sont organisées dans un package (par exemple `etnc`).
+- Les sources Java sont organisées dans un package (par exemple `piscine`).
 - La suite de **tests JUnit** est présente dans le dépôt (par exemple sous `src/test/java`).
 - Aucun fichier compilé (`.class`) ni dossier de build n'est versionné (ajoutez-les au
   `.gitignore`).

@@ -32,7 +32,7 @@ Quelle table ?
 
 ## Contraintes
 
-- La classe doit s'appeler `TableMultiplication` et rester dans le package `etnc.m1`.
+- La classe doit s'appeler `TableMultiplication` et rester dans le package `piscine.m1`.
 - La table va toujours de 1 à 10.
 - Le format de chaque ligne doit être exactement `n x i = résultat` (avec les espaces autour du `x` et du `=`).
 

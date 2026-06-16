@@ -25,7 +25,7 @@ dependencies {
 }
 
 application {
-    mainClass = "etnc.piscine.moulinette.console.Main"
+    mainClass = "piscine.moulinette.console.Main"
 }
 
 // Suite par défaut : exclut les tags lourds (équivalent surefire.excludedGroups=git,e2e,tools)

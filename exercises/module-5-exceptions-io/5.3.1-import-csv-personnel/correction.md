@@ -24,12 +24,12 @@ public static List<Personnel> importer(Path csv) throws IOException {
                     "ligne CSV invalide (3 champs attendus) : " + ligne);
         }
 
-        Grade grade;
+        Niveau niveau;
         try {                     // 4) conversion gardée + chaînage de la cause
-            grade = Grade.valueOf(champs[1].trim());
+            niveau = Niveau.valueOf(champs[1].trim());
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException(
-                    "grade inconnu : " + champs[1].trim() + " (ligne : " + ligne + ")", e);
+                    "niveau inconnu : " + champs[1].trim() + " (ligne : " + ligne + ")", e);
         }
 
         int anciennete;
@@ -40,7 +40,7 @@ public static List<Personnel> importer(Path csv) throws IOException {
                     "anciennete invalide : " + champs[2].trim() + " (ligne : " + ligne + ")", e);
         }
 
-        personnels.add(new Personnel(champs[0].trim(), grade, anciennete));
+        personnels.add(new Personnel(champs[0].trim(), niveau, anciennete));
     }
     return personnels;
 }
@@ -54,9 +54,9 @@ public static List<Personnel> importer(Path csv) throws IOException {
   clair. La validation défensive précède toujours l'utilisation.
 
 - **Chaînage de la cause (`new IllegalArgumentException(message, cause)`).** Les
-  deux conversions peuvent échouer : `Grade.valueOf` lève une
+  deux conversions peuvent échouer : `Niveau.valueOf` lève une
   `IllegalArgumentException`, `Integer.parseInt` une `NumberFormatException`. On
-  les **rattrape** pour fournir un message lisible (« grade inconnu : GENERAL »)
+  les **rattrape** pour fournir un message lisible (« niveau inconnu : GENERAL »)
   **sans perdre** l'exception d'origine : on la passe en 2e argument du
   constructeur. Le `stack trace` affichera alors `Caused by: ...`, ce qui permet
   de diagnostiquer la racine du problème.
@@ -68,8 +68,8 @@ public static List<Personnel> importer(Path csv) throws IOException {
   `IllegalArgumentException` — un seul type d'erreur métier à gérer.
 
 - **`trim()` sur chaque champ.** Un fichier réel contient souvent des espaces
-  parasites (« SERGENT » entouré d'espaces). `trim()` les supprime avant
-  `Grade.valueOf` (qui est sensible à la casse **et** aux espaces) et avant
+  parasites (« SENIOR » entouré d'espaces). `trim()` les supprime avant
+  `Niveau.valueOf` (qui est sensible à la casse **et** aux espaces) et avant
   `Integer.parseInt`.
 
 - **UTF-8 explicite.** `Files.readAllLines(csv, StandardCharsets.UTF_8)` : sans
@@ -82,7 +82,7 @@ public static List<Personnel> importer(Path csv) throws IOException {
 
 ## Erreurs fréquentes observées
 
-- **Oublier de chaîner la cause** : `throw new IllegalArgumentException("grade
+- **Oublier de chaîner la cause** : `throw new IllegalArgumentException("niveau
   inconnu")` sans le `e`. Le code « marche », mais on perd l'origine — les tests
   privés sur `getCause()` échouent, et le critère `demarche` est raté.
 
@@ -90,10 +90,10 @@ public static List<Personnel> importer(Path csv) throws IOException {
   `ArrayIndexOutOfBoundsException` sur les lignes trop courtes au lieu du message
   métier attendu.
 
-- **Ne pas sauter l'en-tête** : le programme tente de convertir `grade` à partir
-  de la chaîne `"grade"` → `IllegalArgumentException` sur la 1re ligne.
+- **Ne pas sauter l'en-tête** : le programme tente de convertir `niveau` à partir
+  de la chaîne `"niveau"` → `IllegalArgumentException` sur la 1re ligne.
 
-- **Oublier `trim()`** : `Grade.valueOf(" SERGENT")` échoue (espace de tête), et
+- **Oublier `trim()`** : `Niveau.valueOf(" SENIOR")` échoue (espace de tête), et
   `Integer.parseInt(" 5 ")` lève une `NumberFormatException`.
 
 - **Ne pas ignorer les lignes blanches** : une ligne vide donne `split(",")` →

@@ -30,7 +30,7 @@ Occurrences : 4
 
 ## Contraintes
 
-- La classe doit s'appeler `ComptageOccurrences` et rester dans le package `etnc.m2`.
+- La classe doit s'appeler `ComptageOccurrences` et rester dans le package `piscine.m2`.
 - Lisez l'entrée avec un `Scanner` (`nextLine` pour le texte et pour le caractère).
 - Tout le code peut tenir dans `main`.
 - Le comptage respecte la casse.

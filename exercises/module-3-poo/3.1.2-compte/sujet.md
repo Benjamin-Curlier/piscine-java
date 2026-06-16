@@ -2,7 +2,7 @@
 
 ## Contexte
 
-La trésorerie de l'unité tient un compte par section. On veut un objet simple
+La trésorerie de l'entreprise tient un compte par service. On veut un objet simple
 capable d'enregistrer des dépôts et des retraits et de connaître son solde.
 
 ## Énoncé
@@ -31,7 +31,7 @@ c.toString();      // "Compte de Dupont : 120.00 €"
 
 ## Contraintes
 
-- La classe doit s'appeler `Compte` et rester dans le package `etnc.m3`.
+- La classe doit s'appeler `Compte` et rester dans le package `piscine.m3`.
 - **Ne modifiez pas les signatures publiques** : les tests s'appuient dessus.
 - Les attributs doivent être **privés**. Le solde est un `double`.
 - `toString()` formate le solde à deux décimales avec un point décimal

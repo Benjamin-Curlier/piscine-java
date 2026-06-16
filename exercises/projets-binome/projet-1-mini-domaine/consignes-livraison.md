@@ -27,6 +27,6 @@ Le dépôt contient un fichier `README.md` qui précise :
 
 ## Arborescence et format
 
-- Les sources Java sont organisées dans un package (par exemple `etnc`).
+- Les sources Java sont organisées dans un package (par exemple `piscine`).
 - Aucun fichier compilé (`.class`) ni dossier de build n'est versionné.
 - Le rendu est remis à la date fixée par le formateur.

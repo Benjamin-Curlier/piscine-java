@@ -27,7 +27,7 @@ new Coordonnees(1, 2).equals(new Coordonnees(1, 2));   // true (equals généré
 
 ## Contraintes
 
-- Record `Coordonnees` dans le package `etnc.m3`. **Ne changez pas l'en-tête ni
+- Record `Coordonnees` dans le package `piscine.m3`. **Ne changez pas l'en-tête ni
   les signatures.**
 - N'écrivez **pas** `equals`/`hashCode` : ils sont générés.
 - `translater` ne modifie rien : il **construit** un nouveau record.

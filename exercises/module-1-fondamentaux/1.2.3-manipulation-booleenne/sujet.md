@@ -30,7 +30,7 @@ Quelle année ?
 
 ## Contraintes
 
-- La classe doit s'appeler `AnneeBissextile` et rester dans le package `etnc.m1`.
+- La classe doit s'appeler `AnneeBissextile` et rester dans le package `piscine.m1`.
 - Calculez le résultat dans une variable `boolean` avant de l'afficher.
 - Utilisez le modulo `%` et les opérateurs logiques `&&`, `||`.
 - Respectez exactement les deux phrases de sortie.

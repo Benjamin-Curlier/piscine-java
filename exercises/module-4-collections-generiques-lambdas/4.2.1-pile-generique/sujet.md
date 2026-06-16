@@ -41,7 +41,7 @@ pile.estVide();              // true
 
 ## Contraintes
 
-- Package `etnc.m4`. **Ne modifiez pas** l'en-tête `public class Pile<T>` ni les
+- Package `piscine.m4`. **Ne modifiez pas** l'en-tête `public class Pile<T>` ni les
   signatures fournies.
 - **Aucun `Object`, aucun cast** : le `<T>` doit être propagé partout (c'est tout
   l'intérêt d'une classe générique).

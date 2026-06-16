@@ -49,7 +49,7 @@ ValidationSaisie.validerEntier(null,  0, 10) // → NumberFormatException
 
 ## Contraintes
 
-- Package `etnc.m5`. **Ne modifiez pas** la signature de `validerEntier`.
+- Package `piscine.m5`. **Ne modifiez pas** la signature de `validerEntier`.
 - La garde `null` doit être **la première instruction** du corps (avant `trim()`).
 - Pour une entrée illisible, c'est une `NumberFormatException` qui doit remonter
   (pas une `NullPointerException`, pas une `IllegalArgumentException` générique).

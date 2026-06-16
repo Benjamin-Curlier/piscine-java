@@ -189,8 +189,8 @@ L'avantage : le compilateur attrape **beaucoup d'erreurs avant l'exécution** (f
 **Objectif** : modifier votre `HelloWorld.java` pour qu'il affiche **deux** lignes :
 
 ```text
-Bonjour, soldat !
-Bienvenue à la Piscine ETNC.
+Bonjour, l'équipe !
+Bienvenue à la Piscine Java.
 ```
 
 Indices :
@@ -204,8 +204,8 @@ Indices :
 ```java
 public class HelloWorld {
     public static void main(String[] args) {
-        System.out.println("Bonjour, soldat !");
-        System.out.println("Bienvenue à la Piscine ETNC.");
+        System.out.println("Bonjour, l'équipe !");
+        System.out.println("Bienvenue à la Piscine Java.");
     }
 }
 ```

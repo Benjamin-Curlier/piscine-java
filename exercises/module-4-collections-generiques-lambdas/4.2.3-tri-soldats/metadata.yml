@@ -1,5 +1,5 @@
-slug: tri-soldats
-titre: "Tri de soldats (Comparable<T>)"
+slug: tri-membres
+titre: "Tri de membres (Comparable<T>)"
 module: 4
 sous_groupe: "4.2"
 position: 3
@@ -8,13 +8,13 @@ duree_estimee_min: 35
 prerequis: []
 objectifs_pedagogiques:
   - "Implémenter Comparable<T> sur un record"
-  - "Composer plusieurs critères de tri (grade puis nom)"
+  - "Composer plusieurs critères de tri (niveau puis nom)"
   - "Utiliser l'ordre naturel via Collections.sort"
 notions:
   - Comparable
   - record
   - enum
   - tri naturel
-auteur: "ETNC"
+auteur: "Piscine Java"
 version: 1
 date_creation: 2026-06-04

@@ -18,7 +18,7 @@ Il existe **deux façons** d'utiliser la Piscine. Tu n'en utilises **qu'une seul
 
 ## Mode standalone (ZIP)
 
-1. Décompresse le ZIP `piscine-etnc-stagiaire-*.zip` où tu veux.
+1. Décompresse le ZIP `piscine-java-stagiaire-*.zip` où tu veux.
 2. Double-clique sur **`piscine.bat`** (Windows).
 3. Au premier lancement, ton espace de travail est créé automatiquement, **le site de cours s'ouvre dans ton navigateur** et la **console de correction** démarre.
 4. Si le navigateur ne s'ouvre pas tout seul, ouvre l'adresse affichée dans la console (par défaut `http://127.0.0.1:8800/`).
@@ -31,7 +31,7 @@ Tout est embarqué (Java, git, cours, moulinette) : **aucune installation, aucun
 2. Clone le dépôt, puis lance le script de bootstrap qui prépare ton espace de travail.
 3. Lance la console de correction (REPL) avec la commande affichée par le bootstrap.
 
-Le détail pas-à-pas des deux modes est dans le **[guide stagiaire complet](https://github.com/Benjamin-Curlier/Piscine-ETNC/blob/main/docs/piscine-stagiaire.md)**.
+Le détail pas-à-pas des deux modes est dans le **[guide stagiaire complet](https://github.com/Benjamin-Curlier/piscine-java/blob/main/docs/piscine-stagiaire.md)**.
 
 ## La console reste ouverte
 

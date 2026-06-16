@@ -1,6 +1,6 @@
-# Site de cours — Piscine ETNC
+# Site de cours — Piscine Java
 
-Site [Docusaurus 3](https://docusaurus.io/) hébergeant l'ensemble des cours de la Piscine ETNC.
+Site [Docusaurus 3](https://docusaurus.io/) hébergeant l'ensemble des cours de la Piscine Java.
 
 ## Prérequis
 
@@ -59,5 +59,5 @@ Tout chapitre doit suivre la structure et le ton définis dans la
 
 ## Déploiement
 
-- **Phase de développement** : prévu sur GitHub Pages depuis le repo `Benjamin-Curlier/Piscine-ETNC` (à configurer).
-- **Production** : GitLab CE on-premise (à configurer côté infrastructure militaire).
+- **Phase de développement** : prévu sur GitHub Pages depuis le repo `Benjamin-Curlier/piscine-java` (à configurer).
+- **Production** : GitLab CE on-premise (à configurer côté infrastructure interne).

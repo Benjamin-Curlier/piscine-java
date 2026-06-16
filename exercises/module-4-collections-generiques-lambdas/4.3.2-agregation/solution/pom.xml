@@ -5,7 +5,7 @@
                              https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>etnc.piscine.m4</groupId>
+    <groupId>piscine.m4</groupId>
     <artifactId>agregation-solution</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>

@@ -1,64 +1,64 @@
-# Exercice 4.1.4 — Groupement de personnel par grade
+# Exercice 4.1.4 — Groupement de personnel par niveau
 
 ## Contexte
 
-Le service des effectifs doit organiser les soldats par grade : chaque grade
+Le service des effectifs doit organiser les membres par niveau : chaque niveau
 dispose de sa propre liste de membres, que l'on construit au fil des affectations.
 
 ## Enonce
 
-L'enum `Grade` vous est **fournie** (ne pas modifier) :
+L'enum `Niveau` vous est **fournie** (ne pas modifier) :
 
 ```java
-public enum Grade { SOLDAT, CAPORAL, SERGENT, ADJUDANT, LIEUTENANT }
+public enum Niveau { JUNIOR, CONFIRME, SENIOR, LEAD, PRINCIPAL }
 ```
 
-Completez la classe `GroupesParGrade` :
+Completez la classe `GroupesParNiveau` :
 
 ```java
 // Champ interne (deja present) :
-private final Map<Grade, List<String>> parGrade = new HashMap<>();
+private final Map<Niveau, List<String>> parNiveau = new HashMap<>();
 
-void affecter(Grade grade, String nom)   // ajoute nom a la liste du grade
-List<String> membres(Grade grade)        // liste des membres du grade (vide si grade jamais affecte)
-Set<Grade> grades()                      // ensemble des grades ayant au moins un membre
-int effectif(Grade grade)                // nombre de membres du grade
+void affecter(Niveau niveau, String nom)   // ajoute nom a la liste du niveau
+List<String> membres(Niveau niveau)        // liste des membres du niveau (vide si niveau jamais affecte)
+Set<Niveau> niveaux()                      // ensemble des niveaux ayant au moins un membre
+int effectif(Niveau niveau)                // nombre de membres du niveau
 ```
 
-**Indice** : utilisez `computeIfAbsent` pour creer la liste d'un grade la premiere
+**Indice** : utilisez `computeIfAbsent` pour creer la liste d'un niveau la premiere
 fois qu'un membre y est affecte, et `getOrDefault` pour lire sans creer d'entree.
 
 ## Exemple
 
 ```text
-GroupesParGrade g = new GroupesParGrade();
-g.affecter(Grade.SERGENT, "Dupont");
-g.affecter(Grade.SERGENT, "Martin");
-g.affecter(Grade.CAPORAL, "Bernard");
-g.membres(Grade.SERGENT);   // ["Dupont", "Martin"]
-g.grades();                 // {SERGENT, CAPORAL}
-g.effectif(Grade.CAPORAL);  // 1
-g.membres(Grade.LIEUTENANT); // [] (liste vide, pas null)
+GroupesParNiveau g = new GroupesParNiveau();
+g.affecter(Niveau.SENIOR, "Dupont");
+g.affecter(Niveau.SENIOR, "Martin");
+g.affecter(Niveau.CONFIRME, "Bernard");
+g.membres(Niveau.SENIOR);   // ["Dupont", "Martin"]
+g.niveaux();                 // {SENIOR, CONFIRME}
+g.effectif(Niveau.CONFIRME);  // 1
+g.membres(Niveau.PRINCIPAL); // [] (liste vide, pas null)
 ```
 
 ## Contraintes
 
-- Package `etnc.m4`. **Ne modifiez pas** `Grade` ni les signatures.
-- `membres` d'un grade jamais affecte renvoie une **liste vide** (jamais `null`).
-- `effectif` d'un grade jamais affecte renvoie **0**.
+- Package `piscine.m4`. **Ne modifiez pas** `Niveau` ni les signatures.
+- `membres` d'un niveau jamais affecte renvoie une **liste vide** (jamais `null`).
+- `effectif` d'un niveau jamais affecte renvoie **0**.
 - **Pas** de `Collectors.groupingBy` (reserve au chapitre 4.8).
 - `computeIfAbsent` est l'idiome attendu pour `affecter`.
 
 ## Ce qui sera verifie
 
-- `affecter` plusieurs noms au meme grade les accumule dans l'ordre d'insertion.
-- `grades()` renvoie exactement les grades ayant au moins un membre.
-- `effectif` correspond bien a la taille de la liste du grade.
-- Un meme nom affecte deux fois au meme grade apparait deux fois (c'est une `List`).
-- `membres` d'un grade jamais affecte renvoie une liste vide (pas `null`).
+- `affecter` plusieurs noms au meme niveau les accumule dans l'ordre d'insertion.
+- `niveaux()` renvoie exactement les niveaux ayant au moins un membre.
+- `effectif` correspond bien a la taille de la liste du niveau.
+- Un meme nom affecte deux fois au meme niveau apparait deux fois (c'est une `List`).
+- `membres` d'un niveau jamais affecte renvoie une liste vide (pas `null`).
 
 ## Pour aller plus loin (optionnel - non note)
 
-- Comment trier les membres de chaque grade par ordre alphabetique ?
+- Comment trier les membres de chaque niveau par ordre alphabetique ?
 - `Collectors.groupingBy` (chapitre 4.8) permet de construire ce regroupement
   en une seule ligne a partir d'un stream. Comparez avec votre demarche manuelle.

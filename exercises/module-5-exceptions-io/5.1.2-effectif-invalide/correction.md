@@ -26,14 +26,14 @@
    public void affecter(int effectif) {
        if (effectif < 0 || effectif > capaciteMax) {
            throw new EffectifInvalideException(
-               "Effectif invalide " + effectif + " pour l'unite " + nom
+               "Effectif invalide " + effectif + " pour l'equipe " + nom
                + " (plage autorisee : 0.." + capaciteMax + ")");
        }
        this.effectif = effectif;
    }
    ```
 
-   Le message embarque la **valeur fautive** et le **nom de l'unité** : un message
+   Le message embarque la **valeur fautive** et le **nom de l'équipe** : un message
    d'exception doit être exploitable seul (logs, message stagiaire).
 
 3. **`affecter(String effectifTexte)`** : entourer le `parseInt` d'un `try/catch`

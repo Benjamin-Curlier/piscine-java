@@ -1,25 +1,21 @@
-Tous droits réservés — usage interne ETNC
-==========================================
+MIT License
 
-Copyright (c) 2026 École des Transmissions, du Numérique et du Cyber (ETNC).
+Copyright (c) 2026 Benjamin Curlier
 
-Ce dépôt et l'ensemble de son contenu (cours, exercices, solutions de
-référence, outillage « moulinette », documentation et scripts) sont la
-propriété de l'École des Transmissions, du Numérique et du Cyber et sont
-destinés à un usage strictement interne à l'ETNC, au profit de la formation
-des stagiaires.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-Sauf autorisation écrite préalable de la hiérarchie ETNC :
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-  - toute reproduction, diffusion, publication ou communication à un tiers,
-    totale ou partielle, est interdite ;
-  - toute réutilisation en dehors du cadre de la formation dispensée par
-    l'ETNC est interdite ;
-  - toute modification destinée à un usage externe est interdite.
-
-Cet en-tête est provisoire. Le régime de licence définitif (usage interne
-strict, licence pédagogique ouverte, ou autre) sera arbitré avec la
-hiérarchie et le RSSI de l'ETNC. Voir la tâche #14 du backlog.
-
-Pour toute question relative aux droits d'usage ou de diffusion, contacter
-la direction de l'ETNC.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

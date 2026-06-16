@@ -13,7 +13,7 @@ détecter le bug). Un test qui passe partout, même sur du code faux, ne prouve 
 
 ## Énoncé
 
-La classe `Temperature` (fournie dans `starter/src/main/java/etnc/m6/Temperature.java`,
+La classe `Temperature` (fournie dans `starter/src/main/java/piscine/m6/Temperature.java`,
 **à ne pas modifier**) expose deux méthodes :
 
 ```java
@@ -22,7 +22,7 @@ public boolean estPositive(int celsius)        // vrai si la température est st
 ```
 
 Complétez la classe de test `TemperatureTest` (dans
-`starter/src/test/java/etnc/m6/TemperatureTest.java`) avec des tests qui couvrent :
+`starter/src/test/java/piscine/m6/TemperatureTest.java`) avec des tests qui couvrent :
 
 1. La conversion sur **0 °C** (résultat attendu : 32 °F).
 2. La conversion sur une autre valeur connue (par exemple **100 °C → 212 °F**).

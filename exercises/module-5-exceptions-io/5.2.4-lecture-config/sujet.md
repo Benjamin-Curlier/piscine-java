@@ -14,7 +14,7 @@ main** pour comprendre chaque décision. Vous la découvrirez plus tard.
 
 ## Énoncé
 
-Complétez la classe `LectureConfig` (package `etnc.m5`) avec **deux** méthodes
+Complétez la classe `LectureConfig` (package `piscine.m5`) avec **deux** méthodes
 statiques. Les chemins sont **fournis par l'appelant** ; la lecture propage
 `throws IOException`.
 
@@ -70,7 +70,7 @@ LectureConfig.lireConfig(app.conf)                   // → {langue=fr, niveau=3
 
 ## Contraintes
 
-- Package `etnc.m5`. **Ne modifiez pas** les signatures.
+- Package `piscine.m5`. **Ne modifiez pas** les signatures.
 - **Interdit : `java.util.Properties`.** Parsez le format **à la main**.
 - **NIO.2** : `Path`, `Files.readAllLines`. **UTF-8 explicite**
   (`StandardCharsets.UTF_8`) à la lecture.

@@ -30,7 +30,7 @@ c.toString();      // "Compte de Dupont : 100.00 €"
 
 ## Contraintes
 
-- La classe doit s'appeler `CompteProtege` et rester dans le package `etnc.m3`.
+- La classe doit s'appeler `CompteProtege` et rester dans le package `piscine.m3`.
 - **Ne modifiez pas les signatures publiques** : les tests s'appuient dessus.
 - Les attributs doivent être **privés**.
 - Aucune exception : une opération invalide est **corrigée** (constructeur) ou

@@ -29,7 +29,7 @@ Bravo, vous avez trouvé en 3 essai(s) !
 
 ## Contraintes
 
-- La classe doit s'appeler `DevineLeNombre` et rester dans le package `etnc.m1`.
+- La classe doit s'appeler `DevineLeNombre` et rester dans le package `piscine.m1`.
 - **Ne modifiez ni la graine, ni la ligne du secret** déjà fournies.
 - Comptez le nombre d'essais et affichez-le dans le message final.
 - Respectez exactement les trois phrases de sortie.

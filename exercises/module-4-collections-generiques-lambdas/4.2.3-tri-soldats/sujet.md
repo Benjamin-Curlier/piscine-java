@@ -1,32 +1,32 @@
-# Exercice 4.2.3 — Tri de soldats (Comparable<T>)
+# Exercice 4.2.3 — Tri de membres (Comparable<T>)
 
 ## Contexte
 
-Un peloton compte des soldats de grades et de noms variés. Pour les afficher
-dans l'ordre hiérarchique, on veut que la classe `Soldat` définisse son
-**ordre naturel** en implémentant `Comparable<Soldat>`.
+Un équipe compte des membres de niveaux et de noms variés. Pour les afficher
+dans l'ordre hiérarchique, on veut que la classe `Membre` définisse son
+**ordre naturel** en implémentant `Comparable<Membre>`.
 
 ## Ce qui est fourni
 
-`Grade.java` vous est **fourni — ne pas modifier** :
+`Niveau.java` vous est **fourni — ne pas modifier** :
 
 ```java
-public enum Grade { SOLDAT, CAPORAL, SERGENT, ADJUDANT, LIEUTENANT }
+public enum Niveau { JUNIOR, CONFIRME, SENIOR, LEAD, PRINCIPAL }
 ```
 
 L'ordre de déclaration des constantes est la hiérarchie croissante :
-`SOLDAT` est le grade le plus bas, `LIEUTENANT` le plus élevé. Comme toute
-enum Java, `Grade` implémente déjà `Comparable<Grade>` dans cet ordre.
+`JUNIOR` est le niveau le plus bas, `PRINCIPAL` le plus élevé. Comme toute
+enum Java, `Niveau` implémente déjà `Comparable<Niveau>` dans cet ordre.
 
 ## Énoncé
 
-Complétez la méthode `compareTo` de `Soldat` :
+Complétez la méthode `compareTo` de `Membre` :
 
 ```java
-public record Soldat(String nom, Grade grade, int anciennete)
-        implements Comparable<Soldat> {
+public record Membre(String nom, Niveau niveau, int anciennete)
+        implements Comparable<Membre> {
     @Override
-    public int compareTo(Soldat autre) {
+    public int compareTo(Membre autre) {
         return 0; // TODO
     }
 }
@@ -34,44 +34,44 @@ public record Soldat(String nom, Grade grade, int anciennete)
 
 **Règle de tri** :
 
-1. D'abord par **grade croissant** (`SOLDAT` < ... < `LIEUTENANT`).
-2. En cas d'égalité de grade, par **nom alphabétique** (`String.compareTo`).
+1. D'abord par **niveau croissant** (`JUNIOR` < ... < `PRINCIPAL`).
+2. En cas d'égalité de niveau, par **nom alphabétique** (`String.compareTo`).
 
 Une fois `compareTo` implémenté, `Collections.sort(liste)` et `liste.sort(null)`
-trient automatiquement une `List<Soldat>` sans comparateur supplémentaire.
+trient automatiquement une `List<Membre>` sans comparateur supplémentaire.
 
 ## Exemple
 
 ```text
-Soldat alice = new Soldat("Alice", Grade.SERGENT, 3);
-Soldat bob   = new Soldat("Bob",   Grade.SOLDAT,  1);
-Soldat clara = new Soldat("Clara", Grade.SERGENT, 5);
+Membre alice = new Membre("Alice", Niveau.SENIOR, 3);
+Membre bob   = new Membre("Bob",   Niveau.JUNIOR,  1);
+Membre clara = new Membre("Clara", Niveau.SENIOR, 5);
 
 // Avant tri : [alice, bob, clara]
-List<Soldat> liste = new ArrayList<>(List.of(alice, bob, clara));
+List<Membre> liste = new ArrayList<>(List.of(alice, bob, clara));
 Collections.sort(liste);
 // Après tri : [bob, alice, clara]
-//   bob   → SOLDAT (le plus bas)
-//   alice → SERGENT, puis clara → SERGENT (même grade, "Alice" < "Clara")
+//   bob   → JUNIOR (le plus bas)
+//   alice → SENIOR, puis clara → SENIOR (même niveau, "Alice" < "Clara")
 ```
 
 ## Contraintes
 
-- Package `etnc.m4`. **Ne modifiez pas** `Grade` ni les signatures de `Soldat`.
+- Package `piscine.m4`. **Ne modifiez pas** `Niveau` ni les signatures de `Membre`.
 - `compareTo` doit être cohérent : si `a.compareTo(b) > 0` alors `b.compareTo(a) < 0`.
-- Deux soldats de même grade **et** de même nom → `compareTo` renvoie **zéro**.
+- Deux membres de même niveau **et** de même nom → `compareTo` renvoie **zéro**.
 - Aucune exception levée, aucune réflexion.
 
 ## Ce qui sera vérifié
 
-- Tri d'une liste mélangée : ordre grade croissant, puis nom alphabétique à grade égal.
-- Signe de `compareTo` entre deux grades différents (négatif/positif).
-- Départage alphabétique à grade égal.
-- Égalité stricte (même grade, même nom → zéro).
+- Tri d'une liste mélangée : ordre niveau croissant, puis nom alphabétique à niveau égal.
+- Signe de `compareTo` entre deux niveaux différents (négatif/positif).
+- Départage alphabétique à niveau égal.
+- Égalité stricte (même niveau, même nom → zéro).
 - Antisymétrie : `a.compareTo(b)` et `b.compareTo(a)` ont des signes opposés.
 
 ## Pour aller plus loin (optionnel — non noté)
 
 - Ajoutez `anciennete` comme troisième critère de tri.
-- Explorez `Comparator.comparing(Soldat::grade).thenComparing(Soldat::nom)` :
+- Explorez `Comparator.comparing(Membre::niveau).thenComparing(Membre::nom)` :
   comment se compare-t-il à votre `compareTo` ? (cf. exercice 4.2.4)

@@ -64,7 +64,7 @@ int comparerA(Ordonnable autre)   --> downcast (Dossier) autre requis
 int compareTo(T autre)            --> T est déjà le bon type, zéro downcast
 ```
 
-Le paramètre de type `T` garantit au compilateur que vous comparez bien un `Livre` à un `Livre`, un `Soldat` à un `Soldat`. Le downcast disparaît — c'est exactement la valeur ajoutée des génériques.
+Le paramètre de type `T` garantit au compilateur que vous comparez bien un `Livre` à un `Livre`, un `Membre` à un `Membre`. Le downcast disparaît — c'est exactement la valeur ajoutée des génériques.
 
 ### À retenir
 

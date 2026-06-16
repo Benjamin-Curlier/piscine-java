@@ -2,73 +2,73 @@
 
 ## Contexte
 
-L'état-major veut classer les soldats selon plusieurs critères : d'abord par
-ordre alphabétique, ensuite par grade puis par nom, ou encore par grade en ordre
+L'état-major veut classer les membres selon plusieurs critères : d'abord par
+ordre alphabétique, ensuite par niveau puis par nom, ou encore par niveau en ordre
 décroissant. La classe `Comparator` du JDK permet de construire ces règles de
 tri par **chaînage**, sans modifier les objets.
 
 ## Fourni (ne pas modifier)
 
 ```java
-public enum Grade { SOLDAT, CAPORAL, SERGENT, ADJUDANT, LIEUTENANT }
+public enum Niveau { JUNIOR, CONFIRME, SENIOR, LEAD, PRINCIPAL }
 // L'ordre de déclaration définit la hiérarchie croissante.
 
-public record Soldat(String nom, Grade grade, int anciennete) { }
-// Record complet — Soldat n'implémente pas Comparable.
+public record Membre(String nom, Niveau niveau, int anciennete) { }
+// Record complet — Membre n'implémente pas Comparable.
 ```
 
 ## Énoncé
 
-Complétez la classe `TriSoldats` avec trois méthodes **statiques** :
+Complétez la classe `TriMembres` avec trois méthodes **statiques** :
 
 ```java
 // Trie par nom (ordre alphabétique).
-static List<Soldat> parNom(List<Soldat> soldats)
+static List<Membre> parNom(List<Membre> membres)
 
-// Trie d'abord par grade croissant, puis par nom en cas d'égalité de grade.
-static List<Soldat> parGradePuisNom(List<Soldat> soldats)
+// Trie d'abord par niveau croissant, puis par nom en cas d'égalité de niveau.
+static List<Membre> parNiveauPuisNom(List<Membre> membres)
 
-// Trie par grade décroissant (LIEUTENANT en premier).
-static List<Soldat> parGradeDecroissant(List<Soldat> soldats)
+// Trie par niveau décroissant (PRINCIPAL en premier).
+static List<Membre> parNiveauDecroissant(List<Membre> membres)
 ```
 
 Chaque méthode doit :
 
-1. **Créer une copie** de la liste source (`new ArrayList<>(soldats)`).
+1. **Créer une copie** de la liste source (`new ArrayList<>(membres)`).
 2. Trier la copie avec `copie.sort(comparator)`.
 3. **Renvoyer la copie** — la liste passée en argument ne doit pas être modifiée.
 
 ## Exemple
 
 ```text
-List<Soldat> soldats = List.of(
-    new Soldat("Martin",  Grade.SERGENT,    5),
-    new Soldat("Dubois",  Grade.CAPORAL,    2),
-    new Soldat("Bernard", Grade.LIEUTENANT, 8)
+List<Membre> membres = List.of(
+    new Membre("Martin",  Niveau.SENIOR,    5),
+    new Membre("Dubois",  Niveau.CONFIRME,    2),
+    new Membre("Bernard", Niveau.PRINCIPAL, 8)
 );
 
-parNom(soldats)
+parNom(membres)
 // → [Bernard, Dubois, Martin]   (alpha)
 
-parGradePuisNom(soldats)
-// → [Dubois(CAPORAL), Martin(SERGENT), Bernard(LIEUTENANT)]
+parNiveauPuisNom(membres)
+// → [Dubois(CONFIRME), Martin(SENIOR), Bernard(PRINCIPAL)]
 
-parGradeDecroissant(soldats)
-// → [Bernard(LIEUTENANT), Martin(SERGENT), Dubois(CAPORAL)]
+parNiveauDecroissant(membres)
+// → [Bernard(PRINCIPAL), Martin(SENIOR), Dubois(CONFIRME)]
 ```
 
 ## Contraintes
 
-- Package `etnc.m4`. **Ne modifiez pas** `Grade`, `Soldat` ni les signatures.
+- Package `piscine.m4`. **Ne modifiez pas** `Niveau`, `Membre` ni les signatures.
 - Utilisez `Comparator.comparing` (et `thenComparing`, `reversed` selon le cas).
-- Les méthodes de `TriSoldats` sont **statiques**.
-- Cas limite : si `soldats` est `null`, renvoyer `null`.
+- Les méthodes de `TriMembres` sont **statiques**.
+- Cas limite : si `membres` est `null`, renvoyer `null`.
 
 ## Ce qui sera vérifié
 
 - `parNom` : ordre alphabétique strict.
-- `parGradePuisNom` : grade croissant, départage par nom à grade égal.
-- `parGradeDecroissant` : grade décroissant.
+- `parNiveauPuisNom` : niveau croissant, départage par nom à niveau égal.
+- `parNiveauDecroissant` : niveau décroissant.
 - La liste source n'est **pas mutée** par les appels.
 - Liste à un seul élément renvoyée inchangée.
 
@@ -76,5 +76,5 @@ parGradeDecroissant(soldats)
 
 - Comment ajouter un troisième critère (ancienneté) sans toucher aux deux
   premiers ?
-- Quelle différence entre `Comparator.comparing(Soldat::grade)` et
+- Quelle différence entre `Comparator.comparing(Membre::niveau)` et
   `Comparator.naturalOrder()` ici ?

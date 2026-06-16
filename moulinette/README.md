@@ -1,6 +1,6 @@
-# Moulinette ETNC
+# Moulinette Piscine Java
 
-Correcteur pédagogique automatique pour la **Piscine ETNC**.
+Correcteur pédagogique automatique pour la **Piscine Java**.
 
 La moulinette ne se contente pas de noter : pour chaque erreur détectée, elle affiche
 un **message clair**, la **cause probable** et une **correction-type commentée**.

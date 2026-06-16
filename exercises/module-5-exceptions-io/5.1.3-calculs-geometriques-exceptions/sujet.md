@@ -14,7 +14,7 @@ dimension est strictement négative.
 
 ## Énoncé
 
-Complétez la classe `CalculsGeometriques` (package `etnc.m5`). Les **quatre
+Complétez la classe `CalculsGeometriques` (package `piscine.m5`). Les **quatre
 signatures sont imposées et inchangées** par rapport à 2.3.3 :
 
 ```java
@@ -51,7 +51,7 @@ CalculsGeometriques.aire(0.0)         // 0.0  (zéro autorisé)
 
 ## Contraintes
 
-- Package `etnc.m5`. **Ne modifiez pas les signatures publiques.**
+- Package `piscine.m5`. **Ne modifiez pas les signatures publiques.**
 - Utilisez `Math.PI` (jamais une constante approchée).
 - Levez `IllegalArgumentException` (du JDK, pas de type custom).
 - Le message doit contenir le nom du paramètre fautif.

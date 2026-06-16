@@ -29,7 +29,7 @@ Le dépôt contient un fichier `README.md` qui précise :
 
 ## Arborescence et format
 
-- Les sources Java sont organisées dans un package (par exemple `etnc`).
+- Les sources Java sont organisées dans un package (par exemple `piscine`).
 - Aucun fichier compilé (`.class`) ni dossier de build n'est versionné.
 - Le fichier de données `taches.csv` produit à l'exécution **n'est pas** un
   livrable : ne le versionnez pas (ajoutez-le à votre `.gitignore`).

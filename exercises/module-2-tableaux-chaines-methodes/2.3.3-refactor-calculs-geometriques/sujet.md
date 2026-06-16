@@ -33,7 +33,7 @@ CalculsGeometriques.perimetre(3.0, 4.0) // 14.0
 
 ## Contraintes
 
-- La classe doit s'appeler `CalculsGeometriques` et rester dans le package `etnc.m2`.
+- La classe doit s'appeler `CalculsGeometriques` et rester dans le package `piscine.m2`.
 - **Les quatre signatures sont imposées** : la surcharge cercle / rectangle est
   évaluée.
 - Utilisez `Math.PI` (n'écrivez pas une valeur approchée de π).

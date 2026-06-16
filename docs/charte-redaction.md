@@ -1,16 +1,16 @@
-# Charte de rédaction — Piscine ETNC
+# Charte de rédaction — Piscine Java
 
 > Règles communes pour rédiger **cours, sujets d'exercices, corrections et messages de la moulinette**.
 > Toute contribution écrite au projet doit respecter cette charte.
 
 ## 1. Public cible
 
-**Stagiaires militaires français débutants en programmation.** Profils variés (officiers, sous-officiers, militaires du rang), tous sont volontaires pour se former au développement. Hypothèses de travail :
+**Développeurs débutants francophones en cours d'onboarding.** Profils variés (reconversion, jeunes diplômés, autodidactes), tous sont volontaires pour se former au développement. Hypothèses de travail :
 
 - **Bagage technique** : à peu près aucun. Bureautique courante OK. Ligne de commande : non.
 - **Bagage scolaire** : hétérogène (Bac à Bac+5). Pas tous à l'aise avec les maths.
 - **Motivation** : forte (formation choisie). Mais frustration possible face à l'abstrait.
-- **Contexte** : ils utiliseront Java en environnement militaire (logiciels métier, outils internes, parfois embarqué).
+- **Contexte** : ils utiliseront Java en entreprise (logiciels métier, outils internes, parfois embarqué).
 
 **Conséquence directe** : on écrit pour quelqu'un qui ne sait rien, mais qui n'est ni bête ni paresseux. Pas de condescendance, pas de raccourcis non explicités.
 
@@ -56,27 +56,26 @@ Toujours développés à la première occurrence du document.
 
 > **JVM** (Java Virtual Machine) — la machine virtuelle qui exécute le code Java compilé.
 
-## 4. Vocabulaire et analogies militaires
+## 4. Vocabulaire et analogies métier
 
-Le contexte militaire est un **levier pédagogique** quand il rend une notion plus concrète. Pas un gimmick à plaquer partout.
+Un contexte métier concret est un **levier pédagogique** quand il rend une notion plus tangible. Pas un gimmick à plaquer partout.
 
 ### Faire
-- Utiliser le vocabulaire militaire dans les **exemples métier** : `Soldat`, `Grade`, `Unite`, `Mission`, `Ordre`, `Materiel`, `Caserne`.
-- Filer une **analogie** quand elle clarifie : "une interface est un peu comme un ordre type — elle dit *quoi* faire sans dire *comment*".
-- Choisir des situations crédibles : gestion d'un effectif, journal d'opérations, transmission de messages, inventaire matériel.
+- Utiliser un vocabulaire métier neutre dans les **exemples** : `Membre`, `Niveau`, `Equipe`, `Projet`, `Tache`, `Materiel`, `Bureau`.
+- Filer une **analogie** quand elle clarifie : "une interface est un peu comme une fiche de poste — elle dit *quoi* faire sans dire *comment*".
+- Choisir des situations crédibles : gestion d'un effectif, journal d'activité, envoi de notifications, inventaire de matériel.
 
 ### Ne pas faire
-- Forcer des analogies tirées par les cheveux ("le polymorphisme c'est comme un commando").
-- Utiliser du jargon militaire pointu non expliqué (acronymes d'armes, codes opérationnels, etc.).
-- Faire de la propagande ou évoquer des situations de combat réelles.
-- Présupposer que tous les stagiaires partagent une expérience de terrain.
+- Forcer des analogies tirées par les cheveux ("le polymorphisme c'est comme une équipe pluridisciplinaire").
+- Utiliser du jargon métier pointu non expliqué (acronymes internes, codes propres à une organisation, etc.).
+- Présupposer un secteur d'activité particulier ou une expérience professionnelle commune.
 
-**Test simple** : si un stagiaire qui n'a jamais mis les pieds sur le terrain peut suivre, c'est bon.
+**Test simple** : si un débutant qui découvre le secteur peut suivre, c'est bon.
 
 ## 5. Inclusivité
 
 - Pas de masculin générique systématique : alterner "le stagiaire / la stagiaire" ou utiliser "vous", "on", "la personne", "l'utilisateur·rice" selon le contexte.
-- Pas de stéréotype de genre dans les exemples (la `Soldat Dupont` aussi bien que le `Soldat Martin`).
+- Pas de stéréotype de genre dans les exemples (la `Membre Dupont` aussi bien que le `Membre Martin`).
 - Pas de référence aux origines, religions, opinions politiques dans les exemples.
 
 ## 6. Structure d'un chapitre de cours
@@ -143,7 +142,7 @@ On préfère **5 lignes claires** à **1 ligne ingénieuse**. Les stagiaires lis
 
 ### Nommage
 - **Identifiants Java** en anglais : `firstName`, `getCount()`, `MAX_RETRIES`.
-- **Identifiants métier** en français quand ils rendent l'intention plus claire pour des francophones débutants : `Soldat`, `Grade`, `affecterAUneUnite()`. À garder cohérent dans un même exemple.
+- **Identifiants métier** en français quand ils rendent l'intention plus claire pour des francophones débutants : `Membre`, `Niveau`, `affecterAUneEquipe()`. À garder cohérent dans un même exemple.
 - Pas de variable d'une lettre sauf `i`, `j`, `k` dans une boucle ou `e` dans un `catch`.
 
 ### Commentaires
@@ -155,7 +154,7 @@ On préfère **5 lignes claires** à **1 ligne ingénieuse**. Les stagiaires lis
 i = i + 1;  // on ajoute 1 a i
 
 // BON — commentaire qui explique l'intention
-i = i + 1;  // passe au soldat suivant de la liste
+i = i + 1;  // passe au membre suivant de la liste
 ```
 
 ### Imports
@@ -219,7 +218,7 @@ Aucun contenu pédagogique n'est mergé sans **relecture par au moins un autre f
 **Critères de validation** :
 - [ ] Respect de la structure imposée (section 6 pour les cours, [`format-exercice.md`](format-exercice.md) pour les exos).
 - [ ] Niveau de langue adapté (test : "un cousin de 18 ans qui ne fait pas d'info comprendrait ?").
-- [ ] Pas de jargon militaire non expliqué.
+- [ ] Pas de jargon métier non expliqué.
 - [ ] Code compilable et passant les tests.
 - [ ] Pas de fautes d'orthographe / de grammaire (vérifier avec un correcteur).
 - [ ] Cohérent avec le [référentiel](referentiel.md) (numérotation, objectifs).

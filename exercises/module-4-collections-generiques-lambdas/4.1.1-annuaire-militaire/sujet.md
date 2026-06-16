@@ -1,8 +1,8 @@
-# Exercice 4.1.1 — Annuaire militaire (Map)
+# Exercice 4.1.1 — Annuaire de l'équipe (Map)
 
 ## Contexte
 
-Un réseau radio militaire identifie chaque poste par un **indicatif** (ex. : `"ALPHA-7"`).
+Un annuaire d'équipe identifie chaque membre par un **indicatif** (ex. : `"ALPHA-7"`).
 On veut pouvoir enregistrer, rechercher et supprimer rapidement un correspondant
 par son indicatif. La structure adaptée est une `Map<String, String>`.
 
@@ -43,7 +43,7 @@ a.supprimer("DELTA-9");       // false
 
 ## Contraintes
 
-- Package `etnc.m4`. **Ne modifiez pas** les signatures publiques.
+- Package `piscine.m4`. **Ne modifiez pas** les signatures publiques.
 - Le champ interne `annuaire` est **privé** et non accessible depuis les tests.
 - `rechercher` renvoie `"Inconnu"` (jamais `null`) si l'indicatif est absent.
 - `supprimer` renvoie `false` sur un indicatif absent, **sans lever d'exception**.
@@ -62,5 +62,5 @@ a.supprimer("DELTA-9");       // false
 ## Pour aller plus loin (optionnel — non noté)
 
 - Que se passe-t-il si deux indicatifs différents désignent le même nom ?
-  La `Map` le permet — est-ce un problème pour un annuaire radio ?
+  La `Map` le permet — est-ce un problème pour un annuaire d'équipe ?
 - Ajoutez une méthode `List<String> nomsTries()` qui trie les **valeurs** (noms).

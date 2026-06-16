@@ -56,7 +56,7 @@ executer("somme -3 4")  →  1   (nombres négatifs acceptés)
 
 ## Contraintes
 
-- Package `etnc.m5`. **Ne modifiez pas** la signature de `executer`.
+- Package `piscine.m5`. **Ne modifiez pas** la signature de `executer`.
 - La méthode ne déclare **pas** `throws` — toutes les exceptions levées sont
   unchecked (`IllegalArgumentException`, `NumberFormatException`).
 - Utilisez `split("\\s+")` après `trim()` pour découper les tokens.

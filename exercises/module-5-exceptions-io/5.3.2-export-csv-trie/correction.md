@@ -17,10 +17,10 @@ public static void exporter(List<Personnel> personnels, Path csv) throws IOExcep
     // Construction des lignes CSV : en-tête obligatoire en première position,
     // puis une ligne par personnel avec String.join (pas de concaténation manuelle).
     List<String> lignes = new ArrayList<>();
-    lignes.add("nom,grade,anciennete");
+    lignes.add("nom,niveau,anciennete");
     for (Personnel p : copie) {
-        // grade().name() renvoie le nom de la constante enum ("SERGENT", etc.)
-        lignes.add(String.join(",", p.nom(), p.grade().name(), String.valueOf(p.anciennete())));
+        // niveau().name() renvoie le nom de la constante enum ("SENIOR", etc.)
+        lignes.add(String.join(",", p.nom(), p.niveau().name(), String.valueOf(p.anciennete())));
     }
 
     // Files.write écrase le fichier s'il existe déjà (comportement par défaut).
@@ -41,13 +41,13 @@ public static void exporter(List<Personnel> personnels, Path csv) throws IOExcep
   `.thenComparing(Personnel::nom)` ajoute le tri alphabétique en critère secondaire
   (uniquement quand deux anciennetés sont égales). Ce chaînage est idiomatique M4.
 
-- **`String.join(",", ...)`** : construit `"nom,grade,ancienneté"` proprement.
+- **`String.join(",", ...)`** : construit `"nom,niveau,ancienneté"` proprement.
   Évite les concaténations `+` et garantit que les séparateurs sont tous identiques.
   Avec une liste vide, `String.join` renverrait `""`, mais ici on passe des
   varargs non vides.
 
-- **`p.grade().name()`** : `name()` renvoie le nom exact de la constante enum
-  (`"SERGENT"`, `"LIEUTENANT"`, etc.). `toString()` est souvent identique mais
+- **`p.niveau().name()`** : `name()` renvoie le nom exact de la constante enum
+  (`"SENIOR"`, `"PRINCIPAL"`, etc.). `toString()` est souvent identique mais
   peut être surchargé — `name()` est garantit par l'API Java et est plus lisible
   pour indiquer l'intention.
 
@@ -73,7 +73,7 @@ public static void exporter(List<Personnel> personnels, Path csv) throws IOExcep
 - **Oublier `StandardCharsets.UTF_8`** : les tests avec accents (Léonard, Éric,
   Noël…) échouent sur Windows où l'encodage par défaut est CP-1252.
 
-- **Utiliser `grade().toString()` au lieu de `grade().name()`** : identiques pour
+- **Utiliser `niveau().toString()` au lieu de `niveau().name()`** : identiques pour
   les enums qui ne surchargent pas `toString`, mais `name()` est l'intention
   correcte ici — on veut le nom de la constante, pas une représentation arbitraire.
 

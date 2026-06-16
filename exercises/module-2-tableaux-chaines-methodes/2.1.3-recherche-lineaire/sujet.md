@@ -31,7 +31,7 @@ Indice : 1
 
 ## Contraintes
 
-- La classe doit s'appeler `RechercheLineaire` et rester dans le package `etnc.m2`.
+- La classe doit s'appeler `RechercheLineaire` et rester dans le package `piscine.m2`.
 - Lisez l'entrée avec un `Scanner`. Tout le code peut tenir dans `main`.
 - Les indices commencent à 0 (la première case du tableau est l'indice 0).
 

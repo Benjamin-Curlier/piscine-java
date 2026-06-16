@@ -31,7 +31,7 @@ cible.toString();          // "(4.0, 3.0)"
 
 ## Contraintes
 
-- La classe doit s'appeler `Point2D` et rester dans le package `etnc.m3`.
+- La classe doit s'appeler `Point2D` et rester dans le package `piscine.m3`.
 - **Ne modifiez pas les signatures publiques** : les tests s'appuient dessus.
 - Les coordonnées sont des `double` ; les attributs doivent être **privés**.
 - `toString()` doit produire exactement `(x, y)` (ex. `(1.0, 2.0)`). Utilisez

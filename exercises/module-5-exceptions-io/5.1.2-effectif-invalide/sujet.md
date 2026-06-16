@@ -2,13 +2,13 @@
 
 ## Contexte
 
-On gère l'**effectif** des unités d'un groupement. Chaque unité a un nom et une
+On gère l'**effectif** des équipes d'un groupement. Chaque équipe a un nom et une
 **capacité maximale** d'accueil. Affecter un effectif négatif, supérieur à la
 capacité, ou issu d'une saisie illisible doit être **signalé par une exception**
 plutôt que silencieusement ignoré.
 
 Vous allez écrire **votre propre exception**, `EffectifInvalideException`, puis
-l'utiliser dans la classe `Unite`. C'est l'occasion de pratiquer une exception
+l'utiliser dans la classe `Equipe`. C'est l'occasion de pratiquer une exception
 **personnalisée** *unchecked* et le **chaînage** d'une cause d'origine.
 
 ## Énoncé
@@ -28,17 +28,17 @@ quand l'effectif vient d'un texte illisible, pour ne pas masquer la
 `NumberFormatException` réelle. Le stub fourni ne contient que le premier
 constructeur ; **à vous d'ajouter celui de chaînage**.
 
-### 2. Compléter la classe `Unite`
+### 2. Compléter la classe `Equipe`
 
 Champs, constructeur et getters sont **fournis**. Complétez les deux `affecter` :
 
 ```java
-Unite(String nom, int capaciteMax)   // effectif initial = 0
+Equipe(String nom, int capaciteMax)   // effectif initial = 0
 String getNom()   int getCapaciteMax()   int getEffectif()
 
 void affecter(int effectif)
 //  effectif < 0 || effectif > capaciteMax
-//      -> throw new EffectifInvalideException(message nommant la valeur fautive ET le nom de l'unité)
+//      -> throw new EffectifInvalideException(message nommant la valeur fautive ET le nom de l'équipe)
 //  sinon -> met à jour l'effectif
 
 void affecter(String effectifTexte)
@@ -58,7 +58,7 @@ void affecter(String effectifTexte)
 ## Exemple
 
 ```text
-Unite alpha = new Unite("Alpha", 100);
+Equipe alpha = new Equipe("Alpha", 100);
 alpha.affecter(50);          // OK   -> getEffectif() == 50
 alpha.affecter("30");        // OK   -> getEffectif() == 30
 alpha.affecter(150);         // EffectifInvalideException (message contient "150" et "Alpha")
@@ -70,9 +70,9 @@ alpha.getEffectif();         // 30  (inchangé : les échecs n'ont pas corrompu 
 
 ## Contraintes
 
-- Package `etnc.m5`. **Ne modifiez pas** les signatures fournies.
+- Package `piscine.m5`. **Ne modifiez pas** les signatures fournies.
 - `EffectifInvalideException` **hérite de `RuntimeException`** (unchecked).
-- Le message de l'exception de plage **nomme la valeur fautive ET le nom de l'unité**.
+- Le message de l'exception de plage **nomme la valeur fautive ET le nom de l'équipe**.
 - Le chaînage de `affecter(String)` **préserve la `NumberFormatException`** comme cause.
 - Une affectation qui échoue **laisse l'effectif inchangé**.
 - Imports **explicites** (jamais `import ...*`), encodage UTF-8.
@@ -83,7 +83,7 @@ alpha.getEffectif();         // 30  (inchangé : les échecs n'ont pas corrompu 
   reflète la valeur.
 - `affecter(-1)` et `affecter(capaciteMax + 1)` lèvent une `EffectifInvalideException`.
 - Le **type** levé est bien `EffectifInvalideException`, et son message **contient
-  la valeur fautive** et le **nom de l'unité**.
+  la valeur fautive** et le **nom de l'équipe**.
 - `affecter("30")` (texte valide) met l'effectif à 30 ; `affecter("abc")` lève.
 - L'exception est **unchecked** (`isInstanceOf(RuntimeException.class)`).
 - `affecter("abc")` chaîne une `NumberFormatException` (`getCause()`) ; `affecter("-5")`

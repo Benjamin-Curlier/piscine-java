@@ -46,7 +46,7 @@ for pom in "$EX_ROOT"/module-*/*/solution/pom.xml; do
       declare -a backups=() targets=()
       ok_swap=1
       while IFS= read -r mut_file; do
-        rel="${mut_file#"$mut_id_dir"}"          # ex. etnc/m6/Operation.java
+        rel="${mut_file#"$mut_id_dir"}"          # ex. piscine/m6/Operation.java
         target="$sol_main/$rel"
         if [[ ! -f "$target" ]]; then
           echo "  ! $exo/$mid : cible introuvable pour $rel"

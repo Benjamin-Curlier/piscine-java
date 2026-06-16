@@ -26,7 +26,7 @@ F(10) = 55
 
 ## Contraintes
 
-- La classe doit s'appeler `FibonacciIteratif` et rester dans le package `etnc.m1`.
+- La classe doit s'appeler `FibonacciIteratif` et rester dans le package `piscine.m1`.
 - Calcul **itératif** uniquement (pas de récursivité, non vue à ce stade).
 - Utilisez `long` pour la valeur calculée (les termes grandissent vite).
 - `F(0) = 0`, `F(1) = 1`.

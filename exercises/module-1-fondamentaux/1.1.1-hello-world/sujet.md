@@ -4,7 +4,7 @@
 
 Bienvenue dans la Piscine. Cet exercice est volontairement minimaliste : son but est de vous faire passer en revue le cycle complet **écrire → compiler → exécuter** avec un programme dont vous ne pourrez pas vous tromper sur la logique.
 
-Comme tout militaire en début de cursus, vous commencez par vous présenter. Votre programme va faire la même chose : se présenter au monde.
+Comme tout nouveau membre de l'équipe en début de parcours, vous commencez par vous présenter. Votre programme va faire la même chose : se présenter au monde.
 
 ## Énoncé
 
@@ -14,20 +14,20 @@ Comme tout militaire en début de cursus, vous commencez par vous présenter. Vo
 Hello, world!
 ```
 
-Votre classe doit s'appeler **`HelloWorld`** et appartenir au **package `etnc.m1`**. Le squelette de code vous est fourni dans le dossier `starter/` — vous devez uniquement compléter le contenu de la méthode `main`.
+Votre classe doit s'appeler **`HelloWorld`** et appartenir au **package `piscine.m1`**. Le squelette de code vous est fourni dans le dossier `starter/` — vous devez uniquement compléter le contenu de la méthode `main`.
 
 ## Exemple
 
 **Exécution attendue (depuis la ligne de commande) :**
 
 ```text
-$ java etnc.m1.HelloWorld
+$ java piscine.m1.HelloWorld
 Hello, world!
 ```
 
 ## Contraintes
 
-- La classe doit s'appeler `HelloWorld` et être dans le package `etnc.m1`.
+- La classe doit s'appeler `HelloWorld` et être dans le package `piscine.m1`.
 - Le texte affiché doit être exactement `Hello, world!` (attention aux espaces, à la majuscule, à la ponctuation).
 - Aucune entrée utilisateur, aucun argument de ligne de commande à lire.
 - Vous ne devez **rien modifier** en dehors du corps de la méthode `main` (n'ajoutez pas d'imports, ne renommez pas la classe, ne touchez pas au package).

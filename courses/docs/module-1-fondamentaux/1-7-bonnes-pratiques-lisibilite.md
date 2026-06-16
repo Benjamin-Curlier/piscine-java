@@ -88,7 +88,7 @@ Un commentaire utile ne redit pas ce que le code montre déjà. Il explique une 
 compteur = compteur + 1;   // on ajoute 1 à compteur
 
 // BON — le commentaire explique pourquoi
-compteur = compteur + 1;   // passe au soldat suivant de la liste
+compteur = compteur + 1;   // passe au membre suivant de la liste
 ```
 
 Si vous avez besoin d'un commentaire pour expliquer *ce que fait* une ligne, c'est souvent le signe qu'un meilleur nom de variable rendrait le commentaire inutile.

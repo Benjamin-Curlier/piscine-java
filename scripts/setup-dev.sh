@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Prépare l'environnement de développement Piscine ETNC sous Linux/macOS, sans droits admin.
+# Prépare l'environnement de développement Piscine Java sous Linux/macOS, sans droits admin.
 # Vérifie git et Node, installe un JDK Temurin 25 portable si Java 25+ est absent,
 # configure JAVA_HOME / PATH (session + ~/.profile), puis vérifie le Maven Wrapper.
 # Usage : ./scripts/setup-dev.sh [--jdk-dir <dossier>] [--force]
@@ -27,7 +27,7 @@ java_major() {
     "$exe" -version 2>&1 | head -1 | sed -n 's/.*version "\([0-9]*\).*/\1/p'
 }
 
-echo "== Setup dev Piscine ETNC =="
+echo "== Setup dev Piscine Java =="
 
 # 1. git
 if ! command -v git >/dev/null 2>&1; then
@@ -99,7 +99,7 @@ else
     [[ "$MAJOR" -ge 25 ]] || { echo "Installation du JDK échouée (version : $MAJOR)." >&2; exit 1; }
 
     # Persistance dans ~/.profile (idempotent)
-    MARK="# Piscine ETNC — JDK 25"
+    MARK="# Piscine Java — JDK 25"
     if ! grep -qF "$MARK" "$HOME/.profile" 2>/dev/null; then
         {
             echo ""

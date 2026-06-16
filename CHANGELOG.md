@@ -1,4 +1,4 @@
-# Changelog — Piscine ETNC
+# Changelog — Piscine Java
 
 Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/). Versions en [SemVer](https://semver.org/lang/fr/).
 
@@ -22,10 +22,10 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/). Versions 
   (un exo validé ne redescend jamais).
 
 ### Distribution
-- **Installeur jpackage** « Piscine ETNC » : `.exe` Windows **par utilisateur** (sans admin,
+- **Installeur jpackage** « Piscine Java » : `.exe` Windows **par utilisateur** (sans admin,
   JRE + MinGit + exercices + site de cours embarqués, répertoire modifiable), `.deb` et
   app-image portable Linux — workflow CI **Release** sur tag `v*`. Mode zéro-argument de la
-  GUI : workspace auto-initialisé dans `~/PiscineETNC` (env `PISCINE_HOME`), données hors du
+  GUI : workspace auto-initialisé dans `~/PiscinePiscine Java` (env `PISCINE_HOME`), données hors du
   répertoire d'installation. Remplace le bundle ZIP (`build-bundle` retiré).
 - Résolution git explicite : propriété `piscine.git` (MinGit embarqué) → env
   `PISCINE_GIT_HOME` → `git` du PATH.
@@ -87,6 +87,6 @@ est absent (fréquent sous Git-Bash Windows).
 - **Pas de note pondérée /20** : verdict binaire pass/fail par checker (la pondération
   `evaluation.yml` n'est pas encore consommée par le runtime).
 - **À venir (Phase 4)** : isolation Docker du runner (#30), PMD/SpotBugs, anti-triche JPlag (#29),
-  GitLab CE on-premise (#26), branding ETNC du site (#33).
+  GitLab CE on-premise (#26), branding Piscine Java du site (#33).
 
-[0.6.0-rc.1]: https://github.com/Benjamin-Curlier/Piscine-ETNC
+[0.6.0-rc.1]: https://github.com/Benjamin-Curlier/piscine-java

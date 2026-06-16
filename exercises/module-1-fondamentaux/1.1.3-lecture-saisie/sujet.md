@@ -26,7 +26,7 @@ Bonjour Dupont, vous avez 42 ans.
 
 ## Contraintes
 
-- La classe doit s'appeler `LectureSaisie` et rester dans le package `etnc.m1`.
+- La classe doit s'appeler `LectureSaisie` et rester dans le package `piscine.m1`.
 - Le prénom peut contenir des espaces (« Jean Le Goff ») : lisez **toute la ligne**.
 - L'âge est un entier.
 - Le message final doit être **exactement** au format de l'exemple (ponctuation et espaces compris).

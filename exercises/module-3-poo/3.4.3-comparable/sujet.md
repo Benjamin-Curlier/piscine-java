@@ -37,7 +37,7 @@ Classement.plusPrioritaire(new Dossier[] { a, b }).getTitre();   // "A"
 
 ## Contraintes
 
-- Package `etnc.m3`. **Ne modifiez pas** `Ordonnable` ni les signatures.
+- Package `piscine.m3`. **Ne modifiez pas** `Ordonnable` ni les signatures.
 - Les champs de `Dossier` sont **privés**.
 - `comparerA` renvoie un **signe** (pas forcément la différence brute) ;
   `Integer.compare` est idiomatique.

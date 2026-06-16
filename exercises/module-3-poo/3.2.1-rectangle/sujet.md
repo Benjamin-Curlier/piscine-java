@@ -35,7 +35,7 @@ Rectangle carre = new Rectangle(5.0);  // 5.0 x 5.0
 
 ## Contraintes
 
-- La classe doit s'appeler `Rectangle` et rester dans le package `etnc.m3`.
+- La classe doit s'appeler `Rectangle` et rester dans le package `piscine.m3`.
 - **Ne modifiez pas les signatures publiques** : les tests s'appuient dessus.
 - Les attributs doivent être **privés**.
 - Aucune exception : une valeur invalide est **corrigée** (constructeur) ou

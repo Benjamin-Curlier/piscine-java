@@ -2,14 +2,14 @@
 
 ## Démarche attendue
 
-1. `parGrade` : `soldats.stream().collect(Collectors.groupingBy(Soldat::grade))`.
-   La référence de méthode `Soldat::grade` extrait la clé de groupement.
-   La map résultante ne contient que les grades effectivement présents.
-2. `selonAnciennete` : `soldats.stream().collect(Collectors.partitioningBy(s -> s.anciennete() >= seuil))`.
+1. `parNiveau` : `membres.stream().collect(Collectors.groupingBy(Membre::niveau))`.
+   La référence de méthode `Membre::niveau` extrait la clé de groupement.
+   La map résultante ne contient que les niveaux effectivement présents.
+2. `selonAnciennete` : `membres.stream().collect(Collectors.partitioningBy(s -> s.anciennete() >= seuil))`.
    `partitioningBy` garantit **toujours** les deux clés `true` et `false`, même
    si l'un des groupes est vide — c'est sa différence fondamentale avec
    `groupingBy`.
-3. `effectifsParGrade` : `soldats.stream().collect(Collectors.groupingBy(Soldat::grade, Collectors.counting()))`.
+3. `effectifsParNiveau` : `membres.stream().collect(Collectors.groupingBy(Membre::niveau, Collectors.counting()))`.
    Le collecteur downstream `counting()` remplace la liste par défaut par un
    compteur `Long`.
 
@@ -21,15 +21,15 @@
 - **Collecteur downstream** : `groupingBy(classifier, downstream)` permet de
   transformer chaque groupe — ici `counting()`, mais on pourrait écrire
   `mapping(...)`, `joining(...)`, etc.
-- **Référence de méthode** : `Soldat::grade` est équivalente à la lambda
-  `s -> s.grade()` ; la forme compacte est idiomatique.
+- **Référence de méthode** : `Membre::niveau` est équivalente à la lambda
+  `s -> s.niveau()` ; la forme compacte est idiomatique.
 
 ## Erreurs fréquentes observées
 
 - Utiliser `groupingBy` pour `selonAnciennete` : la clé `false` peut alors
-  être absente si tous les soldats satisfont le critère.
-- Oublier le collecteur downstream `counting()` et obtenir une `Map<Grade, List<Soldat>>`
-  au lieu de `Map<Grade, Long>`.
+  être absente si tous les membres satisfont le critère.
+- Oublier le collecteur downstream `counting()` et obtenir une `Map<Niveau, List<Membre>>`
+  au lieu de `Map<Niveau, Long>`.
 - Retourner `null` pour une liste vide au lieu d'une map vide (comportement
   naturel de `groupingBy`).
 

@@ -13,7 +13,7 @@ Piscine.
 public void preparerPullRequest(GitCommandes git) throws IOException {
     git.run("switch", "-c", "feature/ajoute-licence");
     Files.writeString(git.repo().resolve("LICENSE"),
-        "Licence interne ETNC — tous droits réservés\n", StandardCharsets.UTF_8);
+        "Licence MIT — Piscine Java\n", StandardCharsets.UTF_8);
     git.run("add", "LICENSE");
     git.run("commit", "-m", "Ajoute le fichier LICENSE");
 

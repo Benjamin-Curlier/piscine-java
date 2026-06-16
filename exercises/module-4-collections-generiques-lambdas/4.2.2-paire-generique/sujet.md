@@ -35,7 +35,7 @@ Paire<String, Integer> r = Paire.de("x", 1);   // types inférés
 
 ## Contraintes
 
-- Package `etnc.m4`. **Ne changez pas** les signatures publiques.
+- Package `piscine.m4`. **Ne changez pas** les signatures publiques.
 - La classe est **`final`** et **immuable** : champs `private final`, **aucun
   mutateur**. `inverser()` ne modifie pas l'objet d'origine, il en crée un nouveau.
 - Conservez l'en-tête générique fourni (`Paire<A, B>`, `<B, A>`, `<X, Y>`) :

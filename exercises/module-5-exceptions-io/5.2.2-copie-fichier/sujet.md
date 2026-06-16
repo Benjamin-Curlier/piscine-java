@@ -38,7 +38,7 @@ CopieFichier.copier(source, destination);
 
 ## Contraintes
 
-- Package `etnc.m5`. **Ne modifiez pas** la signature de `copier`.
+- Package `piscine.m5`. **Ne modifiez pas** la signature de `copier`.
 - La méthode doit utiliser `Files.copy` avec `StandardCopyOption.REPLACE_EXISTING`.
 - La copie est **octet-exacte** : un fichier sans `\n` final en source
   doit produire une destination sans `\n` final.

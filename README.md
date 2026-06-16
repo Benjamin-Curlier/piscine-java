@@ -1,8 +1,8 @@
-# Piscine ETNC
+# Piscine Java
 
 > **Stagiaire ?** Va directement à [`docs/piscine-stagiaire.md`](docs/piscine-stagiaire.md) — tout est expliqué pour démarrer en autonomie.
 
-Plateforme pédagogique d'apprentissage du langage **Java** pour les stagiaires de l'**École des Transmissions, du Numérique et du Cyber** (ETNC).
+Plateforme pédagogique d'apprentissage du langage **Java**, pensée pour l'**onboarding de nouveaux développeurs** qui montent en compétence à leur rythme.
 
 Inspirée des piscines C/C++ de 42 et Epitech, cette piscine se distingue par :
 
@@ -32,7 +32,6 @@ Dans les deux modes, la boucle pédagogique est identique : on édite un exercic
 | `courses/` | Site Docusaurus regroupant les 6 modules de cours, organisés en chapitres progressifs. |
 | `exercises/` | 65 exercices individuels + 3 projets en binôme, au format standardisé (sujet, métadonnées, tests, solution de référence). |
 | `moulinette/` | Code Java de la moulinette de correction automatique (multi-module Gradle). |
-| `.claude/` | Configuration Claude Code du projet (skills, hooks, subagents). |
 
 ## Modules
 
@@ -80,12 +79,12 @@ Formateur ? Voir **[`CONTRIBUTING.md`](CONTRIBUTING.md)** : workflow Git, checkl
 
 ## Statut
 
-**Release Candidate** — contenu pédagogique complet (6 modules : 65 exercices + 3 projets binôme), moulinette évaluante, mode standalone hors-ligne. Voir [`CHANGELOG.md`](CHANGELOG.md) pour le détail de la version et les *known issues*, [`docs/backlog.md`](docs/backlog.md) pour la suite (Phase 4 — déploiement militaire), et [`docs/referentiel.md`](docs/referentiel.md) pour le plan pédagogique complet.
+**Release Candidate** — contenu pédagogique complet (6 modules : 65 exercices + 3 projets binôme), moulinette évaluante, mode standalone hors-ligne. Voir [`CHANGELOG.md`](CHANGELOG.md) pour le détail de la version et les *known issues*, [`docs/backlog.md`](docs/backlog.md) pour la suite (Phase 4 — déploiement à grande échelle), et [`docs/referentiel.md`](docs/referentiel.md) pour le plan pédagogique complet.
 
 ## Licence
 
-Tous droits réservés — usage interne ETNC. Voir [`LICENSE`](LICENSE).
+Sous licence **MIT** — voir [`LICENSE`](LICENSE).
 
 ---
 
-*Projet à vocation pédagogique au profit des forces militaires françaises.*
+*Projet à vocation pédagogique pour l'apprentissage du langage Java.*

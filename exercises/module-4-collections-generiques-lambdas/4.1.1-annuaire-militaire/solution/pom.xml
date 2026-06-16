@@ -5,12 +5,12 @@
                              https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>etnc.piscine.m4</groupId>
-    <artifactId>annuaire-militaire-solution</artifactId>
+    <groupId>piscine.m4</groupId>
+    <artifactId>annuaire-membre-solution</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>Annuaire militaire (solution de reference)</name>
+    <name>Annuaire de l'equipe (solution de reference)</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

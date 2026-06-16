@@ -29,7 +29,7 @@ ParcoursMatrice.sommeMatrice(m)   // 10
 
 ## Contraintes
 
-- La classe doit s'appeler `ParcoursMatrice` et rester dans le package `etnc.m2`.
+- La classe doit s'appeler `ParcoursMatrice` et rester dans le package `piscine.m2`.
 - **La signature de `sommeMatrice` est imposée.**
 - **La solution doit être récursive** (aucune boucle ; cas de base + appel
   récursif). Les méthodes auxiliaires `private` sont autorisées.

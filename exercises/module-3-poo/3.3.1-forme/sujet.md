@@ -36,7 +36,7 @@ new Rectangle(3.0, 4.0).decrire();  // "aire = 12.00, perimetre = 14.00"
 
 ## Contraintes
 
-- Classes dans le package `etnc.m3`. **Ne modifiez pas les signatures
+- Classes dans le package `piscine.m3`. **Ne modifiez pas les signatures
   publiques** ni la classe `Forme`.
 - Les champs des sous-classes doivent être **privés**.
 - Utilisez `Math.PI` pour le cercle.

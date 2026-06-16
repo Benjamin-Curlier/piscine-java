@@ -33,7 +33,7 @@ ligne d'arrivée, lue de bas en haut : `3 1`.
 
 ## Contraintes
 
-- La classe doit s'appeler `RotationMatrice` et rester dans le package `etnc.m2`.
+- La classe doit s'appeler `RotationMatrice` et rester dans le package `piscine.m2`.
 - Lisez l'entrée avec un `Scanner`. Tout le code peut tenir dans `main`.
 - La matrice est toujours **carrée** (`n` lignes de `n` colonnes).
 - La rotation est de 90° dans le sens **horaire**.

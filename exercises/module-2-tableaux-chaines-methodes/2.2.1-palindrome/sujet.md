@@ -25,7 +25,7 @@ oui
 
 ## Contraintes
 
-- La classe doit s'appeler `Palindrome` et rester dans le package `etnc.m2`.
+- La classe doit s'appeler `Palindrome` et rester dans le package `piscine.m2`.
 - Lisez l'entrée avec un `Scanner`. Tout le code peut tenir dans `main`.
 - La comparaison doit ignorer la casse (`toLowerCase`).
 - Affichez exactement `oui` ou `non` (en minuscules).

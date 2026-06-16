@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Bootstrap autonome de la Piscine ETNC en mode local.
+# Bootstrap autonome de la Piscine Java en mode local.
 # Usage : ./scripts/piscine-bootstrap.sh --nom <slug> [--dest <dossier>] [--force]
 
 set -euo pipefail

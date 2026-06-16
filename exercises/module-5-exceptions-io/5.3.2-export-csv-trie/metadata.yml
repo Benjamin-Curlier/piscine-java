@@ -11,13 +11,13 @@ objectifs_pedagogiques:
   - "Faire une copie défensive avant de trier pour ne pas muter la liste source"
   - "Construire une ligne CSV avec String.join sans concaténation manuelle"
   - "Écrire un fichier texte avec Files.write et StandardCharsets.UTF_8"
-  - "Utiliser grade().name() pour obtenir le nom de la constante enum"
+  - "Utiliser niveau().name() pour obtenir le nom de la constante enum"
 notions:
   - CSV
   - Comparator
   - String.join
   - Files.write
   - record
-auteur: "ETNC"
+auteur: "Piscine Java"
 version: 1
 date_creation: 2026-06-04

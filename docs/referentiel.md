@@ -1,11 +1,11 @@
-# Référentiel pédagogique — Piscine ETNC
+# Référentiel pédagogique — Piscine Java
 
-> Document de référence décrivant la progression complète des cours, exercices et projets de la Piscine ETNC.
+> Document de référence décrivant la progression complète des cours, exercices et projets de la Piscine Java.
 > **Statut** : v0.1 — squelette initial. Les intitulés peuvent évoluer après revue pédagogique.
 
 ## 1. Objectifs
 
-Former des **stagiaires militaires débutants en programmation** aux **fondamentaux du développement logiciel** en utilisant **Java 25 LTS** comme langage support.
+Former des **développeurs débutants en programmation** aux **fondamentaux du développement logiciel** en utilisant **Java 25 LTS** comme langage support.
 
 À l'issue de la Piscine, un stagiaire doit être capable de :
 
@@ -24,7 +24,7 @@ Former des **stagiaires militaires débutants en programmation** aux **fondament
 | **Apprentissage progressif** | Chaque exercice s'appuie uniquement sur des notions vues dans les chapitres antérieurs. |
 | **Rendu Git dès le jour 1** | Familiarisation Git par la pratique, pas par un cours théorique préalable. |
 | **Ressources externes assumées** | Pas de vidéo interne — liens vers contenus reconnus (Baeldung, Java Almanac, OpenJDK docs, etc.). |
-| **Niveau de langue adapté** | Vocabulaire accessible, analogies métier (militaires quand pertinent), zéro jargon non expliqué. |
+| **Niveau de langue adapté** | Vocabulaire accessible, analogies métier (quand pertinent), zéro jargon non expliqué. |
 
 ## 3. Vue d'ensemble
 
@@ -96,9 +96,9 @@ Former des **stagiaires militaires débutants en programmation** aux **fondament
 10. **Records et `sealed`** — types immuables (records), hiérarchies fermées (`sealed` / `permits`), pattern matching.
 
 #### Sous-groupes d'exercices (4 sous-groupes, 14 exercices)
-- **3.1 Classes et objets** (3 ex) — `Point2D`, `Compte` bancaire simple, `Soldat` (attributs + méthodes).
+- **3.1 Classes et objets** (3 ex) — `Point2D`, `Compte` bancaire simple, `Membre` (attributs + méthodes).
 - **3.2 Encapsulation et constructeurs** (3 ex) — invariants d'un `Rectangle`, validation dans le constructeur, classe `Date` simple.
-- **3.3 Héritage et polymorphisme** (4 ex) — hiérarchie `Vehicule`, `Forme` géométrique, `Personnel` militaire (officier/sous-off/MdR), méthode polymorphe `decrire()`.
+- **3.3 Héritage et polymorphisme** (4 ex) — hiérarchie `Vehicule`, `Forme` géométrique, `Personnel` (encadrant/intermédiaire/exécutant), méthode polymorphe `decrire()`.
 - **3.4 Interfaces, enums, records** (4 ex) — interface `Comparable` custom, enum `Grade` avec méthodes, `record Coordonnees`, hiérarchie `sealed` d'événements.
 
 #### → **Projet binôme #1 — Conception d'un mini-domaine OO**
@@ -121,8 +121,8 @@ Voir [section 5](#5-projets-binôme).
 8. **Streams et `Optional`** — pipeline `map`/`filter`/`reduce`/`collect`, terminaux courants, `Optional` correctement utilisé.
 
 #### Sous-groupes d'exercices (3 sous-groupes, 12 exercices)
-- **4.1 Collections** (4 ex) — annuaire militaire (`Map`), set d'utilisateurs uniques, file de mission (`Deque`), groupement par grade.
-- **4.2 Génériques et tri** (4 ex) — `Stack<T>` custom, paire générique, tri d'une liste de `Soldat` (par grade puis nom), `Comparator` chaîné.
+- **4.1 Collections** (4 ex) — annuaire d'équipe (`Map`), set d'utilisateurs uniques, file de traitement (`Deque`), groupement par niveau.
+- **4.2 Génériques et tri** (4 ex) — `Stack<T>` custom, paire générique, tri d'une liste de `Membre` (par niveau puis nom), `Comparator` chaîné.
 - **4.3 Lambdas et Streams** (4 ex) — filtrage/projection d'une liste, agrégation (somme, moyenne, max), `groupingBy` / `partitioningBy`, recherche avec `Optional`.
 
 ---
@@ -179,7 +179,7 @@ Trois projets en binôme jalonnent la Piscine. Chaque projet est volontairement 
 
 | # | Quand | Thème pédagogique | Exemple de sujet |
 |---|---|---|---|
-| **Projet 1** | Après module 3 | Conception orientée objet d'un mini-domaine | **Gestion d'une caserne** — soldats, grades, unités, opérations simples (affecter, promouvoir, lister). |
+| **Projet 1** | Après module 3 | Conception orientée objet d'un mini-domaine | **Gestion d'un bureau** — membres, niveaux, équipes, opérations simples (affecter, promouvoir, lister). |
 | **Projet 2** | Après module 5 | Application OO + persistance fichier | **Gestionnaire de tâches CLI** — ajouter, lister, marquer fait, persistance CSV (à la main), gestion d'erreurs propre. |
 | **Projet 3** | Après module 6 (final) | Application complète : OO + persistance + tests + Git collaboratif | **Mini-moulinette pédagogique** — checker simple qui compile un fichier Java, l'exécute sur des cas, génère un rapport explicatif. Le binôme doit produire ≥ 70 % de couverture JUnit et utiliser des branches + PR. |
 
@@ -212,4 +212,4 @@ Aucun module ne peut être abordé sans avoir validé le précédent. À l'inté
 
 ---
 
-*Document maintenu par l'équipe de formateurs ETNC. Toute modification structurelle (ajout/suppression d'un module, refonte d'un sous-groupe) passe par une PR avec revue par au moins un autre formateur.*
+*Document maintenu par l'équipe de formateurs Piscine Java. Toute modification structurelle (ajout/suppression d'un module, refonte d'un sous-groupe) passe par une PR avec revue par au moins un autre formateur.*

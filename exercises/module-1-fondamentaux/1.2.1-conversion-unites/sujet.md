@@ -24,7 +24,7 @@ Température en °C ?
 
 ## Contraintes
 
-- La classe doit s'appeler `ConversionUnites` et rester dans le package `etnc.m1`.
+- La classe doit s'appeler `ConversionUnites` et rester dans le package `piscine.m1`.
 - Le calcul doit se faire en **nombres à virgule** (`double`), sans division entière.
 - Le format de sortie doit être exactement celui de l'exemple.
 

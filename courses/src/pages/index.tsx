@@ -34,7 +34,7 @@ export default function Home(): ReactNode {
   return (
     <Layout
       title={siteConfig.title}
-      description="Piscine ETNC — parcours d'initiation au développement Java de l'École des Transmissions, du Numérique et du Cyber.">
+      description="Piscine Java — parcours d'initiation au développement Java pour les nouveaux développeurs de l'équipe.">
       <HomepageHeader />
       <main>
         <HomepageFeatures />

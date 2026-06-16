@@ -1,6 +1,6 @@
 name: Release
 
-# Construit les installeurs « Piscine ETNC » (v1) : .exe Windows per-user (JRE + MinGit
+# Construit les installeurs « Piscine Java » (v1) : .exe Windows per-user (JRE + MinGit
 # + exercices + site de cours embarqués) et .deb + app-image tar.gz Linux.
 on:
   push:
@@ -55,12 +55,12 @@ jobs:
         working-directory: moulinette
         run: |
           ./gradlew :gui:jpackageApp -PjpackageType=app-image
-          Compress-Archive -Path 'gui/build/jpackage/out/Piscine ETNC' `
-            -DestinationPath 'gui/build/jpackage/out/piscine-etnc-windows-portable.zip'
+          Compress-Archive -Path 'gui/build/jpackage/out/Piscine Java' `
+            -DestinationPath 'gui/build/jpackage/out/piscine-java-windows-portable.zip'
 
       - uses: actions/upload-artifact@v4
         with:
-          name: piscine-etnc-windows
+          name: piscine-java-windows
           path: |
             moulinette/gui/build/jpackage/out/*.exe
             moulinette/gui/build/jpackage/out/*.zip
@@ -101,12 +101,12 @@ jobs:
         working-directory: moulinette
         run: |
           ./gradlew :gui:jpackageApp -PjpackageType=app-image
-          tar -czf gui/build/jpackage/out/piscine-etnc-linux-portable.tar.gz \
-              -C gui/build/jpackage/out "Piscine ETNC"
+          tar -czf gui/build/jpackage/out/piscine-java-linux-portable.tar.gz \
+              -C gui/build/jpackage/out "Piscine Java"
 
       - uses: actions/upload-artifact@v4
         with:
-          name: piscine-etnc-linux
+          name: piscine-java-linux
           path: |
             moulinette/gui/build/jpackage/out/*.deb
             moulinette/gui/build/jpackage/out/*.tar.gz

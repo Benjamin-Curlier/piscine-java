@@ -1,4 +1,4 @@
-/* Terminal web de la Piscine ETNC : chaque ligne validée part en POST /api/terminal,
+/* Terminal web de la Piscine Java : chaque ligne validée part en POST /api/terminal,
  * la réponse (CommandResult) s'affiche. Le prompt est rendu côté client. */
 (function () {
   "use strict";
@@ -89,7 +89,7 @@
 
   (async function init() {
     await refreshState();
-    writeLines("Piscine ETNC — console locale. Tape `help` pour la liste des commandes.\n");
+    writeLines("Piscine Java — console locale. Tape `help` pour la liste des commandes.\n");
     prompt();
     term.focus();
   })();

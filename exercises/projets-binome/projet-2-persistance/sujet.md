@@ -2,8 +2,8 @@
 
 ## Contexte
 
-Une unité doit suivre ses tâches courantes : consignes à exécuter, points à
-traiter, actions en attente. L'état-major veut un petit outil en ligne de
+Une équipe doit suivre ses tâches courantes : consignes à exécuter, points à
+traiter, actions en attente. L'équipe veut un petit outil en ligne de
 commande pour saisir ces tâches, suivre leur avancement et les **retrouver au
 prochain lancement**. Les tâches sont donc enregistrées dans un fichier.
 

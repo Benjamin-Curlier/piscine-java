@@ -1,21 +1,21 @@
-# Correction — Exercice 4.1.4 Groupement de personnel par grade
+# Correction — Exercice 4.1.4 Groupement de personnel par niveau
 
 ## Demarche attendue
 
-1. **`affecter`** : utiliser `computeIfAbsent(grade, g -> new ArrayList<>())` pour
-   obtenir la liste du grade, en la creant si elle n'existe pas encore, puis
+1. **`affecter`** : utiliser `computeIfAbsent(niveau, g -> new ArrayList<>())` pour
+   obtenir la liste du niveau, en la creant si elle n'existe pas encore, puis
    appeler `.add(nom)` sur le resultat. Cette methode est l'idiome cle de l'exo :
    elle garantit qu'on ne reinitialise jamais une liste deja existante.
 
-2. **`membres`** : utiliser `getOrDefault(grade, List.of())` pour renvoyer la liste
-   associee au grade, ou une liste vide immuable si le grade n'est pas encore
-   enregistre. Cela evite de creer une entree dans la Map pour un grade jamais
+2. **`membres`** : utiliser `getOrDefault(niveau, List.of())` pour renvoyer la liste
+   associee au niveau, ou une liste vide immuable si le niveau n'est pas encore
+   enregistre. Cela evite de creer une entree dans la Map pour un niveau jamais
    affecte (contrairement a `computeIfAbsent`).
 
-3. **`grades`** : renvoyer `parGrade.keySet()`. L'ensemble des cles de la Map est
-   exactement l'ensemble des grades ayant au moins un membre.
+3. **`niveaux`** : renvoyer `parNiveau.keySet()`. L'ensemble des cles de la Map est
+   exactement l'ensemble des niveaux ayant au moins un membre.
 
-4. **`effectif`** : delegueer a `membres(grade).size()`. Cette delegation evite
+4. **`effectif`** : delegueer a `membres(niveau).size()`. Cette delegation evite
    la duplication de la logique `getOrDefault`.
 
 ## Points cles
@@ -25,16 +25,16 @@
   `put` remplacerait la liste a chaque affectation.
 - **`getOrDefault` pour la lecture** : lire sans modifier la Map. Si on utilisait
   `computeIfAbsent` pour `membres`, on polluerait la Map avec des listes vides.
-- **Delegation dans `effectif`** : `membres(grade).size()` plutot que
-  `parGrade.getOrDefault(...).size()` directement — une seule source de verite.
+- **Delegation dans `effectif`** : `membres(niveau).size()` plutot que
+  `parNiveau.getOrDefault(...).size()` directement — une seule source de verite.
 
 ## Erreurs frequentes observees
 
-- Utiliser `computeIfAbsent` dans `membres` : cree une entree vide pour les grades
-  jamais affectes, ce qui fausse `grades()`.
+- Utiliser `computeIfAbsent` dans `membres` : cree une entree vide pour les niveaux
+  jamais affectes, ce qui fausse `niveaux()`.
 - Remplacer la liste par `new ArrayList<>()` a chaque `affecter` : perte des
-  membres precedemment affectes au grade.
-- Renvoyer `null` au lieu d'une liste vide pour un grade absent.
+  membres precedemment affectes au niveau.
+- Renvoyer `null` au lieu d'une liste vide pour un niveau absent.
 
 ## Pour approfondir
 

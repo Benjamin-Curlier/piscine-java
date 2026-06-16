@@ -33,7 +33,7 @@ Journal.resumer(new Erreur(404, "Not Found"));  // "Erreur 404 : Not Found"
 
 ## Contraintes
 
-- Package `etnc.m3`. **Ne modifiez pas** la hiérarchie `Evenement`.
+- Package `piscine.m3`. **Ne modifiez pas** la hiérarchie `Evenement`.
 - Le `switch` est **exhaustif sans `default`** : la hiérarchie sealed garantit
   que tous les cas sont couverts (le compilateur le vérifie).
 - Accédez aux composants des records par leurs accesseurs (`c.utilisateur()`,

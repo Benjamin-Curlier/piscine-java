@@ -1,8 +1,8 @@
-# Correction — Exercice 4.1.3 File de mission (Deque FIFO)
+# Correction — Exercice 4.1.3 File de tâches (Deque FIFO)
 
 ## Démarche attendue
 
-1. `ajouter` : `file.addLast(mission)` insère en queue — c'est le côté « entrée »
+1. `ajouter` : `file.addLast(tache)` insère en queue — c'est le côté « entrée »
    d'une file FIFO.
 2. `traiterProchaine` : `file.pollFirst()` retire et renvoie la tête de file.
    `pollFirst` (contrairement à `removeFirst`) renvoie `null` si la file est vide,

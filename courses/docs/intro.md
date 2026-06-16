@@ -1,15 +1,15 @@
 ---
 id: intro
 sidebar_position: 1
-title: "Bienvenue à la Piscine ETNC"
+title: "Bienvenue à la Piscine Java"
 slug: /intro
 ---
 
-# Bienvenue à la Piscine ETNC
+# Bienvenue à la Piscine Java
 
 > 👉 Pressé de démarrer ? Va directement à **[Comment lancer la Piscine](lancer-la-piscine.md)**.
 
-Bienvenue ! Vous vous apprêtez à suivre la **Piscine ETNC**, le parcours d'initiation au développement Java de l'**École des Transmissions, du Numérique et du Cyber**.
+Bienvenue ! Vous vous apprêtez à suivre la **Piscine Java**, le parcours d'initiation au développement Java pour les nouveaux développeurs de l'équipe.
 
 ## À quoi ressemble la Piscine
 
@@ -43,6 +43,6 @@ Bonne piscine !
 
 ## Documents de référence
 
-- [Référentiel pédagogique complet](https://github.com/Benjamin-Curlier/Piscine-ETNC/blob/main/docs/referentiel.md) — la carte de tous les modules, chapitres et exercices.
-- [Format d'un exercice](https://github.com/Benjamin-Curlier/Piscine-ETNC/blob/main/docs/format-exercice.md) — à quoi ressemble un exercice et ce que la moulinette vérifie.
-- [Charte de rédaction](https://github.com/Benjamin-Curlier/Piscine-ETNC/blob/main/docs/charte-redaction.md) — les conventions des contenus pédagogiques.
+- [Référentiel pédagogique complet](https://github.com/Benjamin-Curlier/piscine-java/blob/main/docs/referentiel.md) — la carte de tous les modules, chapitres et exercices.
+- [Format d'un exercice](https://github.com/Benjamin-Curlier/piscine-java/blob/main/docs/format-exercice.md) — à quoi ressemble un exercice et ce que la moulinette vérifie.
+- [Charte de rédaction](https://github.com/Benjamin-Curlier/piscine-java/blob/main/docs/charte-redaction.md) — les conventions des contenus pédagogiques.

@@ -1,5 +1,5 @@
-slug: groupement-par-grade
-titre: "Groupement de personnel par grade"
+slug: groupement-par-niveau
+titre: "Groupement de personnel par niveau"
 module: 4
 sous_groupe: "4.1"
 position: 4
@@ -18,6 +18,6 @@ notions:
   - computeIfAbsent
   - getOrDefault
   - enum
-auteur: "ETNC"
+auteur: "Piscine Java"
 version: 1
 date_creation: 2026-06-04

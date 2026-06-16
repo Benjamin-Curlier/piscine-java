@@ -25,12 +25,12 @@ Ce chapitre présente le fonctionnement des chaînes en Java, leurs méthodes le
 Une `String` est **immuable** : une fois créée, elle ne change jamais. Les méthodes qui semblent la « modifier » (mettre en majuscules, remplacer un caractère…) ne la touchent pas : elles renvoient une **nouvelle** chaîne.
 
 ```java
-String message = "alerte";
+String message = "bonjour";
 message.toUpperCase();                 // ne change RIEN à message
-System.out.println(message);           // affiche toujours "alerte"
+System.out.println(message);           // affiche toujours "bonjour"
 
-String cri = message.toUpperCase();    // il faut récupérer la valeur renvoyée
-System.out.println(cri);               // affiche "ALERTE"
+String crie = message.toUpperCase();   // il faut récupérer la valeur renvoyée
+System.out.println(crie);              // affiche "BONJOUR"
 ```
 
 Retenez ce réflexe : pour profiter d'une transformation, **récupérez la valeur renvoyée** dans une variable.
@@ -50,11 +50,11 @@ Retenez ce réflexe : pour profiter d'une transformation, **récupérez la valeu
 ### Exemple
 
 ```java
-String grade = "Sergent";
+String niveau = "Manager";
 
-System.out.println(grade.length());   // 7
-System.out.println(grade.charAt(0));  // 'S' (premier caractère)
-System.out.println(grade.charAt(6));  // 't' (dernier : length() - 1)
+System.out.println(niveau.length());   // 7
+System.out.println(niveau.charAt(0));  // 'M' (premier caractère)
+System.out.println(niveau.charAt(6));  // 'r' (dernier : length() - 1)
 ```
 
 ### À retenir
@@ -69,11 +69,11 @@ System.out.println(grade.charAt(6));  // 't' (dernier : length() - 1)
 ### Exemple
 
 ```java
-String phrase = "ordre de mission";
+String phrase = "ligne de commande";
 
-System.out.println(phrase.substring(0, 5));   // "ordre" (indices 0 à 4)
-System.out.println(phrase.indexOf("mission")); // 9
-System.out.println(phrase.indexOf("retraite")); // -1 (absent)
+System.out.println(phrase.substring(0, 5));    // "ligne" (indices 0 à 4)
+System.out.println(phrase.indexOf("commande")); // 9
+System.out.println(phrase.indexOf("erreur"));   // -1 (absent)
 ```
 
 La borne de fin **exclue** dans `substring` surprend souvent : `substring(0, 5)` prend 5 caractères, des indices `0` à `4`.
@@ -170,7 +170,7 @@ Pour quelques concaténations ponctuelles, `+` reste parfait. `StringBuilder` se
 
 **Objectif** : mettre une phrase en majuscules et afficher sa longueur.
 
-On vous donne `String message = "alerte generale";`. Affichez sa version en majuscules, puis le nombre de caractères de la phrase d'origine.
+On vous donne `String message = "bonne formation";`. Affichez sa version en majuscules, puis le nombre de caractères de la phrase d'origine.
 
 Indices :
 - `toUpperCase()` renvoie une nouvelle chaîne : récupérez-la dans une variable.
@@ -182,12 +182,12 @@ Indices :
 ```java
 public class MiseEnForme {
     public static void main(String[] args) {
-        String message = "alerte generale";
+        String message = "bonne formation";
 
         // toUpperCase renvoie une NOUVELLE chaîne : on la récupère.
         String majuscules = message.toUpperCase();
 
-        System.out.println(majuscules);            // "ALERTE GENERALE"
+        System.out.println(majuscules);            // "BONNE FORMATION"
         System.out.println(message.length());      // 15 (l'espace compte)
     }
 }

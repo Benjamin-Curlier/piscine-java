@@ -2,8 +2,8 @@
 
 ## Démarche attendue
 
-1. `total` : `soldats.size()` suffit (ou `.stream().count()` converti en `int`).
-2. `ancienneteMoyenne` : `soldats.stream().mapToInt(Soldat::anciennete)` produit
+1. `total` : `membres.size()` suffit (ou `.stream().count()` converti en `int`).
+2. `ancienneteMoyenne` : `membres.stream().mapToInt(Membre::anciennete)` produit
    un `IntStream`, sur lequel `.average()` renvoie un `OptionalDouble`.
    `.orElse(0.0)` court-circuite le cas liste vide sans exception.
 3. `ancienneteMax` : même principe avec `.max()` qui renvoie un `OptionalInt`,
@@ -16,20 +16,20 @@ import java.util.List;
 
 public class Statistiques {
 
-    public static int total(List<Soldat> soldats) {
-        return soldats.size();
+    public static int total(List<Membre> membres) {
+        return membres.size();
     }
 
-    public static double ancienneteMoyenne(List<Soldat> soldats) {
-        return soldats.stream()
-                .mapToInt(Soldat::anciennete)
+    public static double ancienneteMoyenne(List<Membre> membres) {
+        return membres.stream()
+                .mapToInt(Membre::anciennete)
                 .average()
                 .orElse(0.0);
     }
 
-    public static int ancienneteMax(List<Soldat> soldats) {
-        return soldats.stream()
-                .mapToInt(Soldat::anciennete)
+    public static int ancienneteMax(List<Membre> membres) {
+        return membres.stream()
+                .mapToInt(Membre::anciennete)
                 .max()
                 .orElse(0);
     }
@@ -51,12 +51,12 @@ public class Statistiques {
 
 - Appeler `.average().getAsDouble()` ou `.max().getAsInt()` sans `orElse` :
   lève `NoSuchElementException` sur liste vide.
-- Utiliser un `for` / `if (soldats.isEmpty()) return 0.0;` à la place des
+- Utiliser un `for` / `if (membres.isEmpty()) return 0.0;` à la place des
   streams — fonctionnel mais non idiomatique (noté par le formateur).
 - Confondre `OptionalDouble` (de `IntStream.average()`) et `Optional<Double>`.
 
 ## Pour approfondir
 
 - `IntStream.sum()`, `IntStream.min()` suivent le même patron.
-- `Collectors.averagingInt(Soldat::anciennete)` est une alternative via
+- `Collectors.averagingInt(Membre::anciennete)` est une alternative via
   `collect` — produit un `Double` (0.0 sur liste vide), donc équivalent ici.

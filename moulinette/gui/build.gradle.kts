@@ -15,7 +15,7 @@ dependencies {
 }
 
 application {
-    mainClass = "etnc.piscine.moulinette.gui.Main"
+    mainClass = "piscine.moulinette.gui.Main"
 }
 
 tasks.shadowJar {
@@ -83,9 +83,9 @@ tasks.register<Exec>("jpackageApp") {
     val args = mutableListOf(
         javaHome.file("bin/jpackage").asFile.absolutePath,
         "--type", jpackageType,
-        "--name", "Piscine ETNC",
+        "--name", "Piscine Java",
         "--app-version", appVersion,
-        "--vendor", "ETNC",
+        "--vendor", "Piscine Java",
         "--input", layout.buildDirectory.dir("jpackage/staging").get().asFile.absolutePath,
         "--main-jar", "moulinette-gui.jar",
         "--dest", outDir.get().asFile.absolutePath,

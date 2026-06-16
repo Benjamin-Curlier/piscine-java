@@ -16,5 +16,5 @@ dependencies {
 }
 
 application {
-    mainClass = "etnc.piscine.moulinette.cli.Main"
+    mainClass = "piscine.moulinette.cli.Main"
 }

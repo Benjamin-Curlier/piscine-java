@@ -28,7 +28,7 @@ Parc.compterCercles(formes);  // 1
 
 ## Contraintes
 
-- Package `etnc.m3`. **Ne modifiez pas** `Forme`, `Cercle`, `Rectangle`.
+- Package `piscine.m3`. **Ne modifiez pas** `Forme`, `Cercle`, `Rectangle`.
 - Les trois méthodes de `Parc` sont `static` ; ne changez pas leurs signatures.
 - N'utilisez ni collection ni stream : parcourez le **tableau** avec une boucle.
 - `plusGrande` d'un tableau vide renvoie `null`.

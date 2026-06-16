@@ -19,7 +19,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!-- À ADAPTER à votre binôme -->
-    <groupId>etnc.binome</groupId>
+    <groupId>piscine.binome</groupId>
     <artifactId>mini-moulinette</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>

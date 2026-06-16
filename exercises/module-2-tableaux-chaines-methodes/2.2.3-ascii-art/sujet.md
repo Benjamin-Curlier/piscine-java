@@ -26,7 +26,7 @@ La saisie se fait au clavier : une seule ligne contenant l'entier `n` (`n ≥ 1`
 
 ## Contraintes
 
-- La classe doit s'appeler `AsciiArt` et rester dans le package `etnc.m2`.
+- La classe doit s'appeler `AsciiArt` et rester dans le package `piscine.m2`.
 - Lisez l'entrée avec un `Scanner`. Tout le code peut tenir dans `main`.
 - Chaque ligne ne contient que des étoiles (`*`), suivies d'un retour à la ligne.
 

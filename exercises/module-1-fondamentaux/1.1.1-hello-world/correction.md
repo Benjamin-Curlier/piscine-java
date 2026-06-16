@@ -24,7 +24,7 @@ System.out.println("Hello, world!");
 
 - **`Hello world!` (sans virgule)** ou **`Hello, World!` (majuscule sur W)** → tests qui échouent. Le sujet est strict sur la chaîne exacte.
 - **`System.out.print(...)`** au lieu de `println` → manque le retour à la ligne, le test public échoue avec un message clair.
-- **Touche aux imports / au package** → le code compile mais l'exécution échoue parce que la classe n'est plus trouvée dans `etnc.m1`. Toujours respecter les contraintes du sujet sur ce qui peut être modifié.
+- **Touche aux imports / au package** → le code compile mais l'exécution échoue parce que la classe n'est plus trouvée dans `piscine.m1`. Toujours respecter les contraintes du sujet sur ce qui peut être modifié.
 - **Ajout d'une instruction supplémentaire** ("Bienvenue !" sur une seconde ligne, par exemple) → la sortie ne correspond plus à l'attendu.
 
 ## Variantes possibles

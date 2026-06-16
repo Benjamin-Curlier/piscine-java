@@ -5,7 +5,7 @@ plugins {
 subprojects {
     apply(plugin = "java")
 
-    group = "etnc.piscine.moulinette"
+    group = "piscine.moulinette"
     version = "0.1.0-SNAPSHOT"
 
     repositories {

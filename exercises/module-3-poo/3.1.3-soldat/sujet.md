@@ -1,42 +1,42 @@
-# Exercice 3.1.3 — Soldat
+# Exercice 3.1.3 — Membre
 
 ## Contexte
 
-Dans une simulation d'exercice, chaque combattant est suivi par ses points de
-vie. Vous modélisez un soldat capable d'encaisser des dégâts, d'être soigné et
-d'indiquer s'il est encore opérationnel.
+Dans une simulation, chaque membre de l'équipe est suivi par ses points de
+vie. Vous modélisez un membre capable d'encaisser des dégâts, d'être soigné et
+d'indiquer s'il est encore actif.
 
 ## Énoncé
 
-Complétez la classe `Soldat` fournie dans le `starter/`. Elle représente un
-soldat avec un nom, un grade et des points de vie, et doit proposer :
+Complétez la classe `Membre` fournie dans le `starter/`. Elle représente un
+membre avec un nom, un niveau et des points de vie, et doit proposer :
 
-- un constructeur `Soldat(String nom, String grade, int pointsDeVie)` ;
-- trois accesseurs `getNom()`, `getGrade()`, `getPointsDeVie()` ;
+- un constructeur `Membre(String nom, String niveau, int pointsDeVie)` ;
+- trois accesseurs `getNom()`, `getNiveau()`, `getPointsDeVie()` ;
 - une méthode `subirDegats(int degats)` qui retire des points de vie **sans
   jamais descendre sous 0** ;
 - une méthode `soigner(int soin)` qui ajoute des points de vie ;
-- une méthode `estVivant()` qui renvoie `true` tant que les points de vie sont
+- une méthode `estActif()` qui renvoie `true` tant que les points de vie sont
   strictement positifs ;
-- une redéfinition de `toString()` au format `<nom> (<grade>) - <pv> PV`.
+- une redéfinition de `toString()` au format `<nom> (<niveau>) - <pv> PV`.
 
 ## Exemple
 
 ```text
-Soldat s = new Soldat("Martin", "Sergent", 100);
+Membre s = new Membre("Martin", "Confirmé", 100);
 s.subirDegats(30);   // 70 PV
 s.soigner(10);       // 80 PV
-s.estVivant();       // true
-s.toString();        // "Martin (Sergent) - 80 PV"
+s.estActif();        // true
+s.toString();        // "Martin (Confirmé) - 80 PV"
 ```
 
 ## Contraintes
 
-- La classe doit s'appeler `Soldat` et rester dans le package `etnc.m3`.
+- La classe doit s'appeler `Membre` et rester dans le package `piscine.m3`.
 - **Ne modifiez pas les signatures publiques** : les tests s'appuient dessus.
 - Les attributs doivent être **privés**.
 - `subirDegats` ne doit jamais laisser les points de vie en dessous de 0.
-- `toString()` doit produire exactement `<nom> (<grade>) - <pv> PV`.
+- `toString()` doit produire exactement `<nom> (<niveau>) - <pv> PV`.
 
 ## Ce qui sera vérifié
 
@@ -44,7 +44,7 @@ s.toString();        // "Martin (Sergent) - 80 PV"
 - `subirDegats` réduit les points de vie et les **plafonne à 0** quand les
   dégâts dépassent les points de vie restants.
 - `soigner` augmente les points de vie, y compris après des dégâts.
-- `estVivant` renvoie `false` à 0 point de vie.
+- `estActif` renvoie `false` à 0 point de vie.
 - `toString` respecte le format attendu.
 
 ## Pour aller plus loin (optionnel — non noté)

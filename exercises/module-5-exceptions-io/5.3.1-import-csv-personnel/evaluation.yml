@@ -14,6 +14,6 @@ criteres:
     poids: 2
     type: automatique
   - id: demarche
-    description: "Démarche de parsing : boucle structurée (saut d'en-tête, ignore des lignes blanches, validation du nombre de champs AVANT conversion), conversions gardées par try/catch, et CHAÎNAGE de la cause d'origine (constructeur IllegalArgumentException(message, cause)) pour grade et ancienneté ; accumulation de la liste dans l'ordre du fichier"
+    description: "Démarche de parsing : boucle structurée (saut d'en-tête, ignore des lignes blanches, validation du nombre de champs AVANT conversion), conversions gardées par try/catch, et CHAÎNAGE de la cause d'origine (constructeur IllegalArgumentException(message, cause)) pour niveau et ancienneté ; accumulation de la liste dans l'ordre du fichier"
     poids: 2
     type: formateur

@@ -1,5 +1,5 @@
 slug: grade
-titre: "Grade (enum)"
+titre: "Niveau (enum)"
 module: 3
 sous_groupe: "3.4"
 position: 2
@@ -14,6 +14,6 @@ notions:
   - enum
   - switch
   - methode
-auteur: "ETNC"
+auteur: "Piscine Java"
 version: 1
 date_creation: 2026-06-03
