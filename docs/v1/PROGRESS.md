@@ -15,7 +15,7 @@ vérité.** Chaque itération :
 ## Checklist (cocher quand **vert & commité**)
 
 - [x] **A1** moulinette : rapport attendu/obtenu + indice — `AbstractTestChecker.extraitEchecs`
-- [ ] **A2** chapitre debug / stack trace
+- [x] **A2** chapitre debug / stack trace — `module-1-fondamentaux/1-8-lire-une-erreur.md`
 - [x] **B1** commande `submit` (git masqué) — `SubmitCommand` (checkout+add+commit+push en une commande)
 - [x] **B2** Module 0 / Quickstart — `courses/docs/demarrage-rapide.md` + `lancer-la-piscine.md` modernisé
 - [x] **B3** noter tout le sous-groupe (rapport complet ; progression séquentielle préservée)
@@ -74,3 +74,11 @@ vérité.** Chaque itération :
   modernisé : `submit` mis en avant, exemple de rapport mis à jour (grade-all + attendu/obtenu),
   fin de « s'arrête au premier échec ». Site **Docusaurus** *builde* (0 lien cassé).
 - **Prochaine itération : A2** (chapitre « lire une stack trace & déboguer » — complète l'épic A).
+
+### Itération 6 — 2026-06-16 ✓
+- **A2 livré** : chapitre **`module-1-fondamentaux/1-8-lire-une-erreur.md`** (« Lire une erreur et
+  déboguer ») — erreurs de compilation (javac : fichier/ligne/cause), stack traces d'exécution
+  (type, message, « votre » ligne, `Caused by`), lecture du rapport moulinette (attendu/obtenu, lien
+  avec A1), et méthode de débogage (`println`, réduction, point d'arrêt). Site Docusaurus *builde*.
+  **Épic A complet** (A1 + A2).
+- **Prochaine itération : C1** (moteur de gamification : XP/niveaux/streaks/badges — le « wow »).
