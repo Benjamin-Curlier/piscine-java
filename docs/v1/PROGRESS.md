@@ -17,7 +17,7 @@ vérité.** Chaque itération :
 - [x] **A1** moulinette : rapport attendu/obtenu + indice — `AbstractTestChecker.extraitEchecs`
 - [ ] **A2** chapitre debug / stack trace
 - [x] **B1** commande `submit` (git masqué) — `SubmitCommand` (checkout+add+commit+push en une commande)
-- [ ] **B2** Module 0 / Quickstart
+- [x] **B2** Module 0 / Quickstart — `courses/docs/demarrage-rapide.md` + `lancer-la-piscine.md` modernisé
 - [x] **B3** noter tout le sous-groupe (rapport complet ; progression séquentielle préservée)
 - [ ] **C1** moteur gamification (XP/niveaux/streaks/badges) + tableau de bord
 - [x] **C2** jeu capstone Snake (cœur noté vert + rendu jouable Swing) — `exercises/projets-jeux/jeu-1-snake/`
@@ -61,3 +61,16 @@ vérité.** Chaque itération :
   `checkout`/`branch` pointe désormais vers `submit`. 4 tests `SubmitCommandTest` + `CommandRegistryTest`
   ajusté ; `:console:test` vert.
 - **Prochaine itération : B2** (Module 0 / Quickstart — documente `submit` et « comment lancer son code »).
+
+### Interlude — récupération + durcissement git (worktree concurrent)
+- Un worktree concurrent `../wt-coherence` a fait atterrir le commit B1 hors de `v1` ; commit
+  récupéré et fast-forward sur `origin/v1`. **Protocole git durci** (voir section en tête) :
+  resync sur `origin/v1` au début, `git push origin HEAD:refs/heads/v1` + vérif à la fin.
+
+### Itération 5 — 2026-06-16 ✓
+- **B2 livré** : nouvelle page **`courses/docs/demarrage-rapide.md`** (« Démarrage rapide, 5 min »,
+  position 1.5) qui enseigne la boucle au débutant **avant** le Java : `submit <groupe>` (Git masqué),
+  lecture d'un échec (attendu/obtenu), et « voir son code prendre vie » (Snake jouable). `lancer-la-piscine.md`
+  modernisé : `submit` mis en avant, exemple de rapport mis à jour (grade-all + attendu/obtenu),
+  fin de « s'arrête au premier échec ». Site **Docusaurus** *builde* (0 lien cassé).
+- **Prochaine itération : A2** (chapitre « lire une stack trace & déboguer » — complète l'épic A).

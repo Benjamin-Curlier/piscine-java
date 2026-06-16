@@ -39,26 +39,28 @@ Le détail pas-à-pas des deux modes est dans le **[guide stagiaire complet](htt
 
 Tu tapes tes commandes Git **dans cette console** (l'invite `piscine[...]>`), pas dans un autre terminal : la console est un Git « encadré » qui ne connaît que les commandes utiles à la Piscine.
 
-## Rendre un exercice avec Git
+## Rendre un exercice
 
-C'est **le geste central** de la Piscine. Tu rends un **sous-groupe** d'exercices (ex. `1.1`) sur une branche dédiée `rendu/<sous-groupe>`. **C'est le `push` de cette branche qui déclenche la moulinette.**
+C'est **le geste central** de la Piscine. Le plus simple : **une seule commande**, `submit`.
 
 ```text
-piscine[main]> submit-start 1.1
-Bascule sur la branche rendu/1.1.
+piscine[main]> submit 1.1
 ```
 
-1. **`submit-start 1.1`** crée (ou rebascule sur) la branche **`rendu/1.1`**.
-2. **Édite ton code** dans `workspace/exercises/1.1.1-.../starter/` avec ton éditeur habituel.
-3. **Indexe et enregistre** tes modifications :
-   ```text
-   piscine[rendu/1.1]> git add exercises/1.1.1-hello-world
-   piscine[rendu/1.1]> git commit -m "rendu 1.1.1"
-   ```
-4. **Pousse la branche de rendu** — c'est ce qui lance la correction :
-   ```text
-   piscine[rendu/1.1]> git push origin rendu/1.1
-   ```
+`submit 1.1` enregistre ton travail, le rend, et lance la moulinette sur le sous-groupe `1.1` — **sans que tu aies besoin de connaître Git**. Tu peux t'arrêter là pour démarrer ; la suite explique **ce que `submit` fait pour toi** (utile à savoir, et au programme du **module 6**).
+
+### En détail : ce que `submit` fait à ta place (Git encadré)
+
+Tu rends un **sous-groupe** d'exercices (ex. `1.1`) sur une branche dédiée `rendu/<sous-groupe>`. **C'est le `push` de cette branche qui déclenche la moulinette.** Étape par étape, `submit 1.1` revient à :
+
+```text
+piscine[main]> submit-start 1.1        # crée/rebascule sur la branche rendu/1.1
+piscine[rendu/1.1]> git add .          # indexe tes modifications
+piscine[rendu/1.1]> git commit -m "…"  # enregistre une version
+piscine[rendu/1.1]> git push origin rendu/1.1   # rend → déclenche la moulinette
+```
+
+Tu peux taper ces commandes une à une (c'est l'occasion d'apprendre Git), ou laisser `submit` tout enchaîner.
 
 ### Ce qui se passe quand tu pousses
 
@@ -66,12 +68,16 @@ Bascule sur la branche rendu/1.1.
 [console] Push détecté sur rendu/1.1 → lancement moulinette sur sous-groupe 1.1
 [console] ▶ Exo 1.1.1  ✓ OK
 [console] ▶ Exo 1.1.2  ✗ ÉCHEC
+    ✗ affiche la fiche au format attendu
+       attendu : "=== Fiche membre ===\n..."
+       obtenu  : ""
 [console] Rapport : workspace/.piscine/reports/1.1-….md
-[console] On s'arrête ici (un exo doit passer avant de continuer). Corrige et re-push.
+[console] Corrige les exos en ✗ ci-dessus puis re-pousse (la progression se débloque dans l'ordre).
 ```
 
 - La console détecte que tu as poussé une branche **`rendu/<sous-groupe>`**.
-- Elle lance la **moulinette** sur les exercices de ce sous-groupe, **du plus simple au plus difficile**, et **s'arrête au premier échec**.
+- Elle lance la **moulinette** sur **tous** les exercices de ce sous-groupe, **du plus simple au plus difficile**, et t'affiche le résultat de chacun. La **progression reste séquentielle** : un exo n'est validé que si **tous les précédents** passent — mais tu vois d'un coup d'œil où tu en es.
+- En cas d'échec, elle te montre **ce qui était attendu vs. obtenu** (pas une trace Java brute).
 - Elle écrit un **rapport pédagogique** dans `workspace/.piscine/reports/`.
 
 ### Lire le rapport et recommencer
@@ -84,6 +90,8 @@ Ouvre le fichier `.md` indiqué : pour chaque exo tu as le **statut**, les **mes
 
 1. Lis le chapitre de cours.
 2. Fais l'exercice.
-3. Rends-le : `submit-start`, puis `git add` / `git commit` / `git push origin rendu/<sous-groupe>`.
-4. Lis le **rapport** de la moulinette, corrige, re-pousse.
+3. Rends-le : **`submit <sous-groupe>`** (ex. `submit 1.1`).
+4. Lis le **rapport** de la moulinette, corrige, re-`submit`.
 5. Passe au chapitre suivant.
+
+> Tout débutant·e peut s'en tenir à `submit`. Voir aussi le **[Démarrage rapide](demarrage-rapide.md)**.
