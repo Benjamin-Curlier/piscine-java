@@ -66,7 +66,7 @@ Le script :
 
 1. Lance le REPL (commande affichée par le bootstrap), par exemple :
    ```bash
-   java -jar moulinette/console/target/moulinette-console.jar repl --repo ../piscine-<ton-slug> --piscine-repo .
+   java -jar moulinette/console/build/libs/moulinette-console.jar repl --repo ../piscine-<ton-slug> --piscine-repo .
    ```
 2. Démarre un rendu de sous-groupe :
    ```

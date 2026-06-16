@@ -313,7 +313,7 @@ Certains exercices du module 6 inversent le contrat habituel : **le livrable du 
 
 Avant merge dans `main`, un nouvel exercice doit :
 
-1. Respecter cette structure (vérifié par un script `tools/lint-exercice.sh` à venir).
+1. Respecter cette structure (vérifié par le script `scripts/lint-exercices.sh`).
 2. Avoir tests publics et privés **passants** sur la solution de référence.
 3. Avoir été **relu par un autre formateur** (PR + revue).
 4. Être référencé dans [`docs/referentiel.md`](referentiel.md).

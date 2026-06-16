@@ -3,7 +3,7 @@
 > Ce guide s'adresse aux **formateurs et contributeurs** qui souhaitent travailler
 > sur le projet en local (rédiger des exercices, valider des solutions, lancer la moulinette).
 >
-> Pour les **stagiaires**, consultez les instructions dans `exercises/README.md` (à venir).
+> Pour les **stagiaires**, consultez le guide [`piscine-stagiaire.md`](piscine-stagiaire.md).
 >
 > Ce guide concerne le **mode dépôt** (développement / contribution). Si tu utilises la Piscine via l'**installeur autonome**, tu n'as **rien à installer** : voir [`piscine-stagiaire.md`](piscine-stagiaire.md#mode-installeur-recommandé).
 

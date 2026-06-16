@@ -1,6 +1,6 @@
 # Déploiement — guide instructeur
 
-Depuis la **v1**, la Piscine se distribue comme un **installeur autonome** : le stagiaire
+Depuis la **0.7.0**, la Piscine se distribue comme un **installeur autonome** : le stagiaire
 double-clique, l'application s'ouvre dans son navigateur, et tout est embarqué (JRE, git,
 exercices, site de cours). Aucun droit administrateur, aucun réseau à l'exécution.
 
