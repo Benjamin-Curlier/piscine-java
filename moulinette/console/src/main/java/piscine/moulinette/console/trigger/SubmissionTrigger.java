@@ -38,8 +38,11 @@ public final class SubmissionTrigger {
             if (!o.ok() && !o.message().isBlank()) sb.append("    ").append(o.message());
         }
         sb.append("[console] Rapport : ").append(rep.reportPath()).append("\n");
-        if (rep.stoppedEarly()) {
-            sb.append("[console] On s'arrête ici (un exo doit passer avant de continuer). Corrige et re-push.\n");
+        if (rep.tousReussis()) {
+            sb.append("[console] 🎉 Sous-groupe complet — bravo ! Tu peux passer au suivant.\n");
+        } else {
+            sb.append("[console] Corrige les exos en ✗ ci-dessus puis re-pousse "
+                    + "(la progression se débloque dans l'ordre).\n");
         }
         return sb.toString();
     }

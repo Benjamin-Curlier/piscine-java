@@ -22,7 +22,7 @@ class SubmissionTriggerTest {
         MoulinetteRunner runner = (sg, repo) -> new GroupReport(sg,
             List.of(new ExoOutcome("1.1.1", true, ""),
                     new ExoOutcome("1.1.2", false, "compile: KO")),
-            true, Paths.get("/tmp/report.md"));
+            false, Paths.get("/tmp/report.md"));
 
         var trigger = new SubmissionTrigger(runner);
         var ctx = new ReplContext(Paths.get("/repo"), git, null, Mode.LOCAL);

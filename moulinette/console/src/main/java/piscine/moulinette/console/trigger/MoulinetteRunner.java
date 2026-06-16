@@ -25,20 +25,23 @@ import java.util.Map;
 /**
  * Lance la moulinette sur un sous-groupe d'exercices.
  *
- * <p>Les exercices sont évalués dans l'ordre de difficulté croissante (position),
- * et l'évaluation s'arrête au premier exercice qui échoue.
+ * <p>Les exercices sont évalués dans l'ordre de difficulté croissante (position).
+ * <strong>Tous</strong> les exercices du groupe sont évalués et rapportés — le stagiaire voit
+ * l'ensemble des résultats — mais la <em>progression</em> reste séquentielle : seuls les exos
+ * réussis sans interruption depuis le début du groupe sont validés.
  */
 public interface MoulinetteRunner {
 
     GroupReport runGroup(String sousGroupeId, Path repoRoot);
 
-    record GroupReport(String sousGroupeId, List<ExoOutcome> outcomes, boolean stoppedEarly, Path reportPath) {}
+    record GroupReport(String sousGroupeId, List<ExoOutcome> outcomes, boolean tousReussis, Path reportPath) {}
 
     record ExoOutcome(String exoId, boolean ok, String message) {}
 
     /**
      * Implémentation par défaut : exécute une liste de {@link Checker} sur chaque exercice du groupe,
-     * écrit un rapport Markdown horodaté, et s'arrête au premier exercice en échec.
+     * écrit un rapport Markdown horodaté listant <strong>tous</strong> les exercices, et valide la
+     * progression jusqu'au premier exercice en échec (gating séquentiel).
      */
     final class Default implements MoulinetteRunner {
         private static final Logger LOG = LoggerFactory.getLogger(Default.class);
@@ -58,7 +61,6 @@ public interface MoulinetteRunner {
         public GroupReport runGroup(String sgId, Path repoRoot) {
             SousGroupe sg = catalog.sousGroupe(sgId);
             List<ExoOutcome> outcomes = new ArrayList<>();
-            boolean stopped = false;
             for (ExerciseEntry e : sg.exercices()) {
                 Path renduDir = repoRoot.resolve("exercises").resolve(e.exerciseDir().getFileName());
                 nettoyerBuildDir(renduDir);
@@ -84,11 +86,14 @@ public interface MoulinetteRunner {
                 }
                 ecrireRapportExo(renduDir, e.id(), parChecker);
                 outcomes.add(new ExoOutcome(e.id(), ok, msg.toString()));
-                if (!ok) { stopped = true; break; }
+                // On NE s'arrête PLUS au premier échec : tous les exos du groupe sont notés et
+                // rapportés (le stagiaire voit l'ensemble). Le gating séquentiel est appliqué
+                // par persisterProgression (seul le préfixe d'exos réussis est validé).
             }
-            Path report = writeReport(sgId, outcomes, stopped);
+            boolean tousReussis = outcomes.stream().allMatch(ExoOutcome::ok);
+            Path report = writeReport(sgId, outcomes, tousReussis);
             persisterProgression(repoRoot, outcomes);
-            return new GroupReport(sgId, outcomes, stopped, report);
+            return new GroupReport(sgId, outcomes, tousReussis, report);
         }
 
         /**
@@ -100,8 +105,12 @@ public interface MoulinetteRunner {
             try {
                 Path file = repoRoot.resolve(".piscine/progress.json");
                 java.util.Set<String> valides = new java.util.TreeSet<>(lireProgression(file));
+                // Progression séquentielle : on ne valide que le préfixe d'exos réussis sans
+                // interruption. Un exo réussi « en avance » (après un échec plus tôt dans le
+                // groupe) n'est pas encore débloqué — il le sera quand l'échec sera corrigé.
                 for (ExoOutcome o : outcomes) {
-                    if (o.ok()) valides.add(o.exoId());
+                    if (!o.ok()) break;
+                    valides.add(o.exoId());
                 }
                 Files.createDirectories(file.getParent());
                 StringBuilder sb = new StringBuilder("{\n");
@@ -149,7 +158,7 @@ public interface MoulinetteRunner {
             } catch (IOException ignore) { /* rapport best-effort */ }
         }
 
-        private Path writeReport(String sgId, List<ExoOutcome> outcomes, boolean stopped) {
+        private Path writeReport(String sgId, List<ExoOutcome> outcomes, boolean tousReussis) {
             try {
                 Files.createDirectories(reportsDir);
                 Path out = reportsDir.resolve(sgId + "-" + LocalDateTime.now().format(TS) + ".md");
@@ -162,9 +171,11 @@ public interface MoulinetteRunner {
                         sb.append("```\n").append(o.message()).append("```\n\n");
                     }
                 }
-                if (stopped) {
-                    sb.append("> Évaluation arrêtée au premier exercice en échec. "
-                            + "Corrige-le puis re-pousse la branche.\n");
+                if (tousReussis) {
+                    sb.append("> 🎉 Sous-groupe complet — tous les exercices passent. Bravo !\n");
+                } else {
+                    sb.append("> Corrige les exercices marqués **✗ ÉCHEC** ci-dessus, puis re-pousse "
+                            + "la branche. Les exercices se valident dans l'ordre.\n");
                 }
                 Files.writeString(out, sb.toString());
                 LOG.info("Rapport écrit : {}", out);
