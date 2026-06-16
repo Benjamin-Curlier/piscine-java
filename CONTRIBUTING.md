@@ -82,7 +82,7 @@ sur tag `v*`, ou build local `moulinette/gradlew -p moulinette :gui:jpackageApp`
 
 **Tester l'installeur :** sur une machine Windows **sans Java/git/Node**, installer le `.exe`
 (sans droits admin), lancer « Piscine Java » : la GUI s'ouvre dans le navigateur, le workspace
-est créé dans `~/PiscinePiscine Java`, et un rendu d'exercice est évalué — **hors-ligne**.
+est créé dans `~/PiscineJava`, et un rendu d'exercice est évalué — **hors-ligne**.
 
 ---
 

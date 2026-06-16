@@ -47,7 +47,7 @@ répertoire métier…) fonctionne. Dans ce cas :
 
 1. Extraire `piscine-java-windows-portable.zip` dans un chemin autorisé.
 2. Lancer `Piscine Java\Piscine Java.exe` — identique à la version installée
-   (workspace dans `~/Piscine Java`, icône de zone de notification).
+   (workspace dans `~/PiscineJava`, icône de zone de notification).
 
 Vérifié sur un poste d'entreprise sans droits admin. Pour une distribution « propre » (installeur
 double-clic), la voie durable est de faire **signer l'exe par le certificat interne** de
@@ -57,7 +57,7 @@ DSI/SSI — l'exe jpackage se signe avec `signtool sign` standard.
 ## 3. Premier lancement
 
 Au premier démarrage, l'application :
-1. initialise le **workspace** du stagiaire dans `~/Piscine Java/workspace`
+1. initialise le **workspace** du stagiaire dans `~/PiscineJava/workspace`
    (surchargeable par la variable d'environnement `PISCINE_HOME`) — git local, remote
    simulé, exercices copiés ;
 2. démarre le serveur local (127.0.0.1, port libre) et **ouvre le navigateur** ;
@@ -73,4 +73,4 @@ l'application ne touche jamais à son travail.
 | Le navigateur ne s'ouvre pas | Politique du poste | Ouvrir manuellement l'URL affichée dans la fenêtre console |
 | « Contenu piscine introuvable » | Installation incomplète | Réinstaller ; vérifier `app/piscine/exercises` dans le dossier d'installation |
 | git introuvable (Linux) | git non installé | `sudo apt install git` (le .exe Windows embarque MinGit) |
-| Réinitialiser un stagiaire | — | Supprimer `~/Piscine Java` (l'app le recrée au lancement) |
+| Réinitialiser un stagiaire | — | Supprimer `~/PiscineJava` (l'app le recrée au lancement) |

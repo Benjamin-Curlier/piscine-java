@@ -17,7 +17,7 @@ import java.util.Locale;
  *
  * <p>Sans argument : mode « installé » (jpackage) — contenu piscine et MinGit cherchés à
  * côté du jar ({@code <app>/piscine}, {@code <app>/git}), workspace auto-initialisé au
- * premier lancement dans {@code ~/PiscinePiscine Java/workspace} (surchargeable env {@code PISCINE_HOME}).
+ * premier lancement dans {@code ~/PiscineJava/workspace} (surchargeable env {@code PISCINE_HOME}).
  */
 public final class Main {
 
@@ -48,7 +48,7 @@ public final class Main {
             String home = System.getenv("PISCINE_HOME");
             Path dataDir = home != null && !home.isBlank()
                 ? Paths.get(home)
-                : Paths.get(System.getProperty("user.home"), "PiscinePiscine Java");
+                : Paths.get(System.getProperty("user.home"), "PiscineJava");
             repo = dataDir.resolve("workspace");
             if (!Files.isDirectory(repo.resolve(".piscine"))) {
                 System.out.println("[gui] Premier lancement : initialisation du workspace dans " + repo);
@@ -175,7 +175,7 @@ public final class Main {
             Piscine Java — interface locale
 
             Usage :
-              moulinette-gui                                  # mode installé : workspace auto (~/PiscinePiscine Java)
+              moulinette-gui                                  # mode installé : workspace auto (~/PiscineJava)
               moulinette-gui --repo <workspace> [--piscine-repo <chemin>] [--site <dossier-site>] [--port <n>]
             """);
     }

@@ -4,6 +4,20 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/). Versions 
 
 ## [Unreleased]
 
+## [0.7.0] — 2026-06-16
+
+GUI de bureau (tableau de bord + terminal git intégré) packagée en installeurs jpackage, et
+**rebranding complet** « Piscine ETNC » → **« Piscine Java »** : plateforme générique
+d'apprentissage du Java pour l'onboarding de nouveaux développeurs, dépôt **public** sous licence **MIT**.
+
+### Identité & licence
+- **Rebranding** « Piscine ETNC » → **« Piscine Java »** : suppression de toute référence à l'ETNC
+  et de l'habillage thématique militaire (cours et exercices réécrits en contexte d'équipe logicielle —
+  `Soldat` → `Membre`, grades militaires → niveaux de séniorité, etc.). Namespace Java
+  **`etnc.*` → `piscine.*`** (paquets, dossiers, coordonnées Maven/Gradle, ressources).
+- **Licence MIT** (remplace l'en-tête provisoire « tous droits réservés / usage interne »).
+- Retrait des artefacts internes de développement (`docs/superpowers/`, `.claude/`).
+
 ### Build
 - Build de la moulinette migré de **Maven** vers **Gradle 9.5.1** (wrapper versionné
   `moulinette/gradlew`, uber-jar via plugin Shadow, suites taguées `testGit`/`testTools`/`testE2e`).
@@ -25,7 +39,7 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/). Versions 
 - **Installeur jpackage** « Piscine Java » : `.exe` Windows **par utilisateur** (sans admin,
   JRE + MinGit + exercices + site de cours embarqués, répertoire modifiable), `.deb` et
   app-image portable Linux — workflow CI **Release** sur tag `v*`. Mode zéro-argument de la
-  GUI : workspace auto-initialisé dans `~/PiscinePiscine Java` (env `PISCINE_HOME`), données hors du
+  GUI : workspace auto-initialisé dans `~/PiscineJava` (env `PISCINE_HOME`), données hors du
   répertoire d'installation. Remplace le bundle ZIP (`build-bundle` retiré).
 - Résolution git explicite : propriété `piscine.git` (MinGit embarqué) → env
   `PISCINE_GIT_HOME` → `git` du PATH.
@@ -89,4 +103,5 @@ est absent (fréquent sous Git-Bash Windows).
 - **À venir (Phase 4)** : isolation Docker du runner (#30), PMD/SpotBugs, anti-triche JPlag (#29),
   GitLab CE on-premise (#26), branding Piscine Java du site (#33).
 
+[0.7.0]: https://github.com/Benjamin-Curlier/piscine-java/releases/tag/v0.7.0
 [0.6.0-rc.1]: https://github.com/Benjamin-Curlier/piscine-java

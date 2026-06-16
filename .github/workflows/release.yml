@@ -110,3 +110,31 @@ jobs:
           path: |
             moulinette/gui/build/jpackage/out/*.deb
             moulinette/gui/build/jpackage/out/*.tar.gz
+
+  publier-release:
+    name: Publier la release GitHub
+    needs: [installer-windows, installer-linux]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Récupérer les installeurs
+        uses: actions/download-artifact@v4
+        with:
+          path: dist
+
+      - name: Publier la release (installeurs attachés)
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/**/*
+          fail_on_unmatched_files: false
+          body: |
+            **Piscine Java 0.7.0** — plateforme d'apprentissage du Java pour l'onboarding de nouveaux développeurs.
+
+            Cette version apporte une **GUI de bureau** (tableau de bord + terminal git intégré) packagée en
+            **installeurs jpackage** — `.exe` Windows *par utilisateur* (sans droits admin), `.deb` et version
+            portable Linux — et le **rebranding complet** « Piscine ETNC » → « Piscine Java » : suppression du
+            cadre ETNC / de l'habillage militaire, namespace Java `etnc.*` → `piscine.*`, licence **MIT**, dépôt public.
+
+            Tout est embarqué (JRE, git, moulinette, 65 exercices, site de cours) : double-clic, aucune
+            installation système, aucun réseau. Détail complet dans le [`CHANGELOG.md`](https://github.com/Benjamin-Curlier/piscine-java/blob/main/CHANGELOG.md).

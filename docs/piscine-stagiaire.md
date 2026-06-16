@@ -19,7 +19,7 @@ L'installeur embarque **tout** : Java, git, la moulinette, les exercices et le s
 
 1. **Windows** : double-clique sur `Piscine Java-<version>.exe` (installation par utilisateur, aucun droit admin). **Linux** : installe le `.deb` ou extrais l'archive portable.
 2. Lance « **Piscine Java** » (menu Démarrer / lanceur d'applications).
-3. Au premier lancement, ton espace de travail est créé dans `~/Piscine Java` et **l'application s'ouvre dans ton navigateur** : tableau de bord (ta progression, tes rapports), cours, et terminal git intégré.
+3. Au premier lancement, ton espace de travail est créé dans `~/PiscineJava` et **l'application s'ouvre dans ton navigateur** : tableau de bord (ta progression, tes rapports), cours, et terminal git intégré.
 4. Tu travailles exactement comme aux sections **4 à 8** ci-dessous (`submit-start`, rendu Git, rapport) — dans le **terminal intégré** de l'application.
 
 ---

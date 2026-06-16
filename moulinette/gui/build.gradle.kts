@@ -30,7 +30,7 @@ tasks.shadowJar {
 // Staging : uber-jar + contenu piscine (exercises, site de cours construit) + MinGit (Windows).
 // Le `Main` zéro-argument retrouve `piscine/` et `git/` à côté du jar dans l'app installée.
 
-val appVersion = "1.0.0" // jpackage Windows exige x.y.z numérique
+val appVersion = "0.7.0" // jpackage Windows exige x.y.z numérique
 val mingitVersion = "2.54.0"
 val mingitUrl = "https://github.com/git-for-windows/git/releases/download/" +
     "v$mingitVersion.windows.1/MinGit-$mingitVersion-64-bit.zip"
