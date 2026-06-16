@@ -2,6 +2,16 @@
 
 Branche `v1`. Démarré le 2026-06-16. Budget ~6 h, auto-rythmé. Un item par itération, vérifié, commité si vert.
 
+## ⚠️ Protocole git (un worktree concurrent partage ce clone)
+
+Un worktree `../wt-coherence` (branche `fix/doc-coherence`) partage ce dépôt ; une bascule de
+branche concurrente peut faire atterrir un commit hors de `v1`. **origin/v1 est la source de
+vérité.** Chaque itération :
+1. **Début** : `git fetch origin v1 -q && git checkout -B v1 origin/v1` (resynchronise sur origin).
+2. **Fin** : après `git add -A && git commit …`, pousser **`git push origin HEAD:refs/heads/v1`**
+   (pousse le commit courant vers v1 quel que soit l'état local de HEAD), puis **vérifier**
+   `git log --oneline -1 origin/v1` == ton commit. Sinon re-pousser `git push origin <hash>:refs/heads/v1`.
+
 ## Checklist (cocher quand **vert & commité**)
 
 - [x] **A1** moulinette : rapport attendu/obtenu + indice — `AbstractTestChecker.extraitEchecs`
