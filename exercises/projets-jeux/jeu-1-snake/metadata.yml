@@ -1,0 +1,24 @@
+slug: jeu-1-snake
+titre: "Jeu capstone — Snake"
+projet: true
+module: 4
+duree_estimee_h: 8
+prerequis:
+  - "3"
+  - "4"
+objectifs_pedagogiques:
+  - "Modéliser un état de jeu mutable proprement (collections, encapsulation)"
+  - "Implémenter une boucle de jeu : déplacement, collisions, score"
+  - "Raisonner sur des cas limites subtils (suivre sa queue, demi-tour interdit)"
+  - "Découvrir le test déterministe par injection de dépendance (le générateur de pommes)"
+  - "Voir son code prendre vie : un jeu réellement jouable au clavier"
+notions:
+  - collections
+  - enum
+  - record
+  - encapsulation
+  - injection-de-dependance
+  - boucle-de-jeu
+auteur: "Piscine Java"
+version: 1
+date_creation: 2026-06-16
