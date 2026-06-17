@@ -1,0 +1,24 @@
+slug: jeu-2-bomberman
+titre: "Jeu capstone — Bomberman"
+projet: true
+module: 4
+duree_estimee_h: 8
+prerequis:
+  - "3"
+  - "4"
+  - "jeu-1-snake"
+objectifs_pedagogiques:
+  - "Modéliser un état de jeu sur grille (cases, murs, caisses)"
+  - "Implémenter une propagation en croix avec règles d'arrêt (mur, caisse)"
+  - "Gérer une liste d'objets dans le temps (bombes à retardement)"
+  - "Raisonner sur des cas limites (bords, blocage du souffle, mort du joueur)"
+  - "Voir son code prendre vie : un jeu jouable au clavier"
+notions:
+  - collections
+  - enum
+  - record
+  - grille
+  - boucle-de-jeu
+auteur: "Piscine Java"
+version: 1
+date_creation: 2026-06-16

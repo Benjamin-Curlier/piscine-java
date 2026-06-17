@@ -12,6 +12,8 @@ public final class CommandRegistry {
 
     public static CommandRegistry defaults(SubmissionTrigger trigger) {
         var r = new CommandRegistry();
+        r.register(new SubmitCommand(trigger)); // rendu en une commande (recommandé débutant)
+        r.register(new ProfilCommand());        // XP / niveau / badges (gamification)
         r.register(new AddCommand());
         r.register(new CommitCommand());
         r.register(new PushCommand(trigger));
@@ -45,7 +47,7 @@ public final class CommandRegistry {
 
     private static String unsupportedMessage(String head) {
         String hint = switch (head) {
-            case "checkout", "branch" -> "Pour démarrer un rendu, utilise `submit-start <sous-groupe>`.";
+            case "checkout", "branch" -> "Pour rendre tes exercices, utilise `submit <sous-groupe>` (ex: submit 1.1).";
             case "clone", "pull", "fetch", "merge", "rebase" -> "Cette commande n'est pas couverte par le MVP.";
             default -> "Tape `help` pour voir les commandes supportées.";
         };
