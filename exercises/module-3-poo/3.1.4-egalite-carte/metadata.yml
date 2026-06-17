@@ -1,0 +1,21 @@
+slug: egalite-carte
+titre: "Égalité de valeur (equals / hashCode)"
+module: 3
+sous_groupe: "3.1"
+position: 4
+difficulte: moyen
+duree_estimee_min: 30
+prerequis: []
+objectifs_pedagogiques:
+  - "Redéfinir equals(Object) en respectant son contrat (réflexivité, symétrie, transitivité, null)"
+  - "Redéfinir hashCode de façon cohérente avec equals"
+  - "Comprendre pourquoi HashSet/HashMap exigent cette cohérence"
+notions:
+  - equals
+  - hashCode
+  - egalite-de-valeur
+  - HashSet
+  - encapsulation
+auteur: "Piscine Java"
+version: 1
+date_creation: 2026-06-17

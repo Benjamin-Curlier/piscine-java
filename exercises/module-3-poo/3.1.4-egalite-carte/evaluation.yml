@@ -1,0 +1,19 @@
+total: 20
+seuil_reussite: 12
+criteres:
+  - id: tests-publics
+    description: "Tests publics passants"
+    poids: 8
+    type: automatique
+  - id: tests-prives
+    description: "Tests privés passants (cas limites)"
+    poids: 8
+    type: automatique
+  - id: style
+    description: "Style et lisibilité (Checkstyle + PMD)"
+    poids: 2
+    type: automatique
+  - id: idiomatisme
+    description: "Cohérence equals/hashCode, usage de java.util.Objects, getClass plutôt qu'instanceof approximatif"
+    poids: 2
+    type: formateur
