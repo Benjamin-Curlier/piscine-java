@@ -24,7 +24,7 @@ vérité.** Chaque itération :
 - [x] **C3** (stretch) 2e jeu — **Bomberman** (`exercises/projets-jeux/jeu-2-bomberman/`, cœur noté vert + rendu Swing)
 - [x] **D1** chapitre Maven/Gradle — `module-1-fondamentaux/1-9-comprendre-le-pom-maven.md`
 - [x] **D2** points fins — `java.time` ajouté (`module-5/5-8`) ; enums (`3-9`) & Optional (`4-8`) **déjà couverts** (ma critique était inexacte sur ce point → à refléter en D5)
-- [ ] **D3** (stretch) Module 7 Concurrence
+- [x] **D3** (stretch) Concurrence — chapitre découverte `module-7-pour-aller-plus-loin/7-1-concurrence.md` (allégé, cohérent avec D5)
 - [ ] **D4** (stretch) Module 8 Persistance
 - [x] **D5** périmètre honnête README + « la suite » — section « Périmètre & la suite » (fondamentaux ≠ bootcamp ; pointeur Spring/SQL/REST)
 
@@ -130,3 +130,10 @@ vérité.** Chaque itération :
   `tick`. Cœur **noté vert** (3 tests publics + 3 privés), starter compile, rendu **Swing jouable**
   (flèches + Espace). Met à jour la PR #68.
 - **Prochaine itération : D3** (intro Concurrence — chapitre léger plutôt qu'un module complet).
+
+### Itération 14 — 2026-06-16 ✓
+- **D3 livré (stretch)** : nouveau **« Module 7 — Pour aller plus loin (bonus) »** (position 8) +
+  chapitre **`7-1-concurrence.md`** (découverte : threads, ExecutorService, le piège de l'état
+  partagé / race condition, outils `java.util.concurrent`). Chapitre **d'aperçu, sans exercice**,
+  cohérent avec le périmètre honnête (D5) : « voici un avant-goût, à approfondir ensuite ». Builde.
+- **Prochaine itération : D4** (chapitre découverte Persistance — `7-2-persistance.md`), puis fin de boucle.
