@@ -30,7 +30,7 @@ Dans les deux modes, la boucle pédagogique est identique : on édite un exercic
 |---------|---------|
 | `docs/` | Documentation du projet : référentiel pédagogique, format d'exercice, charte de rédaction, procédures de déploiement. |
 | `courses/` | Site Docusaurus regroupant les 6 modules de cours (+ un module bonus « Pour aller plus loin »), organisés en chapitres progressifs. |
-| `exercises/` | 65 exercices individuels + 3 projets en binôme + 2 jeux capstone (Snake, Bomberman), au format standardisé (sujet, métadonnées, tests, solution de référence). |
+| `exercises/` | 66 exercices individuels + 3 projets en binôme + 2 jeux capstone (Snake, Bomberman), au format standardisé (sujet, métadonnées, tests, solution de référence). |
 | `moulinette/` | Code Java de la moulinette de correction automatique (multi-module Gradle). |
 
 ## Modules
@@ -109,7 +109,7 @@ Formateur ? Voir **[`CONTRIBUTING.md`](CONTRIBUTING.md)** : workflow Git, checkl
 
 ## Statut
 
-**Version 0.7.0** — contenu pédagogique complet (6 modules + bonus : 65 exercices + 3 projets binôme + 2 jeux capstone), moulinette évaluante, installeur hors-ligne. Voir [`CHANGELOG.md`](CHANGELOG.md) pour le détail des versions, [`docs/backlog.md`](docs/backlog.md) pour la suite (Phase 4 — déploiement à grande échelle), et [`docs/referentiel.md`](docs/referentiel.md) pour le plan pédagogique complet.
+**Version 0.7.0** — contenu pédagogique complet (6 modules + bonus : 66 exercices + 3 projets binôme + 2 jeux capstone), moulinette évaluante, installeur hors-ligne. Voir [`CHANGELOG.md`](CHANGELOG.md) pour le détail des versions, [`docs/backlog.md`](docs/backlog.md) pour la suite (Phase 4 — déploiement à grande échelle), et [`docs/referentiel.md`](docs/referentiel.md) pour le plan pédagogique complet.
 
 ## Licence
 
