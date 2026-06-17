@@ -21,7 +21,7 @@ vérité.** Chaque itération :
 - [x] **B3** noter tout le sous-groupe (rapport complet ; progression séquentielle préservée)
 - [x] **C1** gamification — moteur (`console/gamification/`) + commande REPL **`profil`** (XP/niveau/barre/badges visibles, testés). [carte tableau de bord web = polish optionnel]
 - [x] **C2** jeu capstone Snake (cœur noté vert + rendu jouable Swing) — `exercises/projets-jeux/jeu-1-snake/`
-- [ ] **C3** (stretch) 2e jeu
+- [x] **C3** (stretch) 2e jeu — **Bomberman** (`exercises/projets-jeux/jeu-2-bomberman/`, cœur noté vert + rendu Swing)
 - [x] **D1** chapitre Maven/Gradle — `module-1-fondamentaux/1-9-comprendre-le-pom-maven.md`
 - [x] **D2** points fins — `java.time` ajouté (`module-5/5-8`) ; enums (`3-9`) & Optional (`4-8`) **déjà couverts** (ma critique était inexacte sur ce point → à refléter en D5)
 - [ ] **D3** (stretch) Module 7 Concurrence
@@ -122,3 +122,11 @@ vérité.** Chaque itération :
   Corrige l'« oversell » de l'ancien README.
 - **DoD cœur atteint** (A,B,C-cœur,D1,D2,D5) → **ouverture de la PR v1 → main**.
 - **Restant (stretch, optionnel) :** C3 2e jeu, D3 module Concurrence, D4 module Persistance.
+
+### Itération 13 — 2026-06-16 ✓
+- **C3 livré (stretch)** : 2e jeu capstone **Bomberman** (`exercises/projets-jeux/jeu-2-bomberman/`).
+  Grille typée (`Case` VIDE/MUR/CAISSE) via `Plateau.depuis(...)`, bombes à retardement, souffle en
+  croix (arrêt sur mur, absorbé par 1ère caisse, mort du joueur). Étudiant implémente `deplacer` +
+  `tick`. Cœur **noté vert** (3 tests publics + 3 privés), starter compile, rendu **Swing jouable**
+  (flèches + Espace). Met à jour la PR #68.
+- **Prochaine itération : D3** (intro Concurrence — chapitre léger plutôt qu'un module complet).
