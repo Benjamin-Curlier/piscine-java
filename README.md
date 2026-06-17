@@ -42,6 +42,32 @@ Dans les deux modes, la boucle pédagogique est identique : on édite un exercic
 5. **Exceptions et I/O** — Gestion d'erreurs, lecture/écriture de fichiers.
 6. **Tests et Git** — JUnit, TDD, workflow Git collaboratif.
 
+## Périmètre & la suite
+
+La Piscine est une **piscine de fondamentaux du langage Java** — dans l'esprit des piscines C/C++
+de 42. Son but : vous rendre **à l'aise pour écrire du Java**, du premier programme jusqu'à la POO,
+les collections, les exceptions/I/O, et les tests. Le périmètre couvre aussi le **`pom.xml`/Maven**
+(chapitre 1-9), `java.time` (5-8), les **enums** (3-9) et **`Optional`** (4-8).
+
+Ce qu'elle **ne couvre pas** (volontairement — ce n'est pas un bootcamp « job-ready ») :
+
+- **Frameworks** : Spring / Spring Boot ;
+- **Bases de données** : SQL, JDBC, JPA/Hibernate ;
+- **Web & API** : HTTP, REST ;
+- **Concurrence** approfondie et **build avancé**.
+
+### La suite, pour devenir développeur·se back-end Java
+
+Une fois la Piscine terminée, la trajectoire habituelle vers un poste est :
+
+1. **Spring Boot** — le framework de référence pour les applications Java côté serveur ;
+2. une **base de données** relationnelle (SQL) + **JDBC** puis **JPA/Hibernate** ;
+3. construire une **API REST** (endpoints, JSON, tests d'intégration) ;
+4. notions de **concurrence** et d'**observabilité** (logs, métriques).
+
+> Ces sujets pourront faire l'objet d'une **« Piscine Java avancée »** ; la présente Piscine en est
+> le socle indispensable.
+
 ## Architecture technique
 
 **En place (RC) :**

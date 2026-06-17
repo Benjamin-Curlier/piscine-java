@@ -26,7 +26,7 @@ vérité.** Chaque itération :
 - [x] **D2** points fins — `java.time` ajouté (`module-5/5-8`) ; enums (`3-9`) & Optional (`4-8`) **déjà couverts** (ma critique était inexacte sur ce point → à refléter en D5)
 - [ ] **D3** (stretch) Module 7 Concurrence
 - [ ] **D4** (stretch) Module 8 Persistance
-- [ ] **D5** périmètre honnête README + « la suite »
+- [x] **D5** périmètre honnête README + « la suite » — section « Périmètre & la suite » (fondamentaux ≠ bootcamp ; pointeur Spring/SQL/REST)
 
 ## Journal
 
@@ -114,3 +114,11 @@ vérité.** Chaque itération :
   **déjà enseignés** — la critique « thin spots non enseignés » était inexacte sur ces deux points.
   À refléter dans le README de périmètre (D5). Site Docusaurus *builde*.
 - **Prochaine itération : D5** (README honnête sur le périmètre + « la suite » Spring/BDD/REST), puis PR v1.
+
+### Itération 12 — 2026-06-16 ✓
+- **D5 livré** : section **« Périmètre & la suite »** dans le README — assume que c'est une piscine
+  de **fondamentaux du langage** (pas un bootcamp job-ready), liste ce qui n'est pas couvert
+  (Spring, SQL/JDBC/JPA, REST, concurrence avancée) et trace **la suite** vers un poste back-end.
+  Corrige l'« oversell » de l'ancien README.
+- **DoD cœur atteint** (A,B,C-cœur,D1,D2,D5) → **ouverture de la PR v1 → main**.
+- **Restant (stretch, optionnel) :** C3 2e jeu, D3 module Concurrence, D4 module Persistance.
