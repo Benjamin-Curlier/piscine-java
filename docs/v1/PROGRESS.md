@@ -23,7 +23,7 @@ vérité.** Chaque itération :
 - [x] **C2** jeu capstone Snake (cœur noté vert + rendu jouable Swing) — `exercises/projets-jeux/jeu-1-snake/`
 - [ ] **C3** (stretch) 2e jeu
 - [x] **D1** chapitre Maven/Gradle — `module-1-fondamentaux/1-9-comprendre-le-pom-maven.md`
-- [ ] **D2** chapitres enums / Optional / java.time
+- [x] **D2** points fins — `java.time` ajouté (`module-5/5-8`) ; enums (`3-9`) & Optional (`4-8`) **déjà couverts** (ma critique était inexacte sur ce point → à refléter en D5)
 - [ ] **D3** (stretch) Module 7 Concurrence
 - [ ] **D4** (stretch) Module 8 Persistance
 - [ ] **D5** périmètre honnête README + « la suite »
@@ -106,3 +106,11 @@ vérité.** Chaque itération :
   `mvn test` (= ce que fait la moulinette), et situe Gradle. Répond à la critique « outils de build
   imposés mais jamais enseignés ». Site Docusaurus *builde*.
 - **Prochaine itération : D2** (chapitres points fins : enums, Optional, java.time).
+
+### Itération 11 — 2026-06-16 ✓
+- **D2 livré** : ajout du chapitre **`module-5-exceptions-io/5-8-dates-et-heures.md`** (java.time :
+  LocalDate/LocalDateTime/Instant, calculs Period/ChronoUnit, immuabilité, parse/format). Constat
+  d'**honnêteté** : enums (`3-9-enums.md`, 187 l.) et Optional (`4-8-streams-optional.md`) étaient
+  **déjà enseignés** — la critique « thin spots non enseignés » était inexacte sur ces deux points.
+  À refléter dans le README de périmètre (D5). Site Docusaurus *builde*.
+- **Prochaine itération : D5** (README honnête sur le périmètre + « la suite » Spring/BDD/REST), puis PR v1.
