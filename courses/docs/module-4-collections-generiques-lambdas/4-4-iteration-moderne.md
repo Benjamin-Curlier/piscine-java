@@ -40,24 +40,28 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-List<String> couleurs = new ArrayList<>();
-couleurs.add("rouge");
-couleurs.add("vert");
-couleurs.add("bleu");
+public class IteratorDemo {
+    public static void main(String[] args) {
+        List<String> couleurs = new ArrayList<>();
+        couleurs.add("rouge");
+        couleurs.add("vert");
+        couleurs.add("bleu");
 
-// Ce que le for-each fait derrière la scène :
-Iterator<String> it = couleurs.iterator(); // on demande un itérateur
-while (it.hasNext()) {                     // tant qu'il reste des éléments
-    String c = it.next();                  // on prend le suivant
-    System.out.println(c);
-}
-// rouge
-// vert
-// bleu
+        // Ce que le for-each fait derrière la scène :
+        Iterator<String> it = couleurs.iterator(); // on demande un itérateur
+        while (it.hasNext()) {                      // tant qu'il reste des éléments
+            String c = it.next();                   // on prend le suivant
+            System.out.println(c);
+        }
+        // rouge
+        // vert
+        // bleu
 
-// Le for-each ci-dessous est STRICTEMENT équivalent :
-for (String c : couleurs) {
-    System.out.println(c);
+        // Le for-each ci-dessous est STRICTEMENT équivalent :
+        for (String c : couleurs) {
+            System.out.println(c);
+        }
+    }
 }
 ```
 
@@ -79,15 +83,19 @@ Supprimer un élément d'une collection **directement dans un for-each** provoqu
 import java.util.ArrayList;
 import java.util.List;
 
-List<String> mots = new ArrayList<>();
-mots.add("alpha");
-mots.add("bêta");
-mots.add("gamma");
+public class SuppressionDangereuse {
+    public static void main(String[] args) {
+        List<String> mots = new ArrayList<>();
+        mots.add("alpha");
+        mots.add("bêta");
+        mots.add("gamma");
 
-// DANGER : ne jamais faire ceci
-for (String m : mots) {
-    if (m.startsWith("b")) {
-        mots.remove(m); // ConcurrentModificationException !
+        // DANGER : ne jamais faire ceci
+        for (String m : mots) {
+            if (m.startsWith("b")) {
+                mots.remove(m); // ConcurrentModificationException !
+            }
+        }
     }
 }
 ```
@@ -103,20 +111,24 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-List<String> mots = new ArrayList<>();
-mots.add("alpha");
-mots.add("bêta");
-mots.add("gamma");
+public class SuppressionSure {
+    public static void main(String[] args) {
+        List<String> mots = new ArrayList<>();
+        mots.add("alpha");
+        mots.add("bêta");
+        mots.add("gamma");
 
-Iterator<String> it = mots.iterator();
-while (it.hasNext()) {
-    String m = it.next();        // on lit l'élément
-    if (m.startsWith("b")) {
-        it.remove();             // suppression sûre via l'itérateur
+        Iterator<String> it = mots.iterator();
+        while (it.hasNext()) {
+            String m = it.next();        // on lit l'élément
+            if (m.startsWith("b")) {
+                it.remove();             // suppression sûre via l'itérateur
+            }
+        }
+
+        System.out.println(mots);        // [alpha, gamma]
     }
 }
-
-System.out.println(mots);        // [alpha, gamma]
 ```
 
 La règle est simple : **toujours appeler `next()` avant `it.remove()`**. L'itérateur sait alors précisément quel élément supprimer.
@@ -135,16 +147,20 @@ Les collections offrent aussi la méthode `forEach(...)`, qui applique une **act
 import java.util.ArrayList;
 import java.util.List;
 
-List<String> villes = new ArrayList<>();
-villes.add("Paris");
-villes.add("Lyon");
-villes.add("Marseille");
+public class ForEachDemo {
+    public static void main(String[] args) {
+        List<String> villes = new ArrayList<>();
+        villes.add("Paris");
+        villes.add("Lyon");
+        villes.add("Marseille");
 
-// Afficher chaque ville avec forEach
-villes.forEach(ville -> System.out.println("Ville : " + ville));
-// Ville : Paris
-// Ville : Lyon
-// Ville : Marseille
+        // Afficher chaque ville avec forEach
+        villes.forEach(ville -> System.out.println("Ville : " + ville));
+        // Ville : Paris
+        // Ville : Lyon
+        // Ville : Marseille
+    }
+}
 ```
 
 Lisez `ville -> System.out.println(...)` comme : « pour chaque ville, fais `System.out.println(...)` ». C'est une recette d'action, courte et directe.
@@ -173,19 +189,23 @@ Une `Map` n'est pas une collection d'éléments simples : chaque entrée est un 
 import java.util.HashMap;
 import java.util.Map;
 
-Map<String, Integer> scores = new HashMap<>();
-scores.put("Alice", 85);
-scores.put("Bob", 92);
-scores.put("Clara", 78);
+public class VuesMapDemo {
+    public static void main(String[] args) {
+        Map<String, Integer> scores = new HashMap<>();
+        scores.put("Alice", 85);
+        scores.put("Bob", 92);
+        scores.put("Clara", 78);
 
-// Parcourir uniquement les clés
-for (String nom : scores.keySet()) {
-    System.out.println("Stagiaire : " + nom);
-}
+        // Parcourir uniquement les clés
+        for (String nom : scores.keySet()) {
+            System.out.println("Stagiaire : " + nom);
+        }
 
-// Parcourir uniquement les valeurs
-for (int note : scores.values()) {
-    System.out.println("Note : " + note);
+        // Parcourir uniquement les valeurs
+        for (int note : scores.values()) {
+            System.out.println("Note : " + note);
+        }
+    }
 }
 ```
 
@@ -208,20 +228,24 @@ Quand on a besoin de la clé **et** de la valeur en même temps, `entrySet()` es
 import java.util.HashMap;
 import java.util.Map;
 
-Map<String, Integer> scores = new HashMap<>();
-scores.put("Alice", 85);
-scores.put("Bob", 92);
-scores.put("Clara", 78);
+public class EntrySetDemo {
+    public static void main(String[] args) {
+        Map<String, Integer> scores = new HashMap<>();
+        scores.put("Alice", 85);
+        scores.put("Bob", 92);
+        scores.put("Clara", 78);
 
-// Parcourir clé et valeur ensemble via entrySet
-for (Map.Entry<String, Integer> entree : scores.entrySet()) {
-    String nom   = entree.getKey();    // la clé
-    int    note  = entree.getValue();  // la valeur
-    System.out.println(nom + " → " + note);
+        // Parcourir clé et valeur ensemble via entrySet
+        for (Map.Entry<String, Integer> entree : scores.entrySet()) {
+            String nom  = entree.getKey();    // la clé
+            int    note = entree.getValue();  // la valeur
+            System.out.println(nom + " → " + note);
+        }
+        // Alice → 85  (l'ordre dépend de HashMap, non garanti)
+        // Bob → 92
+        // Clara → 78
+    }
 }
-// Alice → 85  (l'ordre dépend de HashMap, non garanti)
-// Bob → 92
-// Clara → 78
 ```
 
 C'est la façon la plus directe de parcourir une `Map` quand on a besoin des deux informations. Elle est aussi plus efficace que d'appeler `get(clé)` dans une boucle sur `keySet()`.
@@ -240,16 +264,20 @@ Pour supprimer des éléments d'une `List` ou d'un `Set` selon un critère, `rem
 import java.util.ArrayList;
 import java.util.List;
 
-List<String> mots = new ArrayList<>();
-mots.add("alpha");
-mots.add("bêta");
-mots.add("gamma");
-mots.add("delta");
+public class RemoveIfDemo {
+    public static void main(String[] args) {
+        List<String> mots = new ArrayList<>();
+        mots.add("alpha");
+        mots.add("bêta");
+        mots.add("gamma");
+        mots.add("delta");
 
-// Supprimer tous les mots de moins de 5 caractères
-mots.removeIf(m -> m.length() < 5);
+        // Supprimer tous les mots de moins de 5 caractères
+        mots.removeIf(m -> m.length() < 5);
 
-System.out.println(mots); // [alpha, gamma, delta]
+        System.out.println(mots); // [alpha, gamma, delta]
+    }
+}
 ```
 
 Lisez `m -> m.length() < 5` comme : « pour chaque mot `m`, le supprimer si sa longueur est inférieure à 5 ». La méthode gère seule l'itération interne — pas de risque de `ConcurrentModificationException`.

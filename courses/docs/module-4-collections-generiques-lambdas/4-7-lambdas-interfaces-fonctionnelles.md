@@ -32,27 +32,30 @@ L'annotation `@FunctionalInterface` n'est pas obligatoire, mais elle est recomma
 ### Exemple
 
 ```java
-import java.util.function.Predicate;
-
 // Voici une interface fonctionnelle maison (pour comprendre le principe) :
 @FunctionalInterface
 interface Testeur {
     boolean tester(int valeur); // une seule méthode abstraite
 }
 
-// Sans lambda, on devrait créer une classe entière :
-Testeur estPositif = new Testeur() {
-    @Override
-    public boolean tester(int valeur) {
-        return valeur > 0;
+public class InterfaceFonctionnelleDemo {
+    public static void main(String[] args) {
+        // Sans lambda, on devrait créer une classe entière :
+        Testeur estPositif = new Testeur() {
+            @Override
+            public boolean tester(int valeur) {
+                return valeur > 0;
+            }
+        };
+
+        // Avec une lambda, c'est beaucoup plus court :
+        Testeur estPositifLambda = valeur -> valeur > 0;
+
+        System.out.println(estPositif.tester(5));        // true
+        System.out.println(estPositifLambda.tester(5));  // true
+        System.out.println(estPositifLambda.tester(-3)); // false
     }
-};
-
-// Avec une lambda, c'est beaucoup plus court :
-Testeur estPositifLambda = valeur -> valeur > 0;
-
-System.out.println(estPositifLambda.tester(5));  // true
-System.out.println(estPositifLambda.tester(-3)); // false
+}
 ```
 
 Java reconnaît que `valeur -> valeur > 0` a la bonne forme (un paramètre entier, retourne un booléen) et l'accepte partout où un `Testeur` est attendu.
@@ -70,19 +73,32 @@ Java reconnaît que `valeur -> valeur > 0` a la bonne forme (un paramètre entie
 Une lambda s'écrit : `(paramètres) -> corps`. Le corps peut être une expression ou un bloc.
 
 ```java
-// Forme 1 : un paramètre, expression directe (parenthèses et return facultatifs)
-valeur -> valeur * 2
+import java.util.function.BinaryOperator;
+import java.util.function.IntUnaryOperator;
+import java.util.function.Supplier;
 
-// Forme 2 : plusieurs paramètres (parenthèses obligatoires)
-(a, b) -> a + b
+public class FormesLambda {
+    public static void main(String[] args) {
+        // Forme 1 : un paramètre, expression directe (parenthèses et return facultatifs)
+        IntUnaryOperator doubler = valeur -> valeur * 2;
 
-// Forme 3 : aucun paramètre (parenthèses vides obligatoires)
-() -> "Bonjour"
+        // Forme 2 : plusieurs paramètres (parenthèses obligatoires)
+        BinaryOperator<Integer> addition = (a, b) -> a + b;
 
-// Forme 4 : corps en bloc (accolades + return explicite)
-(int n) -> {
-    int double_ = n * 2;
-    return double_;
+        // Forme 3 : aucun paramètre (parenthèses vides obligatoires)
+        Supplier<String> salutation = () -> "Bonjour";
+
+        // Forme 4 : corps en bloc (accolades + return explicite)
+        IntUnaryOperator doublerBloc = n -> {
+            int resultat = n * 2;
+            return resultat;
+        };
+
+        System.out.println(doubler.applyAsInt(5));   // 10
+        System.out.println(addition.apply(3, 4));     // 7
+        System.out.println(salutation.get());         // Bonjour
+        System.out.println(doublerBloc.applyAsInt(6)); // 12
+    }
 }
 ```
 
@@ -92,25 +108,29 @@ valeur -> valeur * 2
 import java.util.ArrayList;
 import java.util.List;
 
-List<String> prenoms = new ArrayList<>();
-prenoms.add("Alice");
-prenoms.add("Bob");
-prenoms.add("Clara");
+public class LambdaForEachDemo {
+    public static void main(String[] args) {
+        List<String> prenoms = new ArrayList<>();
+        prenoms.add("Alice");
+        prenoms.add("Bob");
+        prenoms.add("Clara");
 
-// Lambda avec un paramètre — afficher chaque prénom en majuscules
-prenoms.forEach(p -> System.out.println(p.toUpperCase()));
-// ALICE
-// BOB
-// CLARA
+        // Lambda avec un paramètre — afficher chaque prénom en majuscules
+        prenoms.forEach(p -> System.out.println(p.toUpperCase()));
+        // ALICE
+        // BOB
+        // CLARA
 
-// Lambda avec corps en bloc — afficher uniquement les prénoms longs
-prenoms.forEach(p -> {
-    if (p.length() > 3) {
-        System.out.println(p + " (long)");
+        // Lambda avec corps en bloc — afficher uniquement les prénoms longs
+        prenoms.forEach(p -> {
+            if (p.length() > 3) {
+                System.out.println(p + " (long)");
+            }
+        });
+        // Alice (long)
+        // Clara (long)
     }
-});
-// Alice (long)
-// Clara (long)
+}
 ```
 
 ### À retenir
@@ -131,17 +151,21 @@ Le JDK (Java Development Kit) fournit dans le package `java.util.function` des i
 ```java
 import java.util.function.Predicate;
 
-// Un prédicat qui teste si une chaîne est courte (< 5 caractères)
-Predicate<String> estCourt = s -> s.length() < 5;
+public class PredicateDemo {
+    public static void main(String[] args) {
+        // Un prédicat qui teste si une chaîne est courte (< 5 caractères)
+        Predicate<String> estCourt = s -> s.length() < 5;
 
-System.out.println(estCourt.test("Ax"));        // true
-System.out.println(estCourt.test("Alexandre")); // false
+        System.out.println(estCourt.test("Ax"));        // true
+        System.out.println(estCourt.test("Alexandre")); // false
 
-// Un prédicat qui teste si une chaîne commence par une majuscule
-Predicate<String> commenceParMajuscule = s -> Character.isUpperCase(s.charAt(0));
+        // Un prédicat qui teste si une chaîne commence par une majuscule
+        Predicate<String> commenceParMajuscule = s -> Character.isUpperCase(s.charAt(0));
 
-System.out.println(commenceParMajuscule.test("Bonjour")); // true
-System.out.println(commenceParMajuscule.test("java"));    // false
+        System.out.println(commenceParMajuscule.test("Bonjour")); // true
+        System.out.println(commenceParMajuscule.test("java"));    // false
+    }
+}
 ```
 
 ### `Function<T,R>` — transformer une valeur
@@ -151,13 +175,17 @@ System.out.println(commenceParMajuscule.test("java"));    // false
 ```java
 import java.util.function.Function;
 
-// Transformer une chaîne en sa longueur (String → Integer)
-Function<String, Integer> longueur = s -> s.length();
-System.out.println(longueur.apply("Bonjour")); // 7
+public class FunctionDemo {
+    public static void main(String[] args) {
+        // Transformer une chaîne en sa longueur (String → Integer)
+        Function<String, Integer> longueur = s -> s.length();
+        System.out.println(longueur.apply("Bonjour")); // 7
 
-// Transformer une chaîne en majuscules (String → String)
-Function<String, String> enMajuscules = s -> s.toUpperCase();
-System.out.println(enMajuscules.apply("module")); // MODULE
+        // Transformer une chaîne en majuscules (String → String)
+        Function<String, String> enMajuscules = s -> s.toUpperCase();
+        System.out.println(enMajuscules.apply("module")); // MODULE
+    }
+}
 ```
 
 ### `Consumer<T>` — consommer sans retour
@@ -167,11 +195,15 @@ System.out.println(enMajuscules.apply("module")); // MODULE
 ```java
 import java.util.function.Consumer;
 
-// Afficher une chaîne avec un préfixe
-Consumer<String> afficher = s -> System.out.println(">> " + s);
+public class ConsumerDemo {
+    public static void main(String[] args) {
+        // Afficher une chaîne avec un préfixe
+        Consumer<String> afficher = s -> System.out.println(">> " + s);
 
-afficher.accept("Première ligne"); // >> Première ligne
-afficher.accept("Deuxième ligne"); // >> Deuxième ligne
+        afficher.accept("Première ligne"); // >> Première ligne
+        afficher.accept("Deuxième ligne"); // >> Deuxième ligne
+    }
+}
 ```
 
 ### `Supplier<T>` — produire sans entrée
@@ -181,10 +213,14 @@ afficher.accept("Deuxième ligne"); // >> Deuxième ligne
 ```java
 import java.util.function.Supplier;
 
-// Produire un message par défaut (utile pour les cas "aucun résultat")
-Supplier<String> messageParDefaut = () -> "Aucun résultat trouvé.";
+public class SupplierDemo {
+    public static void main(String[] args) {
+        // Produire un message par défaut (utile pour les cas "aucun résultat")
+        Supplier<String> messageParDefaut = () -> "Aucun résultat trouvé.";
 
-System.out.println(messageParDefaut.get()); // Aucun résultat trouvé.
+        System.out.println(messageParDefaut.get()); // Aucun résultat trouvé.
+    }
+}
 ```
 
 ### Tableau récapitulatif
@@ -210,13 +246,20 @@ System.out.println(messageParDefaut.get()); // Aucun résultat trouvé.
 Quand une lambda ne fait qu'appeler une méthode existante, Java propose une écriture encore plus courte : la **référence de méthode** (en anglais *method reference*), avec la syntaxe `Classe::methode` ou `objet::methode`.
 
 ```java
-// Ces deux lignes sont équivalentes :
-Consumer<String> afficher1 = s -> System.out.println(s);
-Consumer<String> afficher2 = System.out::println;  // référence de méthode
+import java.util.function.Consumer;
+import java.util.function.Function;
 
-// Ces deux lignes sont équivalentes :
-Function<String, Integer> longueur1 = s -> s.length();
-Function<String, Integer> longueur2 = String::length;  // référence de méthode
+public class ReferenceMethodeDemo {
+    public static void main(String[] args) {
+        // Ces deux lignes sont équivalentes :
+        Consumer<String> afficher1 = s -> System.out.println(s);
+        Consumer<String> afficher2 = System.out::println;  // référence de méthode
+
+        // Ces deux lignes sont équivalentes :
+        Function<String, Integer> longueur1 = s -> s.length();
+        Function<String, Integer> longueur2 = String::length;  // référence de méthode
+    }
+}
 ```
 
 ### Exemple
@@ -226,20 +269,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
-List<String> mots = new ArrayList<>();
-mots.add("bonjour");
-mots.add("monde");
-mots.add("java");
+public class ReferenceMethodeExemple {
+    public static void main(String[] args) {
+        List<String> mots = new ArrayList<>();
+        mots.add("bonjour");
+        mots.add("monde");
+        mots.add("java");
 
-// Afficher avec une référence de méthode (sur une instance : System.out::println)
-mots.forEach(System.out::println);
-// bonjour
-// monde
-// java
+        // Afficher avec une référence de méthode (sur une instance : System.out::println)
+        mots.forEach(System.out::println);
+        // bonjour
+        // monde
+        // java
 
-// Transformer avec une référence de méthode (sur le type : String::toUpperCase)
-Function<String, String> majuscule = String::toUpperCase;
-System.out.println(majuscule.apply("bonjour")); // BONJOUR
+        // Transformer avec une référence de méthode (sur le type : String::toUpperCase)
+        Function<String, String> majuscule = String::toUpperCase;
+        System.out.println(majuscule.apply("bonjour")); // BONJOUR
+    }
+}
 ```
 
 ### À retenir
@@ -257,15 +304,19 @@ Une lambda peut lire des variables du contexte qui l'entoure (variables locales 
 ```java
 import java.util.function.Predicate;
 
-int seuil = 10; // effectivement finale : elle n'est pas réassignée
+public class CaptureDemo {
+    public static void main(String[] args) {
+        int seuil = 10; // effectivement finale : elle n'est pas réassignée
 
-Predicate<Integer> estAuDessus = n -> n > seuil; // OK : seuil est capturée
+        Predicate<Integer> estAuDessus = n -> n > seuil; // OK : seuil est capturée
 
-System.out.println(estAuDessus.test(15)); // true
-System.out.println(estAuDessus.test(5));  // false
+        System.out.println(estAuDessus.test(15)); // true
+        System.out.println(estAuDessus.test(5));  // false
 
-// Si l'on essayait de réassigner seuil après, le compilateur refuserait :
-// seuil = 20; // décommentez pour voir l'erreur de compilation
+        // Si l'on essayait de réassigner seuil après, le compilateur refuserait :
+        // seuil = 20; // décommentez pour voir l'erreur de compilation
+    }
+}
 ```
 
 ### Pourquoi cette règle ?
@@ -277,12 +328,16 @@ Une lambda peut être exécutée après que la méthode qui l'a créée soit ter
 ```java
 import java.util.function.Function;
 
-String prefixe = "Bonjour, "; // effectivement finale
+public class CapturePrefixeDemo {
+    public static void main(String[] args) {
+        String prefixe = "Bonjour, "; // effectivement finale
 
-Function<String, String> saluer = nom -> prefixe + nom;
+        Function<String, String> saluer = nom -> prefixe + nom;
 
-System.out.println(saluer.apply("Alice")); // Bonjour, Alice
-System.out.println(saluer.apply("Bob"));   // Bonjour, Bob
+        System.out.println(saluer.apply("Alice")); // Bonjour, Alice
+        System.out.println(saluer.apply("Bob"));   // Bonjour, Bob
+    }
+}
 ```
 
 ### À retenir

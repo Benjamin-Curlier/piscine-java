@@ -1,7 +1,6 @@
 package piscine.m4;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +28,7 @@ public class Annuaire {
 
     public List<String> indicatifsTries() {
         List<String> liste = new ArrayList<>(annuaire.keySet());
-        Collections.sort(liste);
+        liste.sort(null);
         return liste;
     }
 }

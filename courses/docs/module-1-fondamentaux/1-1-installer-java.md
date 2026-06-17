@@ -120,7 +120,7 @@ Décortiquons :
 | Élément | Rôle |
 |---|---|
 | `public class HelloWorld` | Déclare une **classe** publique nommée `HelloWorld`. Le nom doit correspondre exactement au nom du fichier (`HelloWorld.java`). |
-| `public static void main(String[] args)` | La **méthode `main`** : point d'entrée du programme. Sa signature est figée — vous la réécrirez à l'identique des dizaines de fois. |
+| `public static void main(String[] args)` | La **méthode `main`** : point d'entrée du programme. C'est la forme classique, celle que vous rencontrerez dans la plupart du code et tout au long de ce cours. Java 25 en propose aussi une forme plus courte, présentée juste après. |
 | `System.out.println("Hello, world!")` | Affiche le texte `Hello, world!` suivi d'un retour à la ligne, sur la **sortie standard** (la console). |
 | `;` | Termine chaque instruction. Oublier le `;` est l'erreur de débutant numéro 1 — vous y aurez droit. |
 | `{` et `}` | Délimitent les **blocs** : ici, le contenu de la classe, et le contenu de la méthode. |
@@ -129,6 +129,37 @@ Décortiquons :
 > - Une classe par fichier, **même nom** que le fichier.
 > - La méthode `main` est le point d'entrée.
 > - Toute instruction se termine par `;`.
+
+### La forme moderne : `void main()` (Java 25)
+
+La signature classique `public static void main(String[] args)` fait beaucoup de cérémonie pour un premier programme. Java 25 introduit une **forme raccourcie** (JEP 512) pensée pour les débutants : la méthode `main` peut désormais s'écrire **sans `public`, sans `static` et sans le paramètre `String[] args`**. C'est une méthode d'instance sans argument, mais vous n'avez pas besoin de comprendre ces mots tout de suite — retenez juste qu'elle est plus courte.
+
+En prime, Java 25 met à disposition `IO.println(...)` (et `IO.readln(...)` pour lire au clavier) **sans aucun `import`** : ce sont des méthodes de la classe `java.lang.IO`, toujours disponible.
+
+Voici le même programme, avant et après :
+
+```java
+// Forme classique (celle utilisée dans ce cours)
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, world!");
+    }
+}
+```
+
+```java
+// Forme moderne (Java 25, JEP 512) — plus courte
+void main() {
+    IO.println("Hello, world!");
+}
+```
+
+Les deux programmes font exactement la même chose. La forme moderne abaisse la barrière d'entrée : moins de mots-clés à retenir le premier jour.
+
+> **À retenir** :
+> - La signature de `main` n'est **pas figée** : depuis Java 25, `void main()` (sans `public`, sans `static`, sans `args`) est aussi un point d'entrée valide.
+> - `IO.println(...)` et `IO.readln(...)` s'utilisent sans `import` (classe `java.lang.IO`).
+> - **Dans ce cours, nous gardons la forme classique** `public static void main(String[] args)` + `System.out.println`, car c'est ce que vous verrez dans la grande majorité du code existant. La forme moderne est bonne à connaître.
 
 ## 5. Écrire, compiler, exécuter
 

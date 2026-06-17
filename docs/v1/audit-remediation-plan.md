@@ -51,32 +51,39 @@ Verification: `JAVA_HOME` = `bundle/piscine-etnc-stagiaire/jdk` (JDK 25.0.3). Ex
 ## PR-2 — Modernization + coverage
 
 ### P2 — Java-25 hybrid modernization
-- [ ] `1-1`/`1-2` — introduce `void main()` / `IO.println` as the modern form; explain the relationship.
-- [ ] Lesson examples after module 1 — use `var` idiomatically, `Stream.toList()` over
-      `Collectors.toList()`, text blocks where natural.
-- [ ] Reference solutions — modernize dated non-`main` idioms (`Collectors.toList()` → `toList()` in
-      `4.3.1`, `Collections.sort` in `4.1.1`, etc.). Keep classic `main`.
+- [x] `1-1`/`1-2` — `void main()` / `IO.println` introduced as the modern form; "figée" claim fixed; `var` seeded.
+- [x] Lesson examples — `var` idiomatically, `Stream.toList()` over `Collectors.toList()`, text blocks in module 2.
+- [x] Reference solutions — `4.3.1` (`Collectors.toList()` → `toList()`) and `4.1.1` (`Collections.sort` → `list.sort`)
+      modernized, classic `main` kept; both re-tested green.
 
 ### P3 — Coverage-gap content
-- [ ] `4-2` — complete the `equals`/`hashCode` contract (add transitivity + consistency).
-- [ ] `4-1` — `List.of()` immutability trap warning.
-- [ ] `7-1` — virtual threads (JEP 444).
-- [ ] `6-3` — mocking / test doubles (concept + simple hand-rolled stub).
-- [ ] `6-7` — `git pull`/`fetch`, `git merge --abort`, `git restore`/`reset`.
-- [ ] `1-2`/`1-3` — floating-point inexactness + integer overflow.
-- [ ] `5-2` — `finally` + `return` exception-swallowing pitfall.
-- [ ] `3-5` — demonstrate a manual `toString()` override (promised, never shown).
-- [ ] `1-4` — Scanner locale (`1,78` vs `1.78`) + resource-leak note.
-- [ ] module 2 — varargs, `Arrays` utilities, `strip()` vs `trim()`.
-- [ ] **Rebuild `5-8-dates-et-heures.md`** to module standard: real imports, `Period` vs `Duration`,
-      formatter thread-safety, exercise + self-check + common-errors sections.
-- [ ] **New exercise** (module 3): `equals`/`hashCode` + HashSet-consistency, with public/private tests.
+- [x] `4-2` — full `equals`/`hashCode` contract (reflexivity, symmetry, transitivity, consistency, non-null + coherence).
+- [x] `4-1` — `List.of()` immutability trap warning + `new ArrayList<>(...)` fix.
+- [x] `7-1` — virtual threads (JEP 444) "aperçu" section.
+- [x] `6-3` — test doubles / mocking (concept + hand-rolled fake, no library).
+- [x] `6-7` — `git fetch`/`pull`, `git merge --abort`, `git restore`/`reset`.
+- [x] `1-2` — floating-point inexactness + integer overflow.
+- [x] `5-2` — `finally` + `return` exception-swallowing pitfall.
+- [x] `3-5` — manual `toString()` override demonstrated.
+- [x] `1-4` — Scanner locale (`1,78` vs `1.78`) + don't-close-`System.in` note.
+- [x] module 2 — varargs, `Arrays` utilities (`sort`/`fill`/`copyOf`/`deepToString`), `strip()` vs `trim()`, text blocks.
+- [x] **Rebuilt `5-8-dates-et-heures.md`** to module standard (335 lines): complete imports, `Period` vs `Duration`,
+      formatter immutability/thread-safety, exercise + self-check + common-errors.
+- [x] **New exercise** `3.1.4-egalite-carte`: `equals`/`hashCode` + HashSet-consistency, public + private tests
+      (solution green: 9 tests; passes `lint-exercices.sh`).
 
 ### Tooling
-- [ ] Snippet-compile guard: extract fenced ```java blocks marked compilable from lessons and compile
-      them in CI (would have caught the `4-5` and `5-8` bugs).
+- [x] Snippet-compile guard `scripts/check-lesson-snippets.py` (opt-in via ```java compile``` fence), wired into CI
+      as the `exemples-cours` job. Opt-in chosen over compile-everything because lessons legitimately evolve
+      same-named classes across blocks (auto-compiling all blocks gives false positives). 3 high-value blocks tagged
+      (the historical `4-5` generics + `5-8` dates bugs, and `4-6`).
 
 ---
 
 ## Status journal
 - 2026-06-17: worktree created off `main` (`d555504`, v1 merged); plan written.
+- 2026-06-17: PR-1 (critical fixes) committed + pushed → PR #70. Verified: `:console:test`, `:gui:compileJava`,
+  Docusaurus build.
+- 2026-06-17: PR-2 (modernization + coverage) implemented via parallel per-module authors + verified centrally
+  (Docusaurus build, snippet guard, `lint-exercices.sh` → 66 exos / 0 errors, new exercise + modernized solutions
+  green under JDK 25).

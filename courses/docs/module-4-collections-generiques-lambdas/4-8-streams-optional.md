@@ -35,10 +35,14 @@ On crée un stream depuis une `List` (ou n'importe quelle `Collection`) avec la 
 import java.util.List;
 import java.util.stream.Stream;
 
-List<String> mots = List.of("radio", "mission", "code", "terrain", "alerte");
+public class CreationStream {
+    public static void main(String[] args) {
+        List<String> mots = List.of("radio", "mission", "code", "terrain", "alerte");
 
-// stream() ouvre le flux — aucun traitement n'a lieu ici
-Stream<String> flux = mots.stream();
+        // stream() ouvre le flux — aucun traitement n'a lieu ici
+        Stream<String> flux = mots.stream();
+    }
+}
 ```
 
 Le stream ne fait rien tant qu'une **opération terminale** ne le déclenche pas. Ce mécanisme s'appelle l'**évaluation paresseuse** (lazy evaluation) : les opérations intermédiaires sont empilées, puis exécutées d'un coup.
@@ -66,19 +70,22 @@ Les opérations intermédiaires transforment ou filtrent le flux. Elles renvoien
 
 ```java
 import java.util.List;
-import java.util.stream.Collectors;
 
-List<String> mots = List.of("radio", "mission", "code", "terrain", "alerte", "code");
+public class PipelineDemo {
+    public static void main(String[] args) {
+        List<String> mots = List.of("radio", "mission", "code", "terrain", "alerte", "code");
 
-List<String> resultat = mots.stream()
-    .filter(m -> m.length() > 4)       // garde les mots de plus de 4 lettres
-    .map(String::toUpperCase)           // met en majuscules
-    .distinct()                         // supprime les doublons éventuels
-    .sorted()                           // trie alphabétiquement
-    .limit(3)                           // au plus 3 éléments
-    .collect(Collectors.toList());      // déclenche le pipeline et collecte
+        List<String> resultat = mots.stream()
+            .filter(m -> m.length() > 4)       // garde les mots de plus de 4 lettres
+            .map(String::toUpperCase)           // met en majuscules
+            .distinct()                         // supprime les doublons éventuels
+            .sorted()                           // trie alphabétiquement
+            .limit(3)                           // au plus 3 éléments
+            .toList();                          // déclenche le pipeline et collecte
 
-System.out.println(resultat);           // [ALERTE, MISSION, RADIO]
+        System.out.println(resultat);           // [ALERTE, MISSION, RADIO]
+    }
+}
 ```
 
 Notez que `"code"` (4 lettres, pas plus de 4) est écarté dès `filter`. Les opérations se lisent de haut en bas, dans l'ordre du traitement.
@@ -97,32 +104,35 @@ Une opération terminale **déclenche** le pipeline et produit un résultat. Apr
 
 ```java
 import java.util.List;
-import java.util.stream.Collectors;
 
-List<String> mots = List.of("alpha", "bravo", "charlie", "delta", "echo");
+public class TerminalesDemo {
+    public static void main(String[] args) {
+        List<String> mots = List.of("alpha", "bravo", "charlie", "delta", "echo");
 
-// collect : rassemble dans une List
-List<String> longs = mots.stream()
-    .filter(m -> m.length() >= 5)
-    .collect(Collectors.toList());
-System.out.println(longs);   // [alpha, bravo, charlie, delta]
+        // toList : rassemble dans une List
+        List<String> longs = mots.stream()
+            .filter(m -> m.length() >= 5)
+            .toList();
+        System.out.println(longs);   // [alpha, bravo, charlie, delta]
 
-// count : compte les éléments qui passent le filtre
-long nombre = mots.stream()
-    .filter(m -> m.length() > 4)
-    .count();
-System.out.println(nombre);  // 4
+        // count : compte les éléments qui passent le filtre
+        long nombre = mots.stream()
+            .filter(m -> m.length() > 4)
+            .count();
+        System.out.println(nombre);  // 4
 
-// forEach : applique une action sur chaque élément (ne renvoie rien)
-mots.stream()
-    .filter(m -> m.startsWith("b"))
-    .forEach(System.out::println);   // bravo
+        // forEach : applique une action sur chaque élément (ne renvoie rien)
+        mots.stream()
+            .filter(m -> m.startsWith("b"))
+            .forEach(System.out::println);   // bravo
 
-// reduce : agrège les éléments en une seule valeur
-int totalLettres = mots.stream()
-    .map(String::length)
-    .reduce(0, Integer::sum);        // accumulateur : somme des longueurs
-System.out.println(totalLettres);    // 26 (5+5+7+5+4)
+        // reduce : agrège les éléments en une seule valeur
+        int totalLettres = mots.stream()
+            .map(String::length)
+            .reduce(0, Integer::sum);        // accumulateur : somme des longueurs
+        System.out.println(totalLettres);    // 26 (5+5+7+5+4)
+    }
+}
 ```
 
 `reduce(identite, accumulateur)` prend une valeur de départ (`0`) et une fonction qui combine l'accumulateur avec chaque élément.
@@ -143,23 +153,27 @@ System.out.println(totalLettres);    // 26 (5+5+7+5+4)
 import java.util.List;
 import java.util.stream.Collectors;
 
-List<String> mots = List.of("foxtrot", "golf", "hotel", "india");
+public class CollecteursDemo {
+    public static void main(String[] args) {
+        List<String> mots = List.of("foxtrot", "golf", "hotel", "india");
 
-// toList() : collecte dans une List
-List<String> resultat = mots.stream()
-    .filter(m -> m.length() > 4)
-    .collect(Collectors.toList());
-System.out.println(resultat);   // [foxtrot, hotel, india]
+        // toList() : collecte dans une List (méthode directe du Stream)
+        List<String> resultat = mots.stream()
+            .filter(m -> m.length() > 4)
+            .toList();
+        System.out.println(resultat);   // [foxtrot, hotel, india]
 
-// joining(delimiter) : concatène les éléments en une String
-String phrase = mots.stream()
-    .collect(Collectors.joining(", "));
-System.out.println(phrase);   // foxtrot, golf, hotel, india
+        // joining(delimiter) : concatène les éléments en une String
+        String phrase = mots.stream()
+            .collect(Collectors.joining(", "));
+        System.out.println(phrase);   // foxtrot, golf, hotel, india
 
-// joining(delimiter, prefix, suffix) : avec préfixe et suffixe
-String liste = mots.stream()
-    .collect(Collectors.joining(", ", "[", "]"));
-System.out.println(liste);    // [foxtrot, golf, hotel, india]
+        // joining(delimiter, prefix, suffix) : avec préfixe et suffixe
+        String liste = mots.stream()
+            .collect(Collectors.joining(", ", "[", "]"));
+        System.out.println(liste);    // [foxtrot, golf, hotel, india]
+    }
+}
 ```
 
 ### 4.2 Introduction à `groupingBy` et `partitioningBy`
@@ -171,27 +185,31 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-List<String> mots = List.of("as", "bras", "code", "delta", "echo", "foxtrot");
+public class GroupesDemo {
+    public static void main(String[] args) {
+        List<String> mots = List.of("as", "bras", "code", "delta", "echo", "foxtrot");
 
-// groupingBy : regroupe par longueur du mot
-Map<Integer, List<String>> parLongueur = mots.stream()
-    .collect(Collectors.groupingBy(String::length));
-// Résultat (ordre des clés non garanti) : {2=[as], 4=[bras, code, echo], 5=[delta], 7=[foxtrot]}
-System.out.println(parLongueur);
+        // groupingBy : regroupe par longueur du mot
+        Map<Integer, List<String>> parLongueur = mots.stream()
+            .collect(Collectors.groupingBy(String::length));
+        // Résultat (ordre des clés non garanti) : {2=[as], 4=[bras, code, echo], 5=[delta], 7=[foxtrot]}
+        System.out.println(parLongueur);
 
-// partitioningBy : sépare en longs (>= 5) et courts (< 5)
-Map<Boolean, List<String>> partition = mots.stream()
-    .collect(Collectors.partitioningBy(m -> m.length() >= 5));
-// Résultat : {false=[as, bras, code, echo], true=[delta, foxtrot]}
-System.out.println(partition.get(true));   // [delta, foxtrot]
-System.out.println(partition.get(false));  // [as, bras, code, echo]
+        // partitioningBy : sépare en longs (>= 5) et courts (< 5)
+        Map<Boolean, List<String>> partition = mots.stream()
+            .collect(Collectors.partitioningBy(m -> m.length() >= 5));
+        // Résultat : {false=[as, bras, code, echo], true=[delta, foxtrot]}
+        System.out.println(partition.get(true));   // [delta, foxtrot]
+        System.out.println(partition.get(false));  // [as, bras, code, echo]
+    }
+}
 ```
 
 `partitioningBy` garantit toujours les deux clés `true` et `false` dans la `Map`, même si l'un des groupes est vide.
 
 ### À retenir
 
-> - `Collectors.toList()` : stream → `List`.
+> - `stream.toList()` : stream → `List` (méthode directe, à préférer à `collect(Collectors.toList())`).
 > - `Collectors.joining(sep)` : stream de `String` → `String` concaténée.
 > - `Collectors.groupingBy(f)` : stream → `Map<K, List<V>>` selon la clé `f`.
 > - `Collectors.partitioningBy(p)` : stream → `Map<Boolean, List<V>>` en deux groupes.
@@ -205,23 +223,27 @@ System.out.println(partition.get(false));  // [as, bras, code, echo]
 ```java
 import java.util.Optional;
 
-// Optional avec une valeur
-Optional<String> present = Optional.of("bonjour");
+public class OptionalDemo {
+    public static void main(String[] args) {
+        // Optional avec une valeur
+        Optional<String> present = Optional.of("bonjour");
 
-// Optional vide (absence de valeur)
-Optional<String> vide = Optional.empty();
+        // Optional vide (absence de valeur)
+        Optional<String> vide = Optional.empty();
 
-// isPresent() : true si une valeur est là
-System.out.println(present.isPresent());   // true
-System.out.println(vide.isPresent());      // false
+        // isPresent() : true si une valeur est là
+        System.out.println(present.isPresent());   // true
+        System.out.println(vide.isPresent());      // false
 
-// orElse(defaut) : renvoie la valeur ou la valeur par défaut
-String valeur = vide.orElse("valeur par défaut");
-System.out.println(valeur);   // valeur par défaut
+        // orElse(defaut) : renvoie la valeur ou la valeur par défaut
+        String valeur = vide.orElse("valeur par défaut");
+        System.out.println(valeur);   // valeur par défaut
 
-// map(function) : transforme la valeur si elle est présente
-Optional<Integer> longueur = present.map(String::length);
-System.out.println(longueur.orElse(0));   // 7
+        // map(function) : transforme la valeur si elle est présente
+        Optional<Integer> longueur = present.map(String::length);
+        System.out.println(longueur.orElse(0));   // 7
+    }
+}
 ```
 
 **Règle d'or** : n'appelez jamais `optional.get()` sans avoir vérifié `isPresent()` au préalable. Si l'`Optional` est vide, `get()` lève une erreur — préférez toujours `orElse(...)` ou `map(...)`.
@@ -231,27 +253,31 @@ System.out.println(longueur.orElse(0));   // 7
 Plusieurs opérations terminales de stream renvoient un `Optional` parce que la collection source peut être vide.
 
 ```java
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.Comparator;
 
-List<String> mots = List.of("kilo", "lima", "mike", "november");
+public class OptionalStreamDemo {
+    public static void main(String[] args) {
+        List<String> mots = List.of("kilo", "lima", "mike", "november");
 
-// findFirst : premier élément qui passe le filtre
-Optional<String> premier = mots.stream()
-    .filter(m -> m.startsWith("m"))
-    .findFirst();
-System.out.println(premier.orElse("aucun"));   // mike
+        // findFirst : premier élément qui passe le filtre
+        Optional<String> premier = mots.stream()
+            .filter(m -> m.startsWith("m"))
+            .findFirst();
+        System.out.println(premier.orElse("aucun"));   // mike
 
-// max : élément maximum selon un Comparator
-Optional<String> plusLong = mots.stream()
-    .max(Comparator.comparingInt(String::length));
-System.out.println(plusLong.orElse(""));   // november
+        // max : élément maximum selon un Comparator
+        Optional<String> plusLong = mots.stream()
+            .max(Comparator.comparingInt(String::length));
+        System.out.println(plusLong.orElse(""));   // november
 
-// min : élément minimum
-Optional<String> plusCourt = mots.stream()
-    .min(Comparator.comparingInt(String::length));
-System.out.println(plusCourt.orElse(""));  // kilo (ou lima ou mike, ex aequo)
+        // min : élément minimum
+        Optional<String> plusCourt = mots.stream()
+            .min(Comparator.comparingInt(String::length));
+        System.out.println(plusCourt.orElse(""));  // kilo (ou lima ou mike, ex aequo)
+    }
+}
 ```
 
 Si le stream est vide (ou que le filtre écarte tout), `findFirst`, `max` et `min` renvoient `Optional.empty()` — et `orElse` fournit une valeur de repli propre, sans `null`.
@@ -276,27 +302,30 @@ Les streams et les boucles `for` produisent souvent le même résultat. Quand pr
 > ⚠️ Vous croiserez `parallelStream()`, qui répartit le travail sur plusieurs cœurs. **N'y touchez pas pour l'instant** : c'est un outil avancé, piégeux (ordre, état partagé, opérations qui doivent être associatives) et qui ralentit souvent plus qu'il n'accélère sur des collections normales. Un `stream()` séquentiel est le bon choix par défaut.
 
 ```java
-import java.util.List;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
+import java.util.List;
 
-List<String> mots = List.of("oscar", "papa", "quebec", "romeo");
+public class StreamVsBoucle {
+    public static void main(String[] args) {
+        List<String> mots = List.of("oscar", "papa", "quebec", "romeo");
 
-// Avec une boucle
-List<String> boucle = new ArrayList<>();
-for (String m : mots) {
-    if (m.length() > 4) {
-        boucle.add(m.toUpperCase());
+        // Avec une boucle
+        List<String> boucle = new ArrayList<>();
+        for (String m : mots) {
+            if (m.length() > 4) {
+                boucle.add(m.toUpperCase());
+            }
+        }
+
+        // Avec un stream — même résultat, plus concis
+        List<String> stream = mots.stream()
+            .filter(m -> m.length() > 4)
+            .map(String::toUpperCase)
+            .toList();
+
+        // Les deux produisent : [OSCAR, QUEBEC, ROMEO]
     }
 }
-
-// Avec un stream — même résultat, plus concis
-List<String> stream = mots.stream()
-    .filter(m -> m.length() > 4)
-    .map(String::toUpperCase)
-    .collect(Collectors.toList());
-
-// Les deux produisent : [OSCAR, QUEBEC, ROMEO]
 ```
 
 Pour les exercices du sous-groupe 4.3, les tests observent **uniquement le résultat** (la valeur retournée), jamais la façon de l'obtenir. Une boucle correcte reste fonctionnelle ; un stream idiomatique est cependant attendu quand la signature du problème prend une interface fonctionnelle en paramètre.
@@ -336,7 +365,7 @@ List<String> mots = List.of(
 **Partie B** : trouvez le premier mot de la liste dont la longueur est exactement 5 lettres. Affichez-le, ou affichez `"Aucun"` si aucun mot de cette longueur n'existe.
 
 Indications :
-- Partie A : chaînez `filter` → `map` → `sorted` → `collect(Collectors.toList())`.
+- Partie A : chaînez `filter` → `map` → `sorted` → `toList()`.
 - Partie B : utilisez `filter` → `findFirst()` qui renvoie un `Optional<String>`, puis `orElse("Aucun")`.
 
 <details>
@@ -345,7 +374,6 @@ Indications :
 ```java
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class ExerciceMots {
 
@@ -360,7 +388,7 @@ public class ExerciceMots {
             .filter(m -> m.length() > 4)       // melon, banane, cerise, prune, abricot, fraise, datte, poire
             .map(String::toUpperCase)           // mise en majuscules
             .sorted()                           // ordre alphabétique
-            .collect(Collectors.toList());      // déclenche et collecte
+            .toList();                          // déclenche et collecte
 
         System.out.println(resultat);
         // [ABRICOT, BANANE, CERISE, DATTE, FRAISE, MELON, POIRE, PRUNE]

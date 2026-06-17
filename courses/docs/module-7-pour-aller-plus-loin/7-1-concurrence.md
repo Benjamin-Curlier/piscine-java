@@ -70,12 +70,40 @@ concurrence, car il est **intermittent**.
   modifiable via la liste partagée — ce n'est *pas* thread-safe. Visez des champs eux-mêmes immuables
   (types primitifs, `String`, autres records immuables, ou copies défensives).
 
+## Les *virtual threads* : un aperçu
+
+Les threads classiques (dits *plateforme*) sont **chers** : chacun correspond à un thread du système d'exploitation et consomme de la mémoire. On ne peut en lancer que quelques milliers — d'où les **pools** qui les recyclent.
+
+Java propose maintenant les **threads virtuels** (*virtual threads*, JEP 444, stables depuis Java 21 et présents dans Java 25). Ce sont des threads **ultra-légers**, gérés par la JVM et non par le système. On peut en lancer **des millions** sans saturer la machine. L'idée : écrire du code **bloquant simple** (« lis ce fichier, attends cette réponse réseau ») tout en gardant une excellente capacité de traitement en parallèle.
+
+Les lancer est direct :
+
+```java
+// Un thread virtuel ponctuel
+Thread.ofVirtual().start(() -> System.out.println("Salut depuis un thread virtuel"));
+
+// Ou un exécuteur qui crée UN thread virtuel par tâche soumise
+try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+    for (int i = 0; i < 10_000; i++) {
+        executor.submit(() -> traiter(requete));
+    }
+} // le try-with-resources attend la fin de toutes les tâches
+```
+
+Quand brillent-ils ? Quand vos tâches passent leur temps à **attendre** (entrées/sorties : réseau, fichiers, base de données) plutôt qu'à calculer. Pendant qu'un thread virtuel attend une réponse, la JVM le « met de côté » et fait avancer les autres — d'où la possibilité d'en avoir une multitude. Pour du calcul pur qui sature le processeur, ils n'apportent rien de plus que les threads classiques.
+
+:::note À retenir
+Les threads virtuels ne suppriment **pas** le piège de l'état partagé : une *race condition* reste une *race condition*. Ils changent le **coût** d'un thread, pas les règles de la concurrence.
+:::
+
 ## En résumé
 
 - Un **thread** exécute du code en parallèle ; on les gère via un **`ExecutorService`**.
 - Le piège n°1 est l'**état mutable partagé** → **race conditions** (bugs intermittents).
 - On s'en protège avec des **verrous** (`synchronized`), des types **atomiques**, les outils de
   `java.util.concurrent`, et surtout en **limitant l'état partagé**.
+- Les **threads virtuels** (Java 21+) sont ultra-légers : idéaux pour beaucoup de tâches qui
+  **attendent** des entrées/sorties — mais ils ne dispensent pas de gérer l'état partagé.
 
 ## Pour aller plus loin
 

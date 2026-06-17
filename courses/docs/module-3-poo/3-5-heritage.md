@@ -137,6 +137,46 @@ Trois compléments utiles :
 > - `final` interdit l'héritage (classe) ou la redéfinition (méthode).
 > - Toute classe hérite d'`Object` (d'où `toString()`).
 
+## 5. Redéfinir `toString()` pour le débogage
+
+`Object` fournit une méthode `toString()` que Java appelle automatiquement dès qu'un objet est concaténé à une `String` ou passé à `System.out.println(...)`. Par défaut, elle renvoie quelque chose comme `Chien@1b6d3586` : le nom de la classe suivi d'un code de hachage en hexadécimal — illisible et inutile au moment de comprendre ce que contient l'objet.
+
+En **redéfinissant** `toString()` (avec `@Override`, comme toute redéfinition), vous décidez d'un format lisible. C'est l'un des premiers réflexes utiles : un affichage clair fait gagner beaucoup de temps quand on inspecte des objets en cours de débogage.
+
+### Exemple
+
+```java
+public class Point {
+    private final int x;
+    private final int y;
+
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    @Override
+    public String toString() {
+        return "Point(x=" + x + ", y=" + y + ")";
+    }
+
+    public static void main(String[] args) {
+        Point p = new Point(3, 7);
+
+        System.out.println(p);            // Point(x=3, y=7) — et non Point@1b6d3586
+        System.out.println("Position : " + p);  // Position : Point(x=3, y=7)
+    }
+}
+```
+
+Sans la redéfinition, la première ligne afficherait `Point@1b6d3586` (la valeur varie d'une exécution à l'autre). Avec elle, on lit immédiatement les valeurs des champs : c'est précisément ce qu'on veut voir dans une trace ou un message de log.
+
+### À retenir
+
+> - Le `toString()` hérité d'`Object` renvoie un texte technique illisible (`Classe@hashcode`).
+> - Redéfinir `toString()` avec `@Override` donne un affichage clair des champs de l'objet.
+> - `println` et la concaténation `+` appellent `toString()` automatiquement : un bon format facilite le débogage.
+
 ## Erreurs fréquentes
 
 - **Oublier `super(...)`** : si le parent n'a pas de constructeur sans argument, le constructeur enfant **doit** appeler `super(...)` en première instruction, sinon le code ne compile pas.

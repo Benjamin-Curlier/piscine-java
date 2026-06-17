@@ -18,6 +18,7 @@ Vos premiers tests fonctionnent, mais vous remarquez vite deux gênes : on recr�
 - **Organiser** des tests apparentés avec `@Nested`.
 - **Donner** un libellé lisible à un test avec `@DisplayName`.
 - **Distinguer** `@BeforeEach` (avant chaque test) de `@BeforeAll` (une seule fois).
+- **Comprendre** ce qu'est un *test double* (stub, fake, mock) et écrire un *fake* à la main.
 
 ## 1. Le cycle de vie : @BeforeEach et @AfterEach
 
@@ -147,6 +148,80 @@ class PanierTest {
 > - `@BeforeAll` / `@AfterAll` : une seule fois pour toute la classe, et **`static`**.
 > - Par défaut, préférez `@BeforeEach` — il préserve l'isolement entre tests.
 
+## 5. Isoler le code testé : les *test doubles*
+
+Un bon test unitaire vérifie **une seule** classe à la fois. Mais cette classe dépend souvent d'autres objets : une horloge, une base de données, un service réseau… Ces **collaborateurs** sont parfois lents, indisponibles, ou imprévisibles (l'heure courante change à chaque exécution). Les faire intervenir pour de vrai rendrait le test lent et fragile.
+
+La solution : remplacer le vrai collaborateur par une doublure de test (*test double*) — un objet bidon, sous votre contrôle, qui joue le même rôle le temps du test. On distingue trois variantes selon ce qu'on attend de la doublure :
+
+- **Stub** : il renvoie des réponses **fixées d'avance**. « Quand on te demande l'heure, réponds toujours 10 h. » On l'utilise pour **fournir une entrée** au code testé.
+- **Fake** : une implémentation **simplifiée mais réelle**, suffisante pour le test. Typiquement, un dépôt de données stocké dans une simple `Map` en mémoire au lieu d'une vraie base.
+- **Mock** : un objet qui **enregistre comment on l'a appelé**, pour qu'on puisse ensuite **vérifier les interactions** (« la méthode `envoyer` a-t-elle bien été appelée une fois ? »).
+
+Pas besoin de bibliothèque (comme Mockito) pour débuter : il suffit d'**implémenter l'interface du collaborateur** avec une petite classe écrite à la main. Pour cela, le code testé doit dépendre d'une **interface**, pas d'une classe concrète — on lui passe alors le vrai objet en production, et la doublure dans le test.
+
+### Exemple
+
+On veut tester un `Bonjour` qui salue différemment selon l'heure. Il dépend d'une `Horloge` — qu'on ne veut surtout pas faire dépendre de l'heure réelle.
+
+```java
+// L'interface dont dépend le code testé
+interface Horloge {
+    int heure(); // 0 à 23
+}
+
+// Le code testé : il reçoit une Horloge, sans savoir laquelle
+class Bonjour {
+    private final Horloge horloge;
+
+    Bonjour(Horloge horloge) {
+        this.horloge = horloge;
+    }
+
+    String saluer() {
+        return horloge.heure() < 18 ? "Bonjour" : "Bonsoir";
+    }
+}
+```
+
+Dans le test, on écrit un **fake** d'`Horloge` qui renvoie une heure choisie :
+
+```java
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+class BonjourTest {
+
+    // Un fake : implémentation minimale et contrôlée d'Horloge
+    static class HorlogeFigee implements Horloge {
+        private final int heure;
+        HorlogeFigee(int heure) { this.heure = heure; }
+        @Override public int heure() { return heure; }
+    }
+
+    @Test
+    void diseBonjourLeMatin() {
+        var bonjour = new Bonjour(new HorlogeFigee(9));
+        assertEquals("Bonjour", bonjour.saluer());
+    }
+
+    @Test
+    void diseBonsoirLeSoir() {
+        var bonjour = new Bonjour(new HorlogeFigee(20));
+        assertEquals("Bonsoir", bonjour.saluer());
+    }
+}
+```
+
+Le test est désormais **rapide, déterministe et indépendant** de l'heure réelle : on a maîtrisé le collaborateur.
+
+### À retenir
+
+> - Un *test double* remplace un collaborateur réel (lent, externe, imprévisible) le temps du test.
+> - **Stub** = réponses fixées d'avance ; **fake** = implémentation simplifiée réelle ; **mock** = enregistre les appels pour vérifier les interactions.
+> - On peut écrire un *fake* **à la main** en implémentant une interface — aucune bibliothèque n'est nécessaire pour débuter.
+> - Pour pouvoir substituer une doublure, faites dépendre votre code d'une **interface**, pas d'une classe concrète.
+
 ## Erreurs fréquentes
 
 - **Partager un état mutable entre tests** : déclarer un objet en champ, le remplir dans un test, et compter dessus dans le suivant. Cause : on croit l'état conservé d'un test à l'autre. Correction : JUnit recrée l'instance à chaque test ; remettez l'état à neuf dans `@BeforeEach`, ne dépendez jamais de l'ordre d'exécution.
@@ -221,6 +296,7 @@ Points à noter :
 - Quand préférez-vous `@CsvSource` à `@ValueSource` ?
 - À quoi servent `@Nested` et `@DisplayName` dans une grande suite de tests ?
 - Un test paramétré avec trois lignes de `@CsvSource` : combien de fois s'exécute-t-il ?
+- Quelle est la différence entre un *stub*, un *fake* et un *mock* ? Pourquoi votre code doit-il dépendre d'une interface pour qu'on puisse y glisser une doublure ?
 
 ## Pour aller plus loin
 

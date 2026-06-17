@@ -4,6 +4,35 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/). Versions 
 
 ## [Unreleased]
 
+## [1.0.0-rc.1] — 2026-06-17
+
+Première **release candidate** de la v1, issue de la remédiation d'un audit qualité
+(expérience apprenant / couverture pédagogique / bonnes pratiques).
+
+### Expérience apprenant
+- **Démarrage corrigé** : la doc « standalone » pointait vers un `piscine.bat`/ZIP retiré en 0.7.0 ;
+  remplacée par le parcours **installeur jpackage** (un apprenant autonome était bloqué dès l'étape 1).
+- **Gamification rendue visible** : le retour d'un `submit` annonce désormais l'XP gagnée, les montées
+  de niveau et les badges débloqués ; le tableau de bord affiche barre d'XP + badges (nouvel endpoint
+  `/api/profil`) ; la bannière du REPL met en avant `submit` et `profil`.
+- Docs alignées sur le comportement réel (évaluation de **tout** le sous-groupe, plus d'« arrêt au
+  premier échec » ; commandes `submit`/`profil` documentées).
+
+### Contenu pédagogique
+- **Java 25 « hybride »** : introduction de `void main()` / `IO.println` (JEP 512) **à côté** du `main`
+  classique ; idiomes modernisés (`var`, `Stream.toList()`, text blocks).
+- **Bugs de cours corrigés** (dont des exemples qui ne compilaient pas : génériques 4-5, dates 5-8),
+  marqueurs de conflit Git, immuabilité des `record`, `%` sur `double`, démo `==` sur chaînes.
+- **Lacunes comblées** : contrat `equals`/`hashCode` complet, piège `List.of()` immuable, virtual threads
+  (JEP 444), test doubles/mocking, `git fetch`/`pull`/`merge --abort`/`restore`, `finally`+`return`,
+  inexactitude des flottants, locale de `Scanner`, varargs, utilitaires `Arrays`, `strip()`/`trim()`,
+  `toString()` manuel, chapitre **dates/heures reconstruit**.
+- **Nouvel exercice** `3.1.4-egalite-carte` (`equals`/`hashCode` + cohérence `HashSet`).
+
+### Qualité / outillage
+- Nouveau garde-fou CI **`scripts/check-lesson-snippets.py`** (job `exemples-cours`) : compile les blocs
+  de cours marqués ` ```java compile ` pour empêcher tout exemple non compilable de passer.
+
 ## [0.7.0] — 2026-06-16
 
 GUI de bureau (tableau de bord + terminal git intégré) packagée en installeurs jpackage, et
