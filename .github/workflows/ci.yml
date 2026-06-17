@@ -100,3 +100,18 @@ jobs:
 
       - name: Tester chaque solution de référence
         run: bash scripts/valider-solutions.sh
+
+  exemples-cours:
+    name: Compiler les exemples de cours marqués
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 25 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+
+      - name: Compiler les blocs Java marqués `compile`
+        run: python3 scripts/check-lesson-snippets.py
