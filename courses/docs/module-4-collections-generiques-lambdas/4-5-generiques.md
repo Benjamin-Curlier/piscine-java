@@ -30,14 +30,18 @@ Avant les génériques (Java 1 et 2), on stockait tout dans des collections d'`O
 import java.util.ArrayList;
 import java.util.List;
 
-// Ancienne approche (Java 1 / Java 2) — à NE PAS reproduire.
-List listeSansType = new ArrayList();    // Collection brute, sans <T>
-listeSansType.add("bonjour");
-listeSansType.add(42);                   // Le compilateur ne proteste pas…
+public class AncienneApproche {
+    public static void main(String[] args) {
+        // Ancienne approche (Java 1 / Java 2) — à NE PAS reproduire.
+        List listeSansType = new ArrayList();    // Collection brute, sans <T>
+        listeSansType.add("bonjour");
+        listeSansType.add(42);                   // Le compilateur ne proteste pas…
 
-// Le cast s'impose à la lecture.
-String mot = (String) listeSansType.get(0);  // OK ici
-String raté = (String) listeSansType.get(1); // Erreur à l'EXÉCUTION : ClassCastException
+        // Le cast s'impose à la lecture.
+        String mot = (String) listeSansType.get(0);  // OK ici
+        String raté = (String) listeSansType.get(1); // Erreur à l'EXÉCUTION : ClassCastException
+    }
+}
 ```
 
 Avec un type paramétré, l'erreur est **signalée à la compilation** — le compilateur refuse d'insérer un entier dans une `List<String>` :
@@ -46,11 +50,15 @@ Avec un type paramétré, l'erreur est **signalée à la compilation** — le co
 import java.util.ArrayList;
 import java.util.List;
 
-List<String> mots = new ArrayList<>();  // <String> = paramètre de type
-mots.add("bonjour");
-// mots.add(42);   // Erreur de compilation — impossible d'ajouter un int à une List<String>
+public class AvecGenerique {
+    public static void main(String[] args) {
+        List<String> mots = new ArrayList<>();  // <String> = paramètre de type
+        mots.add("bonjour");
+        // mots.add(42);   // Erreur de compilation — impossible d'ajouter un int à une List<String>
 
-String mot = mots.get(0);   // Aucun cast : le compilateur sait déjà que c'est un String
+        String mot = mots.get(0);   // Aucun cast : le compilateur sait déjà que c'est un String
+    }
+}
 ```
 
 ### À retenir
@@ -96,13 +104,17 @@ public class Boite<T> {
 À l'utilisation, on instancie en précisant le type réel entre chevrons :
 
 ```java
-Boite<String> boiteTexte = new Boite<>("message secret");
-String texte = boiteTexte.ouvrir();   // Aucun cast : le compilateur sait que c'est un String
-System.out.println(texte);            // message secret
+public class BoiteDemo {
+    public static void main(String[] args) {
+        Boite<String> boiteTexte = new Boite<>("message secret");
+        String texte = boiteTexte.ouvrir();   // Aucun cast : le compilateur sait que c'est un String
+        System.out.println(texte);            // message secret
 
-Boite<Integer> boiteNombre = new Boite<>(42);
-int valeur = boiteNombre.ouvrir();    // Auto-unboxing inclus
-System.out.println(valeur);           // 42
+        Boite<Integer> boiteNombre = new Boite<>(42);
+        int valeur = boiteNombre.ouvrir();    // Auto-unboxing inclus
+        System.out.println(valeur);           // 42
+    }
+}
 ```
 
 Le compilateur produit du bytecode Java identique pour les deux boîtes — c'est l'**effacement de type** (§5), mais votre code source reste sûr et lisible.
@@ -142,13 +154,17 @@ Appel sans préciser `T` (le compilateur l'infère) :
 ```java
 import java.util.List;
 
-List<String> noms = List.of("Alice", "Bob");
-String premierNom = Utilitaires.premier(noms);   // T inféré : String — aucun cast
-System.out.println(premierNom);                  // Alice
+public class PremierDemo {
+    public static void main(String[] args) {
+        List<String> noms = List.of("Alice", "Bob");
+        String premierNom = Utilitaires.premier(noms);   // T inféré : String — aucun cast
+        System.out.println(premierNom);                  // Alice
 
-List<Integer> scores = List.of(100, 75, 88);
-int premierScore = Utilitaires.premier(scores);  // T inféré : Integer — aucun cast
-System.out.println(premierScore);                // 100
+        List<Integer> scores = List.of(100, 75, 88);
+        int premierScore = Utilitaires.premier(scores);  // T inféré : Integer — aucun cast
+        System.out.println(premierScore);                // 100
+    }
+}
 ```
 
 ### À retenir
@@ -191,13 +207,17 @@ public class Extremes {
 import java.util.ArrayList;
 import java.util.List;
 
-List<Integer> notes = new ArrayList<>();
-notes.add(12);
-notes.add(18);
-notes.add(7);
+public class MaximumDemo {
+    public static void main(String[] args) {
+        List<Integer> notes = new ArrayList<>();
+        notes.add(12);
+        notes.add(18);
+        notes.add(7);
 
-Integer meilleureNote = Extremes.maximum(notes);
-System.out.println(meilleureNote);   // 18
+        Integer meilleureNote = Extremes.maximum(notes);
+        System.out.println(meilleureNote);   // 18
+    }
+}
 ```
 
 Retenez pour l'instant que la borne est la porte d'entrée vers les méthodes d'une interface ; vous verrez l'utilisation concrète de `Comparable` dans le prochain chapitre.
@@ -220,25 +240,31 @@ Les wildcards (caractère joker `?`) apparaissent dans les **types déclarés**,
 ### Exemple
 
 ```java
-import java.util.ArrayList;
 import java.util.List;
 
-// Additionne tous les entiers d'une liste, y compris List<Integer> ou List<Number>.
-// ? extends Number = on lit des Number depuis la liste.
-public static double somme(List<? extends Number> nombres) {
-    double total = 0;
-    for (Number n : nombres) {
-        total += n.doubleValue();   // doubleValue() disponible sur Number
+public class Calculs {
+
+    // Additionne tous les entiers d'une liste, y compris List<Integer> ou List<Number>.
+    // ? extends Number = on lit des Number depuis la liste.
+    public static double somme(List<? extends Number> nombres) {
+        double total = 0;
+        for (Number n : nombres) {
+            total += n.doubleValue();   // doubleValue() disponible sur Number
+        }
+        return total;
     }
-    return total;
 }
 ```
 
 ```java
 import java.util.List;
 
-System.out.println(somme(List.of(3, 7)));       // 10.0 — List<Integer> acceptée
-System.out.println(somme(List.of(1.5, 2.5)));   // 4.0  — List<Double> acceptée
+public class SommeDemo {
+    public static void main(String[] args) {
+        System.out.println(Calculs.somme(List.of(3, 7)));       // 10.0 — List<Integer> acceptée
+        System.out.println(Calculs.somme(List.of(1.5, 2.5)));   // 4.0  — List<Double> acceptée
+    }
+}
 ```
 
 Voyez `? extends T` dans une signature JDK → la méthode lit depuis la collection sans y écrire. Voyez `? super T` → la méthode y écrit des `T`.
@@ -260,7 +286,7 @@ Conséquences pratiques :
 - On **ne peut pas** écrire `if (objet instanceof T)` : même raison.
 - Deux variables `List<String>` et `List<Integer>` partagent la **même classe** à l'exécution (`java.util.ArrayList`).
 
-```java
+```java compile
 import java.util.ArrayList;
 import java.util.List;
 

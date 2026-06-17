@@ -94,7 +94,60 @@ public class ListeDeCoursesDemo {
 > | `size()` | Nombre d'éléments |
 > | `isEmpty()` | `true` si la liste ne contient rien |
 
-## 3. Parcourir une liste
+## 3. Attention : `List.of(...)` renvoie une liste IMMUABLE
+
+Pour créer rapidement une liste avec des valeurs, on utilise souvent `List.of(...)`. Très pratique — mais avec un piège majeur : la liste renvoyée est **immuable** (non modifiable). Tout appel à `add`, `remove` ou `set` lève une `UnsupportedOperationException` à l'exécution.
+
+### Exemple
+
+```java
+import java.util.List;
+
+public class PiegeImmuable {
+    public static void main(String[] args) {
+        List<String> couleurs = List.of("rouge", "vert", "bleu");
+
+        System.out.println(couleurs.get(0));   // "rouge" — la lecture fonctionne
+        System.out.println(couleurs.size());    // 3 — la lecture fonctionne
+
+        couleurs.add("jaune");   // UnsupportedOperationException à l'EXÉCUTION !
+    }
+}
+```
+
+Le code **compile** sans erreur : `add` existe bien dans l'interface `List`. Le problème n'apparaît qu'à l'exécution, ce qui rend le piège sournois — d'autant plus qu'on reçoit fréquemment une `List.of(...)` en paramètre d'une méthode sans savoir qu'elle est immuable.
+
+### La solution : envelopper dans une `ArrayList`
+
+Si vous avez besoin de modifier le contenu, copiez la liste immuable dans une `ArrayList` modifiable :
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class SolutionMutable {
+    public static void main(String[] args) {
+        List<String> source = List.of("rouge", "vert", "bleu");
+
+        // Copie modifiable de la liste immuable
+        var couleurs = new ArrayList<>(source);
+
+        couleurs.add("jaune");      // OK : ArrayList est modifiable
+        couleurs.remove("vert");    // OK
+        System.out.println(couleurs);   // [rouge, bleu, jaune]
+    }
+}
+```
+
+`new ArrayList<>(autreListe)` crée une **nouvelle** `ArrayList` contenant les mêmes éléments. La liste d'origine reste intacte ; la copie, elle, accepte `add`/`remove`/`set`.
+
+### À retenir
+
+> - `List.of(...)` renvoie une liste **immuable** : `add`, `remove` et `set` lèvent une `UnsupportedOperationException`.
+> - Le code compile quand même : l'erreur n'apparaît qu'à l'exécution.
+> - Pour obtenir une liste modifiable, copiez : `new ArrayList<>(List.of(...))`.
+
+## 4. Parcourir une liste
 
 Il existe deux façons de parcourir une `List` : le **for indexé** (quand l'indice est utile) et le **for-each** (quand on veut juste chaque élément).
 
@@ -136,7 +189,7 @@ public class ParcoursDemo {
 > - **For-each** : `for (String element : liste)` — plus court, plus lisible.
 > - Ne modifiez pas la taille de la liste (ajout ou suppression) pendant un for-each : le programme échoue avec une `ConcurrentModificationException`. Utilisez le for indexé en sens inverse ou une liste séparée pour les suppressions.
 
-## 4. Rechercher dans une liste
+## 5. Rechercher dans une liste
 
 `contains` et `indexOf` évitent d'écrire une boucle de recherche à la main.
 
@@ -170,7 +223,7 @@ public class RechercheDemo {
 > - `indexOf(objet)` : renvoie l'indice de la première occurrence, ou `-1` si absent.
 > - Ces méthodes utilisent `equals` pour comparer : elles fonctionnent correctement avec des `String` et des types qui redéfinissent `equals`.
 
-## 5. `ArrayList` vs `LinkedList` : quand choisir ?
+## 6. `ArrayList` vs `LinkedList` : quand choisir ?
 
 Le JDK fournit plusieurs implémentations de `List`. Les deux plus courantes sont :
 
@@ -214,6 +267,8 @@ public class ChoixImplDemo {
 - **Modifier la taille pendant un for-each** : supprimer ou ajouter un élément dans la liste qu'on parcourt avec `for (String s : liste)` déclenche une `ConcurrentModificationException`. Correction : parcourez par indice à rebours (`for (int i = liste.size() - 1; i >= 0; i--)`) ou collectez les éléments à supprimer dans une seconde liste, puis appelez `liste.removeAll(aSupprimer)`.
 
 - **Confondre `remove(int)` et `remove(Object)`** : `liste.remove(1)` supprime l'élément à l'indice 1 ; `liste.remove("lait")` supprime la valeur `"lait"`. Avec une `List<Integer>`, passez `Integer.valueOf(n)` pour supprimer par valeur et éviter toute ambiguïté.
+
+- **Modifier une liste issue de `List.of(...)`** : `List.of(...)` renvoie une liste immuable. Appeler `add`, `remove` ou `set` dessus lève une `UnsupportedOperationException` à l'exécution (le code compile pourtant). Correction : créez une copie modifiable avec `new ArrayList<>(List.of(...))`.
 
 ## Exercice guidé
 
@@ -285,6 +340,7 @@ public class ListeDeCourses {
 - Pourquoi déclare-t-on `List<String> liste = new ArrayList<>()` plutôt que `ArrayList<String> liste = new ArrayList<>()` ?
 - Que renvoie `indexOf` lorsque l'élément recherché est absent ? Comment l'utiliseriez-vous pour éviter une erreur ?
 - Quelle erreur se produit si l'on supprime des éléments pendant un for-each, et comment la contourner ?
+- Que se passe-t-il si l'on appelle `add` sur une liste renvoyée par `List.of(...)`, et comment obtenir une liste modifiable ?
 - Dans quel cas préféreriez-vous `LinkedList` à `ArrayList` ?
 
 ## Pour aller plus loin

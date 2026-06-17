@@ -280,7 +280,7 @@ Le Père Goriot (1835)
 <details>
 <summary>Solution (à n'ouvrir qu'après avoir essayé)</summary>
 
-```java
+```java compile
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;

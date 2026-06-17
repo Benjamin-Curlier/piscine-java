@@ -226,23 +226,27 @@ public class Couleur {
 > - `equals` et `hashCode` vont **toujours ensemble** : redéfinir l'un sans l'autre est une erreur.
 > - Utilisez `Objects.hash(champ1, champ2, …)` avec les **mêmes champs** que dans `equals`.
 
-## 6. Le contrat `equals`/`hashCode` expliqué simplement
+## 6. Le contrat `equals`/`hashCode` au complet
 
-Java impose un contrat entre ces deux méthodes. En pratique, retenez trois règles :
+Java impose un **contrat** précis à `equals`. Pour des objets non `null` `x`, `y` et `z`, votre `equals` doit respecter les cinq clauses suivantes :
 
-1. **Réflexivité** : un objet est toujours égal à lui-même (`a.equals(a)` vaut `true`).
-2. **Symétrie** : si `a.equals(b)` vaut `true`, alors `b.equals(a)` doit aussi valoir `true`.
-3. **Cohérence `equals`/`hashCode`** : si `a.equals(b)` vaut `true`, alors `a.hashCode() == b.hashCode()` doit être vrai.
+1. **Réflexivité** : un objet est toujours égal à lui-même — `x.equals(x)` vaut `true`.
+2. **Symétrie** : si `x.equals(y)` vaut `true`, alors `y.equals(x)` doit aussi valoir `true` (et inversement).
+3. **Transitivité** : si `x.equals(y)` vaut `true` et `y.equals(z)` vaut `true`, alors `x.equals(z)` doit valoir `true`.
+4. **Consistance** : appeler `x.equals(y)` plusieurs fois doit toujours renvoyer le même résultat, tant que les objets ne sont pas modifiés.
+5. **Non-nullité** : `x.equals(null)` doit toujours valoir `false` (jamais une `NullPointerException`).
 
-La règle 3 est **indispensable** pour que `HashSet` fonctionne correctement. La règle 2 est facile à casser par inadvertance (par exemple, si `equals` traite différemment `A.equals(B)` et `B.equals(A)`).
+À ces cinq clauses s'ajoute la **règle de cohérence `equals`/`hashCode`** : si `x.equals(y)` vaut `true`, alors `x.hashCode() == y.hashCode()` **doit** être vrai. Autrement dit, deux objets égaux ont obligatoirement le même code de hachage.
 
-> **Note** : la réciproque de la règle 3 est fausse — deux `hashCode` égaux n'impliquent pas que les objets sont égaux (c'est une collision, phénomène normal). C'est pourquoi `HashSet` vérifie aussi `equals` après avoir trouvé une case.
+Le modèle en quatre étapes de la section 4 respecte automatiquement ces clauses : le test `this == autre` assure la réflexivité, le test `autre == null` assure la non-nullité, la vérification de type plus la comparaison champ par champ assurent symétrie et transitivité, et la consistance découle du fait qu'on ne compare que des champs `final`.
+
+> **Note** : la réciproque de la règle de cohérence est fausse — deux `hashCode` égaux n'impliquent pas que les objets soient égaux (c'est une **collision**, phénomène normal). C'est pourquoi `HashSet` vérifie aussi `equals` après avoir trouvé une case.
 
 ### À retenir
 
-> - `equals` doit être symétrique : si `a.equals(b)`, alors `b.equals(a)`.
-> - Si deux objets sont égaux (`equals`), ils **doivent** avoir le même `hashCode`.
-> - La réciproque est fausse : même `hashCode` ne garantit pas l'égalité.
+> - Le contrat `equals` a cinq clauses : **réflexivité**, **symétrie**, **transitivité**, **consistance** et **non-nullité** (`x.equals(null)` est toujours `false`).
+> - Cohérence `equals`/`hashCode` : si deux objets sont égaux (`equals`), ils **doivent** avoir le même `hashCode`.
+> - La réciproque est fausse : un même `hashCode` ne garantit pas l'égalité.
 
 ## 7. La conséquence concrète : doublons dans un `HashSet`
 
