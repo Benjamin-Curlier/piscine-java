@@ -21,30 +21,30 @@ Verification: `JAVA_HOME` = `bundle/piscine-etnc-stagiaire/jdk` (JDK 25.0.3). Ex
 ## PR-1 — Critical fixes (ship-blockers + correctness + gamification)
 
 ### P0 — UX ship-blockers & stale docs
-- [ ] `courses/docs/lancer-la-piscine.md` — replace retired `piscine.bat`/ZIP flow with the jpackage
-      installer flow (mirror `docs/piscine-stagiaire.md`).
-- [ ] `docs/piscine-stagiaire.md` §7 — "arrêt au premier échec" → grade-whole-subgroup behaviour.
-- [ ] `README.md` — drop stale "bundle standalone" / ZIP references; point at the installer.
-- [ ] `courses/docs/intro.md` — link the 5-min `demarrage-rapide.md` quickstart.
-- [ ] Moulinette REPL banner (`Repl.java`) — advertise `submit` on first contact.
+- [x] `courses/docs/lancer-la-piscine.md` — replaced retired `piscine.bat`/ZIP flow with the jpackage
+      installer flow (mirrors `docs/piscine-stagiaire.md`).
+- [x] `docs/piscine-stagiaire.md` §6/§7 — "arrêt au premier échec" → grade-whole-subgroup; added the
+      one-shot `submit`/`profil` commands the doc omitted.
+- [x] `README.md` — dropped stale "bundle standalone" terminology; added module 7 + capstone games.
+- [x] `courses/docs/intro.md` — links the 5-min `demarrage-rapide.md` quickstart; notes bonus module + games.
+- [x] Moulinette REPL banner (`Repl.java`) — advertises `submit` + `profil` on first contact.
 
 ### P1 — Lesson correctness / compile bugs
-- [ ] `1-1` — fix false "signature figée" claim (ties to hybrid policy).
-- [ ] `1-3-operateurs.md` — `%` works on `double`; reframe as a rounding caveat.
-- [ ] `2-3-chaines-de-caracteres.md` — `==` demo uses interned literals (returns `true`); use a
-      runtime-built string so the lesson holds.
-- [ ] `4-5-generiques.md` — snippet uses `T` with no enclosing generic scope; won't compile.
-- [ ] `6-7-git-branches-collaboration.md` — conflict-marker side mislabeled "version fusionnée".
-- [ ] `7-1-concurrence.md` — "records immuables" oversimplification (mutable component ≠ thread-safe).
-- [ ] `4-8-streams-optional.md` — add `parallelStream()` caveat (expert-only).
-- [ ] Wrap the ~15 bare top-level snippets in `4-4`/`4-5`/`4-7` in class/`main` so they compile.
+- [ ] `1-1` — fix false "signature figée" claim. **→ folded into PR-2 hybrid entry-point rewrite (same section).**
+- [x] `1-3-operateurs.md` — `%` works on `double`; reframed as a rounding caveat.
+- [x] `2-3-chaines-de-caracteres.md` — `==` demo now uses a runtime-built string so it returns `false`.
+- [x] `4-5-generiques.md` — snippet wrapped in `class Pile<T>` so `T` is in scope and it compiles.
+- [x] `6-7-git-branches-collaboration.md` — conflict-marker side correctly labeled (incoming branch).
+- [x] `7-1-concurrence.md` — `record` immutability qualified (mutable component ≠ thread-safe).
+- [x] `4-8-streams-optional.md` — added `parallelStream()` caveat (expert-only).
+- [ ] Wrap the bare top-level snippets in `4-4`/`4-5`/`4-7`. **→ folded into PR-2 module-4 modernization (same files).**
 
 ### P1 — Gamification surfacing
-- [ ] Compute gamification before/after applying progress in the submit flow; append
-      `+XP · Niveau N ! · 🏅 Nouveau badge : …` to `SubmissionTrigger.formatReport`.
-- [ ] Surface XP bar + badges in the GUI dashboard (`GuiServer` `/api/progress` + `dashboard.js`).
-- [ ] Nudge `profil` from REPL help/banner.
-- [ ] Unit tests for the new submit-output summary and the badge-diff logic.
+- [x] Compute gamification before/after the run in `SubmissionTrigger`; append
+      `🎮 +XP · Niveau N ! · 🏅 Nouveau badge : …` to the submit output.
+- [x] Surface XP bar + badges in the GUI dashboard (new `/api/profil` + `dashboard.js`/`style.css`).
+- [x] Nudge `profil` from the REPL banner.
+- [x] Unit tests for `resumeGamification` (XP, level-up, badge diff) — `:console:test` green.
 
 ---
 
