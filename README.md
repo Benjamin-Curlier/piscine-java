@@ -109,7 +109,7 @@ Formateur ? Voir **[`CONTRIBUTING.md`](CONTRIBUTING.md)** : workflow Git, checkl
 
 ## Statut
 
-**Version 0.7.0** — contenu pédagogique complet (6 modules + bonus : 66 exercices + 3 projets binôme + 2 jeux capstone), moulinette évaluante, installeur hors-ligne. Voir [`CHANGELOG.md`](CHANGELOG.md) pour le détail des versions, [`docs/backlog.md`](docs/backlog.md) pour la suite (Phase 4 — déploiement à grande échelle), et [`docs/referentiel.md`](docs/referentiel.md) pour le plan pédagogique complet.
+**Version 1.0.0-rc.1** *(release candidate)* — contenu pédagogique complet (6 modules + bonus : 66 exercices + 3 projets binôme + 2 jeux capstone), moulinette évaluante avec gamification, installeur hors-ligne, exemples de cours vérifiés à la compilation en CI. Voir [`CHANGELOG.md`](CHANGELOG.md) pour le détail des versions, [`docs/backlog.md`](docs/backlog.md) pour la suite (Phase 4 — déploiement à grande échelle), et [`docs/referentiel.md`](docs/referentiel.md) pour le plan pédagogique complet.
 
 ## Licence
 
