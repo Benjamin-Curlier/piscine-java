@@ -76,7 +76,7 @@ Les remarques de moindre importance (formulation, détail de style) sont des *su
 
 ## 7. Produire les installeurs
 
-Depuis la **v1**, la distribution stagiaire est un **installeur jpackage** (plus de ZIP). Voir
+Depuis la **0.7.0**, la distribution stagiaire est un **installeur jpackage** (plus de ZIP). Voir
 [`docs/deploiement-instructeur.md`](docs/deploiement-instructeur.md) pour le détail (CI Release
 sur tag `v*`, ou build local `moulinette/gradlew -p moulinette :gui:jpackageApp`).
 

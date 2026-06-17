@@ -1,7 +1,7 @@
 # Référentiel pédagogique — Piscine Java
 
 > Document de référence décrivant la progression complète des cours, exercices et projets de la Piscine Java.
-> **Statut** : v0.1 — squelette initial. Les intitulés peuvent évoluer après revue pédagogique.
+> **Statut** : référentiel livré (0.7.0) — 6 modules, 45 chapitres, 65 exercices et 3 projets binôme.
 
 ## 1. Objectifs
 
@@ -206,8 +206,8 @@ Aucun module ne peut être abordé sans avoir validé le précédent. À l'inté
 ## 7. Conventions
 
 - **Langue** : tout le contenu pédagogique (cours, sujets, corrections, messages de la moulinette) est rédigé en **français**. Le code Java suit les conventions standard (identifiants en anglais, sauf vocabulaire métier où le français est plus clair pour des débutants).
-- **Format d'un exercice** : voir [`docs/format-exercice.md`](format-exercice.md) (à venir).
-- **Charte de rédaction** : voir [`docs/charte-redaction.md`](charte-redaction.md) (à venir).
+- **Format d'un exercice** : voir [`docs/format-exercice.md`](format-exercice.md).
+- **Charte de rédaction** : voir [`docs/charte-redaction.md`](charte-redaction.md).
 - **Stack technique** : voir [README.md](../README.md).
 
 ---

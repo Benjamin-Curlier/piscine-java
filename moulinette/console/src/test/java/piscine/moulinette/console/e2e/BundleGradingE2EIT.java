@@ -40,7 +40,7 @@ class BundleGradingE2EIT {
 
     @Test
     void module4_collection_solution_passe_publics_et_prives(@TempDir Path tmp) throws IOException {
-        CheckerContext ctx = renduAvecCodeSolution(tmp, "module-4-collections-generiques-lambdas/4.1.1-annuaire-militaire");
+        CheckerContext ctx = renduAvecCodeSolution(tmp, "module-4-collections-generiques-lambdas/4.1.1-annuaire-membre");
         assertThat(new PublicTestChecker(tk).check(ctx).status()).isEqualTo(CheckResult.Status.OK);
         assertThat(new PrivateTestChecker(tk).check(ctx).status()).isEqualTo(CheckResult.Status.OK);
     }

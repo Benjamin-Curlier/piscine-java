@@ -44,7 +44,7 @@ Dans les deux modes, la boucle pédagogique est identique : on édite un exercic
 
 ## Architecture technique
 
-**En place (RC) :**
+**En place :**
 - **Java 25 LTS** (OpenJDK Temurin) — moulinette **multi-module Gradle** (les exercices restent des projets Maven côté stagiaire).
 - **JUnit 5** + **AssertJ** pour les tests ; notation hors-ligne via **`javac` + JUnit ConsoleLauncher** (zéro outil de build/réseau à l'exécution, mode standalone).
 - **Checkstyle** pour le style (en mode *advisory* / non bloquant pour la beta).
@@ -56,7 +56,7 @@ Dans les deux modes, la boucle pédagogique est identique : on édite un exercic
 - **PMD / SpotBugs** en complément de Checkstyle, **JaCoCo** côté moulinette.
 - **Anti-triche** (JPlag, #29).
 
-> Depuis la **v1**, la piscine est **100 % locale et auto-rythmée** : pas de forge distante
+> Depuis la **0.7.0**, la piscine est **100 % locale et auto-rythmée** : pas de forge distante
 > ni de notation externe — le stagiaire avance à son rythme, la moulinette locale est l'arbitre.
 
 > JaCoCo est aujourd'hui utilisé **côté projet binôme #3** (couverture ≥ 70 %), pas dans la moulinette elle-même.
@@ -79,7 +79,7 @@ Formateur ? Voir **[`CONTRIBUTING.md`](CONTRIBUTING.md)** : workflow Git, checkl
 
 ## Statut
 
-**Release Candidate** — contenu pédagogique complet (6 modules : 65 exercices + 3 projets binôme), moulinette évaluante, mode standalone hors-ligne. Voir [`CHANGELOG.md`](CHANGELOG.md) pour le détail de la version et les *known issues*, [`docs/backlog.md`](docs/backlog.md) pour la suite (Phase 4 — déploiement à grande échelle), et [`docs/referentiel.md`](docs/referentiel.md) pour le plan pédagogique complet.
+**Version 0.7.0** — contenu pédagogique complet (6 modules : 65 exercices + 3 projets binôme), moulinette évaluante, mode standalone hors-ligne. Voir [`CHANGELOG.md`](CHANGELOG.md) pour le détail des versions, [`docs/backlog.md`](docs/backlog.md) pour la suite (Phase 4 — déploiement à grande échelle), et [`docs/referentiel.md`](docs/referentiel.md) pour le plan pédagogique complet.
 
 ## Licence
 

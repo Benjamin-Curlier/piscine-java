@@ -5,12 +5,12 @@
                              https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>piscine.m3</groupId>
-    <artifactId>soldat-solution</artifactId>
+    <groupId>piscine.m4</groupId>
+    <artifactId>file-de-taches-solution</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>Membre (solution de reference)</name>
+    <name>File de taches (solution de reference)</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
