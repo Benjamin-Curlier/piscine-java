@@ -25,7 +25,7 @@ vérité.** Chaque itération :
 - [x] **D1** chapitre Maven/Gradle — `module-1-fondamentaux/1-9-comprendre-le-pom-maven.md`
 - [x] **D2** points fins — `java.time` ajouté (`module-5/5-8`) ; enums (`3-9`) & Optional (`4-8`) **déjà couverts** (ma critique était inexacte sur ce point → à refléter en D5)
 - [x] **D3** (stretch) Concurrence — chapitre découverte `module-7-pour-aller-plus-loin/7-1-concurrence.md` (allégé, cohérent avec D5)
-- [ ] **D4** (stretch) Module 8 Persistance
+- [x] **D4** (stretch) Persistance — chapitre découverte `module-7-pour-aller-plus-loin/7-2-persistance.md` (fichiers→SQL→JDBC/SQLite→JPA)
 - [x] **D5** périmètre honnête README + « la suite » — section « Périmètre & la suite » (fondamentaux ≠ bootcamp ; pointeur Spring/SQL/REST)
 
 ## Journal
@@ -137,3 +137,10 @@ vérité.** Chaque itération :
   partagé / race condition, outils `java.util.concurrent`). Chapitre **d'aperçu, sans exercice**,
   cohérent avec le périmètre honnête (D5) : « voici un avant-goût, à approfondir ensuite ». Builde.
 - **Prochaine itération : D4** (chapitre découverte Persistance — `7-2-persistance.md`), puis fin de boucle.
+
+### Itération 15 — 2026-06-16 ✓  — 🏁 BOUCLE TERMINÉE
+- **D4 livré (stretch)** : chapitre **`module-7-pour-aller-plus-loin/7-2-persistance.md`** (découverte :
+  mémoire volatile → fichiers → base relationnelle + SQL (CRUD) → JDBC/SQLite (avec garde anti-injection
+  par `PreparedStatement`) → ORM JPA/Hibernate). Builde.
+- **🏁 Toute la roadmap est faite** : épics A (A1,A2), B (B1,B2,B3), C (C1,C2,C3), D (D1,D2,D3,D4,D5).
+  Tout est sur **PR #68** (v1 → main). Boucle arrêtée. Reste à la main de l'utilisateur : **revue + merge** de la PR.
