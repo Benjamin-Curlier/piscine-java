@@ -13,6 +13,7 @@ public final class CommandRegistry {
     public static CommandRegistry defaults(SubmissionTrigger trigger) {
         var r = new CommandRegistry();
         r.register(new SubmitCommand(trigger)); // rendu en une commande (recommandé débutant)
+        r.register(new ProfilCommand());        // XP / niveau / badges (gamification)
         r.register(new AddCommand());
         r.register(new CommitCommand());
         r.register(new PushCommand(trigger));

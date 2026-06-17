@@ -19,7 +19,7 @@ vérité.** Chaque itération :
 - [x] **B1** commande `submit` (git masqué) — `SubmitCommand` (checkout+add+commit+push en une commande)
 - [x] **B2** Module 0 / Quickstart — `courses/docs/demarrage-rapide.md` + `lancer-la-piscine.md` modernisé
 - [x] **B3** noter tout le sous-groupe (rapport complet ; progression séquentielle préservée)
-- [ ] **C1** gamification — **moteur ✓** (`console/gamification/Gamification`, testé) ; reste : câblage commande `profil` + tableau de bord
+- [x] **C1** gamification — moteur (`console/gamification/`) + commande REPL **`profil`** (XP/niveau/barre/badges visibles, testés). [carte tableau de bord web = polish optionnel]
 - [x] **C2** jeu capstone Snake (cœur noté vert + rendu jouable Swing) — `exercises/projets-jeux/jeu-1-snake/`
 - [ ] **C3** (stretch) 2e jeu
 - [ ] **D1** chapitre Maven/Gradle
@@ -91,3 +91,11 @@ vérité.** Chaque itération :
   6 tests `GamificationTest` verts (`:console:test`).
 - **Prochaine itération : C1 partie 2** — câbler : commande REPL `profil` (lit `progress.json` +
   catalogue → affiche XP/niveau/badges) et exposer le profil au tableau de bord GUI.
+
+### Itération 9 — 2026-06-16 ✓
+- **C1 complété** : commande REPL **`profil`** (`ProfilCommand`) + `AdaptateurCatalogue` (catalogue
+  + difficulté lue du metadata → `List<Exo>`). `profil` lit `progress.json`, calcule le `Profil`
+  (XP, niveau+titre, barre 20 segments, badges) et l'affiche. Enregistrée dans `CommandRegistry`
+  (2e, après `submit`). 2 tests `ProfilCommandTest` (profil garni + vierge) ; `:console:test` vert.
+  **Épic C cœur fait** (C1 gamification + C2 Snake). Carte web du tableau de bord = polish optionnel.
+- **Prochaine itération : D1** (chapitre Maven/Gradle — outils de build, déjà imposés au jour 1).
