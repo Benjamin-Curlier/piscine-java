@@ -6,6 +6,25 @@
 
   const STATUS_ICON = { done: "✓", current: "●", locked: "🔒" };
 
+  async function loadProfil() {
+    const r = await fetch("/api/profil");
+    const p = await r.json();
+    const root = document.getElementById("profil");
+    const rempli = Math.round(p.pct / 5);
+    const barre = "█".repeat(rempli) + "·".repeat(20 - rempli);
+    const reste = p.xpProchain >= 0 ? (p.xpProchain - p.xp) + " XP avant le niveau suivant" : "niveau max atteint";
+    const badges = p.badges.length === 0
+      ? '<span class="muted">Aucun badge — valide ton premier exercice pour décrocher « Premier sang » !</span>'
+      : p.badges.map((b) => '<span class="badge" title="' + b.description + '">🏅 ' + b.nom + "</span>").join("");
+    root.innerHTML =
+      '<div class="profil-tete">' +
+        '<span class="profil-niveau">★ Niveau ' + p.niveau + " — " + p.titre + "</span>" +
+        '<span class="profil-xp">' + p.xp + " XP · " + reste + "</span>" +
+      "</div>" +
+      '<div class="profil-barre"><span class="profil-jauge">' + barre + "</span> " + p.pct + "% des exercices validés</div>" +
+      '<div class="profil-badges">' + badges + "</div>";
+  }
+
   async function loadProgress() {
     const r = await fetch("/api/progress");
     const data = await r.json();
@@ -74,6 +93,7 @@
   }
 
   function refresh() {
+    loadProfil().catch(() => {});
     loadProgress().catch(() => {});
     loadReports().catch(() => {});
   }

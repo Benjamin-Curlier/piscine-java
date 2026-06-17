@@ -136,3 +136,36 @@ h2 { font-size: 1rem; margin: 1.2rem 0 0.5rem; }
   border-radius: 6px;
   overflow: auto;
 }
+
+/* Bandeau de gamification (XP, niveau, badges) en tête du tableau de bord */
+.profil {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  margin-bottom: 1rem;
+}
+.profil:empty { display: none; }
+.profil-tete {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.profil-niveau { color: var(--accent); font-weight: 600; }
+.profil-xp { color: var(--muted); }
+.profil-barre { margin-top: 0.3rem; color: var(--muted); }
+.profil-jauge { color: var(--ok); letter-spacing: 1px; }
+.profil-badges {
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+.profil-badges .badge {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.15rem 0.6rem;
+  font-size: 0.85rem;
+}
