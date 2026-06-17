@@ -4,6 +4,10 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 import piscine.moulinette.console.ConsoleSession;
 import piscine.moulinette.console.commands.CommandResult;
+import piscine.moulinette.console.gamification.AdaptateurCatalogue;
+import piscine.moulinette.console.gamification.Badge;
+import piscine.moulinette.console.gamification.Gamification;
+import piscine.moulinette.console.gamification.Profil;
 import piscine.moulinette.console.trigger.MoulinetteRunner;
 import piscine.moulinette.console.workspace.ExerciseEntry;
 import piscine.moulinette.console.workspace.SousGroupe;
@@ -63,6 +67,7 @@ public final class GuiServer {
             s.createContext("/", gui::handleStatic);
             s.createContext("/api/terminal", gui::handleTerminal);
             s.createContext("/api/state", gui::handleState);
+            s.createContext("/api/profil", gui::handleProfil);
             s.createContext("/api/progress", gui::handleProgress);
             s.createContext("/api/reports", gui::handleReports);
             s.createContext("/api/report", gui::handleReport);
@@ -112,6 +117,34 @@ public final class GuiServer {
                 + "\",\"repoRoot\":\"" + Json.escape(session.repoRoot().toString())
                 + "\",\"coursesUrl\":" + (coursesUrl == null ? "null" : "\"" + Json.escape(coursesUrl) + "\"")
                 + "}");
+    }
+
+    /** Profil de jeu (XP, niveau, progression, badges) calculé à partir de progress.json. */
+    private void handleProfil(HttpExchange ex) throws IOException {
+        if (session.catalog() == null) {
+            respond(ex, 200, "application/json",
+                "{\"xp\":0,\"niveau\":1,\"titre\":\"Débutant\",\"xpProchain\":100,\"pct\":0,\"badges\":[]}");
+            return;
+        }
+        Set<String> valides = MoulinetteRunner.Default.lireProgression(
+            session.repoRoot().resolve(".piscine/progress.json"));
+        Profil p = Gamification.evaluer(valides, AdaptateurCatalogue.exos(session.catalog()));
+        StringBuilder sb = new StringBuilder("{");
+        sb.append("\"xp\":").append(p.xp())
+          .append(",\"niveau\":").append(p.niveau())
+          .append(",\"titre\":\"").append(Json.escape(p.titre())).append('"')
+          .append(",\"xpProchain\":").append(p.xpProchainNiveau())
+          .append(",\"pct\":").append(p.progressionPourcent())
+          .append(",\"badges\":[");
+        boolean first = true;
+        for (Badge b : p.badges()) {
+            if (!first) sb.append(',');
+            first = false;
+            sb.append("{\"nom\":\"").append(Json.escape(b.nom()))
+              .append("\",\"description\":\"").append(Json.escape(b.description())).append("\"}");
+        }
+        sb.append("]}");
+        respond(ex, 200, "application/json", sb.toString());
     }
 
     /**

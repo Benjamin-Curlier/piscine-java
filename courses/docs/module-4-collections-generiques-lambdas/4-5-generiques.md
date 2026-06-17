@@ -261,15 +261,17 @@ Conséquences pratiques :
 - Deux variables `List<String>` et `List<Integer>` partagent la **même classe** à l'exécution (`java.util.ArrayList`).
 
 ```java
-// INTERDIT — ne compile pas.
-// T est effacé : à l'exécution, la JVM ne sait pas quel tableau créer.
-// T[] tableau = new T[10];
-
-// Solution habituelle : utiliser une List<T> à la place du tableau.
 import java.util.ArrayList;
 import java.util.List;
 
-List<T> elements = new ArrayList<>();   // Correct : ArrayList gère l'effacement en interne
+public class Pile<T> {           // T est ici un paramètre de la classe → utilisable dans le corps
+
+    // INTERDIT — ne compile pas : T est effacé, la JVM ne sait pas quel tableau créer.
+    // private T[] elements = new T[10];
+
+    // Solution habituelle : une List<T> à la place du tableau.
+    private final List<T> elements = new ArrayList<>();   // OK : ArrayList gère l'effacement en interne
+}
 ```
 
 ### À retenir

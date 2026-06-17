@@ -14,7 +14,9 @@ public final class Repl {
     }
 
     public void run() throws IOException {
-        io.write("Piscine Java — console locale. Tape `help` pour la liste, `exit` pour quitter.\n");
+        io.write("Piscine Java — console locale.\n");
+        io.write("  • `submit <sous-groupe>` (ex. `submit 1.1`) pour rendre un exercice et lancer la moulinette\n");
+        io.write("  • `profil` pour voir ton XP, ton niveau et tes badges · `help` pour tout · `exit` pour quitter\n");
         while (true) {
             io.write("piscine[" + session.currentBranch() + "]> ");
             String line = io.readLine();
