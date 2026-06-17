@@ -18,6 +18,8 @@ Avec le cycle de base, vous savez enregistrer l'historique d'un projet, seul, en
 - **Fusionner** une branche dans une autre avec `git merge`.
 - **Situer** le `rebase` et savoir quand l'éviter.
 - **Résoudre** un conflit de fusion en lisant et en corrigeant les marqueurs.
+- **Récupérer** le travail d'un collègue avec `git fetch` et `git pull`.
+- **Abandonner** une fusion en conflit avec `git merge --abort`, et **annuler** des changements locaux avec `git restore` / `git reset`.
 
 ## 1. Pourquoi des branches
 
@@ -120,6 +122,61 @@ git commit            # conclut la fusion
 > - `rebase` rejoue vos commits pour un historique linéaire — puissant mais délicat.
 > - **Ne rebasez jamais du code déjà partagé.** En cas de doute, utilisez `merge`.
 
+## 5. Récupérer le travail des autres : fetch et pull
+
+Jusqu'ici vous savez **envoyer** votre travail. Mais quand un collègue pousse le sien sur le dépôt distant, comment le **récupérer** ? Deux commandes :
+
+- **`git fetch`** télécharge les nouveautés du distant **sans rien changer** à vos fichiers. Votre branche locale n'avance pas ; vous récupérez juste de quoi voir ce qui a changé (par exemple via `git log origin/main`). C'est l'option prudente : on regarde avant d'intégrer.
+- **`git pull`** fait `fetch` **puis** `merge` dans la foulée : il télécharge les nouveautés **et** les fusionne dans votre branche courante. C'est le raccourci du quotidien quand on veut simplement se mettre à jour.
+
+```bash
+git fetch                 # télécharge, sans toucher à votre travail
+git switch main
+git pull                  # = fetch + merge : met main à jour avec le distant
+```
+
+Comme `git pull` enchaîne un `merge`, il peut déclencher un **conflit** exactement comme à la section 4 — vous le résolvez de la même façon. Réflexe sain : `git pull` **avant** de commencer à travailler, pour partir de la dernière version et limiter les conflits.
+
+### À retenir
+
+> - `git fetch` télécharge les nouveautés du distant **sans** modifier vos fichiers.
+> - `git pull` = `git fetch` + `git merge` : télécharge **et** fusionne dans la branche courante.
+> - Faites un `git pull` avant de vous lancer, pour partir à jour.
+
+## 6. Faire marche arrière : abort, restore, reset
+
+Tout est réparable en Git. Trois filets de sécurité à connaître.
+
+**Abandonner une fusion en conflit.** Un `merge` (ou un `pull`) a déclenché un conflit et vous préférez tout annuler pour repartir à zéro ? `git merge --abort` remet la branche **exactement dans l'état d'avant la fusion**, comme si vous n'aviez rien lancé.
+
+```bash
+git merge feature/titre   # ... CONFLIT, finalement on renonce
+git merge --abort         # retour à l'état d'avant le merge
+```
+
+**Annuler des modifications non commitées.** `git restore <fichier>` **jette** les changements d'un fichier dans le répertoire de travail et le ramène à sa dernière version commitée. Attention : ces changements sont **définitivement perdus** (ils n'étaient pas commités).
+
+```bash
+git restore README.md     # README.md revient à sa version commitée
+git restore .             # idem pour tous les fichiers (à manier avec prudence)
+```
+
+**Désindexer un fichier (sans perdre le travail).** Vous avez fait `git add` d'un fichier que vous ne vouliez pas inclure dans le prochain commit ? `git restore --staged <fichier>` (ou `git reset <fichier>`) le **retire de la zone d'index** tout en **gardant vos modifications** dans le fichier.
+
+```bash
+git add .
+git restore --staged secret.txt   # secret.txt sort de l'index, vos changements restent
+```
+
+`git reset` est une commande plus large (elle peut aussi déplacer la branche, annuler des commits). À ce stade, retenez surtout son usage le plus courant et inoffensif : **désindexer**. Réservez les variantes plus puissantes (`git reset --hard`, qui efface des changements) pour quand vous serez plus à l'aise — elles peuvent détruire du travail.
+
+### À retenir
+
+> - `git merge --abort` annule une fusion en conflit et restaure l'état d'avant.
+> - `git restore <fichier>` jette les modifications non commitées d'un fichier (**définitif**).
+> - `git restore --staged <fichier>` (ou `git reset <fichier>`) **désindexe** sans rien perdre.
+> - `git reset --hard` est puissant **et** destructeur : à éviter tant qu'on débute.
+
 ## Erreurs fréquentes
 
 - **Travailler directement sur `main`** : commiter ses expérimentations sur la branche de référence. Cause : on ne pense pas à créer une branche. Correction : créez une branche dédiée (`git switch -c feature/...`) ; `main` doit rester stable et fonctionnel.
@@ -127,6 +184,10 @@ git commit            # conclut la fusion
 - **Paniquer devant un conflit** : annuler tout, recopier les fichiers à la main. Cause : les marqueurs impressionnent. Correction : un conflit est local et réparable — lisez les marqueurs, choisissez, supprimez-les, `add` + `commit`. Rien n'est perdu.
 
 - **Rebaser une branche partagée** : faire `git rebase` sur une branche que des collègues utilisent déjà. Cause : on cherche un historique « propre ». Correction : réservez le `rebase` aux branches locales non partagées ; sinon, le `merge` est sans danger.
+
+- **Confondre `git restore` et `git restore --staged`** : croire que `git restore <fichier>` ne fait que désindexer, et perdre ainsi ses modifications. Cause : les deux se ressemblent. Correction : `git restore <fichier>` **jette** les changements du fichier (définitif) ; `git restore --staged <fichier>` se contente de **désindexer** sans rien perdre.
+
+- **Dégainer `git reset --hard` pour « tout nettoyer »** : l'utiliser sans comprendre qu'il efface les modifications non commitées. Cause : on cherche une commande magique de remise à zéro. Correction : tant qu'on débute, préférez `git restore` (pour un fichier) ou `git merge --abort` (pour une fusion) ; gardez `--hard` pour plus tard.
 
 ## Exercice guidé
 
@@ -214,6 +275,9 @@ Points à noter :
 - Sur quelle branche doit-on se trouver pour lancer `git merge` ?
 - Que signifient les marqueurs `<<<<<<<`, `=======` et `>>>>>>>` dans un fichier en conflit ?
 - Dans quel cas faut-il absolument éviter `git rebase` ?
+- Quelle est la différence entre `git fetch` et `git pull` ?
+- Comment abandonner une fusion qui a déclenché un conflit ?
+- Quelle commande désindexe un fichier sans perdre vos modifications ?
 
 ## Pour aller plus loin
 

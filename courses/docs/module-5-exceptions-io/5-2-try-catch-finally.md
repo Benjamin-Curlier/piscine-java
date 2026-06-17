@@ -130,10 +130,44 @@ Quelle que soit la valeur de `saisie`, le message `"Traitement terminé"` s'affi
 
 `catch` intercepte une exception. `finally` s'exécute toujours, qu'il y ait exception ou non. Vous pouvez écrire un `try` avec un `finally` mais sans aucun `catch` : le bloc de nettoyage s'exécute même si l'exception remonte à l'appelant.
 
+### Le piège du `return` (ou `throw`) dans `finally`
+
+Puisque `finally` s'exécute **toujours**, un `return` placé dedans s'exécute **après** le `return` du `try` — et il l'**écrase**. Pire : si le `try` lève une exception, un `return` dans le `finally` la fait **disparaître silencieusement**. L'appelant ne voit jamais l'erreur.
+
+```java
+// CONTRE-EXEMPLE — ne JAMAIS faire ça
+static int lireValeur(String saisie) {
+    try {
+        return Integer.parseInt(saisie); // lève NumberFormatException si saisie invalide
+    } finally {
+        return -1; // ❌ écrase le return du try ET avale toute exception
+    }
+}
+```
+
+Quoi qu'il arrive, cette méthode renvoie `-1` :
+
+- `lireValeur("42")` renvoie `-1` (et non `42`) — le `return 42` du `try` est écrasé.
+- `lireValeur("abc")` renvoie `-1` **sans jamais lever** la `NumberFormatException` : l'exception est avalée par le `return` du `finally`. Le bug devient invisible.
+
+La règle est simple : **ne jamais écrire `return` (ni `throw`) dans un bloc `finally`.** Réservez le `finally` au nettoyage (fermeture, journalisation), et laissez le `try` ou le `catch` décider de la valeur de retour.
+
+```java
+// CORRECT — finally ne fait que nettoyer
+static int lireValeur(String saisie) {
+    try {
+        return Integer.parseInt(saisie); // la valeur (ou l'exception) est préservée
+    } finally {
+        System.out.println("Tentative de lecture terminée."); // nettoyage seulement
+    }
+}
+```
+
 ### À retenir
 
 > - `finally` s'exécute **toujours**, même sur un `return` ou une exception non rattrapée.
 > - Il sert à libérer une ressource, fermer une connexion, ou garantir un nettoyage.
+> - **Ne jamais mettre `return` ni `throw` dans un `finally`** : cela écrase la valeur du `try` et **avale** toute exception en cours.
 > - Au chapitre 5-3, vous verrez `try-with-resources`, qui automatise cette fermeture sans `finally` manuel.
 
 ## 4. throw vs throws : lever et déclarer
@@ -198,6 +232,8 @@ Cette remontée s'appelle la **propagation** de l'exception.
 - **Confondre `throw` et `throws`** : `throw` lève une instance dans le corps d'une méthode ; `throws` déclare une exception possible dans la signature. On peut avoir les deux dans la même méthode, mais ils ont des rôles distincts.
 
 - **Placer du code entre un `catch` et le `finally`** : il n'est pas possible d'intercaler d'autres instructions entre les clauses `catch` et le `finally`. La structure légale est `try` / `catch*` / `finally?`.
+
+- **`return` (ou `throw`) dans un `finally`** : écrire `return -1;` dans le bloc `finally` écrase la valeur renvoyée par le `try` et **avale** toute exception levée dans le `try` — le bug devient invisible. Cause : le `finally` s'exécutant toujours, son `return` a le dernier mot. Correction : ne jamais mettre `return` ni `throw` dans un `finally` ; réservez-le au nettoyage.
 
 ## Exercice guidé
 
