@@ -19,6 +19,7 @@ Ce chapitre prolonge le [chapitre 2.1](2-1-tableaux-1d) : une matrice n'est rien
 - **Accéder** à une case par sa ligne et sa colonne.
 - **Distinguer** le nombre de lignes du nombre de colonnes.
 - **Parcourir** une matrice avec deux boucles imbriquées.
+- **Afficher** une matrice d'un coup avec `Arrays.deepToString`.
 
 ## 1. Du tableau 1D à la matrice
 
@@ -134,7 +135,35 @@ La boucle externe avance d'une ligne à la fois ; pour chaque ligne, la boucle i
 > - Deux boucles imbriquées : externe sur les lignes, interne sur les colonnes.
 > - Un `println()` vide après la boucle interne passe à la rangée suivante.
 
-## 6. Une application : la grille noir et blanc
+## 6. Afficher une matrice d'un coup
+
+Comme pour les tableaux 1D (chapitre 2.1), afficher directement une matrice ne donne rien d'utile. Pire : `Arrays.toString` ne suffit pas non plus, car chaque ligne est elle-même un tableau et s'afficherait comme une adresse illisible.
+
+Pour une matrice, Java fournit `Arrays.deepToString`, qui descend **en profondeur** dans les tableaux imbriqués et affiche tout le contenu.
+
+### Exemple
+
+```java
+import java.util.Arrays;
+
+public class AffichageMatrice {
+    public static void main(String[] args) {
+        int[][] image = {
+            {1, 0, 1},
+            {0, 1, 0},
+            {1, 1, 1}
+        };
+        System.out.println(Arrays.deepToString(image));   // [[1, 0, 1], [0, 1, 0], [1, 1, 1]]
+    }
+}
+```
+
+### À retenir
+
+> - Pour une matrice, `Arrays.toString` ne suffit pas (lignes illisibles).
+> - `Arrays.deepToString(m)` descend dans les tableaux imbriqués et affiche tout.
+
+## 7. Une application : la grille noir et blanc
 
 Une image en noir et blanc se représente naturellement par une matrice de `0` (blanc) et de `1` (noir). Un damier, un plan de tir quadrillé, une carte de zones : tous ces cas se ramènent à une grille de nombres que l'on parcourt et que l'on affiche. La matrice est l'outil de base pour ces données en deux dimensions.
 

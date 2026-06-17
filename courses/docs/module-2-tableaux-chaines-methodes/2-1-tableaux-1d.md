@@ -19,6 +19,7 @@ La réponse est le **tableau** (en anglais *array*) : une seule variable qui ran
 - **Accéder** à un élément par son indice et le modifier.
 - **Parcourir** un tableau avec une boucle `for` ou `for-each`.
 - **Afficher** le contenu d'un tableau avec `Arrays.toString`.
+- **Trier, remplir et copier** un tableau avec les méthodes utilitaires d'`Arrays`.
 
 ## 1. Qu'est-ce qu'un tableau
 
@@ -170,6 +171,41 @@ public class AffichageTableau {
 > - Afficher un tableau directement donne une valeur illisible.
 > - `Arrays.toString(t)` affiche son contenu : `[14, 11, 18, 9]`.
 > - Pensez à `import java.util.Arrays;` en haut du fichier.
+
+## 7. D'autres outils de la classe `Arrays`
+
+La classe `Arrays` ne sert pas qu'à afficher. Elle regroupe des méthodes utilitaires qui évitent d'écrire des boucles à la main pour des opérations courantes :
+
+- `Arrays.sort(t)` : **trie** le tableau sur place, par ordre croissant.
+- `Arrays.fill(t, v)` : **remplit** toutes les cases avec la valeur `v`.
+- `Arrays.copyOf(t, n)` : renvoie une **copie** du tableau, ramenée ou étendue à la taille `n` (les cases en trop sont remplies de `0`).
+
+### Exemple
+
+```java
+import java.util.Arrays;
+
+public class OutilsArrays {
+    public static void main(String[] args) {
+        int[] notes = {14, 11, 18, 9};
+
+        Arrays.sort(notes);                       // trie sur place
+        System.out.println(Arrays.toString(notes));   // [9, 11, 14, 18]
+
+        int[] copie = Arrays.copyOf(notes, 6);    // copie agrandie à 6 cases
+        System.out.println(Arrays.toString(copie));   // [9, 11, 14, 18, 0, 0]
+
+        Arrays.fill(copie, 0);                    // tout remettre à 0
+        System.out.println(Arrays.toString(copie));   // [0, 0, 0, 0, 0, 0]
+    }
+}
+```
+
+### À retenir
+
+> - `Arrays.sort(t)` trie le tableau **sur place** (ordre croissant).
+> - `Arrays.fill(t, v)` remplit toutes les cases avec `v`.
+> - `Arrays.copyOf(t, n)` renvoie une **copie** de taille `n`.
 
 ## Erreurs fréquentes
 

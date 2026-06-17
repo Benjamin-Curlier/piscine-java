@@ -43,11 +43,14 @@ public class Saisie {
 }
 ```
 
+On crée **un seul** `Scanner(System.in)` pour tout le programme et on le réutilise pour toutes les lectures — inutile d'en ouvrir un nouveau à chaque saisie. Et on **ne ferme pas** ce `Scanner` (pas de `clavier.close();`) : le fermer fermerait aussi `System.in`, qui ne pourra plus être rouvert pour la suite du programme.
+
 ### À retenir
 
 > - On lit le clavier via `new Scanner(System.in)`.
 > - Il faut `import java.util.Scanner;` en haut du fichier.
 > - `System.in` est l'entrée standard, le pendant de `System.out`.
+> - **Un seul** `Scanner(System.in)` pour tout le programme ; on ne le ferme pas (cela fermerait `System.in`).
 
 ## 2. Lire selon le type attendu
 
@@ -75,10 +78,17 @@ public class Age {
 }
 ```
 
+### Le piège de la locale avec `nextDouble()`
+
+Attention avec les nombres à virgule : `nextDouble()` (comme `nextInt()`) interprète la saisie selon la **locale** (la configuration régionale) de la JVM. Sur une machine configurée en français, `Scanner` peut attendre la **virgule** comme séparateur décimal : taper `1.78` provoque alors une erreur, et il faut saisir `1,78`. Sur une machine configurée en anglais, c'est l'inverse.
+
+C'est une source classique de confusion : un même programme « marche » chez l'un et « plante » chez l'autre, juste à cause de la langue du système. Si vous tombez sur ce cas, essayez l'autre séparateur (`,` au lieu de `.`, ou l'inverse). Vous apprendrez plus tard à fixer explicitement la locale du `Scanner` pour ne plus dépendre de la machine.
+
 ### À retenir
 
 > - `nextInt()` pour un entier, `nextDouble()` pour un nombre à virgule.
 > - `next()` lit un mot ; `nextLine()` lit toute la ligne.
+> - `nextDouble()` suit la **locale** de la machine : en français, il peut attendre `1,78` (virgule) plutôt que `1.78` (point).
 
 ## 3. Le piège du `nextLine` après un `nextInt`
 
@@ -139,6 +149,8 @@ Si l'utilisateur tape autre chose qu'un nombre (par exemple `bonjour`), `nextInt
 - **`error: cannot find symbol — class Scanner`** : vous avez oublié `import java.util.Scanner;` en haut du fichier.
 - **L'utilisateur tape du texte là où un nombre est attendu** : `nextInt()` lève une `InputMismatchException` et le programme s'arrête. C'est normal pour l'instant ; la gestion propre est au programme du module 5.
 - **Confondre `next()` et `nextLine()`** : `next()` s'arrête au premier espace, `nextLine()` lit toute la ligne. Pour « Jean Dupont », `next()` ne lirait que « Jean ».
+- **`nextDouble()` refuse `1.78` (ou `1,78`)** : c'est la locale de la machine. En configuration française, le séparateur attendu peut être la **virgule** (`1,78`) ; en anglais, le **point** (`1.78`). Essayez l'autre séparateur.
+- **Fermer le `Scanner` avec `clavier.close()`** : cela ferme aussi `System.in`. Si vous devez relire au clavier ensuite, ce sera impossible. Créez un seul `Scanner` et ne le fermez pas.
 
 ## Exercice guidé
 

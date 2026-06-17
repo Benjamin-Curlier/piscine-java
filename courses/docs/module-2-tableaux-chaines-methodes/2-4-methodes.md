@@ -18,6 +18,7 @@ Une **méthode** est un bloc de code nommé, que l'on peut appeler à volonté. 
 - **Écrire** une méthode avec sa signature, ses paramètres et son type de retour.
 - **Distinguer** une méthode `void` d'une méthode qui renvoie une valeur.
 - **Surcharger** une méthode (même nom, paramètres différents).
+- **Accepter** un nombre variable d'arguments avec les *varargs* (`int... valeurs`).
 - **Expliquer** la portée des variables et le rôle de `static`.
 
 ## 1. Pourquoi écrire des méthodes
@@ -163,7 +164,43 @@ Attention : la surcharge se joue sur les **paramètres**, pas sur le type de ret
 > - **Surcharger** : même nom, **paramètres** différents (nombre ou type).
 > - Le type de retour seul ne suffit **pas** à distinguer deux méthodes.
 
-## 7. Portée des variables et `static`
+## 7. Un nombre variable d'arguments : les *varargs*
+
+Parfois, on ignore combien de valeurs seront fournies à l'appel : la somme de deux nombres, ou de cinq, ou de dix. Plutôt que de surcharger une méthode pour chaque cas, Java propose les **varargs** (*variable arguments*) : on déclare le dernier paramètre avec trois points `...`, et l'appelant fournit autant d'arguments qu'il veut.
+
+À l'intérieur de la méthode, ce paramètre est tout simplement un **tableau** : on le parcourt comme n'importe quel tableau (chapitre 2.1).
+
+### Exemple
+
+```java
+public class Varargs {
+
+    // int... valeurs : zéro, un ou plusieurs entiers à l'appel.
+    static int somme(int... valeurs) {
+        int total = 0;
+        for (int v : valeurs) {   // « valeurs » est un tableau int[]
+            total += v;
+        }
+        return total;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(somme(3, 4));         // 7
+        System.out.println(somme(1, 2, 3, 4));   // 10
+        System.out.println(somme());             // 0 (aucun argument)
+    }
+}
+```
+
+Une seule règle à retenir : le paramètre varargs doit être le **dernier** de la liste. On peut donc écrire `static void afficher(String titre, int... valeurs)`, mais pas l'inverse.
+
+### À retenir
+
+> - `type... nom` accepte un **nombre variable** d'arguments.
+> - À l'intérieur, le paramètre est un **tableau** ordinaire, parcourable avec une boucle.
+> - Le paramètre varargs doit être le **dernier** de la signature.
+
+## 8. Portée des variables et `static`
 
 Une variable déclarée dans une méthode (ou dans un bloc) n'existe **que** là : c'est sa **portée**. En dehors, elle est inconnue. Deux méthodes peuvent donc utiliser un paramètre nommé `a` sans interférer : ce sont des variables distinctes.
 
@@ -180,6 +217,7 @@ Quant au mot-clé `static`, il permet d'appeler la méthode **sans créer d'obje
 - **Type de retour incohérent** : renvoyer un `double` dans une méthode déclarée `int` provoque une erreur. Le type renvoyé doit correspondre.
 - **Croire qu'on a modifié un primitif** : modifier un paramètre `int` dans la méthode ne change pas la variable de l'appelant (passage par valeur).
 - **Surcharge sur le seul type de retour** : `int f()` et `double f()` ne peuvent coexister ; la surcharge porte sur les paramètres.
+- **Varargs pas en dernier** : `static int f(int... n, String s)` ne compile pas ; le paramètre varargs doit être le **dernier**.
 - **Variable hors de sa portée** : utiliser une variable en dehors de la méthode où elle est déclarée → erreur de compilation.
 
 ## Exercice guidé
@@ -221,6 +259,7 @@ public class Maximum {
 - Que contient la signature d'une méthode ?
 - Que signifie « passage par valeur » pour un paramètre `int` ?
 - Deux méthodes peuvent-elles porter le même nom ? À quelle condition ?
+- Comment une méthode accepte-t-elle un nombre variable d'arguments, et où doit figurer ce paramètre ?
 - À quoi sert le mot-clé `static` dans nos programmes actuels ?
 
 ## Pour aller plus loin

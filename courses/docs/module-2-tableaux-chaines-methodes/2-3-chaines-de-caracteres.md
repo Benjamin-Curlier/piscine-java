@@ -18,6 +18,7 @@ Ce chapitre présente le fonctionnement des chaînes en Java, leurs méthodes le
 - **Expliquer** pourquoi une `String` est immuable.
 - **Utiliser** les méthodes courantes : `length()`, `charAt`, `substring`, `indexOf`, `split`.
 - **Comparer** deux chaînes correctement avec `equals`.
+- **Nettoyer** une chaîne avec `strip()` et **mettre en forme** avec `String.format` et les *text blocks*.
 - **Assembler** des chaînes efficacement avec `StringBuilder`.
 
 ## 1. `String`, un objet immuable
@@ -119,15 +120,17 @@ System.out.println("OUI".equalsIgnoreCase("oui"));   // true
 Plusieurs méthodes renvoient une nouvelle chaîne transformée :
 
 - `toUpperCase()` / `toLowerCase()` : changent la casse.
-- `trim()` : enlève les espaces en début et en fin.
+- `strip()` : enlève les espaces (et autres blancs) en début et en fin.
 - `split(" ")` : découpe la chaîne en un **tableau** de morceaux, selon un séparateur. Le résultat est un `String[]`, parcourable comme tout tableau (chapitre 2.1).
+
+Vous croiserez aussi `trim()`, qui fait presque la même chose que `strip()`. La différence : `trim()` est l'ancienne méthode, qui ne connaît que les espaces ASCII ; `strip()` (depuis Java 11) est **consciente d'Unicode** et gère correctement tous les espaces modernes. Dans du code récent, **préférez `strip()`**.
 
 ### Exemple
 
 ```java
 String ligne = "  Dupont Martin Bernard  ";
 
-String propre = ligne.trim();              // "Dupont Martin Bernard"
+String propre = ligne.strip();             // "Dupont Martin Bernard" (méthode moderne)
 String[] noms = propre.split(" ");         // {"Dupont", "Martin", "Bernard"}
 
 System.out.println(noms.length);           // 3
@@ -136,10 +139,38 @@ System.out.println(noms[0]);               // "Dupont"
 
 ### À retenir
 
-> - `toUpperCase`, `toLowerCase`, `trim` renvoient une chaîne transformée.
+> - `toUpperCase`, `toLowerCase`, `strip` renvoient une chaîne transformée.
+> - `strip()` (Unicode, moderne) est à préférer à `trim()` (ASCII, hérité).
 > - `split(sep)` découpe en un `String[]`, parcourable comme un tableau.
 
-## 6. Concaténer efficacement avec `StringBuilder`
+## 6. Mettre en forme : `String.format` et *text blocks*
+
+Coller des morceaux avec `+` devient vite illisible quand on intercale beaucoup de valeurs. `String.format(...)` permet d'écrire un **modèle** avec des emplacements (`%s` pour une chaîne, `%d` pour un entier, `%.2f` pour un nombre à deux décimales) que Java remplace par les valeurs fournies.
+
+```java
+String nom = "Dupont";
+int note = 17;
+String ligne = String.format("%s a obtenu %d/20", nom, note);
+System.out.println(ligne);   // "Dupont a obtenu 17/20"
+```
+
+Pour un texte sur **plusieurs lignes**, Java propose les **text blocks** : un littéral délimité par trois guillemets `"""`. Plus besoin d'enchaîner les `\n` ni les `+` : le texte s'écrit tel quel, sur autant de lignes qu'on veut.
+
+```java
+String message = """
+    Bonjour,
+    Votre formation commence lundi.
+    Cordialement.
+    """;
+System.out.println(message);
+```
+
+### À retenir
+
+> - `String.format("%s a %d ans", nom, age)` insère des valeurs dans un modèle.
+> - Un *text block* `"""..."""` écrit un texte multi-lignes sans `\n` ni `+`.
+
+## 7. Concaténer efficacement avec `StringBuilder`
 
 Assembler des chaînes avec `+` est pratique pour quelques morceaux. Mais comme une `String` est immuable, **chaque** `+` crée une nouvelle chaîne. Dans une grande boucle, cela multiplie les chaînes intermédiaires inutiles.
 
@@ -148,7 +179,7 @@ Pour assembler beaucoup de morceaux, on utilise `StringBuilder` : un assembleur 
 ### Exemple
 
 ```java
-StringBuilder builder = new StringBuilder();
+var builder = new StringBuilder();   // var : le type StringBuilder est évident à droite
 
 for (int i = 1; i <= 5; i++) {
     builder.append("Ligne ").append(i).append("\n");
@@ -205,6 +236,7 @@ public class MiseEnForme {
 
 - Pourquoi dit-on qu'une `String` est immuable ?
 - Comment compare-t-on deux chaînes par leur contenu ?
+- Quelle différence y a-t-il entre `strip()` et `trim()`, et lequel préférer ?
 - Que renvoie `indexOf` quand le texte cherché est absent ?
 - Dans quel cas vaut-il mieux utiliser `StringBuilder` que l'opérateur `+` ?
 

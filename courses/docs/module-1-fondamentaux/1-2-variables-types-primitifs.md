@@ -58,11 +58,21 @@ long population = 8_100_000_000L; // un long pour un très grand nombre
 // Le caractère _ est juste là pour la lisibilité : Java l'ignore.
 ```
 
+Attention : un `int` a une **limite haute** (`Integer.MAX_VALUE`, environ 2,1 milliards). Si un calcul la dépasse, le résultat **ne plante pas** : il « repasse » brutalement dans les négatifs (on parle de *débordement*, ou *overflow*).
+
+```java
+int max = Integer.MAX_VALUE;     // 2147483647
+System.out.println(max + 1);     // affiche -2147483648, pas 2147483648 !
+```
+
+Si vos valeurs risquent d'être très grandes, utilisez un `long` dès le départ.
+
 ### À retenir
 
 > - `int` pour les entiers usuels.
 > - `long` pour les très grands entiers, avec le suffixe `L`.
 > - On peut écrire `1_000_000` pour mieux lire un grand nombre.
+> - Un `int` **déborde** silencieusement au-delà de `Integer.MAX_VALUE` (il repasse dans les négatifs). Passez à `long` pour les grandes valeurs.
 
 ## 3. Les nombres à virgule : `double`
 
@@ -78,11 +88,21 @@ double moyenne = 12.5;
 float ratio = 0.75f;         // float : moins courant, suffixe f obligatoire
 ```
 
+Un `double` est **approximatif**. La machine stocke les nombres à virgule en binaire, et certaines valeurs simples en décimal ne tombent pas juste. Conséquence surprenante : `0.1 + 0.2` ne vaut **pas** exactement `0.3`.
+
+```java
+double somme = 0.1 + 0.2;
+System.out.println(somme);   // affiche 0.30000000000000004, pas 0.3 !
+```
+
+Pour cette raison, **ne testez jamais l'égalité exacte entre deux `double`** : un calcul peut tomber « presque » sur la bonne valeur sans l'atteindre pile.
+
 ### À retenir
 
 > - `double` pour les nombres à virgule.
 > - Le séparateur décimal est le **point** (`1.78`, pas `1,78`).
 > - Par défaut, on utilise `double` et pas `float`.
+> - Un `double` est **approximatif** : `0.1 + 0.2 != 0.3`. Ne comparez pas deux `double` avec une égalité exacte.
 
 ## 4. `boolean` et `char`
 
@@ -192,6 +212,8 @@ Utilisez `var` quand il rend la ligne plus lisible et que le type saute aux yeux
 - **`double r = (int) 9.99;` donne `9`** : le cast vers `int` tronque la décimale, il n'arrondit pas. Si vous voulez arrondir, ce n'est pas un simple cast.
 - **`long n = 8000000000;` refuse de compiler** : la valeur dépasse la plage de `int` et Java l'interprète d'abord comme un `int`. Ajoutez le suffixe : `8000000000L`.
 - **`char c = "A";` ne compile pas** : `"A"` (guillemets doubles) est un `String`. Pour un `char`, utilisez les apostrophes simples : `'A'`.
+- **`0.1 + 0.2 == 0.3` est `false`** : un `double` est approximatif. Ne testez pas l'égalité exacte entre deux nombres à virgule.
+- **`Integer.MAX_VALUE + 1` donne un nombre négatif** : c'est un débordement d'`int`. Si vos valeurs peuvent être très grandes, utilisez `long`.
 - **Comparer deux `String` avec `==`** : cela ne compare pas le texte comme on s'y attend. La bonne façon sera vue au [chapitre 1.5](1-5-conditions). Retenez juste le piège pour l'instant.
 
 ## Exercice guidé
