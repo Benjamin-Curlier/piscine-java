@@ -272,7 +272,8 @@ Les streams et les boucles `for` produisent souvent le même résultat. Quand pr
 | Pipeline linéaire (filtrer → transformer → collecter) | **stream** : une ligne lisible |
 | Logique complexe avec plusieurs variables accumulatrices | **boucle** : plus lisible |
 | Traitement avec indice (`i`) | **boucle** : `for (int i = 0; …)` |
-| Traitement parallèle (grandes collections) | **stream** avec `parallelStream()` |
+
+> ⚠️ Vous croiserez `parallelStream()`, qui répartit le travail sur plusieurs cœurs. **N'y touchez pas pour l'instant** : c'est un outil avancé, piégeux (ordre, état partagé, opérations qui doivent être associatives) et qui ralentit souvent plus qu'il n'accélère sur des collections normales. Un `stream()` séquentiel est le bon choix par défaut.
 
 ```java
 import java.util.List;

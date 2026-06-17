@@ -142,7 +142,7 @@ Vous n'avez pas besoin de mémoriser toute la table de priorité. **Dans le dout
 - **Écrire `=` au lieu de `==` dans une comparaison** : `age = 18` affecte `18` à `age` au lieu de tester l'égalité. Le compilateur vous arrête souvent, mais pas toujours — soyez vigilant·e.
 - **Oublier la priorité** : `moyenne = note1 + note2 / 2` ne calcule pas la moyenne ! La division passe avant l'addition. Écrivez `(note1 + note2) / 2`.
 - **Division entière dans un calcul à virgule** : `(note1 + note2) / 2` avec des `int` donne une division entière. Pour une moyenne précise, utilisez des `double` (rappel [chapitre 1.2](1-2-variables-types-primitifs)).
-- **Croire que `%` marche bien sur les `double`** : le modulo a un sens clair sur les entiers. Réservez-le aux `int`.
+- **Croire que `%` est réservé aux entiers** : faux — `%` fonctionne aussi sur les `double` (`5.5 % 2.0` vaut `1.5`). En revanche, comme les `double` sont **approximatifs**, un modulo sur des décimaux peut donner un reste légèrement décalé : ne vous en servez pas pour tester une égalité exacte. Sur les entiers, le résultat est toujours net.
 
 ## Exercice guidé
 

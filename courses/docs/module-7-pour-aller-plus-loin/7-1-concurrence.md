@@ -65,7 +65,10 @@ concurrence, car il est **intermittent**.
 - **`java.util.concurrent`** : la boîte à outils — `ExecutorService`, `ConcurrentHashMap`,
   `BlockingQueue`, `CompletableFuture` (pour l'asynchrone)…
 - **Préférer l'immuabilité** : une donnée qui ne change jamais ne peut pas être corrompue par un
-  autre thread. (C'est pour ça que `String` et `record` immuables sont si pratiques.)
+  autre thread. (C'est pour ça que `String` est si pratique en concurrence.) ⚠️ Un `record` n'est
+  immuable **que si tous ses champs le sont aussi** : `record Panier(List<String> articles)` reste
+  modifiable via la liste partagée — ce n'est *pas* thread-safe. Visez des champs eux-mêmes immuables
+  (types primitifs, `String`, autres records immuables, ou copies défensives).
 
 ## En résumé
 

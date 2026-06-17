@@ -96,7 +96,7 @@ Titre B
 
 Lecture des marqueurs :
 - entre `<<<<<<< HEAD` et `=======` : la version de la branche courante (`main`, « Titre A ») ;
-- entre `=======` et `>>>>>>> feature/titre` : la version fusionnée (« Titre B »).
+- entre `=======` et `>>>>>>> feature/titre` : la version de la branche que vous **fusionnez** (`feature/titre`, « Titre B »). Rien n'est encore fusionné — c'est à vous de choisir.
 
 Pour résoudre : éditez le fichier pour ne garder que ce que vous voulez (par exemple « Titre A »), **supprimez les trois lignes de marqueurs**, puis :
 

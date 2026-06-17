@@ -92,15 +92,21 @@ L'opérateur `==` compare des références (« est-ce le même objet en mémoire
 ### Exemple
 
 ```java
-String saisie = "oui";
 String attendu = "oui";
 
-System.out.println(saisie.equals(attendu));   // true : même contenu
-// System.out.println(saisie == attendu);      // À NE PAS FAIRE : compare les références
+// "saisie" est construite à l'exécution (concaténation) : c'est un AUTRE objet en mémoire,
+// même si son contenu est identique. C'est typiquement le cas d'une vraie saisie utilisateur.
+String debut = "ou";
+String saisie = debut + "i";
+
+System.out.println(saisie.equals(attendu));   // true  : même contenu
+System.out.println(saisie == attendu);         // false : objets différents → le piège !
 
 // equalsIgnoreCase ignore la casse (majuscules/minuscules).
 System.out.println("OUI".equalsIgnoreCase("oui"));   // true
 ```
+
+> ⚠️ Si vous testez `"oui" == "oui"` avec deux **littéraux** écrits en dur, Java les partage en mémoire et `==` renvoie `true` — ce qui masque le problème. Dès que la chaîne vient d'une saisie ou d'un calcul, `==` casse. D'où la règle simple : **toujours `equals`**.
 
 ### À retenir
 
