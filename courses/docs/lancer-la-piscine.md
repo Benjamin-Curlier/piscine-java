@@ -11,19 +11,21 @@ Il existe **deux façons** d'utiliser la Piscine. Tu n'en utilises **qu'une seul
 
 | Tu as reçu… | Ton mode | Ce que tu fais |
 |-------------|----------|----------------|
-| un **fichier ZIP** | **Standalone** | Tu décompresses et tu lances. **Rien à installer, aucune connexion.** |
+| un **installeur** (`.exe` Windows, `.deb`/portable Linux) | **Installeur** | Tu installes (aucun droit admin) et tu lances. **Rien d'autre à installer, aucune connexion.** |
 | un **accès au dépôt Git** | **Dépôt** | Tu installes Java 25 + git, tu clones, tu lances le bootstrap. |
 
 > Dans les deux cas, **la façon de travailler est identique** : tu édites un exercice, tu le rends via Git, et la moulinette te répond avec un rapport. Seule la mise en route change.
 
-## Mode standalone (ZIP)
+## Mode installeur (recommandé)
 
-1. Décompresse le ZIP `piscine-java-stagiaire-*.zip` où tu veux.
-2. Double-clique sur **`piscine.bat`** (Windows).
-3. Au premier lancement, ton espace de travail est créé automatiquement, **le site de cours s'ouvre dans ton navigateur** et la **console de correction** démarre.
-4. Si le navigateur ne s'ouvre pas tout seul, ouvre l'adresse affichée dans la console (par défaut `http://127.0.0.1:8800/`).
+L'installeur embarque **tout** : Java, git, la moulinette, les exercices et le site de cours. Aucune autre installation, aucun réseau.
 
-Tout est embarqué (Java, git, cours, moulinette) : **aucune installation, aucun réseau**.
+1. **Windows** : double-clique sur `Piscine Java-<version>.exe` (installation par utilisateur, aucun droit admin). **Linux** : installe le `.deb` ou extrais l'archive portable.
+2. Lance « **Piscine Java** » depuis le menu Démarrer (ou ton lanceur d'applications).
+3. Au premier lancement, ton espace de travail est créé dans `~/PiscineJava` et **l'application s'ouvre dans ton navigateur** : tableau de bord (ta progression, tes badges, tes rapports), cours et terminal git intégré.
+4. Si le navigateur ne s'ouvre pas tout seul, ouvre l'adresse affichée par l'application.
+
+Tout est embarqué (Java, git, cours, moulinette) : **aucune installation supplémentaire, aucun réseau**.
 
 ## Mode dépôt (clone du projet)
 

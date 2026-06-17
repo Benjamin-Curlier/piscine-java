@@ -89,24 +89,26 @@ Ouvre-le dans ton éditeur. Pour chaque exo : statut, messages, suggestions.
 
 ## 6. Bloqué ?
 
-- **Un exo échoue** : la séquence s'arrête à cet exo. Corrige-le, refais `add` / `commit` / `push`.
-- **`git push` refusé (non-fast-forward)** : pour le MVP, supprime la branche locale et recommence avec `submit-start <groupe>`.
-- **Commande non supportée** : seules `add`, `commit`, `push`, `status`, `log`, `diff`, `submit-start`, `help`, `exit` sont reconnues dans le MVP.
+- **Un exo échoue** : **tous** les exos du sous-groupe sont quand même évalués et rapportés (tu vois l'ensemble d'un coup d'œil). La progression, elle, se débloque **dans l'ordre** : seul le préfixe d'exos réussis sans interruption est validé. Corrige l'exo en ✗, refais `add` / `commit` / `push` (ou un simple `submit <groupe>`).
+- **`git push` refusé (non-fast-forward)** : supprime la branche locale et recommence avec `submit-start <groupe>` (ou relance `submit <groupe>`).
+- **Commande non supportée** : seules `submit`, `submit-start`, `add`, `commit`, `push`, `status`, `log`, `diff`, `profil`, `help`, `exit` sont reconnues.
 
 ## 7. Convention de rendu
 
 | Élément | Valeur |
 |---------|--------|
 | Branche de rendu | `rendu/<sous-groupe>` (ex: `rendu/1.1`) |
-| Trigger moulinette | `git push origin rendu/<sous-groupe>` |
-| Ordre d'évaluation | exos d'un groupe par difficulté croissante, **arrêt au premier échec** |
+| Trigger moulinette | `git push origin rendu/<sous-groupe>` (ou `submit <sous-groupe>` qui enchaîne tout) |
+| Ordre d'évaluation | exos d'un groupe par difficulté croissante ; **tous évalués et rapportés**, progression débloquée **dans l'ordre** (seul le préfixe réussi est validé) |
 | Remote | bare local `file://<workspace>/.piscine/remote.git` |
 
 ## 8. Commandes du REPL (rappel)
 
 | Commande | Effet |
 |----------|-------|
-| `submit-start <groupe>` | crée/bascule sur la branche `rendu/<groupe>` |
+| `submit <groupe>` | **rend en une seule commande** : enchaîne `submit-start`, `add`, `commit`, `push` (idéal pour débuter) |
+| `profil` | affiche ton XP, ton niveau et tes badges |
+| `submit-start <groupe>` | crée/bascule sur la branche `rendu/<groupe>` (rendu pas-à-pas) |
 | `git add <chemin>` | indexe des fichiers |
 | `git commit -m "..."` | enregistre un commit |
 | `git push origin rendu/<groupe>` | pousse **et déclenche la moulinette** |

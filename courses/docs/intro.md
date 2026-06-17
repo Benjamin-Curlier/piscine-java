@@ -7,13 +7,13 @@ slug: /intro
 
 # Bienvenue à la Piscine Java
 
-> 👉 Pressé de démarrer ? Va directement à **[Comment lancer la Piscine](lancer-la-piscine.md)**.
+> 👉 Pressé de démarrer ? **[Démarrage rapide (5 min)](demarrage-rapide.md)** pour rendre ton premier exercice tout de suite, ou **[Comment lancer la Piscine](lancer-la-piscine.md)** pour le détail des deux modes.
 
 Bienvenue ! Vous vous apprêtez à suivre la **Piscine Java**, le parcours d'initiation au développement Java pour les nouveaux développeurs de l'équipe.
 
 ## À quoi ressemble la Piscine
 
-La Piscine est organisée en **6 modules** progressifs. Chaque module contient plusieurs **chapitres** de cours, et chaque cours est accompagné d'**exercices** que vous résolvez chez vous.
+La Piscine est organisée en **6 modules** progressifs (plus un module bonus « Pour aller plus loin »). Chaque module contient plusieurs **chapitres** de cours, et chaque cours est accompagné d'**exercices** que vous résolvez chez vous. Les deux derniers exercices sont des **jeux jouables** (Snake, Bomberman) pour voir votre code prendre vie.
 
 Vous rendez votre travail via **Git**. Une **moulinette** automatique corrige vos exercices et vous explique en détail vos erreurs avec une correction-type commentée.
 

@@ -29,8 +29,8 @@ Dans les deux modes, la boucle pédagogique est identique : on édite un exercic
 | Dossier | Contenu |
 |---------|---------|
 | `docs/` | Documentation du projet : référentiel pédagogique, format d'exercice, charte de rédaction, procédures de déploiement. |
-| `courses/` | Site Docusaurus regroupant les 6 modules de cours, organisés en chapitres progressifs. |
-| `exercises/` | 65 exercices individuels + 3 projets en binôme, au format standardisé (sujet, métadonnées, tests, solution de référence). |
+| `courses/` | Site Docusaurus regroupant les 6 modules de cours (+ un module bonus « Pour aller plus loin »), organisés en chapitres progressifs. |
+| `exercises/` | 65 exercices individuels + 3 projets en binôme + 2 jeux capstone (Snake, Bomberman), au format standardisé (sujet, métadonnées, tests, solution de référence). |
 | `moulinette/` | Code Java de la moulinette de correction automatique (multi-module Gradle). |
 
 ## Modules
@@ -41,6 +41,10 @@ Dans les deux modes, la boucle pédagogique est identique : on édite un exercic
 4. **Collections, génériques, lambdas** — List/Set/Map, génériques, streams.
 5. **Exceptions et I/O** — Gestion d'erreurs, lecture/écriture de fichiers.
 6. **Tests et Git** — JUnit, TDD, workflow Git collaboratif.
+7. **Pour aller plus loin** *(bonus)* — premiers pas en concurrence et en persistance.
+
+> En guise de capstone, deux **jeux jouables** (Snake, Bomberman) où le stagiaire écrit la logique
+> par-dessus une interface graphique fournie — voir `exercises/projets-jeux/`.
 
 ## Périmètre & la suite
 
@@ -72,10 +76,10 @@ Une fois la Piscine terminée, la trajectoire habituelle vers un poste est :
 
 **En place :**
 - **Java 25 LTS** (OpenJDK Temurin) — moulinette **multi-module Gradle** (les exercices restent des projets Maven côté stagiaire).
-- **JUnit 5** + **AssertJ** pour les tests ; notation hors-ligne via **`javac` + JUnit ConsoleLauncher** (zéro outil de build/réseau à l'exécution, mode standalone).
+- **JUnit 5** + **AssertJ** pour les tests ; notation hors-ligne via **`javac` + JUnit ConsoleLauncher** (zéro outil de build/réseau à l'exécution).
 - **Checkstyle** pour le style (en mode *advisory* / non bloquant pour la beta).
-- **Docusaurus** pour le site de cours (servi en local dans le bundle standalone).
-- **Git** pour le rendu (MinGit embarqué dans le bundle) ; dépôt de dev sur **GitHub**.
+- **Docusaurus** pour le site de cours (servi en local par l'application installée).
+- **Git** pour le rendu (MinGit embarqué dans l'installeur) ; dépôt de dev sur **GitHub**.
 
 **Cible / à venir** (voir [`docs/backlog.md`](docs/backlog.md)) :
 - **Docker** pour l'isolation du runner (#30).
@@ -105,7 +109,7 @@ Formateur ? Voir **[`CONTRIBUTING.md`](CONTRIBUTING.md)** : workflow Git, checkl
 
 ## Statut
 
-**Version 0.7.0** — contenu pédagogique complet (6 modules : 65 exercices + 3 projets binôme), moulinette évaluante, mode standalone hors-ligne. Voir [`CHANGELOG.md`](CHANGELOG.md) pour le détail des versions, [`docs/backlog.md`](docs/backlog.md) pour la suite (Phase 4 — déploiement à grande échelle), et [`docs/referentiel.md`](docs/referentiel.md) pour le plan pédagogique complet.
+**Version 0.7.0** — contenu pédagogique complet (6 modules + bonus : 65 exercices + 3 projets binôme + 2 jeux capstone), moulinette évaluante, installeur hors-ligne. Voir [`CHANGELOG.md`](CHANGELOG.md) pour le détail des versions, [`docs/backlog.md`](docs/backlog.md) pour la suite (Phase 4 — déploiement à grande échelle), et [`docs/referentiel.md`](docs/referentiel.md) pour le plan pédagogique complet.
 
 ## Licence
 
