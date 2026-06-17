@@ -22,7 +22,7 @@ vérité.** Chaque itération :
 - [x] **C1** gamification — moteur (`console/gamification/`) + commande REPL **`profil`** (XP/niveau/barre/badges visibles, testés). [carte tableau de bord web = polish optionnel]
 - [x] **C2** jeu capstone Snake (cœur noté vert + rendu jouable Swing) — `exercises/projets-jeux/jeu-1-snake/`
 - [ ] **C3** (stretch) 2e jeu
-- [ ] **D1** chapitre Maven/Gradle
+- [x] **D1** chapitre Maven/Gradle — `module-1-fondamentaux/1-9-comprendre-le-pom-maven.md`
 - [ ] **D2** chapitres enums / Optional / java.time
 - [ ] **D3** (stretch) Module 7 Concurrence
 - [ ] **D4** (stretch) Module 8 Persistance
@@ -99,3 +99,10 @@ vérité.** Chaque itération :
   (2e, après `submit`). 2 tests `ProfilCommandTest` (profil garni + vierge) ; `:console:test` vert.
   **Épic C cœur fait** (C1 gamification + C2 Snake). Carte web du tableau de bord = polish optionnel.
 - **Prochaine itération : D1** (chapitre Maven/Gradle — outils de build, déjà imposés au jour 1).
+
+### Itération 10 — 2026-06-16 ✓
+- **D1 livré** : chapitre **`module-1-fondamentaux/1-9-comprendre-le-pom-maven.md`** — à quoi sert un
+  outil de build, anatomie du `pom.xml` (coordonnées + dépendances JUnit/AssertJ, Maven Central),
+  `mvn test` (= ce que fait la moulinette), et situe Gradle. Répond à la critique « outils de build
+  imposés mais jamais enseignés ». Site Docusaurus *builde*.
+- **Prochaine itération : D2** (chapitres points fins : enums, Optional, java.time).
